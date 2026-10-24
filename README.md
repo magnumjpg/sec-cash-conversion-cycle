@@ -216,7 +216,8 @@ and the full attrition funnel are in `DATA.md`.
 
 ```
 02_working_capital_sec/
-  README.md  DATA.md  METHOD.md  LIMITATIONS.md  DECISIONS.md  .gitignore
+  README.md  DATA.md  METHOD.md  LIMITATIONS.md  DECISIONS.md
+  RED_TEAM.md  ANALYSIS_LOG.md  .gitignore
   src/
     tags.py              tag mapping, versioned; SIC division labels
     download_sec.py      SEC FSDS download, cache, manifest, rate limit
@@ -255,3 +256,15 @@ margin change by pre-shock CCC quintile (fig6).
 | `shock_2020.revenue_growth.t` | 0.377976 |
 | `shock_2022.margin_change.beta` / `.t` | −0.000060 / −2.371609 |
 | `validation.n_match` / `validation.n_comparisons` | 49 / 49 |
+
+---
+
+## Resumen en español
+
+El proyecto construye un panel de **25.341 empresas-año (3.158 empresas, 2010–2024)** a partir de los ficheros XBRL de la SEC, no de un proveedor de datos. El ciclo de conversión de caja (CCC) mediano es de **75 días** (DSO 49,1; DIO 84,3; DPO 51,0), y un **15,8%** de las observaciones tiene CCC negativo.
+
+El resultado estructural más interesante es que **solo el 6,0% de la varianza del CCC es entre industrias**, frente al **64,2% entre empresas**. La etiqueta sectorial explica muy poco; la relación concreta con clientes y proveedores explica mucho.
+
+El CCC es persistente pero no fijo: ρ = 0,685 (semivida 1,8 años) con la definición principal, y entre 0,51 y 0,54 con especificaciones alternativas. La asociación con la rentabilidad es **positiva y pequeña** (+1,39 puntos de ROA por cada 100 días de CCC, 0,06 desviaciones típicas), en contra de la hipótesis de partida. Se documenta como asociación, no como efecto causal, y se advierte de que la correlación de rangos dentro de la empresa típica es cero: el coeficiente lo identifican las empresas con mucha variación de CCC.
+
+En los shocks de 2020 y 2022 no hay un patrón robusto: el crecimiento de ingresos de 2020 no se asocia al CCC (t = 0,38), y el margen de 2022 tiene pendiente negativa pero quintiles no monótonos. La conclusión honesta es descriptiva: el CCC es un rasgo de empresa más que de sector, y su relación con la rentabilidad es débil y no causal.

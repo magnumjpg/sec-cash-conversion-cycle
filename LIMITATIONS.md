@@ -68,6 +68,12 @@
   percentage points of ROA per 100 CCC days, or 0.060 SD of ROA per SD of CCC.
   It is a within-firm association conditional on gross margin; the unconditional
   association (no controls) is larger, 0.000184.
+- **The typical firm shows no CCC–ROA relation.** An independent rank check
+  (Spearman correlation of CCC and ROA within each firm) has a median of 0.00,
+  and only 48.2% of firms have a positive one. The positive linear coefficient
+  is identified off firms with large CCC variation and is not a pattern visible
+  in the median firm. This is a further reason to treat it as a weak association
+  rather than a robust fact about working capital.
 - **Attrition is not random.** Firms with ≥3 usable years are larger, older and
   more likely to be industrial/retail. The results describe that population.
 - **Multiple specifications, one dataset.** The robustness table is a set of
