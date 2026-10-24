@@ -1,0 +1,24 @@
+sic2,industry,rho,se,half_life_years,n,firms
+55,Auto & fuel retail,1.0509,0.0116,,127,20
+48,Communications,0.9794,0.129,33.2788,182,42
+32,"Stone, clay & glass",0.9283,0.051,9.3185,110,20
+33,Primary metals,0.9127,0.0647,7.5835,275,45
+56,Apparel retail,0.8982,0.0623,6.4572,146,26
+26,Paper,0.875,0.0316,5.1897,125,23
+25,Wood & furniture,0.7949,0.1098,3.0204,137,21
+36,Electronics,0.7452,0.0135,2.3568,1881,341
+58,Restaurants,0.6909,0.0874,1.8744,115,25
+73,Business services,0.5582,0.1299,1.1889,625,140
+38,Instruments,0.5552,0.0749,1.178,1576,283
+80,Health services,0.5406,0.1386,1.1268,110,25
+39,Misc. manufacturing,0.4641,0.0486,0.9029,175,38
+30,Rubber & plastics,0.4534,0.1595,0.8763,203,32
+20,Food & tobacco,0.4321,0.12,0.826,530,97
+51,Wholesale non-durables,0.428,0.0134,0.8168,291,56
+23,Apparel,0.2634,0.0888,0.5195,132,22
+35,Machinery & computers,0.263,0.1414,0.519,1112,198
+37,Transport equipment,0.2213,0.1209,0.4595,545,90
+34,Fabricated metal,0.083,0.0202,0.2784,264,45
+50,Wholesale durables,0.0806,0.0795,0.2753,401,72
+28,Chemicals & pharma,0.0565,0.0203,0.2412,1612,329
+59,Specialty retail,0.0005,0.0005,0.0911,307,59

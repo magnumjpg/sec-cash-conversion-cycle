@@ -1,0 +1,3206 @@
+{
+  "meta": {
+    "project": "02_working_capital_sec",
+    "as_of_utc": "2026-10-24T22:37:54Z",
+    "sample_years": [
+      2010,
+      2024
+    ],
+    "n_firm_years": 25341,
+    "n_firms": 3158,
+    "n_industries_sic2": 58,
+    "currency": "USD",
+    "forms": "10-K, 10-K/A, 20-F, 20-F/A, 40-F, 40-F/A",
+    "adjustment": "none (raw XBRL as filed, latest filing wins)",
+    "note": "all estimates are associations, not causal effects"
+  },
+  "estimation_screen": {
+    "n_before": 25341,
+    "n_after": 23846,
+    "n_dropped": 1495,
+    "share_dropped": 0.058995,
+    "dropped_abs_ccc_gt_3650": 306,
+    "dropped_assets_lt_1m": 724,
+    "dropped_revenue_lt_1m": 1197,
+    "rule": "|CCC| <= 3650 days & total assets >= $1m & revenue >= $1m",
+    "median_ccc_dropped": -197.409382,
+    "median_ccc_kept": 77.930715
+  },
+  "descriptives": {
+    "ccc": {
+      "mean": -249.713609,
+      "sd": 103401.040023,
+      "p10": -39.45669,
+      "p25": 25.971576,
+      "median": 74.965423,
+      "p75": 134.576157,
+      "p90": 215.671114,
+      "n": 25341,
+      "mean_screened": 79.773072,
+      "sd_screened": 220.788433,
+      "median_screened": 77.930715,
+      "n_screened": 23846
+    },
+    "dso": {
+      "mean": 108.090091,
+      "sd": 4350.6861,
+      "p10": 10.188309,
+      "p25": 29.381538,
+      "median": 49.104276,
+      "p75": 68.307889,
+      "p90": 93.966558,
+      "n": 25341,
+      "mean_screened": 55.279996,
+      "sd_screened": 57.120964,
+      "median_screened": 49.509666,
+      "n_screened": 23846
+    },
+    "dio": {
+      "mean": 2228.74921,
+      "sd": 227065.290177,
+      "p10": 18.496927,
+      "p25": 44.565533,
+      "median": 84.274715,
+      "p75": 144.380178,
+      "p90": 254.338912,
+      "n": 25341,
+      "mean_screened": 124.063507,
+      "sd_screened": 398.673863,
+      "median_screened": 82.723632,
+      "n_screened": 23846
+    },
+    "dpo": {
+      "mean": 2586.552911,
+      "sd": 196081.98791,
+      "p10": 20.02104,
+      "p25": 32.531353,
+      "median": 50.994458,
+      "p75": 85.663051,
+      "p90": 218.203329,
+      "n": 25341,
+      "mean_screened": 99.57043,
+      "sd_screened": 433.319142,
+      "median_screened": 49.011576,
+      "n_screened": 23846
+    },
+    "negative_ccc": {
+      "mean": 0.158399,
+      "sd": 0.365122,
+      "p10": 0.0,
+      "p25": 0.0,
+      "median": 0.0,
+      "p75": 0.0,
+      "p90": 1.0,
+      "n": 25341,
+      "mean_screened": 0.126101,
+      "sd_screened": 0.33197,
+      "median_screened": 0.0,
+      "n_screened": 23846
+    },
+    "gross_margin": {
+      "mean": -0.088687,
+      "sd": 46.37518,
+      "p10": 0.109152,
+      "p25": 0.220358,
+      "median": 0.359874,
+      "p75": 0.544159,
+      "p90": 0.727886,
+      "n": 25341,
+      "mean_screened": 0.366947,
+      "sd_screened": 0.428472,
+      "median_screened": 0.358476,
+      "n_screened": 23846
+    },
+    "roa": {
+      "mean": 1.203878,
+      "sd": 272.771308,
+      "p10": -0.631063,
+      "p25": -0.134237,
+      "median": 0.019329,
+      "p75": 0.072441,
+      "p90": 0.130717,
+      "n": 24875,
+      "mean_screened": -0.106028,
+      "sd_screened": 0.612995,
+      "median_screened": 0.025126,
+      "n_screened": 23408
+    },
+    "cash_ratio": {
+      "mean": 4.083826,
+      "sd": 601.924677,
+      "p10": 0.015137,
+      "p25": 0.043656,
+      "median": 0.109694,
+      "p75": 0.223653,
+      "p90": 0.410893,
+      "n": 24598,
+      "mean_screened": 0.21942,
+      "sd_screened": 8.782547,
+      "median_screened": 0.108268,
+      "n_screened": 23288
+    },
+    "current_ratio": {
+      "mean": 2.917724,
+      "sd": 3.561123,
+      "p10": 0.773179,
+      "p25": 1.328164,
+      "median": 2.085337,
+      "p75": 3.337792,
+      "p90": 5.598143,
+      "n": 25244,
+      "mean_screened": 2.933157,
+      "sd_screened": 3.269264,
+      "median_screened": 2.134226,
+      "n_screened": 23788
+    },
+    "nwc_to_sales": {
+      "mean": -0.184384,
+      "sd": 41.623469,
+      "p10": -0.012382,
+      "p25": 0.08361,
+      "median": 0.179122,
+      "p75": 0.280053,
+      "p90": 0.415637,
+      "n": 25341,
+      "mean_screened": 0.203298,
+      "sd_screened": 0.318645,
+      "median_screened": 0.184307,
+      "n_screened": 23846
+    },
+    "ccc_volatility": {
+      "mean": 3396.493243,
+      "sd": 103240.098569,
+      "p10": 7.556331,
+      "p25": 13.613799,
+      "median": 27.052159,
+      "p75": 67.512816,
+      "p90": 314.386339,
+      "n": 25341,
+      "mean_screened": 1827.061192,
+      "sd_screened": 83044.474786,
+      "median_screened": 24.843054,
+      "n_screened": 23846
+    },
+    "variance_decomposition": {
+      "share_between_industries_sic2": 0.060055,
+      "share_within_industries_sic2": 0.939945,
+      "share_between_firms": 0.641592,
+      "share_within_firms": 0.358408,
+      "n_obs": 23846,
+      "based_on": "winsorized CCC on the screened sample"
+    }
+  },
+  "panel": {
+    "rows": 25341,
+    "firms": 3158,
+    "year_min": 2010,
+    "year_max": 2024,
+    "rows_per_year": {
+      "2010": 1408,
+      "2011": 1840,
+      "2012": 1940,
+      "2013": 1948,
+      "2014": 1886,
+      "2015": 1800,
+      "2016": 1763,
+      "2017": 1769,
+      "2018": 1661,
+      "2019": 1605,
+      "2020": 1634,
+      "2021": 1653,
+      "2022": 1645,
+      "2023": 1476,
+      "2024": 1313
+    },
+    "firms_per_year": {
+      "2010": 1408,
+      "2011": 1840,
+      "2012": 1940,
+      "2013": 1948,
+      "2014": 1886,
+      "2015": 1800,
+      "2016": 1763,
+      "2017": 1769,
+      "2018": 1661,
+      "2019": 1605,
+      "2020": 1634,
+      "2021": 1653,
+      "2022": 1645,
+      "2023": 1476,
+      "2024": 1313
+    },
+    "n_industries_sic2": 58,
+    "n_industries_reported": 35,
+    "share_negative_ccc": 0.158399,
+    "median_ccc": 74.965423,
+    "median_dso": 49.104276,
+    "median_dio": 84.274715,
+    "median_dpo": 50.994458
+  },
+  "industries": [
+    {
+      "sic2": "58",
+      "industry": "Restaurants",
+      "firm_years": 214,
+      "firms": 35,
+      "ccc_median": -8.076243,
+      "ccc_q25": -29.460961,
+      "ccc_q75": 10.155173,
+      "ccc_mean": -13.990842,
+      "dso_median": 6.229666,
+      "dio_median": 14.910916,
+      "dpo_median": 41.083625,
+      "neg_ccc_share": 0.635514,
+      "gross_margin_median": 0.677579,
+      "roa_median": 0.036673
+    },
+    {
+      "sic2": "48",
+      "industry": "Communications",
+      "firm_years": 323,
+      "firms": 53,
+      "ccc_median": 2.627392,
+      "ccc_q25": -72.981028,
+      "ccc_q75": 50.625385,
+      "ccc_mean": -3204.337064,
+      "dso_median": 37.662671,
+      "dio_median": 33.54123,
+      "dpo_median": 68.767206,
+      "neg_ccc_share": 0.486068,
+      "gross_margin_median": 0.498576,
+      "roa_median": -0.025451
+    },
+    {
+      "sic2": "72",
+      "industry": "Personal services",
+      "firm_years": 118,
+      "firms": 17,
+      "ccc_median": 7.83722,
+      "ccc_q25": -60.534656,
+      "ccc_q75": 38.03348,
+      "ccc_mean": -165.762937,
+      "dso_median": 18.612338,
+      "dio_median": 23.696134,
+      "dpo_median": 37.074027,
+      "neg_ccc_share": 0.449153,
+      "gross_margin_median": 0.337102,
+      "roa_median": 0.021248
+    },
+    {
+      "sic2": "29",
+      "industry": "Petroleum refining",
+      "firm_years": 149,
+      "firms": 18,
+      "ccc_median": 18.871852,
+      "ccc_q25": 10.996676,
+      "ccc_q75": 36.475531,
+      "ccc_mean": 22.099606,
+      "dso_median": 19.518243,
+      "dio_median": 26.719815,
+      "dpo_median": 29.110892,
+      "neg_ccc_share": 0.087248,
+      "gross_margin_median": 0.100879,
+      "roa_median": 0.045511
+    },
+    {
+      "sic2": "80",
+      "industry": "Health services",
+      "firm_years": 301,
+      "firms": 45,
+      "ccc_median": 22.10782,
+      "ccc_q25": -22.470193,
+      "ccc_q75": 55.816544,
+      "ccc_mean": -71.335526,
+      "dso_median": 46.206197,
+      "dio_median": 26.58054,
+      "dpo_median": 54.919694,
+      "neg_ccc_share": 0.325581,
+      "gross_margin_median": 0.408777,
+      "roa_median": -0.071449
+    },
+    {
+      "sic2": "73",
+      "industry": "Business services",
+      "firm_years": 1384,
+      "firms": 217,
+      "ccc_median": 26.178117,
+      "ccc_q25": -19.074231,
+      "ccc_q75": 65.516598,
+      "ccc_mean": -5315.41646,
+      "dso_median": 56.29826,
+      "dio_median": 22.920657,
+      "dpo_median": 57.972108,
+      "neg_ccc_share": 0.320809,
+      "gross_margin_median": 0.518546,
+      "roa_median": -0.023079
+    },
+    {
+      "sic2": "59",
+      "industry": "Specialty retail",
+      "firm_years": 725,
+      "firms": 100,
+      "ccc_median": 36.085779,
+      "ccc_q25": -6.579984,
+      "ccc_q75": 85.300509,
+      "ccc_mean": 1.863769,
+      "dso_median": 13.988024,
+      "dio_median": 57.843353,
+      "dpo_median": 46.388218,
+      "neg_ccc_share": 0.270345,
+      "gross_margin_median": 0.352336,
+      "roa_median": 0.015023
+    },
+    {
+      "sic2": "51",
+      "industry": "Wholesale non-durables",
+      "firm_years": 525,
+      "firms": 63,
+      "ccc_median": 38.601331,
+      "ccc_q25": 6.363309,
+      "ccc_q75": 114.342579,
+      "ccc_mean": 38.093741,
+      "dso_median": 28.229645,
+      "dio_median": 43.508232,
+      "dpo_median": 33.114576,
+      "neg_ccc_share": 0.169524,
+      "gross_margin_median": 0.210666,
+      "roa_median": 0.031659
+    },
+    {
+      "sic2": "10",
+      "industry": "Mining & energy",
+      "firm_years": 101,
+      "firms": 15,
+      "ccc_median": 43.11729,
+      "ccc_q25": 5.259711,
+      "ccc_q75": 91.72533,
+      "ccc_mean": -283.842429,
+      "dso_median": 25.449552,
+      "dio_median": 81.828147,
+      "dpo_median": 49.819661,
+      "neg_ccc_share": 0.227723,
+      "gross_margin_median": 0.280688,
+      "roa_median": -0.065708
+    },
+    {
+      "sic2": "87",
+      "industry": "Engineering services",
+      "firm_years": 187,
+      "firms": 26,
+      "ccc_median": 47.718381,
+      "ccc_q25": -7.137977,
+      "ccc_q75": 90.169634,
+      "ccc_mean": -11486.703934,
+      "dso_median": 59.890566,
+      "dio_median": 30.843146,
+      "dpo_median": 50.502595,
+      "neg_ccc_share": 0.262032,
+      "gross_margin_median": 0.455207,
+      "roa_median": -0.027525
+    },
+    {
+      "sic2": "13",
+      "industry": "Mining & energy",
+      "firm_years": 233,
+      "firms": 39,
+      "ccc_median": 48.327618,
+      "ccc_q25": 3.011012,
+      "ccc_q75": 106.890587,
+      "ccc_mean": -1004.980505,
+      "dso_median": 71.404015,
+      "dio_median": 39.898868,
+      "dpo_median": 59.081362,
+      "neg_ccc_share": 0.240343,
+      "gross_margin_median": 0.271907,
+      "roa_median": -0.020907
+    },
+    {
+      "sic2": "20",
+      "industry": "Food & tobacco",
+      "firm_years": 1129,
+      "firms": 141,
+      "ccc_median": 48.647317,
+      "ccc_q25": 23.440849,
+      "ccc_q75": 88.606883,
+      "ccc_mean": -2640.253842,
+      "dso_median": 31.652114,
+      "dio_median": 65.685798,
+      "dpo_median": 43.510357,
+      "neg_ccc_share": 0.170062,
+      "gross_margin_median": 0.299526,
+      "roa_median": 0.030535
+    },
+    {
+      "sic2": "27",
+      "industry": "Printing & publishing",
+      "firm_years": 190,
+      "firms": 21,
+      "ccc_median": 52.559806,
+      "ccc_q25": 12.851132,
+      "ccc_q75": 108.086849,
+      "ccc_mean": 58.632883,
+      "dso_median": 50.20235,
+      "dio_median": 37.516838,
+      "dpo_median": 46.023803,
+      "neg_ccc_share": 0.205263,
+      "gross_margin_median": 0.359656,
+      "roa_median": 0.027772
+    },
+    {
+      "sic2": "26",
+      "industry": "Paper",
+      "firm_years": 236,
+      "firms": 30,
+      "ccc_median": 54.975355,
+      "ccc_q25": 39.879236,
+      "ccc_q75": 72.87269,
+      "ccc_mean": 56.317405,
+      "dso_median": 41.5023,
+      "dio_median": 57.143382,
+      "dpo_median": 42.277281,
+      "neg_ccc_share": 0.012712,
+      "gross_margin_median": 0.190369,
+      "roa_median": 0.042931
+    },
+    {
+      "sic2": "56",
+      "industry": "Apparel retail",
+      "firm_years": 263,
+      "firms": 29,
+      "ccc_median": 57.635368,
+      "ccc_q25": 33.625161,
+      "ccc_q75": 97.848693,
+      "ccc_mean": 67.974239,
+      "dso_median": 5.410963,
+      "dio_median": 88.295057,
+      "dpo_median": 39.322999,
+      "neg_ccc_share": 0.011407,
+      "gross_margin_median": 0.361082,
+      "roa_median": 0.06562
+    },
+    {
+      "sic2": "25",
+      "industry": "Wood & furniture",
+      "firm_years": 253,
+      "firms": 23,
+      "ccc_median": 60.505171,
+      "ccc_q25": 28.490967,
+      "ccc_q75": 97.61144,
+      "ccc_mean": 68.961379,
+      "dso_median": 35.499973,
+      "dio_median": 62.326516,
+      "dpo_median": 44.001005,
+      "neg_ccc_share": 0.134387,
+      "gross_margin_median": 0.346731,
+      "roa_median": 0.051332
+    },
+    {
+      "sic2": "52",
+      "industry": "Building materials retail",
+      "firm_years": 104,
+      "firms": 10,
+      "ccc_median": 60.820126,
+      "ccc_q25": 42.696704,
+      "ccc_q75": 126.785598,
+      "ccc_mean": 90.699338,
+      "dso_median": 34.269015,
+      "dio_median": 77.873974,
+      "dpo_median": 34.857955,
+      "neg_ccc_share": 0.0,
+      "gross_margin_median": 0.341411,
+      "roa_median": 0.094465
+    },
+    {
+      "sic2": "24",
+      "industry": "Wood & furniture",
+      "firm_years": 188,
+      "firms": 19,
+      "ccc_median": 62.191399,
+      "ccc_q25": 45.178358,
+      "ccc_q75": 75.208852,
+      "ccc_mean": 67.499742,
+      "dso_median": 28.760001,
+      "dio_median": 52.18602,
+      "dpo_median": 18.513269,
+      "neg_ccc_share": 0.0,
+      "gross_margin_median": 0.217444,
+      "roa_median": 0.05247
+    },
+    {
+      "sic2": "55",
+      "industry": "Auto & fuel retail",
+      "firm_years": 262,
+      "firms": 27,
+      "ccc_median": 63.972691,
+      "ccc_q25": 15.308591,
+      "ccc_q75": 100.205307,
+      "ccc_mean": 140.878579,
+      "dso_median": 8.674734,
+      "dio_median": 81.287702,
+      "dpo_median": 14.487274,
+      "neg_ccc_share": 0.183206,
+      "gross_margin_median": 0.231132,
+      "roa_median": 0.043843
+    },
+    {
+      "sic2": "37",
+      "industry": "Transport equipment",
+      "firm_years": 1198,
+      "firms": 135,
+      "ccc_median": 66.279029,
+      "ccc_q25": 32.838088,
+      "ccc_q75": 121.194549,
+      "ccc_mean": 24.402125,
+      "dso_median": 48.680163,
+      "dio_median": 69.967366,
+      "dpo_median": 49.885842,
+      "neg_ccc_share": 0.100167,
+      "gross_margin_median": 0.198483,
+      "roa_median": 0.037983
+    },
+    {
+      "sic2": "32",
+      "industry": "Stone, clay & glass",
+      "firm_years": 191,
+      "firms": 24,
+      "ccc_median": 68.449939,
+      "ccc_q25": 39.452671,
+      "ccc_q75": 101.788949,
+      "ccc_mean": 278.039403,
+      "dso_median": 50.474286,
+      "dio_median": 62.520732,
+      "dpo_median": 40.45173,
+      "neg_ccc_share": 0.031414,
+      "gross_margin_median": 0.21522,
+      "roa_median": 0.022879
+    },
+    {
+      "sic2": "50",
+      "industry": "Wholesale durables",
+      "firm_years": 716,
+      "firms": 83,
+      "ccc_median": 74.083078,
+      "ccc_q25": 46.714416,
+      "ccc_q75": 115.683928,
+      "ccc_mean": 81.582114,
+      "dso_median": 49.818866,
+      "dio_median": 70.154261,
+      "dpo_median": 48.373938,
+      "neg_ccc_share": 0.083799,
+      "gross_margin_median": 0.246577,
+      "roa_median": 0.033013
+    },
+    {
+      "sic2": "30",
+      "industry": "Rubber & plastics",
+      "firm_years": 327,
+      "firms": 34,
+      "ccc_median": 75.241707,
+      "ccc_q25": 45.076903,
+      "ccc_q75": 101.162711,
+      "ccc_mean": -37.010677,
+      "dso_median": 46.773792,
+      "dio_median": 74.084488,
+      "dpo_median": 45.860275,
+      "neg_ccc_share": 0.061162,
+      "gross_margin_median": 0.245633,
+      "roa_median": 0.031237
+    },
+    {
+      "sic2": "14",
+      "industry": "Mining & energy",
+      "firm_years": 112,
+      "firms": 16,
+      "ccc_median": 75.828339,
+      "ccc_q25": 58.793979,
+      "ccc_q75": 96.992931,
+      "ccc_mean": 104.248078,
+      "dso_median": 42.945204,
+      "dio_median": 55.137598,
+      "dpo_median": 26.605243,
+      "neg_ccc_share": 0.071429,
+      "gross_margin_median": 0.255745,
+      "roa_median": 0.048808
+    },
+    {
+      "sic2": "28",
+      "industry": "Chemicals & pharma",
+      "firm_years": 3763,
+      "firms": 494,
+      "ccc_median": 76.671088,
+      "ccc_q25": -4.256615,
+      "ccc_q75": 151.469761,
+      "ccc_mean": -609.997407,
+      "dso_median": 54.063589,
+      "dio_median": 117.538918,
+      "dpo_median": 76.870618,
+      "neg_ccc_share": 0.256179,
+      "gross_margin_median": 0.492208,
+      "roa_median": -0.013478
+    },
+    {
+      "sic2": "33",
+      "industry": "Primary metals",
+      "firm_years": 448,
+      "firms": 47,
+      "ccc_median": 82.722929,
+      "ccc_q25": 56.274239,
+      "ccc_q75": 131.680773,
+      "ccc_mean": 102.846361,
+      "dso_median": 45.855876,
+      "dio_median": 70.052538,
+      "dpo_median": 36.666384,
+      "neg_ccc_share": 0.033482,
+      "gross_margin_median": 0.152251,
+      "roa_median": 0.031881
+    },
+    {
+      "sic2": "39",
+      "industry": "Misc. manufacturing",
+      "firm_years": 392,
+      "firms": 51,
+      "ccc_median": 92.414243,
+      "ccc_q25": 65.911511,
+      "ccc_q75": 143.730494,
+      "ccc_mean": 129.93257,
+      "dso_median": 49.511312,
+      "dio_median": 92.043577,
+      "dpo_median": 52.275874,
+      "neg_ccc_share": 0.094388,
+      "gross_margin_median": 0.368918,
+      "roa_median": 0.020716
+    },
+    {
+      "sic2": "36",
+      "industry": "Electronics",
+      "firm_years": 3504,
+      "firms": 410,
+      "ccc_median": 93.147439,
+      "ccc_q25": 52.936463,
+      "ccc_q75": 140.162224,
+      "ccc_mean": 4174.699447,
+      "dso_median": 56.588112,
+      "dio_median": 95.13442,
+      "dpo_median": 55.430001,
+      "neg_ccc_share": 0.085616,
+      "gross_margin_median": 0.35668,
+      "roa_median": 0.009275
+    },
+    {
+      "sic2": "35",
+      "industry": "Machinery & computers",
+      "firm_years": 2108,
+      "firms": 231,
+      "ccc_median": 96.147466,
+      "ccc_q25": 55.057471,
+      "ccc_q75": 145.596482,
+      "ccc_mean": -49.915607,
+      "dso_median": 60.59778,
+      "dio_median": 90.461051,
+      "dpo_median": 52.761496,
+      "neg_ccc_share": 0.089658,
+      "gross_margin_median": 0.34733,
+      "roa_median": 0.033561
+    },
+    {
+      "sic2": "34",
+      "industry": "Fabricated metal",
+      "firm_years": 573,
+      "firms": 61,
+      "ccc_median": 97.352603,
+      "ccc_q25": 56.265818,
+      "ccc_q75": 136.198484,
+      "ccc_mean": 71.246099,
+      "dso_median": 51.693816,
+      "dio_median": 89.722588,
+      "dpo_median": 43.518493,
+      "neg_ccc_share": 0.050611,
+      "gross_margin_median": 0.302036,
+      "roa_median": 0.044264
+    },
+    {
+      "sic2": "22",
+      "industry": "Textiles",
+      "firm_years": 114,
+      "firms": 12,
+      "ccc_median": 99.73483,
+      "ccc_q25": 85.581918,
+      "ccc_q75": 130.710281,
+      "ccc_mean": 80.757474,
+      "dso_median": 50.859439,
+      "dio_median": 90.607323,
+      "dpo_median": 33.227854,
+      "neg_ccc_share": 0.026316,
+      "gross_margin_median": 0.250948,
+      "roa_median": 0.027869
+    },
+    {
+      "sic2": "23",
+      "industry": "Apparel",
+      "firm_years": 269,
+      "firms": 28,
+      "ccc_median": 101.771214,
+      "ccc_q25": 82.761235,
+      "ccc_q75": 125.547108,
+      "ccc_mean": 140.974924,
+      "dso_median": 37.360708,
+      "dio_median": 117.331567,
+      "dpo_median": 54.431977,
+      "neg_ccc_share": 0.007435,
+      "gross_margin_median": 0.469047,
+      "roa_median": 0.054769
+    },
+    {
+      "sic2": "01",
+      "industry": "Agriculture",
+      "firm_years": 185,
+      "firms": 29,
+      "ccc_median": 103.050756,
+      "ccc_q25": 40.971796,
+      "ccc_q75": 202.338086,
+      "ccc_mean": -9213.516385,
+      "dso_median": 31.181734,
+      "dio_median": 112.488748,
+      "dpo_median": 39.528333,
+      "neg_ccc_share": 0.108108,
+      "gross_margin_median": 0.261819,
+      "roa_median": -0.028188
+    },
+    {
+      "sic2": "31",
+      "industry": "Leather",
+      "firm_years": 117,
+      "firms": 11,
+      "ccc_median": 111.605304,
+      "ccc_q25": 91.191109,
+      "ccc_q75": 186.786566,
+      "ccc_mean": 142.212579,
+      "dso_median": 25.257131,
+      "dio_median": 141.961735,
+      "dpo_median": 44.529599,
+      "neg_ccc_share": 0.0,
+      "gross_margin_median": 0.5023,
+      "roa_median": 0.075626
+    },
+    {
+      "sic2": "38",
+      "industry": "Instruments",
+      "firm_years": 3342,
+      "firms": 398,
+      "ccc_median": 134.802754,
+      "ccc_q25": 73.431843,
+      "ccc_q75": 200.991634,
+      "ccc_mean": -664.09527,
+      "dso_median": 58.923058,
+      "dio_median": 140.344343,
+      "dpo_median": 54.785516,
+      "neg_ccc_share": 0.112507,
+      "gross_margin_median": 0.522555,
+      "roa_median": -0.027995
+    }
+  ],
+  "by_year": [
+    {
+      "fiscal_year": 2010,
+      "firms": 1408,
+      "rows": 1408,
+      "ccc_median": 73.764999,
+      "ccc_mean": -2024.736282,
+      "ccc_q25": 28.050435,
+      "ccc_q75": 123.10687,
+      "neg_ccc_share": 0.141335,
+      "dso_median": 48.894711,
+      "dio_median": 76.369236,
+      "dpo_median": 48.707455,
+      "gross_margin_median": 0.374836,
+      "roa_median": 0.040467
+    },
+    {
+      "fiscal_year": 2011,
+      "firms": 1840,
+      "rows": 1840,
+      "ccc_median": 72.851292,
+      "ccc_mean": -1146.32603,
+      "ccc_q25": 31.180646,
+      "ccc_q75": 128.495138,
+      "neg_ccc_share": 0.132609,
+      "dso_median": 48.109165,
+      "dio_median": 79.461201,
+      "dpo_median": 46.621654,
+      "gross_margin_median": 0.362048,
+      "roa_median": 0.035644
+    },
+    {
+      "fiscal_year": 2012,
+      "firms": 1940,
+      "rows": 1940,
+      "ccc_median": 72.947,
+      "ccc_mean": -482.776899,
+      "ccc_q25": 28.617364,
+      "ccc_q75": 129.687165,
+      "neg_ccc_share": 0.150515,
+      "dso_median": 47.975709,
+      "dio_median": 80.033413,
+      "dpo_median": 47.060631,
+      "gross_margin_median": 0.356198,
+      "roa_median": 0.025982
+    },
+    {
+      "fiscal_year": 2013,
+      "firms": 1948,
+      "rows": 1948,
+      "ccc_median": 71.376643,
+      "ccc_mean": -3618.021444,
+      "ccc_q25": 25.88487,
+      "ccc_q75": 129.561003,
+      "neg_ccc_share": 0.160678,
+      "dso_median": 49.156328,
+      "dio_median": 79.231489,
+      "dpo_median": 48.918421,
+      "gross_margin_median": 0.362384,
+      "roa_median": 0.024553
+    },
+    {
+      "fiscal_year": 2014,
+      "firms": 1886,
+      "rows": 1886,
+      "ccc_median": 69.35706,
+      "ccc_mean": -1041.488923,
+      "ccc_q25": 24.447205,
+      "ccc_q75": 129.297717,
+      "neg_ccc_share": 0.158006,
+      "dso_median": 48.189043,
+      "dio_median": 81.177643,
+      "dpo_median": 50.183684,
+      "gross_margin_median": 0.355034,
+      "roa_median": 0.023287
+    },
+    {
+      "fiscal_year": 2015,
+      "firms": 1800,
+      "rows": 1800,
+      "ccc_median": 70.389216,
+      "ccc_mean": -95.533168,
+      "ccc_q25": 23.049687,
+      "ccc_q75": 129.511679,
+      "neg_ccc_share": 0.168889,
+      "dso_median": 47.682298,
+      "dio_median": 81.256752,
+      "dpo_median": 49.905021,
+      "gross_margin_median": 0.361348,
+      "roa_median": 0.020119
+    },
+    {
+      "fiscal_year": 2016,
+      "firms": 1763,
+      "rows": 1763,
+      "ccc_median": 72.119001,
+      "ccc_mean": -1723.912638,
+      "ccc_q25": 22.983515,
+      "ccc_q75": 129.726258,
+      "neg_ccc_share": 0.16903,
+      "dso_median": 48.357723,
+      "dio_median": 81.293545,
+      "dpo_median": 50.276228,
+      "gross_margin_median": 0.364777,
+      "roa_median": 0.019248
+    },
+    {
+      "fiscal_year": 2017,
+      "firms": 1769,
+      "rows": 1769,
+      "ccc_median": 70.200357,
+      "ccc_mean": -414.067605,
+      "ccc_q25": 22.859897,
+      "ccc_q75": 128.08875,
+      "neg_ccc_share": 0.171283,
+      "dso_median": 50.966865,
+      "dio_median": 81.098627,
+      "dpo_median": 53.724638,
+      "gross_margin_median": 0.365567,
+      "roa_median": 0.018632
+    },
+    {
+      "fiscal_year": 2018,
+      "firms": 1661,
+      "rows": 1661,
+      "ccc_median": 70.206383,
+      "ccc_mean": -210.355959,
+      "ccc_q25": 21.593356,
+      "ccc_q75": 126.143184,
+      "neg_ccc_share": 0.171583,
+      "dso_median": 50.305732,
+      "dio_median": 79.462629,
+      "dpo_median": 52.629584,
+      "gross_margin_median": 0.358925,
+      "roa_median": 0.020367
+    },
+    {
+      "fiscal_year": 2019,
+      "firms": 1605,
+      "rows": 1605,
+      "ccc_median": 76.216478,
+      "ccc_mean": -123.958079,
+      "ccc_q25": 26.749952,
+      "ccc_q75": 135.240551,
+      "neg_ccc_share": 0.158255,
+      "dso_median": 50.653123,
+      "dio_median": 82.736303,
+      "dpo_median": 51.833162,
+      "gross_margin_median": 0.35965,
+      "roa_median": 0.011284
+    },
+    {
+      "fiscal_year": 2020,
+      "firms": 1634,
+      "rows": 1634,
+      "ccc_median": 77.398468,
+      "ccc_mean": 51.353493,
+      "ccc_q25": 26.329177,
+      "ccc_q75": 141.25625,
+      "neg_ccc_share": 0.164627,
+      "dso_median": 50.280222,
+      "dio_median": 88.17011,
+      "dpo_median": 53.804422,
+      "gross_margin_median": 0.357056,
+      "roa_median": -0.006156
+    },
+    {
+      "fiscal_year": 2021,
+      "firms": 1653,
+      "rows": 1653,
+      "ccc_median": 82.297025,
+      "ccc_mean": 8782.634709,
+      "ccc_q25": 28.620444,
+      "ccc_q75": 145.56198,
+      "neg_ccc_share": 0.15487,
+      "dso_median": 51.466909,
+      "dio_median": 95.439092,
+      "dpo_median": 58.00579,
+      "gross_margin_median": 0.368663,
+      "roa_median": 0.01844
+    },
+    {
+      "fiscal_year": 2022,
+      "firms": 1645,
+      "rows": 1645,
+      "ccc_median": 86.859852,
+      "ccc_mean": 36.174473,
+      "ccc_q25": 30.335408,
+      "ccc_q75": 155.3978,
+      "neg_ccc_share": 0.15076,
+      "dso_median": 49.328199,
+      "dio_median": 100.989998,
+      "dpo_median": 54.634759,
+      "gross_margin_median": 0.342423,
+      "roa_median": 0.001205
+    },
+    {
+      "fiscal_year": 2023,
+      "firms": 1476,
+      "rows": 1476,
+      "ccc_median": 80.616149,
+      "ccc_mean": -745.684468,
+      "ccc_q25": 23.731181,
+      "ccc_q75": 152.2445,
+      "neg_ccc_share": 0.161924,
+      "dso_median": 48.482072,
+      "dio_median": 95.945663,
+      "dpo_median": 50.811639,
+      "gross_margin_median": 0.351417,
+      "roa_median": 0.006825
+    },
+    {
+      "fiscal_year": 2024,
+      "firms": 1313,
+      "rows": 1313,
+      "ccc_median": 85.66046,
+      "ccc_mean": -371.370292,
+      "ccc_q25": 29.477346,
+      "ccc_q75": 146.743855,
+      "neg_ccc_share": 0.161462,
+      "dso_median": 48.600951,
+      "dio_median": 92.448007,
+      "dpo_median": 51.919107,
+      "gross_margin_median": 0.366719,
+      "roa_median": 0.010012
+    }
+  ],
+  "persistence": {
+    "beta": 0.685315,
+    "se": 0.022846,
+    "t": 29.997212,
+    "p": 0.0,
+    "n": 20576,
+    "stars": "***",
+    "model": "y_it = a + rho*y_i,t-1 + year FE; SE clustered by firm",
+    "r2": 0.519565,
+    "half_life_years": 1.834323,
+    "mean_reversion_1_minus_rho": 0.314685,
+    "n_firms": 2959,
+    "with_firm_fe": {
+      "rho": 0.266371,
+      "se": 0.044533,
+      "n": 20576,
+      "note": "biased downward with short panels (Nickell); upper/lower bound only"
+    },
+    "by_industry": [
+      {
+        "sic2": "30",
+        "industry": "Rubber & plastics",
+        "rho": 0.961646,
+        "se": 0.057592,
+        "half_life_years": 17.723428,
+        "n": 275,
+        "firms": 33
+      },
+      {
+        "sic2": "27",
+        "industry": "Printing & publishing",
+        "rho": 0.952011,
+        "se": 0.027545,
+        "half_life_years": 14.094585,
+        "n": 166,
+        "firms": 20
+      },
+      {
+        "sic2": "51",
+        "industry": "Wholesale non-durables",
+        "rho": 0.947108,
+        "se": 0.055854,
+        "half_life_years": 12.755269,
+        "n": 432,
+        "firms": 61
+      },
+      {
+        "sic2": "20",
+        "industry": "Food & tobacco",
+        "rho": 0.930025,
+        "se": 0.04588,
+        "half_life_years": 9.554814,
+        "n": 903,
+        "firms": 128
+      },
+      {
+        "sic2": "25",
+        "industry": "Wood & furniture",
+        "rho": 0.92723,
+        "se": 0.041172,
+        "half_life_years": 9.174233,
+        "n": 229,
+        "firms": 23
+      },
+      {
+        "sic2": "56",
+        "industry": "Apparel retail",
+        "rho": 0.926958,
+        "se": 0.036823,
+        "half_life_years": 9.138697,
+        "n": 232,
+        "firms": 29
+      },
+      {
+        "sic2": "33",
+        "industry": "Primary metals",
+        "rho": 0.907287,
+        "se": 0.053066,
+        "half_life_years": 7.124048,
+        "n": 397,
+        "firms": 47
+      },
+      {
+        "sic2": "34",
+        "industry": "Fabricated metal",
+        "rho": 0.879543,
+        "se": 0.092339,
+        "half_life_years": 5.400311,
+        "n": 488,
+        "firms": 57
+      },
+      {
+        "sic2": "32",
+        "industry": "Stone, clay & glass",
+        "rho": 0.874374,
+        "se": 0.059733,
+        "half_life_years": 5.163227,
+        "n": 159,
+        "firms": 23
+      },
+      {
+        "sic2": "35",
+        "industry": "Machinery & computers",
+        "rho": 0.866057,
+        "se": 0.024058,
+        "half_life_years": 4.820075,
+        "n": 1804,
+        "firms": 221
+      },
+      {
+        "sic2": "13",
+        "industry": "Mining & energy",
+        "rho": 0.865775,
+        "se": 0.057569,
+        "half_life_years": 4.80919,
+        "n": 179,
+        "firms": 35
+      },
+      {
+        "sic2": "55",
+        "industry": "Auto & fuel retail",
+        "rho": 0.85988,
+        "se": 0.082248,
+        "half_life_years": 4.591525,
+        "n": 226,
+        "firms": 26
+      },
+      {
+        "sic2": "39",
+        "industry": "Misc. manufacturing",
+        "rho": 0.840491,
+        "se": 0.056253,
+        "half_life_years": 3.988909,
+        "n": 306,
+        "firms": 48
+      },
+      {
+        "sic2": "59",
+        "industry": "Specialty retail",
+        "rho": 0.837979,
+        "se": 0.057041,
+        "half_life_years": 3.921347,
+        "n": 581,
+        "firms": 97
+      },
+      {
+        "sic2": "87",
+        "industry": "Engineering services",
+        "rho": 0.835591,
+        "se": 0.052363,
+        "half_life_years": 3.859053,
+        "n": 139,
+        "firms": 25
+      },
+      {
+        "sic2": "50",
+        "industry": "Wholesale durables",
+        "rho": 0.832195,
+        "se": 0.087634,
+        "half_life_years": 3.773492,
+        "n": 600,
+        "firms": 81
+      },
+      {
+        "sic2": "26",
+        "industry": "Paper",
+        "rho": 0.813751,
+        "se": 0.073955,
+        "half_life_years": 3.363148,
+        "n": 203,
+        "firms": 30
+      },
+      {
+        "sic2": "48",
+        "industry": "Communications",
+        "rho": 0.792833,
+        "se": 0.110644,
+        "half_life_years": 2.985865,
+        "n": 243,
+        "firms": 50
+      },
+      {
+        "sic2": "36",
+        "industry": "Electronics",
+        "rho": 0.76559,
+        "se": 0.029116,
+        "half_life_years": 2.594999,
+        "n": 2944,
+        "firms": 394
+      },
+      {
+        "sic2": "73",
+        "industry": "Business services",
+        "rho": 0.750522,
+        "se": 0.056452,
+        "half_life_years": 2.415264,
+        "n": 1028,
+        "firms": 196
+      },
+      {
+        "sic2": "38",
+        "industry": "Instruments",
+        "rho": 0.749845,
+        "se": 0.039899,
+        "half_life_years": 2.407693,
+        "n": 2688,
+        "firms": 366
+      },
+      {
+        "sic2": "80",
+        "industry": "Health services",
+        "rho": 0.680885,
+        "se": 0.098995,
+        "half_life_years": 1.803369,
+        "n": 230,
+        "firms": 44
+      },
+      {
+        "sic2": "37",
+        "industry": "Transport equipment",
+        "rho": 0.6758,
+        "se": 0.052922,
+        "half_life_years": 1.768872,
+        "n": 1009,
+        "firms": 130
+      },
+      {
+        "sic2": "01",
+        "industry": "Agriculture",
+        "rho": 0.660126,
+        "se": 0.059325,
+        "half_life_years": 1.668928,
+        "n": 145,
+        "firms": 27
+      },
+      {
+        "sic2": "23",
+        "industry": "Apparel",
+        "rho": 0.598951,
+        "se": 0.196257,
+        "half_life_years": 1.352283,
+        "n": 220,
+        "firms": 27
+      },
+      {
+        "sic2": "28",
+        "industry": "Chemicals & pharma",
+        "rho": 0.591251,
+        "se": 0.038062,
+        "half_life_years": 1.318986,
+        "n": 2878,
+        "firms": 438
+      },
+      {
+        "sic2": "58",
+        "industry": "Restaurants",
+        "rho": 0.298548,
+        "se": 0.136623,
+        "half_life_years": 0.573405,
+        "n": 164,
+        "firms": 33
+      }
+    ]
+  },
+  "persistence_dso_dio_dpo": {
+    "dso": {
+      "beta": 0.723204,
+      "se": 0.026235,
+      "t": 27.566304,
+      "p": 0.0,
+      "n": 20576,
+      "stars": "***",
+      "model": "y_it = a + rho*y_i,t-1 + year FE; SE clustered by firm",
+      "r2": 0.535629,
+      "half_life_years": 2.138919,
+      "mean_reversion_1_minus_rho": 0.276796,
+      "n_firms": 2959,
+      "with_firm_fe": {
+        "rho": 0.255163,
+        "se": 0.026177,
+        "n": 20576,
+        "note": "biased downward with short panels (Nickell); upper/lower bound only"
+      },
+      "by_industry": [
+        {
+          "sic2": "51",
+          "industry": "Wholesale non-durables",
+          "rho": 0.968773,
+          "se": 0.035945,
+          "half_life_years": 21.848646,
+          "n": 432,
+          "firms": 61
+        },
+        {
+          "sic2": "55",
+          "industry": "Auto & fuel retail",
+          "rho": 0.927958,
+          "se": 0.073799,
+          "half_life_years": 9.270549,
+          "n": 226,
+          "firms": 26
+        },
+        {
+          "sic2": "56",
+          "industry": "Apparel retail",
+          "rho": 0.914009,
+          "se": 0.038556,
+          "half_life_years": 7.708946,
+          "n": 232,
+          "firms": 29
+        },
+        {
+          "sic2": "27",
+          "industry": "Printing & publishing",
+          "rho": 0.908501,
+          "se": 0.039271,
+          "half_life_years": 7.223344,
+          "n": 166,
+          "firms": 20
+        },
+        {
+          "sic2": "23",
+          "industry": "Apparel",
+          "rho": 0.894645,
+          "se": 0.0434,
+          "half_life_years": 6.22614,
+          "n": 220,
+          "firms": 27
+        },
+        {
+          "sic2": "32",
+          "industry": "Stone, clay & glass",
+          "rho": 0.839859,
+          "se": 0.039242,
+          "half_life_years": 3.971704,
+          "n": 159,
+          "firms": 23
+        },
+        {
+          "sic2": "39",
+          "industry": "Misc. manufacturing",
+          "rho": 0.826565,
+          "se": 0.041017,
+          "half_life_years": 3.639004,
+          "n": 306,
+          "firms": 48
+        },
+        {
+          "sic2": "58",
+          "industry": "Restaurants",
+          "rho": 0.819412,
+          "se": 0.028929,
+          "half_life_years": 3.480217,
+          "n": 164,
+          "firms": 33
+        },
+        {
+          "sic2": "25",
+          "industry": "Wood & furniture",
+          "rho": 0.807905,
+          "se": 0.026977,
+          "half_life_years": 3.249469,
+          "n": 229,
+          "firms": 23
+        },
+        {
+          "sic2": "33",
+          "industry": "Primary metals",
+          "rho": 0.792441,
+          "se": 0.106952,
+          "half_life_years": 2.979518,
+          "n": 397,
+          "firms": 47
+        },
+        {
+          "sic2": "35",
+          "industry": "Machinery & computers",
+          "rho": 0.783068,
+          "se": 0.033966,
+          "half_life_years": 2.834536,
+          "n": 1804,
+          "firms": 221
+        },
+        {
+          "sic2": "59",
+          "industry": "Specialty retail",
+          "rho": 0.775582,
+          "se": 0.080622,
+          "half_life_years": 2.727404,
+          "n": 581,
+          "firms": 97
+        },
+        {
+          "sic2": "01",
+          "industry": "Agriculture",
+          "rho": 0.769459,
+          "se": 0.054607,
+          "half_life_years": 2.644918,
+          "n": 145,
+          "firms": 27
+        },
+        {
+          "sic2": "30",
+          "industry": "Rubber & plastics",
+          "rho": 0.75151,
+          "se": 0.043125,
+          "half_life_years": 2.426384,
+          "n": 275,
+          "firms": 33
+        },
+        {
+          "sic2": "73",
+          "industry": "Business services",
+          "rho": 0.718395,
+          "se": 0.044312,
+          "half_life_years": 2.095776,
+          "n": 1028,
+          "firms": 196
+        },
+        {
+          "sic2": "38",
+          "industry": "Instruments",
+          "rho": 0.698563,
+          "se": 0.033965,
+          "half_life_years": 1.932223,
+          "n": 2688,
+          "firms": 366
+        },
+        {
+          "sic2": "28",
+          "industry": "Chemicals & pharma",
+          "rho": 0.675029,
+          "se": 0.034605,
+          "half_life_years": 1.763737,
+          "n": 2878,
+          "firms": 438
+        },
+        {
+          "sic2": "36",
+          "industry": "Electronics",
+          "rho": 0.665106,
+          "se": 0.040033,
+          "half_life_years": 1.699686,
+          "n": 2944,
+          "firms": 394
+        },
+        {
+          "sic2": "37",
+          "industry": "Transport equipment",
+          "rho": 0.651659,
+          "se": 0.080715,
+          "half_life_years": 1.618616,
+          "n": 1009,
+          "firms": 130
+        },
+        {
+          "sic2": "80",
+          "industry": "Health services",
+          "rho": 0.643022,
+          "se": 0.107556,
+          "half_life_years": 1.569709,
+          "n": 230,
+          "firms": 44
+        },
+        {
+          "sic2": "87",
+          "industry": "Engineering services",
+          "rho": 0.638408,
+          "se": 0.071423,
+          "half_life_years": 1.544523,
+          "n": 139,
+          "firms": 25
+        },
+        {
+          "sic2": "48",
+          "industry": "Communications",
+          "rho": 0.637504,
+          "se": 0.079557,
+          "half_life_years": 1.53966,
+          "n": 243,
+          "firms": 50
+        },
+        {
+          "sic2": "20",
+          "industry": "Food & tobacco",
+          "rho": 0.635225,
+          "se": 0.074,
+          "half_life_years": 1.527507,
+          "n": 903,
+          "firms": 128
+        },
+        {
+          "sic2": "34",
+          "industry": "Fabricated metal",
+          "rho": 0.627066,
+          "se": 0.075421,
+          "half_life_years": 1.485197,
+          "n": 488,
+          "firms": 57
+        },
+        {
+          "sic2": "26",
+          "industry": "Paper",
+          "rho": 0.612493,
+          "se": 0.094749,
+          "half_life_years": 1.413957,
+          "n": 203,
+          "firms": 30
+        },
+        {
+          "sic2": "13",
+          "industry": "Mining & energy",
+          "rho": 0.51686,
+          "se": 0.084861,
+          "half_life_years": 1.050251,
+          "n": 179,
+          "firms": 35
+        },
+        {
+          "sic2": "50",
+          "industry": "Wholesale durables",
+          "rho": 0.267712,
+          "se": 0.152959,
+          "half_life_years": 0.525971,
+          "n": 600,
+          "firms": 81
+        }
+      ]
+    },
+    "dio": {
+      "beta": 0.651282,
+      "se": 0.023735,
+      "t": 27.440119,
+      "p": 0.0,
+      "n": 20576,
+      "stars": "***",
+      "model": "y_it = a + rho*y_i,t-1 + year FE; SE clustered by firm",
+      "r2": 0.529792,
+      "half_life_years": 1.616431,
+      "mean_reversion_1_minus_rho": 0.348718,
+      "n_firms": 2959,
+      "with_firm_fe": {
+        "rho": 0.191863,
+        "se": 0.035816,
+        "n": 20576,
+        "note": "biased downward with short panels (Nickell); upper/lower bound only"
+      },
+      "by_industry": [
+        {
+          "sic2": "51",
+          "industry": "Wholesale non-durables",
+          "rho": 0.968195,
+          "se": 0.065372,
+          "half_life_years": 21.444965,
+          "n": 432,
+          "firms": 61
+        },
+        {
+          "sic2": "32",
+          "industry": "Stone, clay & glass",
+          "rho": 0.9522,
+          "se": 0.015981,
+          "half_life_years": 14.151711,
+          "n": 159,
+          "firms": 23
+        },
+        {
+          "sic2": "27",
+          "industry": "Printing & publishing",
+          "rho": 0.942537,
+          "se": 0.039687,
+          "half_life_years": 11.712547,
+          "n": 166,
+          "firms": 20
+        },
+        {
+          "sic2": "56",
+          "industry": "Apparel retail",
+          "rho": 0.9163,
+          "se": 0.035934,
+          "half_life_years": 7.929711,
+          "n": 232,
+          "firms": 29
+        },
+        {
+          "sic2": "34",
+          "industry": "Fabricated metal",
+          "rho": 0.914782,
+          "se": 0.06493,
+          "half_life_years": 7.782073,
+          "n": 488,
+          "firms": 57
+        },
+        {
+          "sic2": "33",
+          "industry": "Primary metals",
+          "rho": 0.911029,
+          "se": 0.044254,
+          "half_life_years": 7.438725,
+          "n": 397,
+          "firms": 47
+        },
+        {
+          "sic2": "20",
+          "industry": "Food & tobacco",
+          "rho": 0.883064,
+          "se": 0.080791,
+          "half_life_years": 5.573845,
+          "n": 903,
+          "firms": 128
+        },
+        {
+          "sic2": "30",
+          "industry": "Rubber & plastics",
+          "rho": 0.874382,
+          "se": 0.064877,
+          "half_life_years": 5.163577,
+          "n": 275,
+          "firms": 33
+        },
+        {
+          "sic2": "35",
+          "industry": "Machinery & computers",
+          "rho": 0.855824,
+          "se": 0.027346,
+          "half_life_years": 4.452073,
+          "n": 1804,
+          "firms": 221
+        },
+        {
+          "sic2": "26",
+          "industry": "Paper",
+          "rho": 0.849167,
+          "se": 0.043388,
+          "half_life_years": 4.239437,
+          "n": 203,
+          "firms": 30
+        },
+        {
+          "sic2": "48",
+          "industry": "Communications",
+          "rho": 0.84615,
+          "se": 0.024294,
+          "half_life_years": 4.149139,
+          "n": 243,
+          "firms": 50
+        },
+        {
+          "sic2": "39",
+          "industry": "Misc. manufacturing",
+          "rho": 0.840567,
+          "se": 0.052172,
+          "half_life_years": 3.990967,
+          "n": 306,
+          "firms": 48
+        },
+        {
+          "sic2": "13",
+          "industry": "Mining & energy",
+          "rho": 0.786906,
+          "se": 0.045461,
+          "half_life_years": 2.892368,
+          "n": 179,
+          "firms": 35
+        },
+        {
+          "sic2": "59",
+          "industry": "Specialty retail",
+          "rho": 0.784339,
+          "se": 0.068485,
+          "half_life_years": 2.85347,
+          "n": 581,
+          "firms": 97
+        },
+        {
+          "sic2": "87",
+          "industry": "Engineering services",
+          "rho": 0.78287,
+          "se": 0.079722,
+          "half_life_years": 2.831616,
+          "n": 139,
+          "firms": 25
+        },
+        {
+          "sic2": "25",
+          "industry": "Wood & furniture",
+          "rho": 0.777521,
+          "se": 0.123733,
+          "half_life_years": 2.754468,
+          "n": 229,
+          "firms": 23
+        },
+        {
+          "sic2": "38",
+          "industry": "Instruments",
+          "rho": 0.764498,
+          "se": 0.026042,
+          "half_life_years": 2.581205,
+          "n": 2688,
+          "firms": 366
+        },
+        {
+          "sic2": "55",
+          "industry": "Auto & fuel retail",
+          "rho": 0.761896,
+          "se": 0.089099,
+          "half_life_years": 2.548844,
+          "n": 226,
+          "firms": 26
+        },
+        {
+          "sic2": "36",
+          "industry": "Electronics",
+          "rho": 0.743131,
+          "se": 0.044468,
+          "half_life_years": 2.334749,
+          "n": 2944,
+          "firms": 394
+        },
+        {
+          "sic2": "50",
+          "industry": "Wholesale durables",
+          "rho": 0.723624,
+          "se": 0.108392,
+          "half_life_years": 2.142758,
+          "n": 600,
+          "firms": 81
+        },
+        {
+          "sic2": "37",
+          "industry": "Transport equipment",
+          "rho": 0.690555,
+          "se": 0.0559,
+          "half_life_years": 1.872054,
+          "n": 1009,
+          "firms": 130
+        },
+        {
+          "sic2": "58",
+          "industry": "Restaurants",
+          "rho": 0.65585,
+          "se": 0.140981,
+          "half_life_years": 1.643215,
+          "n": 164,
+          "firms": 33
+        },
+        {
+          "sic2": "01",
+          "industry": "Agriculture",
+          "rho": 0.6049,
+          "se": 0.104436,
+          "half_life_years": 1.378869,
+          "n": 145,
+          "firms": 27
+        },
+        {
+          "sic2": "28",
+          "industry": "Chemicals & pharma",
+          "rho": 0.529637,
+          "se": 0.03388,
+          "half_life_years": 1.090601,
+          "n": 2878,
+          "firms": 438
+        },
+        {
+          "sic2": "80",
+          "industry": "Health services",
+          "rho": 0.505732,
+          "se": 0.148157,
+          "half_life_years": 1.016719,
+          "n": 230,
+          "firms": 44
+        },
+        {
+          "sic2": "23",
+          "industry": "Apparel",
+          "rho": 0.502113,
+          "se": 0.123516,
+          "half_life_years": 1.006121,
+          "n": 220,
+          "firms": 27
+        },
+        {
+          "sic2": "73",
+          "industry": "Business services",
+          "rho": 0.315146,
+          "se": 0.0915,
+          "half_life_years": 0.600274,
+          "n": 1028,
+          "firms": 196
+        }
+      ]
+    },
+    "dpo": {
+      "beta": 0.618061,
+      "se": 0.028418,
+      "t": 21.748593,
+      "p": 0.0,
+      "n": 20564,
+      "stars": "***",
+      "model": "y_it = a + rho*y_i,t-1 + year FE; SE clustered by firm",
+      "r2": 0.49745,
+      "half_life_years": 1.440552,
+      "mean_reversion_1_minus_rho": 0.381939,
+      "n_firms": 2956,
+      "with_firm_fe": {
+        "rho": 0.218089,
+        "se": 0.049427,
+        "n": 20564,
+        "note": "biased downward with short panels (Nickell); upper/lower bound only"
+      },
+      "by_industry": [
+        {
+          "sic2": "58",
+          "industry": "Restaurants",
+          "rho": 0.987708,
+          "se": 0.019523,
+          "half_life_years": 56.04214,
+          "n": 164,
+          "firms": 33
+        },
+        {
+          "sic2": "30",
+          "industry": "Rubber & plastics",
+          "rho": 0.982321,
+          "se": 0.147392,
+          "half_life_years": 38.859035,
+          "n": 275,
+          "firms": 33
+        },
+        {
+          "sic2": "55",
+          "industry": "Auto & fuel retail",
+          "rho": 0.940937,
+          "se": 0.06319,
+          "half_life_years": 11.385589,
+          "n": 226,
+          "firms": 26
+        },
+        {
+          "sic2": "27",
+          "industry": "Printing & publishing",
+          "rho": 0.93364,
+          "se": 0.047305,
+          "half_life_years": 10.094653,
+          "n": 166,
+          "firms": 20
+        },
+        {
+          "sic2": "13",
+          "industry": "Mining & energy",
+          "rho": 0.89356,
+          "se": 0.06278,
+          "half_life_years": 6.159001,
+          "n": 179,
+          "firms": 35
+        },
+        {
+          "sic2": "56",
+          "industry": "Apparel retail",
+          "rho": 0.8928,
+          "se": 0.029841,
+          "half_life_years": 6.112779,
+          "n": 232,
+          "firms": 29
+        },
+        {
+          "sic2": "26",
+          "industry": "Paper",
+          "rho": 0.873707,
+          "se": 0.031044,
+          "half_life_years": 5.134017,
+          "n": 203,
+          "firms": 30
+        },
+        {
+          "sic2": "48",
+          "industry": "Communications",
+          "rho": 0.87298,
+          "se": 0.071529,
+          "half_life_years": 5.102565,
+          "n": 243,
+          "firms": 50
+        },
+        {
+          "sic2": "32",
+          "industry": "Stone, clay & glass",
+          "rho": 0.854414,
+          "se": 0.06953,
+          "half_life_years": 4.405423,
+          "n": 159,
+          "firms": 23
+        },
+        {
+          "sic2": "20",
+          "industry": "Food & tobacco",
+          "rho": 0.841934,
+          "se": 0.082563,
+          "half_life_years": 4.028658,
+          "n": 903,
+          "firms": 128
+        },
+        {
+          "sic2": "25",
+          "industry": "Wood & furniture",
+          "rho": 0.81586,
+          "se": 0.090898,
+          "half_life_years": 3.405911,
+          "n": 229,
+          "firms": 23
+        },
+        {
+          "sic2": "87",
+          "industry": "Engineering services",
+          "rho": 0.803041,
+          "se": 0.115003,
+          "half_life_years": 3.160018,
+          "n": 139,
+          "firms": 25
+        },
+        {
+          "sic2": "59",
+          "industry": "Specialty retail",
+          "rho": 0.799786,
+          "se": 0.092027,
+          "half_life_years": 3.102565,
+          "n": 581,
+          "firms": 97
+        },
+        {
+          "sic2": "34",
+          "industry": "Fabricated metal",
+          "rho": 0.789833,
+          "se": 0.227602,
+          "half_life_years": 2.937892,
+          "n": 488,
+          "firms": 57
+        },
+        {
+          "sic2": "38",
+          "industry": "Instruments",
+          "rho": 0.752944,
+          "se": 0.052693,
+          "half_life_years": 2.442689,
+          "n": 2688,
+          "firms": 366
+        },
+        {
+          "sic2": "35",
+          "industry": "Machinery & computers",
+          "rho": 0.736572,
+          "se": 0.034335,
+          "half_life_years": 2.267048,
+          "n": 1804,
+          "firms": 221
+        },
+        {
+          "sic2": "73",
+          "industry": "Business services",
+          "rho": 0.734272,
+          "se": 0.082261,
+          "half_life_years": 2.244101,
+          "n": 1028,
+          "firms": 196
+        },
+        {
+          "sic2": "51",
+          "industry": "Wholesale non-durables",
+          "rho": 0.704606,
+          "se": 0.171243,
+          "half_life_years": 1.979764,
+          "n": 432,
+          "firms": 61
+        },
+        {
+          "sic2": "36",
+          "industry": "Electronics",
+          "rho": 0.689222,
+          "se": 0.032811,
+          "half_life_years": 1.862336,
+          "n": 2944,
+          "firms": 394
+        },
+        {
+          "sic2": "33",
+          "industry": "Primary metals",
+          "rho": 0.687923,
+          "se": 0.129223,
+          "half_life_years": 1.852948,
+          "n": 397,
+          "firms": 47
+        },
+        {
+          "sic2": "80",
+          "industry": "Health services",
+          "rho": 0.677993,
+          "se": 0.033505,
+          "half_life_years": 1.78362,
+          "n": 230,
+          "firms": 44
+        },
+        {
+          "sic2": "28",
+          "industry": "Chemicals & pharma",
+          "rho": 0.557517,
+          "se": 0.033886,
+          "half_life_years": 1.186364,
+          "n": 2866,
+          "firms": 435
+        },
+        {
+          "sic2": "39",
+          "industry": "Misc. manufacturing",
+          "rho": 0.517429,
+          "se": 0.069888,
+          "half_life_years": 1.052004,
+          "n": 306,
+          "firms": 48
+        },
+        {
+          "sic2": "01",
+          "industry": "Agriculture",
+          "rho": 0.484186,
+          "se": 0.097867,
+          "half_life_years": 0.955687,
+          "n": 145,
+          "firms": 27
+        },
+        {
+          "sic2": "37",
+          "industry": "Transport equipment",
+          "rho": 0.434861,
+          "se": 0.123106,
+          "half_life_years": 0.832381,
+          "n": 1009,
+          "firms": 130
+        },
+        {
+          "sic2": "23",
+          "industry": "Apparel",
+          "rho": 0.310277,
+          "se": 0.105394,
+          "half_life_years": 0.592287,
+          "n": 220,
+          "firms": 27
+        },
+        {
+          "sic2": "50",
+          "industry": "Wholesale durables",
+          "rho": 0.12294,
+          "se": 0.10718,
+          "half_life_years": 0.33069,
+          "n": 600,
+          "firms": 81
+        }
+      ]
+    }
+  },
+  "persistence_raw_ccc": {
+    "beta": 0.536474,
+    "se": 0.029182,
+    "t": 18.383669,
+    "p": 0.0,
+    "n": 20724,
+    "stars": "***",
+    "model": "y_it = a + rho*y_i,t-1 + year FE; SE clustered by firm",
+    "r2": 0.363889,
+    "half_life_years": 1.113064,
+    "mean_reversion_1_minus_rho": 0.463526,
+    "n_firms": 2996,
+    "with_firm_fe": {
+      "rho": 0.188702,
+      "se": 0.040989,
+      "n": 20724,
+      "note": "biased downward with short panels (Nickell); upper/lower bound only"
+    },
+    "by_industry": [
+      {
+        "sic2": "13",
+        "industry": "Mining & energy",
+        "rho": 1.390321,
+        "se": 0.281894,
+        "half_life_years": NaN,
+        "n": 179,
+        "firms": 35
+      },
+      {
+        "sic2": "27",
+        "industry": "Printing & publishing",
+        "rho": 0.952011,
+        "se": 0.027545,
+        "half_life_years": 14.094585,
+        "n": 166,
+        "firms": 20
+      },
+      {
+        "sic2": "25",
+        "industry": "Wood & furniture",
+        "rho": 0.92723,
+        "se": 0.041172,
+        "half_life_years": 9.174233,
+        "n": 229,
+        "firms": 23
+      },
+      {
+        "sic2": "56",
+        "industry": "Apparel retail",
+        "rho": 0.926958,
+        "se": 0.036823,
+        "half_life_years": 9.138697,
+        "n": 232,
+        "firms": 29
+      },
+      {
+        "sic2": "33",
+        "industry": "Primary metals",
+        "rho": 0.907287,
+        "se": 0.053066,
+        "half_life_years": 7.124048,
+        "n": 397,
+        "firms": 47
+      },
+      {
+        "sic2": "30",
+        "industry": "Rubber & plastics",
+        "rho": 0.893759,
+        "se": 0.087165,
+        "half_life_years": 6.17124,
+        "n": 277,
+        "firms": 33
+      },
+      {
+        "sic2": "48",
+        "industry": "Communications",
+        "rho": 0.888804,
+        "se": 0.178314,
+        "half_life_years": 5.880172,
+        "n": 244,
+        "firms": 50
+      },
+      {
+        "sic2": "55",
+        "industry": "Auto & fuel retail",
+        "rho": 0.856389,
+        "se": 0.068433,
+        "half_life_years": 4.471027,
+        "n": 226,
+        "firms": 26
+      },
+      {
+        "sic2": "32",
+        "industry": "Stone, clay & glass",
+        "rho": 0.849647,
+        "se": 0.05711,
+        "half_life_years": 4.25415,
+        "n": 161,
+        "firms": 24
+      },
+      {
+        "sic2": "26",
+        "industry": "Paper",
+        "rho": 0.813751,
+        "se": 0.073955,
+        "half_life_years": 3.363148,
+        "n": 203,
+        "firms": 30
+      },
+      {
+        "sic2": "87",
+        "industry": "Engineering services",
+        "rho": 0.792987,
+        "se": 0.034602,
+        "half_life_years": 2.988367,
+        "n": 142,
+        "firms": 25
+      },
+      {
+        "sic2": "36",
+        "industry": "Electronics",
+        "rho": 0.755416,
+        "se": 0.066752,
+        "half_life_years": 2.471225,
+        "n": 2954,
+        "firms": 400
+      },
+      {
+        "sic2": "59",
+        "industry": "Specialty retail",
+        "rho": 0.667883,
+        "se": 0.112364,
+        "half_life_years": 1.717233,
+        "n": 586,
+        "firms": 98
+      },
+      {
+        "sic2": "34",
+        "industry": "Fabricated metal",
+        "rho": 0.656997,
+        "se": 0.13525,
+        "half_life_years": 1.650055,
+        "n": 490,
+        "firms": 58
+      },
+      {
+        "sic2": "73",
+        "industry": "Business services",
+        "rho": 0.639888,
+        "se": 0.10803,
+        "half_life_years": 1.552534,
+        "n": 1042,
+        "firms": 198
+      },
+      {
+        "sic2": "38",
+        "industry": "Instruments",
+        "rho": 0.572757,
+        "se": 0.051691,
+        "half_life_years": 1.243773,
+        "n": 2719,
+        "firms": 368
+      },
+      {
+        "sic2": "01",
+        "industry": "Agriculture",
+        "rho": 0.562326,
+        "se": 0.212905,
+        "half_life_years": 1.204064,
+        "n": 145,
+        "firms": 27
+      },
+      {
+        "sic2": "50",
+        "industry": "Wholesale durables",
+        "rho": 0.548378,
+        "se": 0.326779,
+        "half_life_years": 1.153726,
+        "n": 600,
+        "firms": 81
+      },
+      {
+        "sic2": "37",
+        "industry": "Transport equipment",
+        "rho": 0.546366,
+        "se": 0.126335,
+        "half_life_years": 1.146709,
+        "n": 1017,
+        "firms": 132
+      },
+      {
+        "sic2": "20",
+        "industry": "Food & tobacco",
+        "rho": 0.545544,
+        "se": 0.129539,
+        "half_life_years": 1.14386,
+        "n": 913,
+        "firms": 130
+      },
+      {
+        "sic2": "23",
+        "industry": "Apparel",
+        "rho": 0.517821,
+        "se": 0.216715,
+        "half_life_years": 1.053216,
+        "n": 220,
+        "firms": 27
+      },
+      {
+        "sic2": "35",
+        "industry": "Machinery & computers",
+        "rho": 0.507591,
+        "se": 0.11441,
+        "half_life_years": 1.022222,
+        "n": 1809,
+        "firms": 222
+      },
+      {
+        "sic2": "28",
+        "industry": "Chemicals & pharma",
+        "rho": 0.474448,
+        "se": 0.045949,
+        "half_life_years": 0.929647,
+        "n": 2905,
+        "firms": 449
+      },
+      {
+        "sic2": "51",
+        "industry": "Wholesale non-durables",
+        "rho": 0.431368,
+        "se": 0.140764,
+        "half_life_years": 0.824396,
+        "n": 438,
+        "firms": 61
+      },
+      {
+        "sic2": "80",
+        "industry": "Health services",
+        "rho": 0.400148,
+        "se": 0.077334,
+        "half_life_years": 0.756776,
+        "n": 236,
+        "firms": 45
+      },
+      {
+        "sic2": "39",
+        "industry": "Misc. manufacturing",
+        "rho": 0.397813,
+        "se": 0.150221,
+        "half_life_years": 0.751971,
+        "n": 309,
+        "firms": 50
+      },
+      {
+        "sic2": "58",
+        "industry": "Restaurants",
+        "rho": 0.263481,
+        "se": 0.094285,
+        "half_life_years": 0.519689,
+        "n": 165,
+        "firms": 33
+      }
+    ]
+  },
+  "ccc_roa": {
+    "beta": 0.000139,
+    "se": 3.6e-05,
+    "t": 3.813842,
+    "p": 0.000137,
+    "n": 23408,
+    "stars": "***",
+    "model": "roa_it = firm FE + year FE + b*CCC_it + log(assets) + gross margin; SE clustered by firm; ROA and CCC winsorized 1/99 industry-year",
+    "r2_within": 0.069109,
+    "n_firms": 2994,
+    "beta_standardized": 0.060372,
+    "sd_ccc": 176.003868,
+    "sd_roa": 0.405349,
+    "ccc_days_sd": 176.003868
+  },
+  "ccc_roa_raw": {
+    "beta": 0.000115,
+    "se": 2.8e-05,
+    "t": 4.132285,
+    "p": 3.6e-05,
+    "n": 23408,
+    "stars": "***",
+    "model": "roa_it = firm FE + year FE + b*CCC_it + log(assets) + gross margin; SE clustered by firm; ROA and CCC winsorized 1/99 industry-year",
+    "r2_within": 0.07029,
+    "n_firms": 2994,
+    "beta_standardized": 0.06298,
+    "sd_ccc": 221.519851,
+    "sd_roa": 0.405349,
+    "ccc_days_sd": 221.519851
+  },
+  "shock_2020": {
+    "revenue_growth": {
+      "beta": 7.1e-05,
+      "se": 0.000188,
+      "t": 0.377976,
+      "p": 0.705449,
+      "n": 1347,
+      "stars": "",
+      "year": 2020,
+      "y": "sales_growth",
+      "x": "ccc_w_lag",
+      "label": "2019 CCC vs 2019->2020 revenue growth",
+      "model": "sales_growth (winsorized 1/99) on ccc_w_lag + 2-digit SIC FE, cross-section 2020, HC1 SE",
+      "r2": 0.112761,
+      "n_firms": 1347,
+      "sd_y": 0.485556,
+      "quintiles": [
+        {
+          "q": 0.0,
+          "n": 270,
+          "x_median": -10.74991,
+          "y_median": 0.028721,
+          "y_mean": 0.151253
+        },
+        {
+          "q": 1.0,
+          "n": 269,
+          "x_median": 43.734013,
+          "y_median": -0.024091,
+          "y_mean": 0.030223
+        },
+        {
+          "q": 2.0,
+          "n": 269,
+          "x_median": 79.815902,
+          "y_median": -0.035755,
+          "y_mean": -0.000972
+        },
+        {
+          "q": 3.0,
+          "n": 269,
+          "x_median": 120.912164,
+          "y_median": -0.035603,
+          "y_mean": 0.038035
+        },
+        {
+          "q": 4.0,
+          "n": 270,
+          "x_median": 206.568168,
+          "y_median": 0.008698,
+          "y_mean": 0.161269
+        }
+      ]
+    },
+    "roa": {
+      "beta": 0.000244,
+      "se": 7.4e-05,
+      "t": 3.285336,
+      "p": 0.001019,
+      "n": 1344,
+      "stars": "***",
+      "year": 2020,
+      "y": "roa",
+      "x": "ccc_w_lag",
+      "label": "2019 CCC vs 2020 ROA",
+      "model": "roa (winsorized 1/99) on ccc_w_lag + 2-digit SIC FE, cross-section 2020, HC1 SE",
+      "r2": 0.111127,
+      "n_firms": 1344,
+      "sd_y": 0.273773,
+      "quintiles": [
+        {
+          "q": 0.0,
+          "n": 269,
+          "x_median": -10.725247,
+          "y_median": -0.020835,
+          "y_mean": -0.165917
+        },
+        {
+          "q": 1.0,
+          "n": 269,
+          "x_median": 43.762676,
+          "y_median": 0.013095,
+          "y_mean": -0.049243
+        },
+        {
+          "q": 2.0,
+          "n": 268,
+          "x_median": 79.83722,
+          "y_median": 0.020144,
+          "y_mean": -0.019035
+        },
+        {
+          "q": 3.0,
+          "n": 269,
+          "x_median": 120.912164,
+          "y_median": 0.017645,
+          "y_mean": -0.03569
+        },
+        {
+          "q": 4.0,
+          "n": 269,
+          "x_median": 207.060936,
+          "y_median": -0.014153,
+          "y_mean": -0.104153
+        }
+      ]
+    },
+    "cash_ratio": {
+      "beta": -4.8e-05,
+      "se": 4.5e-05,
+      "t": -1.066535,
+      "p": 0.286182,
+      "n": 1329,
+      "stars": "",
+      "year": 2020,
+      "y": "cash_ratio",
+      "x": "ccc_w_lag",
+      "label": "2019 CCC vs 2020 cash/assets",
+      "model": "cash_ratio (winsorized 1/99) on ccc_w_lag + 2-digit SIC FE, cross-section 2020, HC1 SE",
+      "r2": 0.121439,
+      "n_firms": 1329,
+      "sd_y": 0.178926,
+      "quintiles": [
+        {
+          "q": 0.0,
+          "n": 266,
+          "x_median": -10.923824,
+          "y_median": 0.140272,
+          "y_mean": 0.217773
+        },
+        {
+          "q": 1.0,
+          "n": 266,
+          "x_median": 43.142252,
+          "y_median": 0.111355,
+          "y_mean": 0.160995
+        },
+        {
+          "q": 2.0,
+          "n": 265,
+          "x_median": 79.450552,
+          "y_median": 0.124226,
+          "y_mean": 0.170301
+        },
+        {
+          "q": 3.0,
+          "n": 266,
+          "x_median": 120.473885,
+          "y_median": 0.142084,
+          "y_mean": 0.1901
+        },
+        {
+          "q": 4.0,
+          "n": 266,
+          "x_median": 206.568168,
+          "y_median": 0.158285,
+          "y_mean": 0.214547
+        }
+      ]
+    }
+  },
+  "shock_2022": {
+    "margin_change": {
+      "beta": -6e-05,
+      "se": 2.5e-05,
+      "t": -2.371609,
+      "p": 0.017711,
+      "n": 1441,
+      "stars": "**",
+      "year": 2022,
+      "y": "margin_change",
+      "x": "ccc_w_lag",
+      "label": "2021 CCC vs 2021->2022 gross-margin change",
+      "model": "margin_change (winsorized 1/99) on ccc_w_lag + 2-digit SIC FE, cross-section 2022, HC1 SE",
+      "r2": 0.154315,
+      "n_firms": 1441,
+      "sd_y": 0.12084,
+      "quintiles": [
+        {
+          "q": 0.0,
+          "n": 289,
+          "x_median": -8.927117,
+          "y_median": -0.008087,
+          "y_mean": -0.004423
+        },
+        {
+          "q": 1.0,
+          "n": 288,
+          "x_median": 44.804192,
+          "y_median": -0.003511,
+          "y_mean": 0.002403
+        },
+        {
+          "q": 2.0,
+          "n": 288,
+          "x_median": 86.700453,
+          "y_median": -0.007494,
+          "y_mean": -0.002722
+        },
+        {
+          "q": 3.0,
+          "n": 288,
+          "x_median": 130.814377,
+          "y_median": -0.004066,
+          "y_mean": 0.000414
+        },
+        {
+          "q": 4.0,
+          "n": 288,
+          "x_median": 235.735465,
+          "y_median": -0.009262,
+          "y_mean": -0.01041
+        }
+      ]
+    },
+    "roa": {
+      "beta": -5e-06,
+      "se": 9.5e-05,
+      "t": -0.053139,
+      "p": 0.957622,
+      "n": 1440,
+      "stars": "",
+      "year": 2022,
+      "y": "roa",
+      "x": "ccc_w_lag",
+      "label": "2021 CCC vs 2022 ROA",
+      "model": "roa (winsorized 1/99) on ccc_w_lag + 2-digit SIC FE, cross-section 2022, HC1 SE",
+      "r2": 0.101825,
+      "n_firms": 1440,
+      "sd_y": 0.392717,
+      "quintiles": [
+        {
+          "q": 0.0,
+          "n": 288,
+          "x_median": -9.226299,
+          "y_median": -0.039377,
+          "y_mean": -0.227076
+        },
+        {
+          "q": 1.0,
+          "n": 288,
+          "x_median": 44.629843,
+          "y_median": 0.03622,
+          "y_mean": -0.062756
+        },
+        {
+          "q": 2.0,
+          "n": 288,
+          "x_median": 86.700453,
+          "y_median": 0.035355,
+          "y_mean": -0.026709
+        },
+        {
+          "q": 3.0,
+          "n": 288,
+          "x_median": 130.814377,
+          "y_median": 0.018985,
+          "y_mean": -0.087847
+        },
+        {
+          "q": 4.0,
+          "n": 288,
+          "x_median": 235.735465,
+          "y_median": -0.058087,
+          "y_mean": -0.217033
+        }
+      ]
+    }
+  },
+  "robustness_ccc_roa": [
+    {
+      "spec": "1. baseline: CCC winsorized 1/99 industry-year, firm+year FE, controls",
+      "dep_var": "roa",
+      "term": "ccc_w",
+      "beta": 0.000139,
+      "se": 3.6e-05,
+      "t": 3.813842,
+      "p": 0.000137,
+      "stars": "***",
+      "n": 23408,
+      "firms": 2994,
+      "note": "roa_it = firm FE + year FE + b*CCC_it + log(assets) + gross margin; SE clustered by firm; ROA and CCC winsorized 1/99 industry-year"
+    },
+    {
+      "spec": "2. no winsorization (raw CCC and raw ROA)",
+      "dep_var": "roa",
+      "term": "ccc",
+      "beta": 0.00014,
+      "se": 5.4e-05,
+      "t": 2.573634,
+      "p": 0.010071,
+      "stars": "**",
+      "n": 23408,
+      "firms": 2994,
+      "note": "roa_it = firm FE + year FE + b*CCC_it + log(assets) + gross margin; SE clustered by firm; ROA and CCC winsorized 1/99 industry-year"
+    },
+    {
+      "spec": "3. average balances (mean of t and t-1)",
+      "dep_var": "roa",
+      "term": "ccc_avg",
+      "beta": 4e-05,
+      "se": 2.8e-05,
+      "t": 1.430308,
+      "p": 0.152647,
+      "stars": "",
+      "n": 20420,
+      "firms": 2969,
+      "note": "roa_it = firm FE + year FE + b*CCC_it + log(assets) + gross margin; SE clustered by firm; ROA and CCC winsorized 1/99 industry-year"
+    },
+    {
+      "spec": "4. alternative DPO denominator (revenue)",
+      "dep_var": "roa",
+      "term": "ccc_dpo_rev_w",
+      "beta": 6.8e-05,
+      "se": 3.9e-05,
+      "t": 1.744735,
+      "p": 0.081046,
+      "stars": "*",
+      "n": 23408,
+      "firms": 2994,
+      "note": "roa_it = firm FE + year FE + b*CCC_it + log(assets) + gross margin; SE clustered by firm; ROA and CCC winsorized 1/99 industry-year"
+    },
+    {
+      "spec": "5. only negative-CCC firm-years",
+      "dep_var": "roa",
+      "term": "ccc_w",
+      "beta": 0.000106,
+      "se": 5.3e-05,
+      "t": 1.997007,
+      "p": 0.045956,
+      "stars": "**",
+      "n": 2955,
+      "firms": 885,
+      "note": "roa_it = firm FE + year FE + b*CCC_it + log(assets) + gross margin; SE clustered by firm; ROA and CCC winsorized 1/99 industry-year"
+    },
+    {
+      "spec": "6. only non-negative-CCC firm-years",
+      "dep_var": "roa",
+      "term": "ccc_w",
+      "beta": 9.9e-05,
+      "se": 4.6e-05,
+      "t": 2.134389,
+      "p": 0.032825,
+      "stars": "**",
+      "n": 20453,
+      "firms": 2719,
+      "note": "roa_it = firm FE + year FE + b*CCC_it + log(assets) + gross margin; SE clustered by firm; ROA and CCC winsorized 1/99 industry-year"
+    },
+    {
+      "spec": "7. drop |CCC| > 365 days",
+      "dep_var": "roa",
+      "term": "ccc_w",
+      "beta": 0.000376,
+      "se": 8.6e-05,
+      "t": 4.357731,
+      "p": 1.3e-05,
+      "stars": "***",
+      "n": 22437,
+      "firms": 2940,
+      "note": "roa_it = firm FE + year FE + b*CCC_it + log(assets) + gross margin; SE clustered by firm; ROA and CCC winsorized 1/99 industry-year"
+    },
+    {
+      "spec": "11. baseline without controls (firm+year FE only)",
+      "dep_var": "roa",
+      "term": "ccc_w",
+      "beta": 0.000184,
+      "se": 3.9e-05,
+      "t": 4.718253,
+      "p": 2e-06,
+      "stars": "***",
+      "n": 23408,
+      "firms": 2994,
+      "note": "roa_it = firm FE + year FE + b*CCC_it; SE clustered by firm; ROA and CCC winsorized 1/99 industry-year"
+    },
+    {
+      "spec": "8. balanced panel 2015-2024 (all 10 years present)",
+      "dep_var": "roa",
+      "term": "ccc_w",
+      "beta": 0.000204,
+      "se": 5.1e-05,
+      "t": 3.991299,
+      "p": 6.6e-05,
+      "stars": "***",
+      "n": 10050,
+      "firms": 720,
+      "note": "roa_it = firm FE + year FE + b*CCC_it + log(assets) + gross margin; SE clustered by firm; ROA and CCC winsorized 1/99 industry-year"
+    },
+    {
+      "spec": "9. only firm-years using the charter's preferred tag for every input",
+      "dep_var": "roa",
+      "term": "ccc_w",
+      "beta": 0.000134,
+      "se": 6.6e-05,
+      "t": 2.020084,
+      "p": 0.043446,
+      "stars": "**",
+      "n": 4566,
+      "firms": 810,
+      "note": "roa_it = firm FE + year FE + b*CCC_it + log(assets) + gross margin; SE clustered by firm; ROA and CCC winsorized 1/99 industry-year"
+    },
+    {
+      "spec": "10. 2020 revenue growth: 3-digit SIC FE (vs 2-digit in headline)",
+      "dep_var": "sales_growth_2020",
+      "term": "ccc_w_lag",
+      "beta": 5.9e-05,
+      "se": 0.000194,
+      "t": 0.302701,
+      "p": 0.762118,
+      "stars": "",
+      "n": 1347,
+      "firms": 1347,
+      "note": ""
+    },
+    {
+      "spec": "12. including financials, real estate & utilities (panel_full)",
+      "dep_var": "roa",
+      "term": "ccc_w",
+      "beta": 0.00023,
+      "se": 0.000239,
+      "t": 0.964172,
+      "p": 0.33497,
+      "stars": "",
+      "n": 27153,
+      "firms": 4177,
+      "note": "roa_it = firm FE + year FE + b*CCC_it + log(assets) + gross margin; SE clustered by firm; ROA and CCC winsorized 1/99 industry-year"
+    }
+  ],
+  "robustness_persistence": [
+    {
+      "spec": "1. baseline (CCC, winsorized 1/99)",
+      "term": "ccc_w_lag",
+      "rho": 0.685315,
+      "se": 0.022846,
+      "t": 29.997212,
+      "half_life_years": 1.834323,
+      "n": 20576,
+      "firms": 2959
+    },
+    {
+      "spec": "2. raw CCC",
+      "term": "ccc_lag",
+      "rho": 0.536474,
+      "se": 0.029182,
+      "t": 18.383669,
+      "half_life_years": 1.113064,
+      "n": 20724,
+      "firms": 2996
+    },
+    {
+      "spec": "3. average balances",
+      "term": "ccc_avg_lag",
+      "rho": 0.661703,
+      "se": 0.027897,
+      "t": 23.719902,
+      "half_life_years": 1.67857,
+      "n": 17691,
+      "firms": 2929
+    },
+    {
+      "spec": "4. |CCC| <= 365",
+      "term": "ccc_w_lag",
+      "rho": 0.508898,
+      "se": 0.023699,
+      "t": 21.473823,
+      "half_life_years": 1.026113,
+      "n": 19794,
+      "firms": 2894
+    },
+    {
+      "spec": "5. DSO only",
+      "term": "dso_lag",
+      "rho": 0.5176,
+      "se": 0.062896,
+      "t": 8.229506,
+      "half_life_years": 1.05253,
+      "n": 20770,
+      "firms": 3001
+    },
+    {
+      "spec": "6. DIO only",
+      "term": "dio_lag",
+      "rho": 0.522606,
+      "se": 0.029969,
+      "t": 17.438124,
+      "half_life_years": 1.068142,
+      "n": 20748,
+      "firms": 2999
+    },
+    {
+      "spec": "7. DPO only",
+      "term": "dpo_lag",
+      "rho": 0.573238,
+      "se": 0.027267,
+      "t": 21.022936,
+      "half_life_years": 1.245651,
+      "n": 20703,
+      "firms": 2989
+    }
+  ],
+  "attrition": [
+    {
+      "level": "fact",
+      "step": "F0. us-gaap facts, project tags, annual filings, consolidated, qtrs 0/4",
+      "n": 2536529,
+      "firms": NaN
+    },
+    {
+      "level": "fact",
+      "step": "F1. dropped: reporting currency not USD",
+      "n": 60858,
+      "firms": 416.0
+    },
+    {
+      "level": "fact",
+      "step": "F2. dropped: IFRS taxonomy (ifrs-full)",
+      "n": 23790,
+      "firms": NaN
+    },
+    {
+      "level": "fact",
+      "step": "F3. dropped: duplicate tag/period, older filing",
+      "n": 1257640,
+      "firms": NaN
+    },
+    {
+      "level": "fact",
+      "step": "F4. dropped: flow fact without annual duration (qtrs != 4)",
+      "n": 1603,
+      "firms": NaN
+    },
+    {
+      "level": "firm-year",
+      "step": "0. flow+balance matched on exact fiscal-year end",
+      "n": 105865,
+      "firms": 14232.0
+    },
+    {
+      "level": "firm-year",
+      "step": "1. dropped: firm-year with mixed/non-USD currency",
+      "n": 0,
+      "firms": 0.0
+    },
+    {
+      "level": "firm-year",
+      "step": "2. dropped: missing revenue/COGS/AR/inventory/AP",
+      "n": 77938,
+      "firms": 12525.0
+    },
+    {
+      "level": "firm-year",
+      "step": "3. dropped: revenue<=0 or COGS<=0",
+      "n": 267,
+      "firms": 216.0
+    },
+    {
+      "level": "firm-year",
+      "step": "4. dropped: negative balance-sheet item",
+      "n": 1,
+      "firms": 1.0
+    },
+    {
+      "level": "firm-year",
+      "step": "5. dropped: all working-capital items zero",
+      "n": 0,
+      "firms": 0.0
+    },
+    {
+      "level": "firm-year",
+      "step": "6. dropped: financials & real estate (SIC 6000-6999)",
+      "n": 364,
+      "firms": 85.0
+    },
+    {
+      "level": "firm-year",
+      "step": "7. dropped: utilities (SIC 4900-4999)",
+      "n": 449,
+      "firms": 79.0
+    },
+    {
+      "level": "firm-year",
+      "step": "8. dropped: fewer than 3 usable years",
+      "n": 1505,
+      "firms": 905.0
+    },
+    {
+      "level": "firm-year",
+      "step": "9. MAIN SAMPLE",
+      "n": 25341,
+      "firms": 3158.0
+    }
+  ],
+  "tag_usage": [
+    {
+      "concept": "ap",
+      "tag": "AccountsPayableCurrent",
+      "firm_years": 62195,
+      "share": 0.784142,
+      "tier": "charter"
+    },
+    {
+      "concept": "ap",
+      "tag": "AccountsPayableAndAccruedLiabilitiesCurrent",
+      "firm_years": 17121,
+      "share": 0.215858,
+      "tier": "charter"
+    },
+    {
+      "concept": "ar",
+      "tag": "AccountsReceivableNetCurrent",
+      "firm_years": 54812,
+      "share": 0.88284,
+      "tier": "charter"
+    },
+    {
+      "concept": "ar",
+      "tag": "ReceivablesNetCurrent",
+      "firm_years": 6577,
+      "share": 0.105934,
+      "tier": "charter"
+    },
+    {
+      "concept": "ar",
+      "tag": "AccountsReceivableGrossCurrent",
+      "firm_years": 697,
+      "share": 0.011226,
+      "tier": "charter"
+    },
+    {
+      "concept": "assets",
+      "tag": "Assets",
+      "firm_years": 111109,
+      "share": 1.0,
+      "tier": "charter"
+    },
+    {
+      "concept": "assets_current",
+      "tag": "AssetsCurrent",
+      "firm_years": 87694,
+      "share": 1.0,
+      "tier": "charter"
+    },
+    {
+      "concept": "cash",
+      "tag": "CashAndCashEquivalentsAtCarryingValue",
+      "firm_years": 113222,
+      "share": 0.926834,
+      "tier": "charter"
+    },
+    {
+      "concept": "cash",
+      "tag": "CashCashEquivalentsRestrictedCashAndRestrictedCashEquivalents",
+      "firm_years": 8938,
+      "share": 0.073166,
+      "tier": "extra"
+    },
+    {
+      "concept": "cogs",
+      "tag": "CostOfGoodsAndServicesSold",
+      "firm_years": 24015,
+      "share": 0.438895,
+      "tier": "charter"
+    },
+    {
+      "concept": "cogs",
+      "tag": "CostOfRevenue",
+      "firm_years": 20911,
+      "share": 0.382166,
+      "tier": "charter"
+    },
+    {
+      "concept": "cogs",
+      "tag": "CostOfGoodsSold",
+      "firm_years": 9791,
+      "share": 0.178939,
+      "tier": "charter"
+    },
+    {
+      "concept": "equity",
+      "tag": "StockholdersEquity",
+      "firm_years": 121259,
+      "share": 0.925535,
+      "tier": "charter"
+    },
+    {
+      "concept": "equity",
+      "tag": "StockholdersEquityIncludingPortionAttributableToNoncontrollingInterest",
+      "firm_years": 9756,
+      "share": 0.074465,
+      "tier": "extra"
+    },
+    {
+      "concept": "inventory",
+      "tag": "InventoryNet",
+      "firm_years": 44910,
+      "share": 0.985517,
+      "tier": "charter"
+    },
+    {
+      "concept": "inventory",
+      "tag": "InventoryGross",
+      "firm_years": 482,
+      "share": 0.010577,
+      "tier": "charter"
+    },
+    {
+      "concept": "inventory",
+      "tag": "InventoryFinishedGoodsNetOfReserves",
+      "firm_years": 178,
+      "share": 0.003906,
+      "tier": "charter"
+    },
+    {
+      "concept": "liabilities_current",
+      "tag": "LiabilitiesCurrent",
+      "firm_years": 87918,
+      "share": 1.0,
+      "tier": "charter"
+    },
+    {
+      "concept": "net_income",
+      "tag": "NetIncomeLoss",
+      "firm_years": 110036,
+      "share": 0.944994,
+      "tier": "charter"
+    },
+    {
+      "concept": "net_income",
+      "tag": "ProfitLoss",
+      "firm_years": 6405,
+      "share": 0.055006,
+      "tier": "extra"
+    },
+    {
+      "concept": "op_income",
+      "tag": "OperatingIncomeLoss",
+      "firm_years": 87219,
+      "share": 1.0,
+      "tier": "charter"
+    },
+    {
+      "concept": "revenue",
+      "tag": "Revenues",
+      "firm_years": 38816,
+      "share": 0.44966,
+      "tier": "charter"
+    },
+    {
+      "concept": "revenue",
+      "tag": "RevenueFromContractWithCustomerExcludingAssessedTax",
+      "firm_years": 22301,
+      "share": 0.258344,
+      "tier": "charter"
+    },
+    {
+      "concept": "revenue",
+      "tag": "SalesRevenueNet",
+      "firm_years": 16743,
+      "share": 0.193958,
+      "tier": "charter"
+    },
+    {
+      "concept": "revenue",
+      "tag": "RevenueFromContractWithCustomerIncludingAssessedTax",
+      "firm_years": 5233,
+      "share": 0.060621,
+      "tier": "charter"
+    },
+    {
+      "concept": "revenue",
+      "tag": "SalesRevenueGoodsNet",
+      "firm_years": 3230,
+      "share": 0.037418,
+      "tier": "extra"
+    }
+  ],
+  "build_log": {
+    "n_annual_filings_cached": 105027,
+    "n_ciks_with_annual_filing": 15401,
+    "n_num_rows_matched_to_annual_filings": 2560319,
+    "n_rows_ifrs_taxonomy_excluded": 23790,
+    "rows_tagged_us_gaap": 2536529,
+    "rows_non_usd": 60858,
+    "ciks_non_usd": 416,
+    "duplicate_tag_values_collapsed": 1257640,
+    "flow_facts_dropped_not_annual_duration": 1603,
+    "firm_years_flow_balance_matched_on_exact_end": 116988,
+    "n_ciks_with_a_project_tag": 14268,
+    "firm_years_dropped_duplicate_fiscal_year": 1567,
+    "firm_years_in_2010_2024_window": 105865
+  },
+  "funnel": {
+    "ciks_with_annual_filing": 15401,
+    "ciks_with_project_tag": 14268,
+    "firm_years_matched_on_exact_end": 116988,
+    "firm_years_in_window": 105865,
+    "firm_years_main_sample": 25341,
+    "firms_main_sample": 3158,
+    "annual_filings_cached": 105027
+  },
+  "validation": {
+    "firms": [
+      "Fastenal",
+      "Walmart",
+      "Apple"
+    ],
+    "concepts": [
+      "revenue",
+      "cogs",
+      "ar",
+      "inventory",
+      "ap",
+      "assets",
+      "net_income"
+    ],
+    "years": [
+      2019,
+      2022,
+      2023
+    ],
+    "n_comparisons": 49,
+    "n_match": 49,
+    "all_match": true,
+    "max_abs_rel_diff": 0.0,
+    "note": "panel value vs latest 10-K fact at the same fiscal-year end (companyfacts API)"
+  }
+}

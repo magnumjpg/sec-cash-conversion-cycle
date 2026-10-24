@@ -1,0 +1,341 @@
+{
+  "panel_rows": 25341,
+  "panel_firms": 3158,
+  "year_min": 2010,
+  "year_max": 2024,
+  "n_industries_sic2": 58,
+  "attrition": [
+    {
+      "level": "fact",
+      "step": "F0. us-gaap facts, project tags, annual filings, consolidated, qtrs 0/4",
+      "n": 2536529,
+      "firms": NaN
+    },
+    {
+      "level": "fact",
+      "step": "F1. dropped: reporting currency not USD",
+      "n": 60858,
+      "firms": 416.0
+    },
+    {
+      "level": "fact",
+      "step": "F2. dropped: IFRS taxonomy (ifrs-full)",
+      "n": 23790,
+      "firms": NaN
+    },
+    {
+      "level": "fact",
+      "step": "F3. dropped: duplicate tag/period, older filing",
+      "n": 1257640,
+      "firms": NaN
+    },
+    {
+      "level": "fact",
+      "step": "F4. dropped: flow fact without annual duration (qtrs != 4)",
+      "n": 1603,
+      "firms": NaN
+    },
+    {
+      "level": "firm-year",
+      "step": "0. flow+balance matched on exact fiscal-year end",
+      "n": 105865,
+      "firms": 14232.0
+    },
+    {
+      "level": "firm-year",
+      "step": "1. dropped: firm-year with mixed/non-USD currency",
+      "n": 0,
+      "firms": 0.0
+    },
+    {
+      "level": "firm-year",
+      "step": "2. dropped: missing revenue/COGS/AR/inventory/AP",
+      "n": 77938,
+      "firms": 12525.0
+    },
+    {
+      "level": "firm-year",
+      "step": "3. dropped: revenue<=0 or COGS<=0",
+      "n": 267,
+      "firms": 216.0
+    },
+    {
+      "level": "firm-year",
+      "step": "4. dropped: negative balance-sheet item",
+      "n": 1,
+      "firms": 1.0
+    },
+    {
+      "level": "firm-year",
+      "step": "5. dropped: all working-capital items zero",
+      "n": 0,
+      "firms": 0.0
+    },
+    {
+      "level": "firm-year",
+      "step": "6. dropped: financials & real estate (SIC 6000-6999)",
+      "n": 364,
+      "firms": 85.0
+    },
+    {
+      "level": "firm-year",
+      "step": "7. dropped: utilities (SIC 4900-4999)",
+      "n": 449,
+      "firms": 79.0
+    },
+    {
+      "level": "firm-year",
+      "step": "8. dropped: fewer than 3 usable years",
+      "n": 1505,
+      "firms": 905.0
+    },
+    {
+      "level": "firm-year",
+      "step": "9. MAIN SAMPLE",
+      "n": 25341,
+      "firms": 3158.0
+    }
+  ],
+  "tag_usage_top": [
+    {
+      "concept": "ap",
+      "tag": "AccountsPayableCurrent",
+      "firm_years": 62195,
+      "tier": "charter",
+      "preferred": true,
+      "share_of_concept": 0.7841419133592213
+    },
+    {
+      "concept": "ap",
+      "tag": "AccountsPayableAndAccruedLiabilitiesCurrent",
+      "firm_years": 17121,
+      "tier": "charter",
+      "preferred": false,
+      "share_of_concept": 0.21585808664077866
+    },
+    {
+      "concept": "ar",
+      "tag": "AccountsReceivableNetCurrent",
+      "firm_years": 54812,
+      "tier": "charter",
+      "preferred": true,
+      "share_of_concept": 0.8828399317076313
+    },
+    {
+      "concept": "ar",
+      "tag": "ReceivablesNetCurrent",
+      "firm_years": 6577,
+      "tier": "charter",
+      "preferred": false,
+      "share_of_concept": 0.10593370486099926
+    },
+    {
+      "concept": "ar",
+      "tag": "AccountsReceivableGrossCurrent",
+      "firm_years": 697,
+      "tier": "charter",
+      "preferred": false,
+      "share_of_concept": 0.011226363431369391
+    },
+    {
+      "concept": "assets",
+      "tag": "Assets",
+      "firm_years": 111109,
+      "tier": "charter",
+      "preferred": true,
+      "share_of_concept": 1.0
+    },
+    {
+      "concept": "assets_current",
+      "tag": "AssetsCurrent",
+      "firm_years": 87694,
+      "tier": "charter",
+      "preferred": true,
+      "share_of_concept": 1.0
+    },
+    {
+      "concept": "cash",
+      "tag": "CashAndCashEquivalentsAtCarryingValue",
+      "firm_years": 113222,
+      "tier": "charter",
+      "preferred": true,
+      "share_of_concept": 0.9268336607727571
+    },
+    {
+      "concept": "cash",
+      "tag": "CashCashEquivalentsRestrictedCashAndRestrictedCashEquivalents",
+      "firm_years": 8938,
+      "tier": "extra",
+      "preferred": false,
+      "share_of_concept": 0.07316633922724296
+    },
+    {
+      "concept": "cogs",
+      "tag": "CostOfGoodsAndServicesSold",
+      "firm_years": 24015,
+      "tier": "charter",
+      "preferred": true,
+      "share_of_concept": 0.4388946762432151
+    },
+    {
+      "concept": "cogs",
+      "tag": "CostOfRevenue",
+      "firm_years": 20911,
+      "tier": "charter",
+      "preferred": false,
+      "share_of_concept": 0.3821664199426138
+    },
+    {
+      "concept": "cogs",
+      "tag": "CostOfGoodsSold",
+      "firm_years": 9791,
+      "tier": "charter",
+      "preferred": false,
+      "share_of_concept": 0.1789389038141711
+    },
+    {
+      "concept": "equity",
+      "tag": "StockholdersEquity",
+      "firm_years": 121259,
+      "tier": "charter",
+      "preferred": true,
+      "share_of_concept": 0.9255352440560242
+    },
+    {
+      "concept": "equity",
+      "tag": "StockholdersEquityIncludingPortionAttributableToNoncontrollingInterest",
+      "firm_years": 9756,
+      "tier": "extra",
+      "preferred": false,
+      "share_of_concept": 0.07446475594397588
+    },
+    {
+      "concept": "inventory",
+      "tag": "InventoryNet",
+      "firm_years": 44910,
+      "tier": "charter",
+      "preferred": true,
+      "share_of_concept": 0.9855167873601053
+    },
+    {
+      "concept": "inventory",
+      "tag": "InventoryGross",
+      "firm_years": 482,
+      "tier": "charter",
+      "preferred": false,
+      "share_of_concept": 0.010577134079438227
+    },
+    {
+      "concept": "inventory",
+      "tag": "InventoryFinishedGoodsNetOfReserves",
+      "firm_years": 178,
+      "tier": "charter",
+      "preferred": false,
+      "share_of_concept": 0.0039060785604564407
+    },
+    {
+      "concept": "liabilities_current",
+      "tag": "LiabilitiesCurrent",
+      "firm_years": 87918,
+      "tier": "charter",
+      "preferred": true,
+      "share_of_concept": 1.0
+    },
+    {
+      "concept": "net_income",
+      "tag": "NetIncomeLoss",
+      "firm_years": 110036,
+      "tier": "charter",
+      "preferred": true,
+      "share_of_concept": 0.9449936019099802
+    },
+    {
+      "concept": "net_income",
+      "tag": "ProfitLoss",
+      "firm_years": 6405,
+      "tier": "extra",
+      "preferred": false,
+      "share_of_concept": 0.05500639809001984
+    },
+    {
+      "concept": "op_income",
+      "tag": "OperatingIncomeLoss",
+      "firm_years": 87219,
+      "tier": "charter",
+      "preferred": true,
+      "share_of_concept": 1.0
+    },
+    {
+      "concept": "revenue",
+      "tag": "Revenues",
+      "firm_years": 38816,
+      "tier": "charter",
+      "preferred": false,
+      "share_of_concept": 0.4496599979148083
+    },
+    {
+      "concept": "revenue",
+      "tag": "RevenueFromContractWithCustomerExcludingAssessedTax",
+      "firm_years": 22301,
+      "tier": "charter",
+      "preferred": true,
+      "share_of_concept": 0.2583436627550016
+    },
+    {
+      "concept": "revenue",
+      "tag": "SalesRevenueNet",
+      "firm_years": 16743,
+      "tier": "charter",
+      "preferred": false,
+      "share_of_concept": 0.19395757793403845
+    },
+    {
+      "concept": "revenue",
+      "tag": "RevenueFromContractWithCustomerIncludingAssessedTax",
+      "firm_years": 5233,
+      "tier": "charter",
+      "preferred": false,
+      "share_of_concept": 0.06062115542786974
+    },
+    {
+      "concept": "revenue",
+      "tag": "SalesRevenueGoodsNet",
+      "firm_years": 3230,
+      "tier": "extra",
+      "preferred": false,
+      "share_of_concept": 0.03741760596828192
+    }
+  ],
+  "raw": {
+    "n_annual_filings_cached": 105027,
+    "n_ciks_with_annual_filing": 15401,
+    "n_num_rows_matched_to_annual_filings": 2560319,
+    "n_rows_ifrs_taxonomy_excluded": 23790,
+    "rows_tagged_us_gaap": 2536529,
+    "rows_non_usd": 60858,
+    "ciks_non_usd": 416,
+    "duplicate_tag_values_collapsed": 1257640,
+    "flow_facts_dropped_not_annual_duration": 1603,
+    "firm_years_flow_balance_matched_on_exact_end": 116988,
+    "n_ciks_with_a_project_tag": 14268,
+    "firm_years_dropped_duplicate_fiscal_year": 1567,
+    "firm_years_in_2010_2024_window": 105865
+  },
+  "rows_per_year": {
+    "2010": 1408,
+    "2011": 1840,
+    "2012": 1940,
+    "2013": 1948,
+    "2014": 1886,
+    "2015": 1800,
+    "2016": 1763,
+    "2017": 1769,
+    "2018": 1661,
+    "2019": 1605,
+    "2020": 1634,
+    "2021": 1653,
+    "2022": 1645,
+    "2023": 1476,
+    "2024": 1313
+  }
+}

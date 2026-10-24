@@ -1,0 +1,16 @@
+level,step,n,firms
+fact,"F0. us-gaap facts, project tags, annual filings, consolidated, qtrs 0/4",2536529,
+fact,F1. dropped: reporting currency not USD,60858,416.0
+fact,F2. dropped: IFRS taxonomy (ifrs-full),23790,
+fact,"F3. dropped: duplicate tag/period, older filing",1257640,
+fact,F4. dropped: flow fact without annual duration (qtrs != 4),1603,
+firm-year,0. flow+balance matched on exact fiscal-year end,105865,14232.0
+firm-year,1. dropped: firm-year with mixed/non-USD currency,0,0.0
+firm-year,2. dropped: missing revenue/COGS/AR/inventory/AP,77938,12525.0
+firm-year,3. dropped: revenue<=0 or COGS<=0,267,216.0
+firm-year,4. dropped: negative balance-sheet item,1,1.0
+firm-year,5. dropped: all working-capital items zero,0,0.0
+firm-year,6. dropped: financials & real estate (SIC 6000-6999),364,85.0
+firm-year,7. dropped: utilities (SIC 4900-4999),449,79.0
+firm-year,8. dropped: fewer than 3 usable years,1505,905.0
+firm-year,9. MAIN SAMPLE,25341,3158.0

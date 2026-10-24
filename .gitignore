@@ -1,0 +1,20 @@
+# Raw SEC cache: ~200 MB, rebuilt by `python src/download_sec.py`.
+# data/manifest.json (URL + bytes + sha256) IS committed, so the exact
+# provenance of every cached file is reproducible from the repo.
+data/raw/
+
+# Large derived binaries (panel.csv is committed for inspection)
+data/processed/*.parquet
+data/processed/panel_full.csv.gz
+
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.venv/
+venv/
+.ipynb_checkpoints/
+
+# OS noise
+Thumbs.db
+desktop.ini
+.DS_Store

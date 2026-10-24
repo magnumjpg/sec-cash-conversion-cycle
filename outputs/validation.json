@@ -1,0 +1,26 @@
+{
+  "firms": [
+    "Fastenal",
+    "Walmart",
+    "Apple"
+  ],
+  "concepts": [
+    "revenue",
+    "cogs",
+    "ar",
+    "inventory",
+    "ap",
+    "assets",
+    "net_income"
+  ],
+  "years": [
+    2019,
+    2022,
+    2023
+  ],
+  "n_comparisons": 49,
+  "n_match": 49,
+  "all_match": true,
+  "max_abs_rel_diff": 0.0,
+  "note": "panel value vs latest 10-K fact at the same fiscal-year end (companyfacts API)"
+}
