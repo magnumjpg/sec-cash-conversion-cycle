@@ -156,9 +156,14 @@ pre-shock CCC is the winsorized lagged value. Descriptive only.
   flat.
 
 Read together: if CCC mattered for resilience, the 2020 revenue and cash
-outcomes are where it should show up most clearly, and they do not. The 2022
-margin result is the only one that would survive a casual read, and its
-non-monotonicity argues against over-interpreting it.
+outcomes are a natural place to look, and they are null. The 2022 margin result
+is the only one that would survive a casual read, and its non-monotonicity
+argues against over-interpreting it.
+
+One charter outcome is **absent**: inventory write-downs. The cached tag slice
+does not contain write-down tags and the source zips were deleted, so recovering
+them requires re-downloading the quarterly extracts (`DECISIONS.md → D-12`). The
+resilience evidence here is profitability, revenue, cash and gross margin only.
 
 ## What this does not prove
 
@@ -170,6 +175,8 @@ non-monotonicity argues against over-interpreting it.
   identified here and is deliberately not computed.
 - **No market test.** Without CRSP/Compustat there are no returns or event
   windows; "resilience" is accounting profitability and cash only.
+- **No inventory write-down outcome.** Write-down tags were never extracted;
+  recovering them needs a cache rebuild (`DECISIONS.md → D-12`).
 - **The shock exercises are cross-sections.** One observation per firm plus
   industry FE cannot separate CCC from an unobserved firm trait correlated with
   it.

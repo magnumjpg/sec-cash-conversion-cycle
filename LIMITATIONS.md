@@ -39,6 +39,10 @@
   The panel is therefore US-listed, mostly US-domiciled.
 - **Restatements.** "Latest filing wins" only over filings up to 2025-12-31.
   Later amendments are not captured until the cache is extended.
+- **Inventory write-downs are not measured.** They are one of the charter's
+  three resilience outcomes, but the cached tag slice does not contain
+  write-down tags and the source zips were deleted. Recovering them requires a
+  re-download of the quarterly extracts (`DECISIONS.md → D-12`).
 - **No quarterly data.** Seasonality is invisible. A December-ending retailer
   and a January-ending one are compared at their own year-end, which is the
   right point for annual ratios but hides peak-vs-trough working capital.

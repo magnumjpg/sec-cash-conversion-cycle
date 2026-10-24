@@ -159,3 +159,20 @@ touching the code.
 - No market returns: no CRSP/Compustat, so no abnormal-return test.
 - No attempt to make the panel "representative" of all US listed firms. It is
   the population of 10-K/20-F filers with usable trade working capital.
+
+---
+
+## D-12. Inventory write-downs are not measured
+
+The charter's resilience question (§1.3) lists inventory write-downs alongside
+profitability and cash. This pipeline does **not** measure them.
+
+`download_sec.py` slices `num.txt` to `TAG_UNIVERSE` at download time. Write-down
+tags (`InventoryWriteDown`, `InventoryImpairmentLoss`, …) are not in that
+universe, so they were never cached, and the 64 source zips were deleted after
+extraction. Recovering them means re-downloading the quarterly extracts
+(roughly 5.4 GB) and extending `tags.py` plus `build_panel.py`.
+
+Consequence: the 2020 and 2022 exercises cover revenue growth, ROA, cash/assets
+and gross-margin change, but not write-downs. This is a gap in the resilience
+answer, stated in `LIMITATIONS.md` and `README.md`, not a silent omission.

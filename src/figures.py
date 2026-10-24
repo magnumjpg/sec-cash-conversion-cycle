@@ -25,6 +25,7 @@ TABLES = OUT / "tables"
 
 sys.path.insert(0, str(ROOT / "src"))
 from analysis import add_winsorized, plausibility_screen, winsorize  # noqa: E402
+from tags import sic_division  # noqa: E402
 
 plt.rcParams.update({
     "figure.dpi": 140, "savefig.dpi": 140, "font.size": 9,
@@ -136,11 +137,21 @@ def fig_ccc_roa(p: pd.DataFrame, res: dict) -> Path:
 
 def fig_shock_2020(p: pd.DataFrame, res: dict) -> Path:
     d = p[p["fiscal_year"] == 2020].dropna(
-        subset=["sales_growth", "ccc_w_lag", "industry", "sic2"]).copy()
+        subset=["sales_growth", "ccc_w_lag", "industry", "sic2", "sic"]).copy()
     # same left-hand side as the headline cross-section
     d["_y"] = winsorize(d["sales_growth"], [d["sic2"]], min_group=10**9)
-    fig, ax = plt.subplots(figsize=(6.6, 4.8))
-    ax.scatter(d["ccc_w_lag"], d["_y"], s=6, alpha=0.18, color=C_GREY, linewidths=0)
+    d["division"] = d["sic"].map(sic_division)
+    fig, ax = plt.subplots(figsize=(7.0, 5.0))
+    top = d["division"].value_counts().head(6).index.tolist()
+    palette = ["#1f4e79", "#c0504d", "#4f81bd", "#9bbb59", "#8064a2", "#f79646"]
+    for i, div in enumerate(top):
+        sub = d[d["division"] == div]
+        ax.scatter(sub["ccc_w_lag"], sub["_y"], s=7, alpha=0.30,
+                   color=palette[i], linewidths=0,
+                   label=f"{div} ({len(sub)})")
+    rest = d[~d["division"].isin(top)]
+    ax.scatter(rest["ccc_w_lag"], rest["_y"], s=5, alpha=0.12,
+               color=C_GREY, linewidths=0, label=f"other ({len(rest)})")
     q = pd.qcut(d["ccc_w_lag"], 10, duplicates="drop")
     bm = d.groupby(q).agg(x=("ccc_w_lag", "median"), y=("_y", "median"))
     ax.plot(bm["x"], bm["y"], "o-", color=C_MAIN, ms=4.5, lw=1.5, label="decile medians")
@@ -158,7 +169,7 @@ def fig_shock_2020(p: pd.DataFrame, res: dict) -> Path:
                  f"N = {res['shock_2020']['revenue_growth']['n']:,}\n"
                  f"2-digit SIC FE, HC1 SE; cross-section, descriptive "
                  f"(axes truncated for display)", fontsize=9.5, loc="left")
-    ax.legend(frameon=False, fontsize=8, loc="upper right")
+    ax.legend(frameon=True, framealpha=0.9, fontsize=6.5, loc="lower right", ncol=2)
     fig.tight_layout()
     pth = FIGS / "fig4_shock_2020.png"
     fig.savefig(pth)
