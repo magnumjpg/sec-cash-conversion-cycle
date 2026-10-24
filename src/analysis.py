@@ -369,9 +369,6 @@ def robustness(p: pd.DataFrame) -> list[dict]:
     trim = ccc_roa(p[p["ccc_w"].abs() <= 365], "ccc_w")
     add("7. drop |CCC| > 365 days", trim, "ccc_w")
 
-    nocontrol = ccc_roa(p, "ccc_w", controls=False)
-    add("11. baseline without controls (firm+year FE only)", nocontrol, "ccc_w")
-
     bal_years = list(range(2015, 2025))
     bal_firms = (p[p["fiscal_year"].isin(bal_years)].groupby("cik")["fiscal_year"]
                  .nunique().loc[lambda s: s == len(bal_years)].index)
@@ -398,6 +395,9 @@ def robustness(p: pd.DataFrame) -> list[dict]:
                      "t": r(res3.tvalues["ccc_w_lag"]), "p": r(res3.pvalues["ccc_w_lag"]),
                      "stars": stars(res3.pvalues["ccc_w_lag"]), "n": int(res3.nobs),
                      "firms": int(d20["cik"].nunique()), "note": ""})
+
+    nocontrol = ccc_roa(p, "ccc_w", controls=False)
+    add("11. baseline without controls (firm+year FE only)", nocontrol, "ccc_w")
 
     # including financials & utilities (charter: keep for a robustness table)
     try:

@@ -1,7 +1,7 @@
 {
   "meta": {
     "project": "02_working_capital_sec",
-    "as_of_utc": "2026-10-24T22:37:54Z",
+    "as_of_utc": "2026-10-24T22:42:40Z",
     "sample_years": [
       2010,
       2024
@@ -2740,19 +2740,6 @@
       "note": "roa_it = firm FE + year FE + b*CCC_it + log(assets) + gross margin; SE clustered by firm; ROA and CCC winsorized 1/99 industry-year"
     },
     {
-      "spec": "11. baseline without controls (firm+year FE only)",
-      "dep_var": "roa",
-      "term": "ccc_w",
-      "beta": 0.000184,
-      "se": 3.9e-05,
-      "t": 4.718253,
-      "p": 2e-06,
-      "stars": "***",
-      "n": 23408,
-      "firms": 2994,
-      "note": "roa_it = firm FE + year FE + b*CCC_it; SE clustered by firm; ROA and CCC winsorized 1/99 industry-year"
-    },
-    {
       "spec": "8. balanced panel 2015-2024 (all 10 years present)",
       "dep_var": "roa",
       "term": "ccc_w",
@@ -2790,6 +2777,19 @@
       "n": 1347,
       "firms": 1347,
       "note": ""
+    },
+    {
+      "spec": "11. baseline without controls (firm+year FE only)",
+      "dep_var": "roa",
+      "term": "ccc_w",
+      "beta": 0.000184,
+      "se": 3.9e-05,
+      "t": 4.718253,
+      "p": 2e-06,
+      "stars": "***",
+      "n": 23408,
+      "firms": 2994,
+      "note": "roa_it = firm FE + year FE + b*CCC_it; SE clustered by firm; ROA and CCC winsorized 1/99 industry-year"
     },
     {
       "spec": "12. including financials, real estate & utilities (panel_full)",

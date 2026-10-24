@@ -17,8 +17,9 @@ non-monotone.
 
 The panel is built from SEC XBRL filings, not from a vendor. The source is the
 SEC Financial Statement Data Sets (bulk extracts of the same facts as
-`companyfacts`), 2010–2025 filings. Reasons for preferring the bulk files, and
-the checks that were run before switching, are in `DECISIONS.md → D-01`.
+`companyfacts`), 2010q1–2025q4 quarterly extracts. Reasons for preferring the
+bulk files, and the checks that were run before switching, are in
+`DECISIONS.md → D-01`.
 
 | Step | Firm-years |
 |---|---:|
@@ -33,8 +34,8 @@ the checks that were run before switching, are in `DECISIONS.md → D-01`.
 
 The main sample covers **3,158 firms**, fiscal years **2010–2024**, and **58
 two-digit SIC industries** (35 with at least 100 firm-years). Coverage is
-**1,313 to 1,948 firm-years per year** (lowest in 2024, highest in 2013); this
-pipeline does not decompose that decline. Tag choices are explicit and counted
+**1,313 to 1,948 firm-years per year** (lowest in 2024, highest in 2013); the
+decline is not decomposed here. Tag choices are explicit and counted
 in `outputs/tables/tag_usage.csv`; `DATA.md` reports the full attrition and tag
 usage. Cross-source validation against the `companyfacts` API for Fastenal,
 Walmart and Apple is **49/49 exact matches** across 7 concepts and 3 fiscal
@@ -69,8 +70,9 @@ effects rather than treating "industry practice" as the unit of analysis.
 
 Headline medians are computed on the **unscreened** sample, as the charter
 requires. Raw means are unusable — mean CCC is −249.7 days with an SD of
-103,401 — because roughly 6% of XBRL rows contain scale errors (assets tagged in
-millions, COGS off by 1,000×). For estimation only, rows with |CCC| > 3,650
+103,401 — because roughly 6% of rows are not interpretable at face value (mostly
+XBRL scale errors: assets tagged in millions, COGS off by 1,000×, plus micro-caps).
+For estimation only, rows with |CCC| > 3,650
 days, assets < $1m or revenue < $1m are dropped: **1,495 rows (5.90%)**. The
 screen is not neutral: the dropped group has a median CCC of −197.41 days, and
 the kept sample's median is 77.93 days. That difference is disclosed, not
@@ -115,10 +117,10 @@ within industry-year.
 
 The sign is **positive**: 100 extra CCC days are associated with **+1.39
 percentage points of ROA**, or 0.060 SD per SD. This contradicts the charter's
-prior ("expect negative β") and should be stated plainly. It survives every ROA
-specification in the robustness table (11 of 11 positive; 8 of 11 significant at
-5%), ranging from +0.000040 with average balances to +0.000376 when
-|CCC| > 365 is dropped. Without the gross-margin control the coefficient is
+prior ("expect negative β") and should be stated plainly. The sign holds in all
+11 ROA specifications in the robustness table (8 of 11 significant at 5%),
+ranging from +0.000040 with average balances to +0.000376 when |CCC| > 365 is
+dropped. Without the gross-margin control the coefficient is
 larger (+0.000184, SE 0.000039), so the controls attenuate rather than create
 the result.
 
@@ -130,7 +132,7 @@ be able to support more sales and absorb shocks. A third reading — that
 lengthening CCC *causes* higher ROA — is not supported by this design and is not
 claimed. The association is small: 0.06 SD.
 
-## 4. Shock exposure: mostly null, one weak margin result
+## 4. Shock exposure: weak and non-monotone
 
 Cross-sections with 2-digit SIC fixed effects and HC1 standard errors;
 pre-shock CCC is the winsorized lagged value. Descriptive only.
@@ -181,7 +183,7 @@ non-monotonicity argues against over-interpreting it.
 ## Reproduce
 
 ```
-python src/download_sec.py            # all 64 quarters (cached; no-op if present)
+python src/download_sec.py            # all cached quarters (no-op if present)
 python src/run_all.py                 # panel → validation → results → figures
 python src/run_all.py --test          # same + pytest
 python src/analysis.py                # re-estimate only
@@ -195,12 +197,13 @@ and the full attrition funnel are in `DATA.md`.
 
 | Command | Status |
 |---|---|
+| `python src/download_sec.py` | ok — 64/64 quarters cached |
 | `python src/download_sec.py --quarters 2021q4 --force` | ok (24 s) |
 | `python src/build_panel.py` | ok — 25,341 / 3,158 |
 | `python src/analysis.py` | ok |
 | `python src/figures.py` | ok — 6 figures |
 | `python src/verify_known_firms.py` | ok — 49/49 |
-| `python src/run_all.py --test` | ok — 16 tests passed |
+| `python src/run_all.py --skip-download --test` | ok — 16 tests passed |
 
 ## Files
 
@@ -219,6 +222,7 @@ and the full attrition funnel are in `DATA.md`.
   data/
     manifest.json        URLs + bytes + sha256 of every cached file
     processed/panel.csv  main sample (25,341 rows)
+    raw/                 not committed; rebuilt from the manifest (DATA.md)
   outputs/
     results.json         canonical numbers used in this README
     validation.json      Fastenal / Walmart / Apple check
