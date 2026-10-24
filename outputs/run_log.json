@@ -1,36 +1,36 @@
 {
-  "started_utc": "2026-10-24T22:42:18+00:00",
-  "finished_utc": "2026-10-24T22:43:15+00:00",
-  "total_seconds": 56.9,
+  "started_utc": "2026-10-24T22:46:48+00:00",
+  "finished_utc": "2026-10-24T22:47:36+00:00",
+  "total_seconds": 47.3,
   "steps": [
     {
       "step": "build_panel",
       "status": "ok",
-      "seconds": 21.7,
+      "seconds": 15.2,
       "error": null
     },
     {
       "step": "verify_known_firms",
       "status": "ok",
-      "seconds": 0.3,
+      "seconds": 0.2,
       "error": null
     },
     {
       "step": "analysis",
       "status": "ok",
-      "seconds": 23.2,
+      "seconds": 18.5,
       "error": null
     },
     {
       "step": "figures",
       "status": "ok",
-      "seconds": 8.2,
+      "seconds": 10.1,
       "error": null
     },
     {
       "step": "pytest",
       "status": "ok",
-      "seconds": 3.4,
+      "seconds": 3.3,
       "error": null
     }
   ]
