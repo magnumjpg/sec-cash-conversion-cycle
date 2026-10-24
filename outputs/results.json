@@ -1,7 +1,7 @@
 {
   "meta": {
     "project": "02_working_capital_sec",
-    "as_of_utc": "2026-10-24T22:47:04Z",
+    "as_of_utc": "2026-10-24T22:51:55Z",
     "sample_years": [
       2010,
       2024
@@ -480,7 +480,7 @@
     },
     {
       "sic2": "25",
-      "industry": "Wood & furniture",
+      "industry": "Furniture",
       "firm_years": 253,
       "firms": 23,
       "ccc_median": 60.505171,
@@ -512,7 +512,7 @@
     },
     {
       "sic2": "24",
-      "industry": "Wood & furniture",
+      "industry": "Lumber & wood",
       "firm_years": 188,
       "firms": 19,
       "ccc_median": 62.191399,
@@ -1083,7 +1083,7 @@
       },
       {
         "sic2": "25",
-        "industry": "Wood & furniture",
+        "industry": "Furniture",
         "rho": 0.92723,
         "se": 0.041172,
         "half_life_years": 9.174233,
@@ -1384,7 +1384,7 @@
         },
         {
           "sic2": "25",
-          "industry": "Wood & furniture",
+          "industry": "Furniture",
           "rho": 0.807905,
           "se": 0.026977,
           "half_life_years": 3.249469,
@@ -1711,7 +1711,7 @@
         },
         {
           "sic2": "25",
-          "industry": "Wood & furniture",
+          "industry": "Furniture",
           "rho": 0.777521,
           "se": 0.123733,
           "half_life_years": 2.754468,
@@ -1930,7 +1930,7 @@
         },
         {
           "sic2": "25",
-          "industry": "Wood & furniture",
+          "industry": "Furniture",
           "rho": 0.81586,
           "se": 0.090898,
           "half_life_years": 3.405911,
@@ -2123,7 +2123,7 @@
       },
       {
         "sic2": "25",
-        "industry": "Wood & furniture",
+        "industry": "Furniture",
         "rho": 0.92723,
         "se": 0.041172,
         "half_life_years": 9.174233,

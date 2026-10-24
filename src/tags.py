@@ -102,7 +102,7 @@ SIC_DIVISIONS: dict[str, str] = {
     "10": "Mining & energy", "12": "Mining & energy", "13": "Mining & energy", "14": "Mining & energy",
     "15": "Construction", "16": "Construction", "17": "Construction",
     "20": "Food & tobacco", "21": "Food & tobacco", "22": "Textiles", "23": "Apparel",
-    "24": "Wood & furniture", "25": "Wood & furniture", "26": "Paper", "27": "Printing & publishing",
+    "24": "Lumber & wood", "25": "Furniture", "26": "Paper", "27": "Printing & publishing",
     "28": "Chemicals & pharma", "29": "Petroleum refining", "30": "Rubber & plastics",
     "31": "Leather", "32": "Stone, clay & glass", "33": "Primary metals",
     "34": "Fabricated metal", "35": "Machinery & computers", "36": "Electronics",
