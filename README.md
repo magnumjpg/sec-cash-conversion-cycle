@@ -369,7 +369,7 @@ volumes, cache layout and the full attrition funnel are in `DATA.md`.
 | `python src/analysis.py` | ok |
 | `python src/figures.py` | ok — 6 figures |
 | `python src/verify_known_firms.py` | ok — internal spot check 63/63 |
-| `python src/run_all.py --skip-download --test` | ok — 29 tests passed |
+| `python src/run_all.py --skip-download --test` | ok — 30 tests passed |
 
 ## Files
 
