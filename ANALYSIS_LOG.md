@@ -38,7 +38,9 @@ interval arithmetic. The join used:
 - consecutive years required to be 350–380 days apart, so a year-end change does
   not create a fake 15-month "year".
 
-Result: **105,865** firm-years with the five inputs present.
+Result: **116,988** firm-years with a flow and a balance on the same period end;
+after dropping 1,567 duplicate fiscal-year labels and 9,556 rows outside the
+2010–2024 window, **105,865** enter the measurement filters.
 
 ---
 
@@ -68,7 +70,15 @@ estimation sample gets 77.9.
 Three issuers — Fastenal, Walmart, Apple — three fiscal years, seven concepts
 each: revenue, COGS, receivables, inventory, payables, assets, net income.
 
-**49/49 exact matches** against `companyfacts`, maximum relative difference 0.0.
+**63/63 exact matches** against `companyfacts`, maximum relative difference 0.0.
+
+The first version of this check reported 49/49, and that number was wrong in a
+way worth recording. The code filtered to comparisons where both values were
+non-null *before* computing the denominator, so it deleted ten Apple rows whose
+only defect was that the panel stores a month-end period end (2019-09-30) while
+the 10-K closes two days earlier (2019-09-28). Four more rows were skipped
+outright. The fix matches within ±7 days and keeps every attempted comparison in
+the denominator: 3 firms × 7 concepts × 3 years = 63.
 
 This does not prove the whole panel is right. It proves the tag mapping and the
 fiscal-year join are right for three very different filers, which is the failure
@@ -108,10 +118,11 @@ one.
 
 **Independent check by the lead:** a from-scratch re-estimation on `panel.csv`
 gives +0.000140 (t = 3.92). A within-firm rank correlation has median 0.00 and is
-positive for only 48.2% of firms, so the coefficient is identified off firms with
+positive for only 48.1% of firms, so the coefficient is identified off firms with
 large CCC variation and is not a pattern in the median firm. This is now in
-`LIMITATIONS.md`; it makes the result weaker, not stronger, and is included for
-that reason.
+`LIMITATIONS.md` and is computed by the pipeline (`results.json.rank_check`,
+2,852 firms), not by hand; it makes the result weaker, not stronger, and is
+included for that reason.
 
 ---
 
@@ -119,12 +130,19 @@ that reason.
 
 Two cross-sections, one observation per firm:
 
-- **2020 demand shock** (pre-shock 2019 CCC): revenue growth coefficient
-  +0.000071, t = 0.38. Null. ROA is significant but non-monotone across
-  quintiles. Cash ratio is null.
-- **2022 cost shock**: gross-margin change coefficient −0.00006, t = −2.37. The
+- **FY2020 demand shock** (pre-shock FY2019 CCC): revenue-growth coefficient
+  +0.000071, t = 0.38 — not detectable, not "no effect". ROA is significant but
+  non-monotone across quintiles. Cash ratio is not detectable either.
+- **FY2022 cost shock**: gross-margin change coefficient −0.00006, t = −2.37. The
   quintile medians are **not monotone** (−0.81, −0.35, −0.75, −0.41, −0.93 pp),
   which means the linear slope is tail-driven.
+
+The labels are issuer fiscal years, not calendar windows: 28.6% of FY2020 rows
+and 28.4% of FY2022 rows have a non-December year-end. Re-estimating on December
+year-ends only leaves the FY2020 revenue result undetectable (t = 0.72) and the
+FY2020 ROA coefficient positive (t = 2.87), but moves the FY2022 margin slope to
+−0.0059 with t = −1.72, so it no longer clears 5%. That check is stored in
+`results.json.shock_window`.
 
 Both are labelled descriptive. No placebo, no pre-trend, no matched controls.
 
@@ -159,6 +177,40 @@ silently disagree with the table.
 
 ---
 
+## 10. The external audit, and what it changed
+
+A read-only audit of the finished project found eight issues. Six were real
+defects, not stylistic quibbles, and all were fixed before the final run:
+
+1. **Validation denominator.** 49/49 was a success-only denominator; it is now
+   63/63 with every attempted comparison kept (see §4).
+2. **Funnel bridge.** The table started at 105,865 and silently dropped 11,123
+   rows (1,567 duplicate labels + 9,556 outside the window). The funnel now starts
+   at 116,988 and shows each subtraction.
+3. **Persistence rows contradicted the JSON.** `table_persistence.csv` estimated
+   the component rows on *raw* DSO/DIO/DPO while the headline used winsorized
+   values. The rows are now winsorized (0.723 / 0.651 / 0.618) and match the
+   headline.
+4. **Variance shares added to 106%.** They are two overlapping partitions, not
+   one. The README and RED_TEAM now present each partition separately and say why
+   they do not sum to 100.
+5. **Negative CCC is tag-sensitive.** 48.1% of the 2,799 rows using
+   `AccountsPayableAndAccruedLiabilitiesCurrent` are negative, against 11.8% of
+   the 22,542 preferred-tag rows; without the fallback the share is 11.83%, not
+   15.84%. Both numbers are now reported.
+6. **FY labels are not calendar windows.** The shock sections now say FY2020 /
+   FY2022 and report the December-only sensitivity.
+
+Two were nits, also fixed: the rank-check numbers are now produced by the
+pipeline, and the CCC level table states that its components are separate medians
+and do not add to 74.97 (49.10 + 84.27 − 50.99 = 82.38).
+
+The audit also flagged `tag_usage.csv` shares that differ from `DATA.md`. They
+are not wrong: the CSV uses the pre-filter tagged universe and `DATA.md` uses the
+final panel. `DATA.md` now states both denominators.
+
+---
+
 ## What I would do differently
 
 1. **Check the lag bound before interpreting an AR(1).** A ρ of 0.00001 is a
@@ -177,7 +229,8 @@ silently disagree with the table.
 The project set out to measure whether working capital predicts profitability
 and resilience. It found:
 
-- a large, stable descriptive fact (median CCC 75 days, half of it inventory);
+- a large, stable descriptive fact (median CCC 75 days; DIO alone is 84 days and
+  DPO offsets half of the operating cycle);
 - that industry explains little of it (6% of variance) and firm identity a lot
   (64%);
 - a positive, small CCC–ROA association, against the prior, which survives

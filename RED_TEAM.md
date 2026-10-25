@@ -26,9 +26,11 @@ A within-firm event study around deliberate CCC changes would be needed.
 ## "Then your result is just industry fixed effects."
 
 No. The headline specification has firm fixed effects, so industry is absorbed
-by construction. The variance decomposition is the relevant number and it points
-the other way: only **6.0%** of CCC variance is between two-digit industries,
-while **64.2%** is between firms and **35.8%** is within firms over time.
+by construction. The variance decomposition is the relevant number, and it is
+two overlapping partitions, not one: only **6.0%** of CCC variance is between
+two-digit industries (94.0% within them), while **64.2%** is between firms
+(35.8% within a firm over time). Adding the three numbers gives 106% precisely
+because "between industries" is nested inside "between firms".
 
 That is the substantive finding that survives the objection: "industry practice"
 explains very little of working-capital levels.
@@ -81,7 +83,10 @@ is **"not detectable in this cross-section"**, not "CCC did not matter in 2020".
 
 The 2022 margin result is the opposite problem: it is significant in the linear
 specification and non-monotone in quintiles. That pattern is consistent with
-tails, not with a dose–response, and is described that way.
+tails, not with a dose–response, and is described that way. It is also
+window-sensitive: restricting to December year-ends, so the outcome covers
+January–December 2022, moves t from −2.37 to −1.72 and it no longer clears 5%.
+That sensitivity is stored in `results.json.shock_window`.
 
 **Unresolved:** no placebo outcome, no pre-trend, no matched control group. Each
 of those would improve the design; none is present.
@@ -97,8 +102,10 @@ probably truncates the left tail of distress.
 
 The project states the population explicitly and does not generalise beyond it.
 The 15.84% negative-CCC share is presented as a **lower bound** for the listed
-universe, because service firms without inventory are excluded by the data
-requirements.
+universe on the industry-mix dimension (service firms without inventory are
+excluded by the data), but it is also **tag-sensitive**: 48.1% of rows on the
+accrued-liabilities fallback are negative against 11.8% on the preferred payable
+tag, so the share falls to 11.83% without the fallback. Both are in the README.
 
 ---
 
@@ -108,9 +115,13 @@ Three checks:
 
 1. **Cross-source validation.** Seven concepts across three fiscal years for
    Fastenal, Walmart and Apple, compared to the `companyfacts` API:
-   **49/49 exact matches**, maximum relative difference 0.0.
-2. **A published attrition funnel.** 2,536,529 us-gaap facts → 105,865 matched
-   firm-years → 25,341 in the main sample, with every exclusion counted.
+   **63/63 exact matches**, maximum relative difference 0.0. The denominator is
+   every comparison the design sets out to make; a ±7-day window matches the
+   issuer's exact period end to the panel's month-end convention.
+2. **A published attrition funnel.** 2,536,529 us-gaap facts → 116,988 matched
+   firm-years → 105,865 in the fiscal-year window (after 1,567 duplicate labels
+   and 9,556 outside-window rows) → 25,341 in the main sample, with every
+   exclusion counted.
 3. **A manifest with SHA-256 hashes** for 64 quarterly source files, so a silent
    upstream revision is detectable.
 

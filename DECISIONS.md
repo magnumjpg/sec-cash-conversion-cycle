@@ -57,8 +57,12 @@ what makes a January-ending retailer land in FY2020 rather than FY2021.
 
 Consequence: the panel year is a *label*, not a calendar year. Two firms with
 different year-ends in the same "year" are up to 11 months apart. Year fixed
-effects absorb the common component; nothing else in the design depends on the
-label being a calendar year.
+effects absorb the common component in the panel models, but the **shock
+cross-sections do depend on the label**: 28.6% of FY2020 rows and 28.4% of FY2022
+rows have a non-December year-end. The main tables therefore say "FY2020/FY2022",
+and `results.json.shock_window` reports a December-only re-estimation so the
+calendar alignment can be checked. The FY2022 margin slope falls from −0.006
+(t = −2.37) to −0.0059 (t = −1.72) on December year-ends.
 
 ---
 
@@ -155,7 +159,7 @@ touching the code.
 
 - No dollar value of a CCC day. It needs a cost of capital and an explicit
   financing assumption; the charter forbids it and it is not identified here.
-- No causal language. The 2020/2022 cross-sections are descriptive.
+- No causal language. The FY2020/FY2022 cross-sections are descriptive.
 - No market returns: no CRSP/Compustat, so no abnormal-return test.
 - No attempt to make the panel "representative" of all US listed firms. It is
   the population of 10-K/20-F filers with usable trade working capital.

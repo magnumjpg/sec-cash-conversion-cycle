@@ -48,16 +48,29 @@ def fetch_facts(cik: int) -> dict:
     return json.loads(p.read_text())
 
 
-def facts_for(facts: dict, tag: str, end: str, annual: bool) -> float | None:
+def facts_for(facts: dict, tag: str, end: str, annual: bool,
+              tolerance_days: int = 7) -> float | None:
+    """Value for `tag` at the annual/instant period close to `end`.
+
+    The panel stores the FSDS `ddate`, which is a month-end convention, while
+    `companyfacts` carries the issuer's exact period end (Apple's FY2019 10-K
+    closes on 2019-09-28, not 2019-09-30). A ±7-day window matches the same
+    period without allowing two fiscal years to compete.
+    """
     node = facts.get("facts", {}).get("us-gaap", {}).get(tag)
     if not node:
         return None
-    best = None
+    target = pd.Timestamp(end)
+    candidates: list[tuple[int, str, str, float]] = []
     for unit, items in node.get("units", {}).items():
         if unit != "USD":
             continue
         for it in items:
-            if it.get("end") != end:
+            try:
+                gap = abs((pd.Timestamp(it.get("end")) - target).days)
+            except (TypeError, ValueError):
+                continue
+            if gap > tolerance_days:
                 continue
             if it.get("form") not in ("10-K", "10-K/A", "20-F", "40-F"):
                 continue
@@ -71,10 +84,14 @@ def facts_for(facts: dict, tag: str, end: str, annual: bool) -> float | None:
             else:
                 if "start" in it:
                     continue
-            key = (it.get("filed", ""), it.get("accn", ""))
-            if best is None or key > best[0]:
-                best = (key, it.get("val"))
-    return None if best is None else float(best[1])
+            candidates.append((gap, it.get("filed", ""), it.get("accn", ""),
+                               float(it["val"])))
+    if not candidates:
+        return None
+    # closest period end; for the same end keep the latest filing
+    closest = min(c[0] for c in candidates)
+    latest = max(c[1:] for c in candidates if c[0] == closest)
+    return latest[2]
 
 
 def main() -> dict:
@@ -109,10 +126,16 @@ def main() -> dict:
                         if facts_for(facts, cand, end, annual) is not None:
                             tag = cand
                             break
-                    if tag is None:
-                        continue
-                cf = facts_for(facts, tag, end, annual)
                 pv = r.get(concept)
+                if tag is None:
+                    rows.append({"cik": cik, "firm": label, "concept": concept,
+                                 "year": year, "tag": None, "fiscal_year_end": end,
+                                 "panel_value": None if pd.isna(pv) else float(pv),
+                                 "companyfacts_value": None, "match": False,
+                                 "rel_diff": None,
+                                 "note": "no matching tag in companyfacts within 7 days"})
+                    continue
+                cf = facts_for(facts, tag, end, annual)
                 ok = (cf is not None and pd.notna(pv)
                       and abs(float(pv) - cf) <= max(1.0, 0.002 * abs(cf)))
                 rows.append({"cik": cik, "firm": label, "concept": concept, "year": year,
@@ -125,22 +148,27 @@ def main() -> dict:
     df = pd.DataFrame(rows)
     TABLES.mkdir(parents=True, exist_ok=True)
     df.to_csv(TABLES / "known_firm_check.csv", index=False)
-    checked = df[df["companyfacts_value"].notna() & df["panel_value"].notna()]
+    # The denominator is every comparison the design sets out to make, not only
+    # the ones that happened to return a value.
+    attempted = df[df["year"].notna()].copy()
     summary = {
         "firms": list(FIRMS.values()),
         "concepts": CONCEPTS,
         "years": YEARS,
-        "n_comparisons": int(len(checked)),
-        "n_match": int(checked["match"].sum()),
-        "all_match": bool(len(checked) > 0 and checked["match"].all()),
-        "max_abs_rel_diff": float(checked["rel_diff"].abs().max()) if len(checked) else None,
-        "note": "panel value vs latest 10-K fact at the same fiscal-year end (companyfacts API)",
+        "n_comparisons": int(len(attempted)),
+        "n_match": int(attempted["match"].fillna(False).sum()),
+        "all_match": bool(len(attempted) > 0 and attempted["match"].fillna(False).all()),
+        "n_unavailable": int(attempted["companyfacts_value"].isna().sum()),
+        "max_abs_rel_diff": (float(attempted["rel_diff"].abs().max())
+                             if attempted["rel_diff"].notna().any() else None),
+        "note": ("panel value vs latest 10-K fact within 7 days of the panel "
+                 "fiscal-year end (companyfacts API); unavailable comparisons "
+                 "stay in the denominator"),
     }
     (OUT / "validation.json").write_text(json.dumps(summary, indent=2))
     print(json.dumps(summary, indent=2))
-    if len(checked):
-        print(checked[["firm", "concept", "year", "panel_value", "companyfacts_value", "match"]]
-              .to_string(index=False))
+    print(attempted[["firm", "concept", "year", "panel_value", "companyfacts_value", "match"]]
+          .to_string(index=False))
     return summary
 
 

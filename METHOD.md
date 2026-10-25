@@ -56,15 +56,19 @@ a firm that changes its year-end does not generate a fake 15-month "year".
 
 **Structure.** Median and IQR of CCC by 2-digit SIC; share of firms with a
 negative CCC by industry and year; variance decomposition
-(`SS_between / SS_total`) for industry and for firm.
+(`SS_between / SS_total`) for industry and for firm. These are **two overlapping
+partitions**, not one decomposition: between-industry (6.0%) and
+within-industry (94.0%) is one split; between-firm (64.2%) and within-firm
+(35.8%) is the other. They are reported separately and never summed.
 
 **Persistence.** `CCC_it = a + rho·CCC_i,t-1 + year FE + e_it`, SEs clustered by
 firm. Half-life `ln(0.5)/ln(rho)`. No firm FE in the headline (with a lagged
 dependent variable and T≈10 the firm-FE estimate is Nickell-biased); the
 firm-FE version is reported as a bound. Same model for DSO, DIO, DPO, and by
-2-digit industry. Both the current and the lagged value are bounded to
-`|x| <= 3,650` days, because a firm-year that passes the screen can still follow
-an uninterpretable one.
+2-digit industry; the component models use the same winsorized series as the
+headline, so their estimates are comparable to it. Both the current and the
+lagged value are bounded to `|x| <= 3,650` days, because a firm-year that passes
+the screen can still follow an uninterpretable one.
 
 **CCC and profitability.**
 `ROA_it = a_i + d_t + b·CCC_it + c·log(assets)_it + d·gross_margin_it + e_it`,
@@ -77,12 +81,16 @@ firm and year FE, SEs clustered by firm. Standardised coefficient =
 y_i = a + b·CCC_i,pre + industry FE + e_i
 ```
 
-- 2020: `y` = revenue growth 2019→2020, ROA 2020, cash/assets 2020;
+- FY2020: `y` = revenue growth FY2019→FY2020, ROA FY2020, cash/assets FY2020;
   `CCC_i,pre` = CCC in FY2019.
-- 2022: `y` = gross-margin change 2021→2022, ROA 2022; `CCC_i,pre` = CCC FY2021.
+- FY2022: `y` = gross-margin change FY2021→FY2022, ROA FY2022; `CCC_i,pre` = CCC
+  FY2021.
 
 HC1 standard errors. Quintile tables are in `results.json` and drive the
-figures.
+figures. The year is the issuer's fiscal-year label, not a calendar year, so the
+same code is also run on December year-ends only (28.6% of FY2020 and 28.4% of
+FY2022 rows are non-December); that calendar-aligned check is
+`results.json.shock_window`.
 
 **Robustness.** Average balances; no winsorization; revenue-denominated DPO;
 negative-CCC-only and non-negative-CCC-only; balanced 2015–2024 panel; dropping

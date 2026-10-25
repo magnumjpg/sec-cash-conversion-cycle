@@ -99,7 +99,10 @@ From `outputs/results.json → attrition` and `outputs/tables/attrition.csv`:
 | fact | dropped: IFRS taxonomy (`ifrs-full`) | 23,790 | |
 | fact | dropped: duplicate tag/period, older filing | 1,257,640 | |
 | fact | dropped: flow fact with `qtrs != 4` | 1,603 | |
-| firm-year | flow + balance matched on identical fiscal-year end | 105,865 | 14,232 |
+| firm-year | flow + balance matched on identical fiscal-year end | 116,988 | 14,268 |
+| firm-year | dropped: duplicate fiscal-year label | 1,567 | |
+| firm-year | dropped: fiscal year outside 2010–2024 | 9,556 | |
+| firm-year | in the 2010–2024 window | 105,865 | 14,232 |
 | firm-year | dropped: missing revenue/COGS/AR/inventory/AP | 77,938 | 12,525 |
 | firm-year | dropped: revenue ≤ 0 or COGS ≤ 0 | 267 | 216 |
 | firm-year | dropped: negative balance-sheet item | 1 | 1 |
@@ -115,8 +118,14 @@ retail by construction, because it requires inventory and COGS.
 ## 5. Tag usage
 
 Recorded per row in `tag_revenue`, `tag_cogs`, `tag_ar`, `tag_inventory`,
-`tag_ap`; aggregated in `outputs/tables/tag_usage.csv`. Shares below are of the
-25,341 panel rows.
+`tag_ap`; aggregated in `outputs/tables/tag_usage.csv`. **The two tables do not
+share a denominator, deliberately.** `tag_usage.csv` is computed before the
+panel filters, so `share_of_concept` is the share of the firm-years that reported
+*any* tag for that concept (e.g. COGS `CostOfGoodsAndServicesSold` is 43.9% of
+24,015 + 20,911 + 9,791 tagged firm-years). The table below is computed on the
+final 25,341 panel rows, after the missing-input and window filters, so the same
+tag is 49.6% of the panel. Neither is wrong; a reader comparing them must use the
+labelled denominator rather than assume they are the same.
 
 | Concept | Tag | Rows | Share | Tier |
 |---|---|---:|---:|---|
@@ -144,20 +153,26 @@ charter tag supplied every input.
 ## 6. Validation against `companyfacts`
 
 `src/verify_known_firms.py` compares the panel, tag by tag, with the latest 10-K
-fact at the same fiscal-year end for Fastenal (CIK 815556), Walmart (104169) and
-Apple (320193), for fiscal years 2019, 2022 and 2023, across 7 concepts.
+fact close to the same fiscal-year end for Fastenal (CIK 815556), Walmart
+(104169) and Apple (320193), for fiscal years 2019, 2022 and 2023, across 7
+concepts. The panel stores the FSDS month-end `ddate` while `companyfacts` stores
+the issuer's exact period end (Apple's FY2019 closes on 2019-09-28), so the
+matcher accepts a ±7-day gap; that is how the same period is compared rather than
+two different ones.
 
 Result (`outputs/validation.json`, `outputs/tables/known_firm_check.csv`):
 
 ```
-n_comparisons = 49
-n_match       = 49
+n_comparisons = 63
+n_match       = 63
+n_unavailable = 0
 max_abs_rel_diff = 0.0
 all_match     = true
 ```
 
-This is a spot check of tag mapping and period alignment, not a full
-reconciliation of the panel.
+The denominator is 3 firms × 7 concepts × 3 years = 63. Failures stay in it: an
+earlier version filtered to comparisons that had returned a value and reported
+49/49, hiding 10 Apple rows whose only problem was the two-day period-end gap.
 
 ## 7. Offline rebuild and known data gaps
 

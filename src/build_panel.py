@@ -179,12 +179,16 @@ def build_panel() -> dict:
 
     # A transition/long period can make two ends share one fiscal-year label.
     before = len(panel)
+    log["firm_years_flow_balance_matched_on_exact_end"] = int(before)
+    log["firms_flow_balance_matched_on_exact_end"] = int(panel["cik"].nunique())
     panel = panel.sort_values(["cik", "fy_label", "_is_fy_period", "ddate"])
     panel = panel.drop_duplicates(["cik", "fy_label"], keep="last")
     log["firm_years_dropped_duplicate_fiscal_year"] = int(before - len(panel))
 
     panel["fiscal_year"] = panel["fy_label"]
-    panel = panel[(panel["fiscal_year"] >= YEAR_MIN) & (panel["fiscal_year"] <= YEAR_MAX)].copy()
+    in_window = (panel["fiscal_year"] >= YEAR_MIN) & (panel["fiscal_year"] <= YEAR_MAX)
+    log["firm_years_outside_2010_2024_window"] = int((~in_window).sum())
+    panel = panel[in_window].copy()
     log["firm_years_in_2010_2024_window"] = int(len(panel))
 
     # universe metadata: latest SIC / name / ticker per CIK
@@ -216,6 +220,9 @@ def build_panel() -> dict:
             "firms": int(df["cik"].nunique()) if len(df) else 0,
         })
 
+    def record_n(step: str, n: int, firms: int | None = None) -> None:
+        rows.append({"level": "firm-year", "step": step, "n": int(n), "firms": firms})
+
     # fact-level attrition (rows of num.txt, not firm-years)
     rows.append({"level": "fact",
                  "step": "F0. us-gaap facts, project tags, annual filings, consolidated, qtrs 0/4",
@@ -229,7 +236,15 @@ def build_panel() -> dict:
     rows.append({"level": "fact", "step": "F4. dropped: flow fact without annual duration (qtrs != 4)",
                  "n": int(log.get("flow_facts_dropped_not_annual_duration", 0)), "firms": None})
 
-    record("0. flow+balance matched on exact fiscal-year end", panel)
+    record_n("0. flow+balance matched on exact fiscal-year end",
+             log["firm_years_flow_balance_matched_on_exact_end"],
+             log.get("firms_flow_balance_matched_on_exact_end"))
+    record_n("0a. dropped: duplicate fiscal-year label",
+             log["firm_years_dropped_duplicate_fiscal_year"])
+    record_n("0b. dropped: fiscal year outside 2010-2024",
+             log["firm_years_outside_2010_2024_window"])
+    record_n("0c. firm-years in 2010-2024 window",
+             log["firm_years_in_2010_2024_window"])
 
     u = panel[[c for c in panel.columns if c.startswith("uom_")]]
     usd_ok = ~(u.notna() & (u != "USD")).any(axis=1)

@@ -1,7 +1,7 @@
 {
   "meta": {
     "project": "02_working_capital_sec",
-    "as_of_utc": "2026-10-24T22:51:55Z",
+    "as_of_utc": "2026-10-25T10:58:34Z",
     "sample_years": [
       2010,
       2024
@@ -2348,6 +2348,13 @@
       }
     ]
   },
+  "rank_check": {
+    "definition": "within-firm Spearman correlation of winsorized CCC and ROA; firms with at least three overlapping years",
+    "n_firms": 2852,
+    "median_spearman": 0.0,
+    "share_positive": 0.481066,
+    "note": "0.00 / 48.1% mean the linear coefficient is not a pattern in the median firm; it is below 0.5, so most firms are negative, not positive"
+  },
   "ccc_roa": {
     "beta": 0.000139,
     "se": 3.6e-05,
@@ -2355,7 +2362,7 @@
     "p": 0.000137,
     "n": 23408,
     "stars": "***",
-    "model": "roa_it = firm FE + year FE + b*CCC_it + log(assets) + gross margin; SE clustered by firm; ROA and CCC winsorized 1/99 industry-year",
+    "model": "roa_it = firm FE + year FE + b*CCC_it + log(assets) + gross margin; SE clustered by firm; ROA and CCC each used as supplied (roa_w on ccc_w; winsorized 1/99 when the column ends in _w)",
     "r2_within": 0.069109,
     "n_firms": 2994,
     "beta_standardized": 0.060372,
@@ -2370,7 +2377,7 @@
     "p": 3.6e-05,
     "n": 23408,
     "stars": "***",
-    "model": "roa_it = firm FE + year FE + b*CCC_it + log(assets) + gross margin; SE clustered by firm; ROA and CCC winsorized 1/99 industry-year",
+    "model": "roa_it = firm FE + year FE + b*CCC_it + log(assets) + gross margin; SE clustered by firm; ROA and CCC each used as supplied (roa_w on ccc; winsorized 1/99 when the column ends in _w)",
     "r2_within": 0.07029,
     "n_firms": 2994,
     "beta_standardized": 0.06298,
@@ -2647,6 +2654,227 @@
       ]
     }
   },
+  "shock_window": {
+    "note": "FY labels are issuer fiscal years, not calendar years; the December-only block restricts the outcome window to Jan-Dec",
+    "share_non_december_fy2020": 0.285807,
+    "share_non_december_fy2022": 0.283706,
+    "shock_2020_december": {
+      "revenue_growth": {
+        "beta": 0.000152,
+        "se": 0.00021,
+        "t": 0.723033,
+        "p": 0.469659,
+        "n": 939,
+        "stars": "",
+        "year": 2020,
+        "y": "sales_growth",
+        "x": "ccc_w_lag",
+        "label": "2019 CCC vs FY2020 revenue growth, December year-ends",
+        "model": "sales_growth (winsorized 1/99) on ccc_w_lag + 2-digit SIC FE, cross-section 2020, HC1 SE",
+        "r2": 0.131647,
+        "n_firms": 939,
+        "sd_y": 0.547203,
+        "quintiles": [
+          {
+            "q": 0.0,
+            "n": 188,
+            "x_median": -19.701045,
+            "y_median": 0.024357,
+            "y_mean": 0.150129
+          },
+          {
+            "q": 1.0,
+            "n": 188,
+            "x_median": 41.110574,
+            "y_median": -0.01351,
+            "y_mean": 0.052805
+          },
+          {
+            "q": 2.0,
+            "n": 187,
+            "x_median": 79.890725,
+            "y_median": -0.041971,
+            "y_mean": 0.009015
+          },
+          {
+            "q": 3.0,
+            "n": 188,
+            "x_median": 125.048017,
+            "y_median": -0.041634,
+            "y_mean": 0.07314
+          },
+          {
+            "q": 4.0,
+            "n": 188,
+            "x_median": 224.186114,
+            "y_median": 0.022119,
+            "y_mean": 0.224268
+          }
+        ]
+      },
+      "roa": {
+        "beta": 0.000216,
+        "se": 7.5e-05,
+        "t": 2.867976,
+        "p": 0.004131,
+        "n": 937,
+        "stars": "***",
+        "year": 2020,
+        "y": "roa",
+        "x": "ccc_w_lag",
+        "label": "2019 CCC vs FY2020 ROA, December year-ends",
+        "model": "roa (winsorized 1/99) on ccc_w_lag + 2-digit SIC FE, cross-section 2020, HC1 SE",
+        "r2": 0.100655,
+        "n_firms": 937,
+        "sd_y": 0.291143,
+        "quintiles": [
+          {
+            "q": 0.0,
+            "n": 188,
+            "x_median": -19.07093,
+            "y_median": -0.059238,
+            "y_mean": -0.215887
+          },
+          {
+            "q": 1.0,
+            "n": 187,
+            "x_median": 41.155085,
+            "y_median": 0.002516,
+            "y_mean": -0.053644
+          },
+          {
+            "q": 2.0,
+            "n": 187,
+            "x_median": 79.890725,
+            "y_median": 0.020337,
+            "y_mean": -0.028477
+          },
+          {
+            "q": 3.0,
+            "n": 187,
+            "x_median": 125.04325,
+            "y_median": 0.011275,
+            "y_mean": -0.055665
+          },
+          {
+            "q": 4.0,
+            "n": 188,
+            "x_median": 224.186114,
+            "y_median": -0.035833,
+            "y_mean": -0.137435
+          }
+        ]
+      }
+    },
+    "shock_2022_december": {
+      "margin_change": {
+        "beta": -5.9e-05,
+        "se": 3.5e-05,
+        "t": -1.723595,
+        "p": 0.084781,
+        "n": 1025,
+        "stars": "*",
+        "year": 2022,
+        "y": "margin_change",
+        "x": "ccc_w_lag",
+        "label": "2021 CCC vs FY2022 gross-margin change, December year-ends",
+        "model": "margin_change (winsorized 1/99) on ccc_w_lag + 2-digit SIC FE, cross-section 2022, HC1 SE",
+        "r2": 0.191839,
+        "n_firms": 1025,
+        "sd_y": 0.163521,
+        "quintiles": [
+          {
+            "q": 0.0,
+            "n": 205,
+            "x_median": -13.705559,
+            "y_median": -0.008187,
+            "y_mean": 0.000802
+          },
+          {
+            "q": 1.0,
+            "n": 205,
+            "x_median": 45.775382,
+            "y_median": -0.001869,
+            "y_mean": 0.005524
+          },
+          {
+            "q": 2.0,
+            "n": 205,
+            "x_median": 89.621548,
+            "y_median": -0.011722,
+            "y_mean": 0.000304
+          },
+          {
+            "q": 3.0,
+            "n": 205,
+            "x_median": 134.935267,
+            "y_median": -0.004426,
+            "y_mean": 0.01469
+          },
+          {
+            "q": 4.0,
+            "n": 205,
+            "x_median": 257.081396,
+            "y_median": -0.013167,
+            "y_mean": -0.007957
+          }
+        ]
+      },
+      "roa": {
+        "beta": -3.7e-05,
+        "se": 0.000101,
+        "t": -0.36992,
+        "p": 0.711442,
+        "n": 1024,
+        "stars": "",
+        "year": 2022,
+        "y": "roa",
+        "x": "ccc_w_lag",
+        "label": "2021 CCC vs FY2022 ROA, December year-ends",
+        "model": "roa (winsorized 1/99) on ccc_w_lag + 2-digit SIC FE, cross-section 2022, HC1 SE",
+        "r2": 0.108338,
+        "n_firms": 1024,
+        "sd_y": 0.437929,
+        "quintiles": [
+          {
+            "q": 0.0,
+            "n": 205,
+            "x_median": -13.705559,
+            "y_median": -0.072176,
+            "y_mean": -0.276837
+          },
+          {
+            "q": 1.0,
+            "n": 205,
+            "x_median": 45.824732,
+            "y_median": 0.018837,
+            "y_mean": -0.105048
+          },
+          {
+            "q": 2.0,
+            "n": 204,
+            "x_median": 89.663678,
+            "y_median": 0.034365,
+            "y_mean": -0.049053
+          },
+          {
+            "q": 3.0,
+            "n": 205,
+            "x_median": 134.935267,
+            "y_median": 0.00571,
+            "y_mean": -0.125267
+          },
+          {
+            "q": 4.0,
+            "n": 205,
+            "x_median": 257.081396,
+            "y_median": -0.130728,
+            "y_mean": -0.260202
+          }
+        ]
+      }
+    }
+  },
   "robustness_ccc_roa": [
     {
       "spec": "1. baseline: CCC winsorized 1/99 industry-year, firm+year FE, controls",
@@ -2659,7 +2887,7 @@
       "stars": "***",
       "n": 23408,
       "firms": 2994,
-      "note": "roa_it = firm FE + year FE + b*CCC_it + log(assets) + gross margin; SE clustered by firm; ROA and CCC winsorized 1/99 industry-year"
+      "note": "roa_it = firm FE + year FE + b*CCC_it + log(assets) + gross margin; SE clustered by firm; ROA and CCC each used as supplied (roa_w on ccc_w; winsorized 1/99 when the column ends in _w)"
     },
     {
       "spec": "2. no winsorization (raw CCC and raw ROA)",
@@ -2672,7 +2900,7 @@
       "stars": "**",
       "n": 23408,
       "firms": 2994,
-      "note": "roa_it = firm FE + year FE + b*CCC_it + log(assets) + gross margin; SE clustered by firm; ROA and CCC winsorized 1/99 industry-year"
+      "note": "roa_it = firm FE + year FE + b*CCC_it + log(assets) + gross margin; SE clustered by firm; ROA and CCC each used as supplied (roa on ccc; winsorized 1/99 when the column ends in _w)"
     },
     {
       "spec": "3. average balances (mean of t and t-1)",
@@ -2685,7 +2913,7 @@
       "stars": "",
       "n": 20420,
       "firms": 2969,
-      "note": "roa_it = firm FE + year FE + b*CCC_it + log(assets) + gross margin; SE clustered by firm; ROA and CCC winsorized 1/99 industry-year"
+      "note": "roa_it = firm FE + year FE + b*CCC_it + log(assets) + gross margin; SE clustered by firm; ROA and CCC each used as supplied (roa_w on ccc_avg; winsorized 1/99 when the column ends in _w)"
     },
     {
       "spec": "4. alternative DPO denominator (revenue)",
@@ -2698,7 +2926,7 @@
       "stars": "*",
       "n": 23408,
       "firms": 2994,
-      "note": "roa_it = firm FE + year FE + b*CCC_it + log(assets) + gross margin; SE clustered by firm; ROA and CCC winsorized 1/99 industry-year"
+      "note": "roa_it = firm FE + year FE + b*CCC_it + log(assets) + gross margin; SE clustered by firm; ROA and CCC each used as supplied (roa_w on ccc_dpo_rev_w; winsorized 1/99 when the column ends in _w)"
     },
     {
       "spec": "5. only negative-CCC firm-years",
@@ -2711,7 +2939,7 @@
       "stars": "**",
       "n": 2955,
       "firms": 885,
-      "note": "roa_it = firm FE + year FE + b*CCC_it + log(assets) + gross margin; SE clustered by firm; ROA and CCC winsorized 1/99 industry-year"
+      "note": "roa_it = firm FE + year FE + b*CCC_it + log(assets) + gross margin; SE clustered by firm; ROA and CCC each used as supplied (roa_w on ccc_w; winsorized 1/99 when the column ends in _w)"
     },
     {
       "spec": "6. only non-negative-CCC firm-years",
@@ -2724,7 +2952,7 @@
       "stars": "**",
       "n": 20453,
       "firms": 2719,
-      "note": "roa_it = firm FE + year FE + b*CCC_it + log(assets) + gross margin; SE clustered by firm; ROA and CCC winsorized 1/99 industry-year"
+      "note": "roa_it = firm FE + year FE + b*CCC_it + log(assets) + gross margin; SE clustered by firm; ROA and CCC each used as supplied (roa_w on ccc_w; winsorized 1/99 when the column ends in _w)"
     },
     {
       "spec": "7. drop |CCC| > 365 days",
@@ -2737,7 +2965,7 @@
       "stars": "***",
       "n": 22437,
       "firms": 2940,
-      "note": "roa_it = firm FE + year FE + b*CCC_it + log(assets) + gross margin; SE clustered by firm; ROA and CCC winsorized 1/99 industry-year"
+      "note": "roa_it = firm FE + year FE + b*CCC_it + log(assets) + gross margin; SE clustered by firm; ROA and CCC each used as supplied (roa_w on ccc_w; winsorized 1/99 when the column ends in _w)"
     },
     {
       "spec": "8. balanced panel 2015-2024 (all 10 years present)",
@@ -2750,7 +2978,7 @@
       "stars": "***",
       "n": 10050,
       "firms": 720,
-      "note": "roa_it = firm FE + year FE + b*CCC_it + log(assets) + gross margin; SE clustered by firm; ROA and CCC winsorized 1/99 industry-year"
+      "note": "roa_it = firm FE + year FE + b*CCC_it + log(assets) + gross margin; SE clustered by firm; ROA and CCC each used as supplied (roa_w on ccc_w; winsorized 1/99 when the column ends in _w)"
     },
     {
       "spec": "9. only firm-years using the charter's preferred tag for every input",
@@ -2763,7 +2991,7 @@
       "stars": "**",
       "n": 4566,
       "firms": 810,
-      "note": "roa_it = firm FE + year FE + b*CCC_it + log(assets) + gross margin; SE clustered by firm; ROA and CCC winsorized 1/99 industry-year"
+      "note": "roa_it = firm FE + year FE + b*CCC_it + log(assets) + gross margin; SE clustered by firm; ROA and CCC each used as supplied (roa_w on ccc_w; winsorized 1/99 when the column ends in _w)"
     },
     {
       "spec": "10. 2020 revenue growth: 3-digit SIC FE (vs 2-digit in headline)",
@@ -2789,7 +3017,7 @@
       "stars": "***",
       "n": 23408,
       "firms": 2994,
-      "note": "roa_it = firm FE + year FE + b*CCC_it; SE clustered by firm; ROA and CCC winsorized 1/99 industry-year"
+      "note": "roa_it = firm FE + year FE + b*CCC_it; SE clustered by firm; ROA and CCC each used as supplied (roa_w on ccc_w; winsorized 1/99 when the column ends in _w)"
     },
     {
       "spec": "12. including financials, real estate & utilities (panel_full)",
@@ -2802,7 +3030,7 @@
       "stars": "",
       "n": 27153,
       "firms": 4177,
-      "note": "roa_it = firm FE + year FE + b*CCC_it + log(assets) + gross margin; SE clustered by firm; ROA and CCC winsorized 1/99 industry-year"
+      "note": "roa_it = firm FE + year FE + b*CCC_it + log(assets) + gross margin; SE clustered by firm; ROA and CCC each used as supplied (roa_w on ccc_w; winsorized 1/99 when the column ends in _w)"
     }
   ],
   "robustness_persistence": [
@@ -2848,33 +3076,33 @@
     },
     {
       "spec": "5. DSO only",
-      "term": "dso_lag",
-      "rho": 0.5176,
-      "se": 0.062896,
-      "t": 8.229506,
-      "half_life_years": 1.05253,
-      "n": 20770,
-      "firms": 3001
+      "term": "dso_w_lag",
+      "rho": 0.723204,
+      "se": 0.026235,
+      "t": 27.566304,
+      "half_life_years": 2.138919,
+      "n": 20576,
+      "firms": 2959
     },
     {
       "spec": "6. DIO only",
-      "term": "dio_lag",
-      "rho": 0.522606,
-      "se": 0.029969,
-      "t": 17.438124,
-      "half_life_years": 1.068142,
-      "n": 20748,
-      "firms": 2999
+      "term": "dio_w_lag",
+      "rho": 0.651282,
+      "se": 0.023735,
+      "t": 27.440119,
+      "half_life_years": 1.616431,
+      "n": 20576,
+      "firms": 2959
     },
     {
       "spec": "7. DPO only",
-      "term": "dpo_lag",
-      "rho": 0.573238,
-      "se": 0.027267,
-      "t": 21.022936,
-      "half_life_years": 1.245651,
-      "n": 20703,
-      "firms": 2989
+      "term": "dpo_w_lag",
+      "rho": 0.618061,
+      "se": 0.028418,
+      "t": 21.748593,
+      "half_life_years": 1.440552,
+      "n": 20564,
+      "firms": 2956
     }
   ],
   "attrition": [
@@ -2911,8 +3139,26 @@
     {
       "level": "firm-year",
       "step": "0. flow+balance matched on exact fiscal-year end",
+      "n": 116988,
+      "firms": 14268.0
+    },
+    {
+      "level": "firm-year",
+      "step": "0a. dropped: duplicate fiscal-year label",
+      "n": 1567,
+      "firms": NaN
+    },
+    {
+      "level": "firm-year",
+      "step": "0b. dropped: fiscal year outside 2010-2024",
+      "n": 9556,
+      "firms": NaN
+    },
+    {
+      "level": "firm-year",
+      "step": "0c. firm-years in 2010-2024 window",
       "n": 105865,
-      "firms": 14232.0
+      "firms": NaN
     },
     {
       "level": "firm-year",
@@ -3165,13 +3411,17 @@
     "flow_facts_dropped_not_annual_duration": 1603,
     "firm_years_flow_balance_matched_on_exact_end": 116988,
     "n_ciks_with_a_project_tag": 14268,
+    "firms_flow_balance_matched_on_exact_end": 14268,
     "firm_years_dropped_duplicate_fiscal_year": 1567,
+    "firm_years_outside_2010_2024_window": 9556,
     "firm_years_in_2010_2024_window": 105865
   },
   "funnel": {
     "ciks_with_annual_filing": 15401,
     "ciks_with_project_tag": 14268,
     "firm_years_matched_on_exact_end": 116988,
+    "firm_years_dropped_duplicate_fiscal_year": 1567,
+    "firm_years_outside_window": 9556,
     "firm_years_in_window": 105865,
     "firm_years_main_sample": 25341,
     "firms_main_sample": 3158,
@@ -3197,10 +3447,11 @@
       2022,
       2023
     ],
-    "n_comparisons": 49,
-    "n_match": 49,
+    "n_comparisons": 63,
+    "n_match": 63,
     "all_match": true,
+    "n_unavailable": 0,
     "max_abs_rel_diff": 0.0,
-    "note": "panel value vs latest 10-K fact at the same fiscal-year end (companyfacts API)"
+    "note": "panel value vs latest 10-K fact within 7 days of the panel fiscal-year end (companyfacts API); unavailable comparisons stay in the denominator"
   }
 }

@@ -4,7 +4,10 @@ fact,F1. dropped: reporting currency not USD,60858,416.0
 fact,F2. dropped: IFRS taxonomy (ifrs-full),23790,
 fact,"F3. dropped: duplicate tag/period, older filing",1257640,
 fact,F4. dropped: flow fact without annual duration (qtrs != 4),1603,
-firm-year,0. flow+balance matched on exact fiscal-year end,105865,14232.0
+firm-year,0. flow+balance matched on exact fiscal-year end,116988,14268.0
+firm-year,0a. dropped: duplicate fiscal-year label,1567,
+firm-year,0b. dropped: fiscal year outside 2010-2024,9556,
+firm-year,0c. firm-years in 2010-2024 window,105865,
 firm-year,1. dropped: firm-year with mixed/non-USD currency,0,0.0
 firm-year,2. dropped: missing revenue/COGS/AR/inventory/AP,77938,12525.0
 firm-year,3. dropped: revenue<=0 or COGS<=0,267,216.0

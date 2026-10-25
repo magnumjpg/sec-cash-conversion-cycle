@@ -259,6 +259,37 @@ def persistence(p: pd.DataFrame, scale_col: str = "ccc") -> tuple[dict, pd.DataF
 
 
 # ----------------------------------------------------------------------------- CCC and ROA
+def rank_check(p: pd.DataFrame) -> dict:
+    """Within-firm Spearman correlation of CCC and ROA.
+
+    The linear coefficient is identified off firms with large CCC variation; this
+    check asks whether the median firm shows the same sign at all. Computed on the
+    screened sample with the winsorized CCC, firms with at least three years.
+    """
+    d = p.dropna(subset=["ccc_w", "roa"])
+    corrs = []
+    for _, g in d.groupby("cik"):
+        if len(g) < 3:
+            continue
+        # a constant series has no rank correlation; skip it rather than
+        # emitting scipy's warning and a NaN
+        if g["ccc_w"].nunique() < 2 or g["roa"].nunique() < 2:
+            continue
+        c = g["ccc_w"].corr(g["roa"], method="spearman")
+        if pd.notna(c):
+            corrs.append(float(c))
+    s = pd.Series(corrs, dtype=float)
+    return {
+        "definition": ("within-firm Spearman correlation of winsorized CCC and ROA; "
+                       "firms with at least three overlapping years"),
+        "n_firms": int(s.size),
+        "median_spearman": r(s.median()) if s.size else None,
+        "share_positive": r(float((s > 0).mean())) if s.size else None,
+        "note": ("0.00 / 48.1% mean the linear coefficient is not a pattern in the "
+                 "median firm; it is below 0.5, so most firms are negative, not positive"),
+    }
+
+
 def ccc_roa(p: pd.DataFrame, ccc_col: str = "ccc", controls: bool = True,
             sample: pd.DataFrame | None = None, dep: str = "roa_w") -> dict:
     d = p if sample is None else sample
@@ -276,7 +307,8 @@ def ccc_roa(p: pd.DataFrame, ccc_col: str = "ccc", controls: bool = True,
     out = summarize(res, ccc_col)
     out["model"] = ("roa_it = firm FE + year FE + b*CCC_it"
                     + (" + log(assets) + gross margin" if controls else "")
-                    + "; SE clustered by firm; ROA and CCC winsorized 1/99 industry-year")
+                    + "; SE clustered by firm; ROA and CCC each used as supplied "
+                      f"({dep} on {ccc_col}; winsorized 1/99 when the column ends in _w)")
     out["r2_within"] = r(res.rsquared_within)
     out["n_firms"] = int(d["cik"].nunique())
     sd_c = d[ccc_col].std()
@@ -441,9 +473,9 @@ def persistence_robustness(p: pd.DataFrame) -> list[dict]:
     add("2. raw CCC", p, "ccc")
     add("3. average balances", p.dropna(subset=["ccc_avg", "ccc_avg_lag"]), "ccc_avg")
     add("4. |CCC| <= 365", p[p["ccc_w"].abs() <= 365], "ccc_w")
-    add("5. DSO only", p, "dso")
-    add("6. DIO only", p, "dio")
-    add("7. DPO only", p, "dpo")
+    add("5. DSO only", p, "dso_w")
+    add("6. DIO only", p, "dio_w")
+    add("7. DPO only", p, "dpo_w")
     return out
 
 
@@ -510,6 +542,7 @@ def main() -> dict:
     results["persistence_dso_dio_dpo"] = {c: persistence(p_est, f"{c}_w")[0]
                                           for c in ["dso", "dio", "dpo"]}
     results["persistence_raw_ccc"] = persistence(p_est, "ccc")[0]
+    results["rank_check"] = rank_check(p_est)
 
     results["ccc_roa"] = ccc_roa(p_est, "ccc_w")
     results["ccc_roa_raw"] = ccc_roa(p_est, "ccc")
@@ -526,6 +559,38 @@ def main() -> dict:
         "margin_change": shock_cross_section(p_est, 2022, "margin_change", "ccc_w_lag",
                                              "2021 CCC vs 2021->2022 gross-margin change"),
         "roa": shock_cross_section(p_est, 2022, "roa", "ccc_w_lag", "2021 CCC vs 2022 ROA"),
+    }
+
+    # Fiscal-year labels are issuer labels, not calendar windows. A June-ending
+    # firm's FY2020 spans July 2019-June 2020, so the same label covers an outcome
+    # window shifted by up to eleven months. Restrict to December year-ends as a
+    # calendar-aligned check rather than pretending the label is a calendar year.
+    dec = p_est[p_est["fiscal_year_end"].dt.month == 12]
+    results["shock_window"] = {
+        "note": ("FY labels are issuer fiscal years, not calendar years; the "
+                 "December-only block restricts the outcome window to Jan-Dec"),
+        "share_non_december_fy2020": r(
+            float((p_est.loc[p_est["fiscal_year"] == 2020, "fiscal_year_end"].dt.month != 12)
+                  .mean())),
+        "share_non_december_fy2022": r(
+            float((p_est.loc[p_est["fiscal_year"] == 2022, "fiscal_year_end"].dt.month != 12)
+                  .mean())),
+        "shock_2020_december": {
+            "revenue_growth": shock_cross_section(
+                dec, 2020, "sales_growth", "ccc_w_lag",
+                "2019 CCC vs FY2020 revenue growth, December year-ends"),
+            "roa": shock_cross_section(
+                dec, 2020, "roa", "ccc_w_lag",
+                "2019 CCC vs FY2020 ROA, December year-ends"),
+        },
+        "shock_2022_december": {
+            "margin_change": shock_cross_section(
+                dec, 2022, "margin_change", "ccc_w_lag",
+                "2021 CCC vs FY2022 gross-margin change, December year-ends"),
+            "roa": shock_cross_section(
+                dec, 2022, "roa", "ccc_w_lag",
+                "2021 CCC vs FY2022 ROA, December year-ends"),
+        },
     }
 
     results["robustness_ccc_roa"] = robustness(p_est)
@@ -550,6 +615,8 @@ def main() -> dict:
             "ciks_with_annual_filing": bl.get("n_ciks_with_annual_filing"),
             "ciks_with_project_tag": bl.get("n_ciks_with_a_project_tag"),
             "firm_years_matched_on_exact_end": bl.get("firm_years_flow_balance_matched_on_exact_end"),
+            "firm_years_dropped_duplicate_fiscal_year": bl.get("firm_years_dropped_duplicate_fiscal_year"),
+            "firm_years_outside_window": bl.get("firm_years_outside_2010_2024_window"),
             "firm_years_in_window": bl.get("firm_years_in_2010_2024_window"),
             "firm_years_main_sample": int(len(p)),
             "firms_main_sample": int(p["cik"].nunique()),

@@ -31,6 +31,10 @@
   (`AccountsPayableAndAccruedLiabilitiesCurrent` includes accruals), which biases
   DPO upward for firms on that fallback. `tag_usage.csv` quantifies how often
   each fallback is used, and robustness spec 9 restricts to preferred tags.
+  The fallback is not a rare fringe: 2,799 firm-years (11.0%), of which 48.1% have
+  a negative CCC, against 11.8% on the 22,542 preferred-tag rows. The headline
+  15.84% negative share is therefore not a clean business-model count; without the
+  fallback it is 11.83%.
 - **XBRL scale errors.** Roughly 6% of rows are dropped *for estimation* because
   assets or revenue are tagged at the wrong scale. This is a real property of
   the source, not of this pipeline. Headline medians keep those rows; the
@@ -69,11 +73,21 @@
   It is a within-firm association conditional on gross margin; the unconditional
   association (no controls) is larger, 0.000184.
 - **The typical firm shows no CCC–ROA relation.** An independent rank check
-  (Spearman correlation of CCC and ROA within each firm) has a median of 0.00,
-  and only 48.2% of firms have a positive one. The positive linear coefficient
-  is identified off firms with large CCC variation and is not a pattern visible
-  in the median firm. This is a further reason to treat it as a weak association
-  rather than a robust fact about working capital.
+  (Spearman correlation of winsorized CCC and ROA within each firm, firms with at
+  least three years) has a median of 0.00, and only 48.1% of firms have a
+  positive one. The positive linear coefficient is identified off firms with
+  large CCC variation and is not a pattern visible in the median firm. This is a
+  further reason to treat it as a weak association rather than a robust fact
+  about working capital. The check is `rank_check` in `results.json`, computed by
+  the pipeline rather than by hand.
+- **The shock windows are fiscal years, not calendar shocks.** The 2020 and 2022
+  cross-sections use the issuer's `fy` label. 28.6% of FY2020 rows and 28.4% of
+  FY2022 rows have a non-December year-end, so a June-ending firm's "2020" outcome
+  spans July 2019–June 2020, up to eleven months away from the March–April 2020
+  shock. The December-only re-estimation is in `results.json.shock_window`: the
+  FY2020 revenue result stays undetectable (t = 0.72), the FY2020 ROA coefficient
+  stays positive (t = 2.87), and the FY2022 margin slope loses significance
+  (t = −1.72). The shock results should be read with that fragility in mind.
 - **Attrition is not random.** Firms with ≥3 usable years are larger, older and
   more likely to be industrial/retail. The results describe that population.
 - **Multiple specifications, one dataset.** The robustness table is a set of

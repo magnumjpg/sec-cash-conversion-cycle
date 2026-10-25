@@ -38,8 +38,26 @@
     {
       "level": "firm-year",
       "step": "0. flow+balance matched on exact fiscal-year end",
+      "n": 116988,
+      "firms": 14268.0
+    },
+    {
+      "level": "firm-year",
+      "step": "0a. dropped: duplicate fiscal-year label",
+      "n": 1567,
+      "firms": NaN
+    },
+    {
+      "level": "firm-year",
+      "step": "0b. dropped: fiscal year outside 2010-2024",
+      "n": 9556,
+      "firms": NaN
+    },
+    {
+      "level": "firm-year",
+      "step": "0c. firm-years in 2010-2024 window",
       "n": 105865,
-      "firms": 14232.0
+      "firms": NaN
     },
     {
       "level": "firm-year",
@@ -318,7 +336,9 @@
     "flow_facts_dropped_not_annual_duration": 1603,
     "firm_years_flow_balance_matched_on_exact_end": 116988,
     "n_ciks_with_a_project_tag": 14268,
+    "firms_flow_balance_matched_on_exact_end": 14268,
     "firm_years_dropped_duplicate_fiscal_year": 1567,
+    "firm_years_outside_2010_2024_window": 9556,
     "firm_years_in_2010_2024_window": 105865
   },
   "rows_per_year": {
