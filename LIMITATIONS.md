@@ -28,13 +28,17 @@
 - **Tag heterogeneity.** The mapping is explicit and versioned, but a firm that
   reports "accounts receivable" inside an "other receivables" line will be
   missing rather than approximately right. Tag fallbacks mix concepts
-  (`AccountsPayableAndAccruedLiabilitiesCurrent` includes accruals), which biases
-  DPO upward for firms on that fallback. `tag_usage.csv` quantifies how often
-  each fallback is used, and robustness spec 9 restricts to preferred tags.
-  The fallback is not a rare fringe: 2,799 firm-years (11.0%), of which 48.1% have
-  a negative CCC, against 11.8% on the 22,542 preferred-tag rows. The headline
-  15.84% negative share is therefore not a clean business-model count; without the
-  fallback it is 11.83%.
+  (`AccountsPayableAndAccruedLiabilitiesCurrent` includes accruals), which raises
+  DPO and lowers CCC for firms on that fallback: preferred-AP firm-years have a
+  median CCC of 80.54 days and fallback-AP firm-years 3.76. The pooled median
+  (74.97) therefore understates the preferred-tag level. `tag_usage.csv`
+  quantifies how often each fallback is used, and robustness spec 9 restricts to
+  preferred tags (including `InventoryNet`); it is the cleaner measurement and is
+  weaker (β = +0.000123, p = 0.068), not stronger.
+  The fallback is not a rare fringe: 2,799 firm-years (11.0%) in the final panel,
+  of which 48.1% have a negative CCC, against 11.8% on the 22,542 preferred-tag
+  rows. The headline 15.84% negative share is therefore not a clean
+  business-model count; without the fallback it is 11.83%.
 - **XBRL scale errors.** Roughly 6% of rows are dropped *for estimation* because
   assets or revenue are tagged at the wrong scale. This is a real property of
   the source, not of this pipeline. Headline medians keep those rows; the
@@ -58,16 +62,19 @@
 
 ## Econometric limitations
 
-- **Short panels.** T ≈ 10. The firm-FE AR(1) is Nickell-biased downward; the
-  headline excludes firm FE for that reason, at the cost of not controlling for
-  time-invariant firm traits in the persistence regression.
+- **Short panels and two biased persistence estimators.** T ≈ 10. The pooled
+  AR(1) excludes firm FE, so it is biased **upward** by persistent between-firm
+  differences (ρ = 0.685, half-life 1.83 years). The firm-FE AR(1) is
+  Nickell-biased **downward** (ρ = 0.266, half-life 0.52 years). An
+  Anderson–Hsiao IV gives 0.409 (SE 0.128). The result is a range, 0.27–0.69,
+  not a point; `1 − ρ` from the pooled model is not a within-firm speed.
 - **Weak controls.** `log(assets)` and gross margin are coarse. There is no
   control for growth opportunities, supplier concentration, or payment terms.
 - **Winsorization choices move coefficients.** Reported with and without.
-- **Persistence is definition-sensitive.** The headline ρ = 0.685 falls to
-  0.536 on raw CCC and 0.509 when |CCC| > 365 days are dropped. All estimates
-  are far from zero, but the level should be quoted together with the
-  definition, not as "the" persistence of the CCC.
+- **Persistence is definition-sensitive.** The pooled ρ falls from 0.685 to
+  0.536 on raw CCC and 0.509 when |CCC| > 365 days are dropped, and the firm-FE
+  estimate is 0.266. All are reported; the level should be quoted together with
+  the estimator and definition, not as "the" persistence of the CCC.
 - **The ROA association is small in economic terms.** β = 0.000139 is 1.39
   percentage points of ROA per 100 CCC days, or 0.060 SD of ROA per SD of CCC.
   It is a within-firm association conditional on gross margin; the unconditional
@@ -75,7 +82,9 @@
 - **The typical firm shows no CCC–ROA relation.** An independent rank check
   (Spearman correlation of winsorized CCC and ROA within each firm, firms with at
   least three years) has a median of 0.00, and only 48.1% of firms have a
-  positive one. The positive linear coefficient is identified off firms with
+  positive one. That is **no monotone association in the median firm**, not a
+  negative majority: the remaining 51.9% are zero or negative. The positive
+  linear coefficient is identified off firms with
   large CCC variation and is not a pattern visible in the median firm. This is a
   further reason to treat it as a weak association rather than a robust fact
   about working capital. The check is `rank_check` in `results.json`, computed by
@@ -89,7 +98,10 @@
   stays positive (t = 2.87), and the FY2022 margin slope loses significance
   (t = −1.72). The shock results should be read with that fragility in mind.
 - **Attrition is not random.** Firms with ≥3 usable years are larger, older and
-  more likely to be industrial/retail. The results describe that population.
+  more likely to be industrial/retail. The results describe that population. The
+  largest drop (77,938 firm-years missing an input) is concentrated in inventory
+  (63,363) and COGS (55,272), with 73.9% of those rows missing more than one
+  input; the decomposition is in `results.json → attrition_missing_items`.
 - **Multiple specifications, one dataset.** The robustness table is a set of
   specifications, not a pre-registration. No correction for multiple testing;
   the p-values should be read as descriptive.
@@ -99,5 +111,7 @@
 - The FSDS `num.txt` has no `start` date, so annual duration is identified by the
   SEC's own `qtrs == 4` flag plus 350–380-day spacing between fiscal-year ends,
   not by recomputing each fact's duration.
-- Validation against `companyfacts` covers 3 issuers × 3 years × 7 concepts. It
-  is a spot check, not a full reconciliation.
+- The internal spot check against `companyfacts` covers 3 issuers × 3 years ×
+  7 concepts. It validates parsing and period alignment for those issuers, not
+  the tag choice, the ordered fallback logic or coverage. It is a spot check,
+  not a full reconciliation.

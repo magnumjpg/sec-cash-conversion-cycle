@@ -1,5 +1,6 @@
 metric,value,se,half_life_years,n
 rho (CCC AR1),0.685315,0.022846,1.834323,20576
+firm FE (Nickell-biased lower end of the range),0.266371,0.044533,0.523974,20576
 "1. baseline (CCC, winsorized 1/99)",0.685315,0.022846,1.834323,20576
 2. raw CCC,0.536474,0.029182,1.113064,20724
 3. average balances,0.661703,0.027897,1.67857,17691

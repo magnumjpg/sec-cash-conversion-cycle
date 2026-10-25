@@ -1,0 +1,10 @@
+item,n_firm_years,share_of_dropped
+revenue,26071,0.334509
+cogs,55272,0.709179
+ar,47782,0.613077
+inventory,63363,0.812992
+ap,31957,0.410031
+any item missing (rows dropped),77938,1.0
+exactly one item missing,20375,0.261426
+more than one item missing,57563,0.738574
+missing item-cells (sum of the five rows above),224445,

@@ -23,5 +23,5 @@
   "all_match": true,
   "n_unavailable": 0,
   "max_abs_rel_diff": 0.0,
-  "note": "panel value vs latest 10-K fact within 7 days of the panel fiscal-year end (companyfacts API); unavailable comparisons stay in the denominator"
+  "note": "internal spot check: panel value vs latest 10-K fact within 7 days of the panel fiscal-year end (companyfacts API). It validates parsing and period alignment for these three issuers, not the tag choice, the fallback order or coverage of the wider panel; unavailable comparisons stay in the denominator"
 }

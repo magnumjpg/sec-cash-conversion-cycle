@@ -1,0 +1,8 @@
+pandas==2.3.2
+numpy==2.3.3
+statsmodels==0.15.0
+linearmodels==7.1
+pyarrow==21.0.0
+requests==2.32.5
+pytest==8.4.2
+matplotlib==3.10.8

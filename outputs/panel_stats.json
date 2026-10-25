@@ -9,7 +9,7 @@
       "level": "fact",
       "step": "F0. us-gaap facts, project tags, annual filings, consolidated, qtrs 0/4",
       "n": 2536529,
-      "firms": NaN
+      "firms": null
     },
     {
       "level": "fact",
@@ -21,19 +21,19 @@
       "level": "fact",
       "step": "F2. dropped: IFRS taxonomy (ifrs-full)",
       "n": 23790,
-      "firms": NaN
+      "firms": null
     },
     {
       "level": "fact",
       "step": "F3. dropped: duplicate tag/period, older filing",
       "n": 1257640,
-      "firms": NaN
+      "firms": null
     },
     {
       "level": "fact",
       "step": "F4. dropped: flow fact without annual duration (qtrs != 4)",
       "n": 1603,
-      "firms": NaN
+      "firms": null
     },
     {
       "level": "firm-year",
@@ -45,19 +45,19 @@
       "level": "firm-year",
       "step": "0a. dropped: duplicate fiscal-year label",
       "n": 1567,
-      "firms": NaN
+      "firms": null
     },
     {
       "level": "firm-year",
       "step": "0b. dropped: fiscal year outside 2010-2024",
       "n": 9556,
-      "firms": NaN
+      "firms": null
     },
     {
       "level": "firm-year",
       "step": "0c. firm-years in 2010-2024 window",
       "n": 105865,
-      "firms": NaN
+      "firms": 14232.0
     },
     {
       "level": "firm-year",
@@ -112,6 +112,53 @@
       "step": "9. MAIN SAMPLE",
       "n": 25341,
       "firms": 3158.0
+    }
+  ],
+  "attrition_missing_items": [
+    {
+      "item": "revenue",
+      "n_firm_years": 26071,
+      "share_of_dropped": 0.334509
+    },
+    {
+      "item": "cogs",
+      "n_firm_years": 55272,
+      "share_of_dropped": 0.709179
+    },
+    {
+      "item": "ar",
+      "n_firm_years": 47782,
+      "share_of_dropped": 0.613077
+    },
+    {
+      "item": "inventory",
+      "n_firm_years": 63363,
+      "share_of_dropped": 0.812992
+    },
+    {
+      "item": "ap",
+      "n_firm_years": 31957,
+      "share_of_dropped": 0.410031
+    },
+    {
+      "item": "any item missing (rows dropped)",
+      "n_firm_years": 77938,
+      "share_of_dropped": 1.0
+    },
+    {
+      "item": "exactly one item missing",
+      "n_firm_years": 20375,
+      "share_of_dropped": 0.261426
+    },
+    {
+      "item": "more than one item missing",
+      "n_firm_years": 57563,
+      "share_of_dropped": 0.738574
+    },
+    {
+      "item": "missing item-cells (sum of the five rows above)",
+      "n_firm_years": 224445,
+      "share_of_dropped": null
     }
   ],
   "tag_usage_top": [
@@ -339,7 +386,8 @@
     "firms_flow_balance_matched_on_exact_end": 14268,
     "firm_years_dropped_duplicate_fiscal_year": 1567,
     "firm_years_outside_2010_2024_window": 9556,
-    "firm_years_in_2010_2024_window": 105865
+    "firm_years_in_2010_2024_window": 105865,
+    "firms_in_2010_2024_window": 14232
   },
   "rows_per_year": {
     "2010": 1408,

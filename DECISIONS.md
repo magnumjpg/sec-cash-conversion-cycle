@@ -42,9 +42,12 @@ are not kept (6.4 GB); the filtered extracts (`data/raw/fsds/*.parquet`, ~1.5 MB
 per quarter) are cached forever together with the source URL, byte size and
 SHA-256 of the zip. The pipeline therefore reruns fully offline.
 
-**Verified:** three well-known issuers (Fastenal, Walmart, Apple) are compared
-tag-by-tag against the `companyfacts` API in `src/verify_known_firms.py`
-(`outputs/validation.json`, `outputs/tables/known_firm_check.csv`).
+**Internal spot check:** three well-known issuers (Fastenal, Walmart, Apple) are
+compared tag-by-tag against the `companyfacts` API in
+`src/verify_known_firms.py` (`outputs/validation.json`,
+`outputs/tables/known_firm_check.csv`). This checks that the extractor parses
+and period-aligns the facts it selected; it does not validate the tag choice,
+the ordered fallback logic or coverage outside those three issuers.
 
 ---
 
@@ -97,7 +100,13 @@ this filter, segment revenue would be mixed with company revenue.
 They are always **after** every charter tag in the fallback order, tagged
 `tier = "extra"` in `outputs/tables/tag_usage.csv`, and the headline regression
 is re-run using only firm-years where the *preferred* charter tag supplied each
-input (robustness spec 9 in `outputs/results.json`).
+input (robustness spec 9 in `outputs/results.json`). Spec 9 requires
+`InventoryNet` as well as the preferred revenue/COGS/AR/AP tags; it estimates
+β = +0.000123 (t = 1.83, p = 0.068, n = 4,542) and is the cleaner measurement,
+weaker than the mixed-tag headline. The AP fallback
+`AccountsPayableAndAccruedLiabilitiesCurrent` is a different concept (AP plus
+accruals), and `results.json → tag_sensitivity` reports its effect on the CCC
+and DPO medians.
 
 ---
 
@@ -128,12 +137,24 @@ observations, where a 1% cut clips nothing; those cells fall back to the pooled
 
 ---
 
-## D-08. Persistence specification
+## D-08. Persistence specification: report a range, not a point
 
-`CCC_it = a + rho*CCC_i,t-1 + year FE`, SEs clustered by firm, with **no firm
-fixed effect** (charter §5.2). Because a lagged dependent variable plus firm FE
-is Nickell-biased in short panels, the firm-FE version is reported separately as
-a bound (`persistence.with_firm_fe`), never as the headline.
+The pooled model `CCC_it = a + rho*CCC_i,t-1 + year FE`, SEs clustered by firm,
+with **no firm fixed effect** (charter §5.2), gives rho = 0.685. It is consistent
+but omits time-invariant firm traits, so persistent between-firm differences are
+part of rho and the estimate is biased **upward** as a within-firm speed.
+
+The firm-FE version is reported alongside it (`persistence.with_firm_fe`):
+rho = 0.266. Because a lagged dependent variable plus firm FE is Nickell-biased
+in short panels (T ≈ 10), that estimate is biased **downward**. Neither is the
+parameter. An Anderson–Hsiao IV on first differences (`persistence.anderson_hsiao`)
+gives 0.409 (SE 0.128), between the two. The headline is therefore the range
+**0.27–0.69** (half-life 0.5–1.8 years), and `1 - rho` from the pooled model is
+not described as the share of a firm's gap that closes each year.
+
+The by-industry table uses the same pooled estimator and is labelled
+"pooled (between + within firm)"; a firm-FE rho is reported per industry where
+estimable, with the caveat that the industry-level within estimates are noisy.
 
 ---
 

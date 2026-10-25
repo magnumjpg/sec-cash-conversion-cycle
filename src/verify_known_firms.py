@@ -1,10 +1,10 @@
 """
-Independent validation of the panel against SEC `companyfacts` (a different
-endpoint from the bulk FSDS files used to build it).
+Internal spot check of the panel against SEC `companyfacts`.
 
 For 3 well-known issuers we pull companyfacts, locate the exact tag + fiscal
-year end that the panel used, and compare values. This is a cross-source check:
-it catches unit, period-alignment and tag-mapping errors.
+year end that the panel used, and compare values. This validates that the
+extractor parses and period-aligns the facts it selected; it does not validate
+the tag choice, the fallback order or coverage of the wider panel.
 
     python src/verify_known_firms.py
 
@@ -14,6 +14,7 @@ Writes outputs/tables/known_firm_check.csv and outputs/validation.json.
 from __future__ import annotations
 
 import json
+import os
 import sys
 from pathlib import Path
 
@@ -27,9 +28,10 @@ OUT = ROOT / "outputs"
 TABLES = OUT / "tables"
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 
+from json_utils import write_json  # noqa: E402
 from tags import TAG_MAP  # noqa: E402
 
-UA = {"User-Agent": "Jaime Perez portfolio research magnum.jpg@gmail.com"}
+UA = {"User-Agent": f"portfolio-research/1.0 ({os.environ.get('SEC_CONTACT', 'portfolio-research@example.com')})"}
 
 # Fastenal (industrial distributor), Walmart (retail), Apple (hardware).
 FIRMS = {815556: "Fastenal", 104169: "Walmart", 320193: "Apple"}
@@ -161,11 +163,13 @@ def main() -> dict:
         "n_unavailable": int(attempted["companyfacts_value"].isna().sum()),
         "max_abs_rel_diff": (float(attempted["rel_diff"].abs().max())
                              if attempted["rel_diff"].notna().any() else None),
-        "note": ("panel value vs latest 10-K fact within 7 days of the panel "
-                 "fiscal-year end (companyfacts API); unavailable comparisons "
-                 "stay in the denominator"),
+        "note": ("internal spot check: panel value vs latest 10-K fact within 7 days "
+                 "of the panel fiscal-year end (companyfacts API). It validates "
+                 "parsing and period alignment for these three issuers, not the tag "
+                 "choice, the fallback order or coverage of the wider panel; "
+                 "unavailable comparisons stay in the denominator"),
     }
-    (OUT / "validation.json").write_text(json.dumps(summary, indent=2))
+    write_json(OUT / "validation.json", summary)
     print(json.dumps(summary, indent=2))
     print(attempted[["firm", "concept", "year", "panel_value", "companyfacts_value", "match"]]
           .to_string(index=False))

@@ -28,7 +28,12 @@ extracts; after the first download the whole pipeline runs offline.
 7. fiscal year = issuer's `fy` label for that period end (January year-ends are
    labelled the way the company labels them).
 8. window 2010–2024.
-9. `revenue > 0`, `COGS > 0`, and non-missing `AR`, `inventory`, `AP`.
+9. `revenue > 0`, `COGS > 0`, and non-missing `AR`, `inventory`, `AP`. The
+   missing-input drop is decomposed by item in
+   `outputs/tables/attrition_missing_items.csv`: of 77,938 rows, inventory is
+   missing in 63,363, COGS in 55,272, AR in 47,782, AP in 31,957 and revenue in
+   26,071; 57,563 rows (73.9%) miss more than one input, so the item counts
+   overlap.
 10. exclude SIC 6000–6999 (financials, includes real estate 6500–6599) and
     4900–4999 (utilities).
 11. at least 3 usable fiscal years per firm.
@@ -61,14 +66,24 @@ partitions**, not one decomposition: between-industry (6.0%) and
 within-industry (94.0%) is one split; between-firm (64.2%) and within-firm
 (35.8%) is the other. They are reported separately and never summed.
 
-**Persistence.** `CCC_it = a + rho·CCC_i,t-1 + year FE + e_it`, SEs clustered by
-firm. Half-life `ln(0.5)/ln(rho)`. No firm FE in the headline (with a lagged
-dependent variable and T≈10 the firm-FE estimate is Nickell-biased); the
-firm-FE version is reported as a bound. Same model for DSO, DIO, DPO, and by
-2-digit industry; the component models use the same winsorized series as the
-headline, so their estimates are comparable to it. Both the current and the
-lagged value are bounded to `|x| <= 3,650` days, because a firm-year that passes
-the screen can still follow an uninterpretable one.
+**Persistence.** Two estimators bound the AR(1) coefficient; neither is the
+parameter. The **pooled** model is
+`CCC_it = a + rho·CCC_i,t-1 + year FE + e_it`, SEs clustered by firm. It omits
+time-invariant firm traits, so persistent between-firm differences are absorbed
+into rho and the estimate is **biased upward** as a within-firm speed. The
+**firm-FE** model adds firm fixed effects; with a lagged dependent variable and
+T ≈ 10 it is **Nickell-biased downward**. The headline result is therefore a
+range: pooled rho = 0.685 (half-life 1.83 years) and firm-FE rho = 0.266
+(half-life 0.52 years), with the truth between them. An **Anderson–Hsiao IV**
+(first difference, year dummies, lagged difference instrumented by the
+twice-lagged level) gives 0.409 (SE 0.128). Half-life `ln(0.5)/ln(rho)`;
+`1 - rho` from the pooled model is not interpreted as a within-firm adjustment
+speed. Same models for DSO, DIO, DPO, and by 2-digit industry. The industry
+table is labelled **pooled (between + within firm)**; a firm-FE rho is reported
+alongside it for every industry where the within transformation is estimable.
+Both the current and the lagged value are bounded to `|x| <= 3,650` days,
+because a firm-year that passes the screen can still follow an uninterpretable
+one.
 
 **CCC and profitability.**
 `ROA_it = a_i + d_t + b·CCC_it + c·log(assets)_it + d·gross_margin_it + e_it`,
@@ -95,8 +110,11 @@ FY2022 rows are non-December); that calendar-aligned check is
 **Robustness.** Average balances; no winsorization; revenue-denominated DPO;
 negative-CCC-only and non-negative-CCC-only; balanced 2015–2024 panel; dropping
 |CCC|>365; 3-digit vs 2-digit SIC FE; no controls (firm+year FE only); only
-firm-years where the charter's preferred tag supplied every input; including
-financials/utilities (`panel_full`).
+firm-years where the charter's preferred tag supplied every input (including
+`InventoryNet`); including financials/utilities (`panel_full`). The number of
+main-sample specifications significant at 5% is computed from the p-values in
+`robustness_ccc_roa`, not typed: `robustness_summary.n_significant_p05` over
+`n_specs_main_sample` (currently 7 of 11).
 
 ## 4. Data-quality guards
 
@@ -106,8 +124,16 @@ financials/utilities (`panel_full`).
   *without* this screen.
 - **Winsorization** at 1/99 within industry-year, with pooled bounds for thin
   cells (<50 observations); applied to CCC and ROA in every regression.
-- **Cross-source validation** of Fastenal, Walmart and Apple against the
-  `companyfacts` API, tag by tag, in `outputs/validation.json`.
+- **Tag sensitivity is reported, not removed.** Ordered fallbacks are mandatory
+  under the charter, but `AccountsPayableAndAccruedLiabilitiesCurrent` is AP plus
+  accruals: 2,799 panel firm-years (11.0%) use it, their median CCC is 3.76 days
+  against 80.54 on the preferred tag, and the pooled median (74.97) therefore
+  understates the preferred-tag level. Robustness spec 9 uses preferred tags only
+  and is the cleaner measurement; it is weaker (p = 0.068).
+- **Internal spot check** of Fastenal, Walmart and Apple against the
+  `companyfacts` API, tag by tag, in `outputs/validation.json`. It checks parsing
+  and period alignment for three issuers; it does not validate the tag choice,
+  the fallback order or coverage of the wider panel.
 
 ## 5. Reproduction
 

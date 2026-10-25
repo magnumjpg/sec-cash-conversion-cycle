@@ -35,13 +35,16 @@ from pathlib import Path
 import pandas as pd
 import requests
 
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+from json_utils import json_safe  # noqa: E402
+
 ROOT = Path(__file__).resolve().parents[1]
 RAW = ROOT / "data" / "raw"
 FSDS_DIR = RAW / "fsds"
 ZIP_DIR = RAW / "zips"
 MANIFEST = ROOT / "data" / "manifest.json"
 
-USER_AGENT = "Jaime Perez portfolio research magnum.jpg@gmail.com"
+USER_AGENT = f"portfolio-research/1.0 ({os.environ.get('SEC_CONTACT', 'portfolio-research@example.com')})"
 HEADERS = {"User-Agent": USER_AGENT, "Accept-Encoding": "gzip, deflate"}
 
 FSDS_URL = "https://www.sec.gov/files/dera/data/financial-statement-data-sets/{q}.zip"
@@ -95,7 +98,7 @@ def _save_manifest(man: dict) -> None:
     MANIFEST.parent.mkdir(parents=True, exist_ok=True)
     tmp = MANIFEST.with_suffix(".json.tmp")
     with open(tmp, "w", encoding="utf-8") as fh:
-        json.dump(man, fh, indent=2, sort_keys=False)
+        json.dump(json_safe(man), fh, indent=2, sort_keys=False, allow_nan=False)
     os.replace(tmp, MANIFEST)
 
 

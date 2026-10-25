@@ -10,8 +10,11 @@ unresolved.
 
 It was checked before anything was written. The coefficient is positive in the
 baseline (+0.000139), in the no-controls specification (+0.000184), with raw
-unwinsorized variables (+0.000140), and in 8 of 11 specifications. The sign does
-not come from the controls: removing gross margin makes it larger.
+unwinsorized variables (+0.000140), and in all 11 main-sample specifications
+(ten ROA variants plus a 2020 growth placebo); 7 of 11 are significant at 5%.
+The sign does not come from the controls:
+removing gross margin makes it larger. It is also weaker under the cleanest
+measurement (spec 9, preferred tags only: β = +0.000123, p = 0.068).
 
 It is also not evidence that lengthening the CCC raises ROA. The most plausible
 reading is product mix: firms in instruments, machinery and made-to-order
@@ -60,17 +63,21 @@ repairing them would require reading 1,495 filings.
 
 ## "Persistence of 0.685 is a mechanical artefact of not having firm fixed effects."
 
-Partly fair. The headline is an AR(1) with year FE and no firm FE, which is
-consistent but omits time-invariant firm traits. Adding firm FE gives ρ = 0.266,
-but that estimate is Nickell-biased downward with T ≈ 10.
+Partly fair, and the project now says so. The 0.685 is a pooled AR(1) with year
+FE and no firm FE. It is consistent, but it keeps persistent between-firm
+differences in the error, so it is an **upper bound** on the within-firm speed.
+Adding firm FE gives ρ = 0.266 (half-life 0.52 years), but that estimate is
+Nickell-biased **downward** with T ≈ 10, so it is a lower bound. An
+Anderson–Hsiao IV gives 0.409 (SE 0.128), between the two.
 
-The honest statement is a **bound**, not a point: the truth is somewhere between
-0.27 and 0.69, and the half-life between roughly one and three years. The README
-reports the firm-FE version in the same table, labelled as biased, rather than
-hiding it.
+The honest statement is a **range**, not a point: the truth is somewhere between
+0.27 and 0.69, with a half-life between roughly half a year and under two years.
+The project does not claim that "31% of the gap closes each year"; that number is
+only the pooled `1 − ρ` and is not a within-firm adjustment speed.
 
 **Also:** the estimate is definition-sensitive. Raw CCC gives 0.536; dropping
-|CCC| > 365 gives 0.509. The project quotes 0.685 together with the definition.
+|CCC| > 365 gives 0.509. The project quotes the range together with the
+definitions.
 
 ---
 
@@ -105,7 +112,9 @@ The 15.84% negative-CCC share is presented as a **lower bound** for the listed
 universe on the industry-mix dimension (service firms without inventory are
 excluded by the data), but it is also **tag-sensitive**: 48.1% of rows on the
 accrued-liabilities fallback are negative against 11.8% on the preferred payable
-tag, so the share falls to 11.83% without the fallback. Both are in the README.
+tag, so the share falls to 11.83% without the fallback. The fallback also lowers
+the level (median CCC 3.76 days against 80.54 on the preferred tag), because it
+raises DPO. Both are in the README and in `results.json → tag_sensitivity`.
 
 ---
 
@@ -113,11 +122,13 @@ tag, so the share falls to 11.83% without the fallback. Both are in the README.
 
 Three checks:
 
-1. **Cross-source validation.** Seven concepts across three fiscal years for
+1. **Internal spot check.** Seven concepts across three fiscal years for
    Fastenal, Walmart and Apple, compared to the `companyfacts` API:
    **63/63 exact matches**, maximum relative difference 0.0. The denominator is
    every comparison the design sets out to make; a ±7-day window matches the
-   issuer's exact period end to the panel's month-end convention.
+   issuer's exact period end to the panel's month-end convention. This checks
+   parsing and period alignment, not the tag choice, the fallback order or
+   coverage of the wider panel.
 2. **A published attrition funnel.** 2,536,529 us-gaap facts → 116,988 matched
    firm-years → 105,865 in the fiscal-year window (after 1,567 duplicate labels
    and 9,556 outside-window rows) → 25,341 in the main sample, with every
@@ -163,6 +174,8 @@ measurement and no fake causal claims; it did not ask for an identification
 strategy the data cannot support.
 
 The contribution is the dataset and the three measurements that are not obvious
-before looking: a 75-day median CCC, a CCC that is mostly a firm rather than an
-industry trait, and a positive rather than negative ROA association. Those are
-worth reporting precisely because the prior pointed the other way.
+before looking: a pooled median CCC of 75 days, a CCC that is mostly a firm
+rather than an industry trait, and a positive rather than negative ROA
+association. Those are worth reporting precisely because the prior pointed the
+other way — and the persistence result is a range, not the single number the
+first draft advertised.

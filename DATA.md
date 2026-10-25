@@ -11,7 +11,7 @@ vendor-adjusted data enter the panel. Every number in `README.md` is produced by
 | SEC Financial Statement Data Sets (FSDS) | `https://www.sec.gov/files/dera/data/financial-statement-data-sets/{q}.zip` | main panel, 2010q1–2025q4 |
 | SEC company tickers | `https://www.sec.gov/files/company_tickers.json` | ticker/exchange lookup only |
 | SEC company tickers + exchange | `https://www.sec.gov/files/company_tickers_exchange.json` | `data/raw/tickers.parquet` |
-| SEC `companyfacts` API | `https://data.sec.gov/api/xbrl/companyfacts/CIK##########.json` | validation of 3 issuers only |
+| SEC `companyfacts` API | `https://data.sec.gov/api/xbrl/companyfacts/CIK##########.json` | internal spot check, 3 issuers only |
 
 The charter preferred `companyfacts` and suggested the Frames API. Frames were
 tested and rejected because the payload has no `form`, `filed`, `fp` or `sic`,
@@ -20,7 +20,11 @@ SIC exclusions). FSDS is the SEC's own bulk extract of the same XBRL facts,
 exposes all of those fields, and includes delisted filers. Full reasoning and the
 trade-off table: `DECISIONS.md → D-01`.
 
-User-Agent sent to the SEC: `Jaime Perez portfolio research magnum.jpg@gmail.com`.
+User-Agent sent to the SEC: `portfolio-research/1.0 (${SEC_CONTACT})`, where
+`SEC_CONTACT` is an environment variable. Set it before running the downloader,
+e.g. `export SEC_CONTACT=you@example.com` (bash) or
+`$env:SEC_CONTACT="you@example.com"` (PowerShell). The fallback contact is
+`portfolio-research@example.com`; no personal address is stored in the repo.
 Requests are throttled to **4 per second** (charter ceiling: 5), with 6 retries
 and exponential backoff.
 
@@ -38,7 +42,7 @@ data/
     zips/                           empty: source zips deleted after extraction
     company_tickers*.json
     tickers.parquet
-    companyfacts/CIK*.json         validation cache (3 firms)
+    companyfacts/CIK*.json         spot-check cache (3 firms)
   processed/
     panel.csv                     main sample, inspectable (committed)
     panel.parquet                 same, typed (gitignored)
@@ -67,7 +71,7 @@ and the parquet hashes pin what the panel was built from.
 ```json
 {
   "generated_at_utc": "2026-10-24T22:34:11+00:00",
-  "user_agent": "Jaime Perez portfolio research magnum.jpg@gmail.com",
+  "user_agent": "portfolio-research/1.0 (portfolio-research@example.com)",
   "files": [
     {
       "url": "https://www.sec.gov/files/dera/data/financial-statement-data-sets/2021q4.zip",
@@ -115,6 +119,28 @@ Segment (`segments`) and co-registrant (`coreg`) facts were dropped at download
 time; they are not counted as separate rows above. The panel is industrial and
 retail by construction, because it requires inventory and COGS.
 
+The single "missing revenue/COGS/AR/inventory/AP" step (77,938 rows) is
+decomposed in `outputs/tables/attrition_missing_items.csv` and
+`results.json → attrition_missing_items`. A row can miss several inputs, so the
+item counts overlap and are **not** disjoint:
+
+| Missing item | Firm-years | Share of the 77,938 |
+|---|---:|---:|
+| Inventory | 63,363 | 81.3% |
+| COGS | 55,272 | 70.9% |
+| Accounts receivable | 47,782 | 61.3% |
+| Accounts payable | 31,957 | 41.0% |
+| Revenue | 26,071 | 33.5% |
+| **More than one item missing** | **57,563** | **73.9%** |
+| Exactly one item missing | 20,375 | 26.1% |
+| Missing item-cells (sum of the five item rows) | 224,445 | — |
+
+Inventory and COGS dominate the drop: 81.3% of the excluded rows have no
+inventory fact and 70.9% no COGS, which is the expected consequence of requiring
+a manufacturer/retailer working-capital cycle. The overlap is large (73.9% miss
+more than one input), so quoting any single item as "the" reason would be
+misleading.
+
 ## 5. Tag usage
 
 Recorded per row in `tag_revenue`, `tag_cogs`, `tag_ar`, `tag_inventory`,
@@ -148,9 +174,27 @@ labelled denominator rather than assume they are the same.
 
 No `extra` tag is used for COGS, receivables, inventory or payables in the
 final panel. Robustness spec 9 restricts to firm-years where the *preferred*
-charter tag supplied every input.
+charter tag supplied every input (including `InventoryNet`) and requires
+`AccountsPayableCurrent`; it is the cleaner measurement, and it is weaker than
+the mixed-tag headline (β = +0.000123, t = 1.83, p = 0.068, n = 4,542).
 
-## 6. Validation against `companyfacts`
+**What the AP fallback does to the level.** The fallback
+`AccountsPayableAndAccruedLiabilitiesCurrent` is AP plus accruals, not a
+like-for-like substitute. In the final panel, 2,799 firm-years (11.0%) use it;
+in the pre-filter tagged universe of `tag_usage.csv` the share is 21.6%. The
+medians differ sharply:
+
+| AP tag | Firm-years (panel) | CCC median, days | DPO median, days |
+|---|---:|---:|---:|
+| `AccountsPayableCurrent` (preferred) | 22,542 | 80.54 | 47.99 |
+| `AccountsPayableAndAccruedLiabilitiesCurrent` (fallback) | 2,799 | 3.76 | 111.69 |
+
+Because the fallback raises DPO, it lowers CCC; the pooled 74.97-day median
+therefore understates the preferred-tag level. The fallback is kept because the
+charter mandates ordered fallbacks, and the sensitivity is reported in
+`results.json → tag_sensitivity` rather than removed.
+
+## 6. Internal spot check against `companyfacts`
 
 `src/verify_known_firms.py` compares the panel, tag by tag, with the latest 10-K
 fact close to the same fiscal-year end for Fastenal (CIK 815556), Walmart
@@ -159,6 +203,12 @@ concepts. The panel stores the FSDS month-end `ddate` while `companyfacts` store
 the issuer's exact period end (Apple's FY2019 closes on 2019-09-28), so the
 matcher accepts a ±7-day gap; that is how the same period is compared rather than
 two different ones.
+
+This is an **internal spot check of parsing and period alignment**, not a
+validation of the tag mapping: it uses the same tag selected by the panel and
+does not test whether the ordered fallback chose the right concept, whether
+another tag would have been preferable, or how well the extract covers firms
+outside these three issuers.
 
 Result (`outputs/validation.json`, `outputs/tables/known_firm_check.csv`):
 
@@ -186,5 +236,5 @@ earlier version filtered to comparisons that had returned a value and reported
   version used here; a fresh download may therefore produce slightly different
   bytes. The panel counts and headline results in this repo refer to the pinned
   cache.
-- `companyfacts` is cached for three issuers only. It is a validation source,
-  deliberately not a data source for the panel.
+- `companyfacts` is cached for three issuers only. It is an internal spot-check
+  source, deliberately not a data source for the panel.

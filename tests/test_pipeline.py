@@ -14,6 +14,12 @@ ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "src"))
 PANEL = ROOT / "data" / "processed" / "panel.csv"
 RESULTS = ROOT / "outputs" / "results.json"
+FSDS = ROOT / "data" / "raw" / "fsds"
+
+requires_raw_cache = pytest.mark.skipif(
+    not FSDS.exists() or not any(FSDS.glob("*_sub.parquet")),
+    reason="raw SEC cache absent; rebuild with src/download_sec.py",
+)
 
 
 @pytest.fixture(scope="session")
@@ -30,7 +36,9 @@ def results() -> dict:
 
 def test_files_exist():
     for rel in ["data/manifest.json", "outputs/results.json", "README.md",
-                "DATA.md", "METHOD.md", "LIMITATIONS.md", "DECISIONS.md"]:
+                "DATA.md", "METHOD.md", "LIMITATIONS.md", "DECISIONS.md",
+                "outputs/tables/attrition_missing_items.csv",
+                "requirements.txt", "LICENSE"]:
         assert (ROOT / rel).exists(), f"missing {rel}"
 
 
@@ -84,7 +92,8 @@ def test_results_keys(results):
     for key in ["meta", "panel", "descriptives", "industries", "by_year", "persistence",
                 "ccc_roa", "shock_2020", "shock_2022", "shock_window", "rank_check",
                 "funnel", "robustness_ccc_roa", "robustness_persistence", "attrition",
-                "tag_usage"]:
+                "attrition_missing_items", "tag_usage", "tag_sensitivity",
+                "robustness_summary"]:
         assert key in results, f"missing results.json key: {key}"
 
 
@@ -111,10 +120,10 @@ def test_tag_usage_covers_concepts(results):
         assert c in concepts
 
 
+@requires_raw_cache
 def test_raw_cache_integrity():
     """Every cached quarter loads, and each accession appears in exactly one quarter."""
-    fsds = ROOT / "data" / "raw" / "fsds"
-    subs = sorted(fsds.glob("*_sub.parquet"))
+    subs = sorted(FSDS.glob("*_sub.parquet"))
     assert len(subs) == 64, f"expected 64 cached quarters, found {len(subs)}"
     adsh = []
     for f in subs:
@@ -126,6 +135,7 @@ def test_raw_cache_integrity():
     assert total == len(set().union(*adsh)), "an accession appears in two quarterly files"
 
 
+@requires_raw_cache
 def test_manifest_hashes(results):
     man = json.loads((ROOT / "data" / "manifest.json").read_text())
     entries = {e["path"]: e for e in man["files"]}
@@ -133,7 +143,7 @@ def test_manifest_hashes(results):
     for p, e in entries.items():
         assert len(e["sha256"]) == 64
     # every cached derived file is described in the manifest
-    for f in (ROOT / "data" / "raw" / "fsds").glob("*.parquet"):
+    for f in FSDS.glob("*.parquet"):
         rel = str(f.relative_to(ROOT)).replace("\\", "/")
         assert rel in entries, f"{rel} missing from manifest"
 
@@ -225,3 +235,118 @@ def test_tag_usage_denominator(panel):
     assert ap.sum() == len(panel)
     assert ap["AccountsPayableCurrent"] != int(
         t[(t.concept == "ap") & (t.preferred)]["firm_years"].iloc[0])
+
+
+def test_robustness_count_is_computed_from_pvalues(results):
+    """The 7-of-11 claim must be the p-values in the table, not a typed count."""
+    rows = results["robustness_ccc_roa"]
+    main = [r for r in rows if r.get("sample") == "main" and r.get("p") is not None]
+    summary = results["robustness_summary"]
+    assert summary["n_specs_main_sample"] == len(main)
+    assert summary["n_significant_p05"] == sum(1 for r in main if r["p"] < 0.05)
+    assert summary["n_positive"] == sum(1 for r in main if r["beta"] > 0)
+    # spec 9 now filters inventory as well and is the preferred-tag estimate
+    spec9 = next(r for r in rows if r["spec"].startswith("9."))
+    assert spec9["n"] == results["tag_sensitivity"]["preferred_only_ccc_roa"]["n"]
+    assert spec9["p"] > 0.05
+    assert spec9["n"] < 5000
+
+
+def test_tag_sensitivity_matches_panel(panel, results):
+    ts = results["tag_sensitivity"]
+    pref = panel["tag_ap"] == "AccountsPayableCurrent"
+    fb = panel["tag_ap"] == "AccountsPayableAndAccruedLiabilitiesCurrent"
+    assert ts["preferred_ap"]["n"] == int(pref.sum())
+    assert ts["fallback_ap"]["n"] == int(fb.sum())
+    assert abs(ts["preferred_ap"]["ccc_median"] - panel.loc[pref, "ccc"].median()) < 1e-6
+    assert abs(ts["fallback_ap"]["ccc_median"] - panel.loc[fb, "ccc"].median()) < 1e-6
+    assert abs(ts["preferred_ap"]["dpo_median"] - panel.loc[pref, "dpo"].median()) < 1e-6
+    assert abs(ts["fallback_ap"]["dpo_median"] - panel.loc[fb, "dpo"].median()) < 1e-6
+    assert abs(ts["fallback_share_panel"] - fb.mean()) < 1e-6
+    firm_med = panel.groupby("cik")["ccc"].median().median()
+    assert abs(ts["median_of_firm_median_ccc"] - firm_med) < 1e-6
+    # the fallback is a different concept and must lower the pooled level
+    assert ts["fallback_ap"]["ccc_median"] < ts["preferred_ap"]["ccc_median"]
+    assert ts["fallback_ap"]["dpo_median"] > ts["preferred_ap"]["dpo_median"]
+
+
+def test_persistence_reports_a_range(results):
+    p = results["persistence"]
+    fe = p["with_firm_fe"]
+    iv = p["anderson_hsiao"]
+    assert 0 < fe["rho"] < p["beta"] < 1
+    assert fe["rho"] < iv["rho"] < p["beta"]
+    assert 0 < fe["half_life_years"] < p["half_life_years"]
+    assert abs(fe["half_life_years"] - np.log(0.5) / np.log(fe["rho"])) < 1e-6
+    assert iv["n"] < p["n"]
+    # the industry table is labelled pooled and carries a firm-FE column
+    byind = p["by_industry"]
+    assert byind and all("rho_firm_fe" in row for row in byind)
+    assert all("pooled" in row["model"] for row in byind)
+
+
+def test_attrition_missing_decomposition(results):
+    rows = results["attrition_missing_items"]
+    by_item = {r["item"]: r["n_firm_years"] for r in rows}
+    total = by_item["any item missing (rows dropped)"]
+    assert total == 77938
+    for item in ["revenue", "cogs", "ar", "inventory", "ap"]:
+        assert 0 < by_item[item] <= total
+    assert (by_item["exactly one item missing"]
+            + by_item["more than one item missing"]) == total
+    assert by_item["more than one item missing"] > by_item["exactly one item missing"]
+    assert by_item["missing item-cells (sum of the five rows above)"] == sum(
+        by_item[i] for i in ["revenue", "cogs", "ar", "inventory", "ap"])
+    csv = pd.read_csv(ROOT / "outputs" / "tables" / "attrition_missing_items.csv")
+    assert len(csv) == len(rows)
+
+
+def test_rank_check_note_matches_numbers(results):
+    rc = results["rank_check"]
+    assert "no monotone" in rc["note"]
+    assert "most firms are negative" not in rc["note"]
+    assert abs(rc["median_spearman"]) < 0.05
+    assert 0.45 < rc["share_positive"] < 0.52
+
+
+def test_user_agent_has_no_personal_address():
+    """The SEC contact is an environment variable, not a hard-coded address."""
+    for rel in ["src/download_sec.py", "src/verify_known_firms.py"]:
+        text = (ROOT / rel).read_text(encoding="utf-8").lower()
+        assert "gmail" not in text
+        assert "magnum" not in text
+        assert "sec_contact" in text
+
+
+def _reject_nonfinite(token):
+    raise ValueError(f"non-finite JSON constant: {token}")
+
+
+def test_json_outputs_are_strict():
+    """NaN/Infinity are invalid JSON; undefined values must serialise as null."""
+    paths = [RESULTS, ROOT / "outputs" / "panel_stats.json",
+             ROOT / "outputs" / "validation.json",
+             ROOT / "outputs" / "run_log.json",
+             ROOT / "data" / "manifest.json"]
+    parsed = {}
+    for path in paths:
+        text = path.read_text(encoding="utf-8")
+        assert "NaN" not in text, f"{path.name} contains NaN"
+        assert "Infinity" not in text, f"{path.name} contains Infinity"
+        parsed[path.name] = json.loads(text, parse_constant=_reject_nonfinite)
+
+    # the nulls are deliberate: an undefined half-life cannot be a number
+    p = parsed["results.json"]["persistence"]
+    null_hl = [row for row in p["by_industry"]
+               if row["half_life_firm_fe"] is None]
+    assert null_hl, "expected an undefined industry firm-FE half-life"
+    for row in null_hl:
+        assert row["rho_firm_fe"] is None or not 0 < row["rho_firm_fe"] < 1
+    raw_rows = parsed["results.json"]["persistence_raw_ccc"]["by_industry"]
+    assert any(row["half_life_years"] is None for row in raw_rows)
+
+    # attrition firm counts are undefined for aggregate-only steps
+    att = parsed["panel_stats.json"]["attrition"]
+    assert any(row["firms"] is None for row in att)
+    assert all(row["firms"] is None or isinstance(row["firms"], (int, float))
+               for row in att)

@@ -18,6 +18,7 @@ from pathlib import Path
 import numpy as np
 import pandas as pd
 import statsmodels.api as sm
+from linearmodels.iv import IV2SLS
 from linearmodels.panel import PanelOLS
 
 warnings.filterwarnings("ignore", category=FutureWarning)
@@ -27,6 +28,7 @@ PROC = ROOT / "data" / "processed"
 OUT = ROOT / "outputs"
 TABLES = OUT / "tables"
 sys.path.insert(0, str(Path(__file__).resolve().parent))
+from json_utils import write_json  # noqa: E402
 
 MIN_IND_FIRM_YEARS = 100      # industries reported individually
 MIN_IND_FIRMS = 5
@@ -217,23 +219,72 @@ def persistence(p: pd.DataFrame, scale_col: str = "ccc") -> tuple[dict, pd.DataF
     rho = res.params[f"{scale_col}_lag"]
     out = summarize(res, f"{scale_col}_lag")
     out.update({
-        "model": "y_it = a + rho*y_i,t-1 + year FE; SE clustered by firm",
+        "model": ("y_it = a + rho*y_i,t-1 + year FE; SE clustered by firm; "
+                  "pooled (no firm FE, so between-firm differences are part of rho)"),
         "r2": r(res.rsquared),
         "half_life_years": r(np.log(0.5) / np.log(rho)) if 0 < rho < 1 else None,
         "mean_reversion_1_minus_rho": r(1 - rho),
         "n_firms": int(d["cik"].nunique()),
     })
 
-    # with firm FE (Nickell-biased; reported for completeness only)
+    # with firm FE (Nickell-biased downward; reported as the other end of the range)
     res_fe, n_fe = panel_fit(d, scale_col, [f"{scale_col}_lag"], entity=True, time=True)
+    rho_fe = res_fe.params[f"{scale_col}_lag"]
     out["with_firm_fe"] = {
-        "rho": r(res_fe.params[f"{scale_col}_lag"]),
+        "rho": r(rho_fe),
         "se": r(res_fe.std_errors[f"{scale_col}_lag"]),
+        "half_life_years": r(np.log(0.5) / np.log(rho_fe)) if 0 < rho_fe < 1 else None,
         "n": int(n_fe),
-        "note": "biased downward with short panels (Nickell); upper/lower bound only",
+        "model": "y_it = firm FE + year FE + rho*y_i,t-1; SE clustered by firm",
+        "note": ("biased downward with short panels (Nickell); the pooled estimate is "
+                 "biased upward by persistent between-firm differences, so the truth "
+                 "lies between the two, not at either point"),
     }
 
-    # by 2-digit industry
+    # Anderson-Hsiao IV: first differences, instrument the lagged difference
+    # with the twice-lagged level. Needs two valid annual gaps (700-760 days),
+    # so it is estimated on the balanced-lag subset of this unbalanced panel.
+    try:
+        h = d.sort_values(["cik", "fiscal_year"]).copy()
+        gap2 = h.groupby("cik")["fiscal_year_end"].diff(2).dt.days
+        h["_lag2"] = h.groupby("cik")[scale_col].shift(2).where(
+            gap2.between(2 * 350, 2 * 380))
+        h = h.dropna(subset=[scale_col, f"{scale_col}_lag", "_lag2"]).copy()
+        if len(h) < 100:
+            raise ValueError(f"only {len(h)} usable observations")
+        h["_dy"] = h[scale_col] - h[f"{scale_col}_lag"]
+        h["_dy_lag"] = h[f"{scale_col}_lag"] - h["_lag2"]
+        year_dummies = pd.get_dummies(h["fiscal_year"], prefix="y",
+                                      drop_first=True, dtype=float)
+        exog = pd.concat([pd.Series(1.0, index=h.index, name="const"),
+                          year_dummies], axis=1)
+        iv = IV2SLS(h["_dy"], exog, h[["_dy_lag"]], h[["_lag2"]]).fit(
+            cov_type="clustered", clusters=h["cik"])
+        rho_iv = iv.params["_dy_lag"]
+        out["anderson_hsiao"] = {
+            "rho": r(rho_iv),
+            "se": r(iv.std_errors["_dy_lag"]),
+            "t": r(iv.tstats["_dy_lag"]),
+            "p": r(iv.pvalues["_dy_lag"]),
+            "half_life_years": r(np.log(0.5) / np.log(rho_iv))
+            if 0 < rho_iv < 1 else None,
+            "n": int(iv.nobs),
+            "n_firms": int(h["cik"].nunique()),
+            "first_stage_partial_r2": r(
+                float(iv.first_stage.diagnostics.loc["_dy_lag", "partial.rsquared"])),
+            "model": ("first difference of the AR(1), year dummies; lagged "
+                      "difference instrumented by the twice-lagged level"),
+            "note": ("consistent under sequential exogeneity but imprecise; shown "
+                     "as a third estimate, not as the headline"),
+        }
+    except Exception as exc:  # noqa: BLE001
+        out["anderson_hsiao"] = {"rho": None, "se": None, "t": None, "p": None,
+                                 "half_life_years": None, "n": None, "n_firms": None,
+                                 "note": f"not estimable: {exc}"}
+
+    # by 2-digit industry: pooled (between+within) and, where estimable, firm FE.
+    # The pooled row is not a within-firm speed: time-invariant firm differences
+    # are part of it, exactly as in the headline specification.
     rows = []
     for sic2, g in d.groupby("sic2"):
         if g["cik"].nunique() < 20 or len(g) < MIN_IND_FIRM_YEARS:
@@ -244,18 +295,87 @@ def persistence(p: pd.DataFrame, scale_col: str = "ccc") -> tuple[dict, pd.DataF
                          entity_effects=False, time_effects=True, drop_absorbed=True)
             ri = m.fit(cov_type="clustered", cluster_entity=True)
             rho_i = ri.params[f"{scale_col}_lag"]
-            rows.append({
+            row = {
                 "sic2": sic2, "industry": g["industry"].iloc[0],
                 "rho": r(rho_i), "se": r(ri.std_errors[f"{scale_col}_lag"]),
                 "half_life_years": r(np.log(0.5) / np.log(rho_i)) if 0 < rho_i < 1 else None,
                 "n": int(ri.nobs), "firms": int(g["cik"].nunique()),
-            })
+                "model": "pooled AR(1), year FE only (between + within firm)",
+            }
         except Exception:  # noqa: BLE001
             continue
+        try:
+            m_fe = PanelOLS(gi[scale_col], gi[[f"{scale_col}_lag"]],
+                            entity_effects=True, time_effects=True, drop_absorbed=True)
+            ri_fe = m_fe.fit(cov_type="clustered", cluster_entity=True)
+            rho_i_fe = ri_fe.params[f"{scale_col}_lag"]
+            row.update({
+                "rho_firm_fe": r(rho_i_fe),
+                "se_firm_fe": r(ri_fe.std_errors[f"{scale_col}_lag"]),
+                "half_life_firm_fe": r(np.log(0.5) / np.log(rho_i_fe))
+                if 0 < rho_i_fe < 1 else None,
+                "n_firm_fe": int(ri_fe.nobs),
+            })
+        except Exception:  # noqa: BLE001
+            row.update({"rho_firm_fe": None, "se_firm_fe": None,
+                        "half_life_firm_fe": None, "n_firm_fe": None})
+        rows.append(row)
     byind = pd.DataFrame(rows).sort_values("rho", ascending=False)
     byind.to_csv(TABLES / f"persistence_by_industry_{scale_col}.csv", index=False)
     out["by_industry"] = byind.to_dict(orient="records")
     return out, byind
+
+
+# ----------------------------------------------------------------------------- tag sensitivity
+def tag_sensitivity(p: pd.DataFrame, tu: pd.DataFrame | None = None) -> dict:
+    """Level sensitivity to the AP fallback, on the headline (unscreened) sample.
+
+    `AccountsPayableAndAccruedLiabilitiesCurrent` is AP plus accruals, not a
+    like-for-like substitute: it raises DPO and therefore lowers CCC. The
+    fallback is kept because the charter mandates ordered fallbacks; this block
+    quantifies what it does to the headline median instead of hiding the mix.
+    """
+    pref_tag = "AccountsPayableCurrent"
+    fb_tag = "AccountsPayableAndAccruedLiabilitiesCurrent"
+    pref = p["tag_ap"] == pref_tag
+    fb = p["tag_ap"] == fb_tag
+    firm_med = p.groupby("cik")["ccc"].median()
+    out = {
+        "preferred_ap": {
+            "tag": pref_tag,
+            "n": int(pref.sum()),
+            "ccc_median": r(p.loc[pref, "ccc"].median()),
+            "dpo_median": r(p.loc[pref, "dpo"].median()),
+            "negative_ccc_share": r(float(p.loc[pref, "negative_ccc"].mean())),
+            "n_negative": int(p.loc[pref, "negative_ccc"].sum()),
+        },
+        "fallback_ap": {
+            "tag": fb_tag,
+            "n": int(fb.sum()),
+            "ccc_median": r(p.loc[fb, "ccc"].median()),
+            "dpo_median": r(p.loc[fb, "dpo"].median()),
+            "negative_ccc_share": r(float(p.loc[fb, "negative_ccc"].mean())),
+            "n_negative": int(p.loc[fb, "negative_ccc"].sum()),
+        },
+        "pooled_negative_ccc_share": r(float(p["negative_ccc"].mean())),
+        "n_negative": int(p["negative_ccc"].sum()),
+        "fallback_share_panel": r(float(fb.mean())),
+        "pooled_ccc_median": r(p["ccc"].median()),
+        "median_of_firm_median_ccc": r(firm_med.median()),
+        "n_firms": int(len(firm_med)),
+        "definition": ("headline sample, unscreened; preferred vs fallback AP tag; "
+                       "ccc and dpo medians in days"),
+        "bias": ("the fallback adds accrued liabilities to trade payables, so it raises "
+                 "DPO and lowers CCC; the pooled median therefore understates the "
+                 "preferred-tag CCC level"),
+    }
+    if tu is not None:
+        ap = tu[tu["concept"] == "ap"]
+        out["fallback_share_tag_usage"] = r(float(
+            ap.loc[ap["tag"] == fb_tag, "share_of_concept"].sum()))
+        out["tag_usage_denominator"] = (
+            "share of firm-years in the pre-filter tagged universe that reported any AP tag")
+    return out
 
 
 # ----------------------------------------------------------------------------- CCC and ROA
@@ -279,14 +399,18 @@ def rank_check(p: pd.DataFrame) -> dict:
         if pd.notna(c):
             corrs.append(float(c))
     s = pd.Series(corrs, dtype=float)
+    med = s.median() if s.size else np.nan
+    pos = float((s > 0).mean()) if s.size else np.nan
     return {
         "definition": ("within-firm Spearman correlation of winsorized CCC and ROA; "
                        "firms with at least three overlapping years"),
         "n_firms": int(s.size),
-        "median_spearman": r(s.median()) if s.size else None,
-        "share_positive": r(float((s > 0).mean())) if s.size else None,
-        "note": ("0.00 / 48.1% mean the linear coefficient is not a pattern in the "
-                 "median firm; it is below 0.5, so most firms are negative, not positive"),
+        "median_spearman": r(med) if s.size else None,
+        "share_positive": r(pos) if s.size else None,
+        "note": (f"median Spearman = {med:.2f} and {100 * pos:.1f}% of firms positive: "
+                 "the median firm shows no monotone CCC-ROA association, not a negative "
+                 "one. The linear coefficient is identified by firms with larger CCC "
+                 "variation, not by a sign shared by most firms."),
     }
 
 
@@ -360,9 +484,11 @@ def shock_cross_section(p: pd.DataFrame, year: int, ycol: str, xcol: str,
 def robustness(p: pd.DataFrame) -> list[dict]:
     rows: list[dict] = []
 
-    def add(name: str, res: dict, term: str, extra: str = "") -> None:
+    def add(name: str, res: dict, term: str, extra: str = "",
+            sample: str = "main") -> None:
         rows.append({
             "spec": name,
+            "sample": sample,
             "dep_var": "roa",
             "term": term,
             "beta": res.get("beta"), "se": res.get("se"), "t": res.get("t"),
@@ -410,6 +536,7 @@ def robustness(p: pd.DataFrame) -> list[dict]:
     pref = p[(p["tag_revenue"] == "RevenueFromContractWithCustomerExcludingAssessedTax")
              & (p["tag_cogs"] == "CostOfGoodsAndServicesSold")
              & (p["tag_ar"] == "AccountsReceivableNetCurrent")
+             & (p["tag_inventory"] == "InventoryNet")
              & (p["tag_ap"] == "AccountsPayableCurrent")]
     pref_m = ccc_roa(pref, "ccc_w")
     add("9. only firm-years using the charter's preferred tag for every input",
@@ -422,6 +549,7 @@ def robustness(p: pd.DataFrame) -> list[dict]:
         dm = pd.get_dummies(d20["sic3"].astype(int), prefix="s3", drop_first=True, dtype=float)
         res3 = ols_cluster(d20["_y"], pd.concat([d20[["ccc_w_lag"]], dm], axis=1))
         rows.append({"spec": "10. 2020 revenue growth: 3-digit SIC FE (vs 2-digit in headline)",
+                     "sample": "main",
                      "dep_var": "sales_growth_2020", "term": "ccc_w_lag",
                      "beta": r(res3.params["ccc_w_lag"]), "se": r(res3.bse["ccc_w_lag"]),
                      "t": r(res3.tvalues["ccc_w_lag"]), "p": r(res3.pvalues["ccc_w_lag"]),
@@ -436,11 +564,13 @@ def robustness(p: pd.DataFrame) -> list[dict]:
         pf = pd.read_csv(PROC / "panel_full.csv.gz")
         pf["ccc_w"] = winsorize(pf["ccc"], [pf["sic2"], pf["fiscal_year"]])
         finres = ccc_roa(pf, "ccc_w")
-        add("12. including financials, real estate & utilities (panel_full)", finres, "ccc_w")
+        add("12. including financials, real estate & utilities (panel_full)", finres,
+            "ccc_w", sample="panel_full")
     except Exception as exc:  # noqa: BLE001
-        rows.append({"spec": "12. including financials/utilities", "dep_var": "roa",
-                     "term": "ccc_w", "beta": None, "se": None, "t": None, "p": None,
-                     "stars": "", "n": None, "firms": None, "note": f"failed: {exc}"})
+        rows.append({"spec": "12. including financials/utilities", "sample": "panel_full",
+                     "dep_var": "roa", "term": "ccc_w", "beta": None, "se": None,
+                     "t": None, "p": None, "stars": "", "n": None, "firms": None,
+                     "note": f"failed: {exc}"})
 
     return rows
 
@@ -595,12 +725,26 @@ def main() -> dict:
 
     results["robustness_ccc_roa"] = robustness(p_est)
     results["robustness_persistence"] = persistence_robustness(p_est)
+    rob = results["robustness_ccc_roa"]
+    main_rob = [row for row in rob
+                if row.get("sample") == "main" and row.get("p") is not None]
+    all_rob = [row for row in rob if row.get("p") is not None]
+    results["robustness_summary"] = {
+        "n_specs_main_sample": len(main_rob),
+        "n_significant_p05": int(sum(1 for row in main_rob if row["p"] < 0.05)),
+        "n_positive": int(sum(1 for row in main_rob if row["beta"] > 0)),
+        "n_specs_all": len(all_rob),
+        "n_significant_p05_all": int(sum(1 for row in all_rob if row["p"] < 0.05)),
+        "rule": ("two-sided p < 0.05 on the CCC coefficient; main-sample specs "
+                 "exclude spec 12, which uses panel_full"),
+    }
 
     # attrition + tag usage straight from the panel build
     att_path = TABLES / "attrition.csv"
     if att_path.exists():
         results["attrition"] = pd.read_csv(att_path).to_dict(orient="records")
     tu_path = TABLES / "tag_usage.csv"
+    tu = None
     if tu_path.exists():
         tu = pd.read_csv(tu_path)
         results["tag_usage"] = [
@@ -608,8 +752,18 @@ def main() -> dict:
              "share": r(row["share_of_concept"]), "tier": row["tier"]}
             for _, row in tu.iterrows()
         ]
+    results["tag_sensitivity"] = tag_sensitivity(p, tu)
+    spec9 = next((row for row in rob if row["spec"].startswith("9.")), None)
+    if spec9 is not None:
+        results["tag_sensitivity"]["preferred_only_ccc_roa"] = {
+            "spec": spec9["spec"], "beta": spec9["beta"], "se": spec9["se"],
+            "t": spec9["t"], "p": spec9["p"], "n": spec9["n"],
+            "note": ("cleaner measurement (preferred tag for every input); weaker than "
+                     "the mixed-tag headline"),
+        }
     if panel_stats:
         results["build_log"] = panel_stats.get("raw", {})
+        results["attrition_missing_items"] = panel_stats.get("attrition_missing_items", [])
         bl = results["build_log"]
         results["funnel"] = {
             "ciks_with_annual_filing": bl.get("n_ciks_with_annual_filing"),
@@ -629,8 +783,7 @@ def main() -> dict:
     # headline table for the README
     write_summary_table(results)
 
-    with open(OUT / "results.json", "w", encoding="utf-8") as fh:
-        json.dump(results, fh, indent=2, ensure_ascii=False)
+    write_json(OUT / "results.json", results)
     print(f"wrote {OUT / 'results.json'}")
     return results
 
@@ -647,6 +800,12 @@ def write_summary_table(res: dict) -> None:
         "se": res["persistence"]["se"],
         "half_life_years": res["persistence"]["half_life_years"],
         "n": res["persistence"]["n"],
+    }, {
+        "metric": "firm FE (Nickell-biased lower end of the range)",
+        "value": res["persistence"]["with_firm_fe"]["rho"],
+        "se": res["persistence"]["with_firm_fe"]["se"],
+        "half_life_years": res["persistence"]["with_firm_fe"]["half_life_years"],
+        "n": res["persistence"]["with_firm_fe"]["n"],
     }]
     for spec in res["robustness_persistence"]:
         rows.append({"metric": spec["spec"], "value": spec["rho"], "se": spec["se"],

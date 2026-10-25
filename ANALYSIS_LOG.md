@@ -65,7 +65,7 @@ estimation sample gets 77.9.
 
 ---
 
-## 4. Validating the panel against the API we did not use
+## 4. Internal spot check against the API we did not use
 
 Three issuers — Fastenal, Walmart, Apple — three fiscal years, seven concepts
 each: revenue, COGS, receivables, inventory, payables, assets, net income.
@@ -80,9 +80,11 @@ the 10-K closes two days earlier (2019-09-28). Four more rows were skipped
 outright. The fix matches within ±7 days and keeps every attempted comparison in
 the denominator: 3 firms × 7 concepts × 3 years = 63.
 
-This does not prove the whole panel is right. It proves the tag mapping and the
-fiscal-year join are right for three very different filers, which is the failure
-mode that would otherwise go unnoticed.
+This is an **internal spot check**, not a validation of the tag mapping. It
+shows that the extractor parses and period-aligns the tags it selected for three
+very different filers. It does **not** test whether the ordered fallback chose
+the right tag, whether a different tag would have been preferable, or whether
+the extract covers firms outside those three issuers.
 
 ---
 
@@ -94,9 +96,16 @@ Cause: the specification bounded the *current* CCC value to |x| ≤ 3,650 but no
 the lag. One extreme lagged value dominated the regression and flattened the
 slope.
 
-**Fix:** bound both sides. Raw ρ became **0.536**; the winsorized headline
-**0.685**. The bug is recorded because the first number looked like a real result
-("CCC is not persistent at all") and was not.
+**Fix:** bound both sides. Raw ρ became **0.536**; the winsorized pooled
+headline **0.685**. The bug is recorded because the first number looked like a
+real result ("CCC is not persistent at all") and was not.
+
+That was not the end of the persistence problem. The pooled 0.685 has no firm
+fixed effect, so it also contains persistent between-firm differences; the
+firm-FE estimate is **0.266** (half-life 0.52 years), Nickell-biased downward.
+An Anderson–Hsiao IV gives **0.409** (SE 0.128). The project now reports the
+range **0.27–0.69**, not a point, and no longer says that 31% of a firm's gap
+closes each year.
 
 ---
 
@@ -109,7 +118,7 @@ Before writing anything, three checks:
 
 1. No controls, firm and year FE only: +0.000184 (t = 4.72). Larger, not smaller.
 2. Raw variables, no winsorization: +0.000140.
-3. Eleven specifications: positive in all, significant in eight.
+3. Eleven main-sample specifications: positive in all, significant in seven.
 
 So the sign is not an artefact of the controls or of winsorization. The project
 reports it as contrary to the prior and offers two non-causal readings (product
@@ -118,11 +127,11 @@ one.
 
 **Independent check by the lead:** a from-scratch re-estimation on `panel.csv`
 gives +0.000140 (t = 3.92). A within-firm rank correlation has median 0.00 and is
-positive for only 48.1% of firms, so the coefficient is identified off firms with
-large CCC variation and is not a pattern in the median firm. This is now in
-`LIMITATIONS.md` and is computed by the pipeline (`results.json.rank_check`,
-2,852 firms), not by hand; it makes the result weaker, not stronger, and is
-included for that reason.
+positive for only 48.1% of firms: the median firm shows **no monotone** CCC–ROA
+association, not a negative one. The coefficient is identified off firms with
+large CCC variation and is not a pattern in the median firm. This is computed by
+the pipeline (`results.json.rank_check`, 2,852 firms), not by hand; it makes the
+result weaker, not stronger, and is included for that reason.
 
 ---
 
@@ -182,7 +191,7 @@ silently disagree with the table.
 A read-only audit of the finished project found eight issues. Six were real
 defects, not stylistic quibbles, and all were fixed before the final run:
 
-1. **Validation denominator.** 49/49 was a success-only denominator; it is now
+1. **Spot-check denominator.** 49/49 was a success-only denominator; it is now
    63/63 with every attempted comparison kept (see §4).
 2. **Funnel bridge.** The table started at 105,865 and silently dropped 11,123
    rows (1,567 duplicate labels + 9,556 outside the window). The funnel now starts
@@ -211,6 +220,40 @@ final panel. `DATA.md` now states both denominators.
 
 ---
 
+## 11. Second audit: measurement, not formatting
+
+A later review found issues that changed numbers rather than presentation:
+
+1. **Robustness spec 9 was incomplete.** It filtered on preferred revenue, COGS,
+   AR and AP but not `InventoryNet`. Adding the inventory condition leaves 4,542
+   usable observations, β = +0.000123 (t = 1.83, p = 0.068), and reduces the
+   significant main-sample specifications from 8/11 to 7/11. The count is now
+   computed from the p-values (`robustness_summary`), not typed.
+2. **The headline CCC level mixes two AP concepts.** Preferred-AP rows have a
+   median CCC of 80.54 days and fallback rows 3.76; the fallback adds accruals
+   and raises DPO, so the pooled 74.97 understates the preferred level. The
+   pooled sample remains the headline because the charter mandates ordered
+   fallbacks, but the mix and its direction are now in
+   `results.json → tag_sensitivity`.
+3. **Persistence was overstated.** 0.685 is a pooled AR(1); with firm FE it is
+   0.266 (half-life 0.52 years), and Anderson–Hsiao IV gives 0.409. The project
+   now reports the range 0.27–0.69 and describes the pooled `1 - rho` as an
+   implication of that model, not a within-firm speed.
+4. **The rank-check note said the opposite of its own numbers.** Median Spearman
+   0.00 and 48.1% positive mean no monotone relation in the median firm, not a
+   negative majority.
+5. **The 77,938-row missing-input drop was one opaque bucket.** It is now
+   decomposed by item; inventory (63,363) and COGS (55,272) dominate, and 73.9%
+   of the dropped rows miss more than one input.
+6. **"63/63" was called validation when it is a spot check.** It is now labelled
+   an internal spot check everywhere, with an explicit statement that it does not
+   validate tag choice, fallback order or coverage.
+
+The audit's half-life of 0.63 years for the firm-FE estimate was an arithmetic
+slip: `ln(0.5)/ln(0.266)` is 0.52, and that is the value reported.
+
+---
+
 ## What I would do differently
 
 1. **Check the lag bound before interpreting an AR(1).** A ρ of 0.00001 is a
@@ -229,12 +272,14 @@ final panel. `DATA.md` now states both denominators.
 The project set out to measure whether working capital predicts profitability
 and resilience. It found:
 
-- a large, stable descriptive fact (median CCC 75 days; DIO alone is 84 days and
-  DPO offsets half of the operating cycle);
+- a large, stable descriptive fact (pooled median CCC 75 days; DIO alone is 84
+  days and DPO offsets half of the operating cycle);
 - that industry explains little of it (6% of variance) and firm identity a lot
   (64%);
+- a persistence range of 0.27–0.69, not a single half-life;
 - a positive, small CCC–ROA association, against the prior, which survives
-  specification checks but is invisible in the median firm;
+  specification checks but is significant in only 7 of 11 main-sample
+  specifications and is invisible in the median firm;
 - no detectable 2020 revenue effect, and a 2022 margin effect that is
   non-monotone.
 

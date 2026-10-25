@@ -1,7 +1,7 @@
 {
   "meta": {
     "project": "02_working_capital_sec",
-    "as_of_utc": "2026-10-25T10:58:34Z",
+    "as_of_utc": "2026-10-25T14:53:43Z",
     "sample_years": [
       2010,
       2024
@@ -1033,7 +1033,7 @@
     "p": 0.0,
     "n": 20576,
     "stars": "***",
-    "model": "y_it = a + rho*y_i,t-1 + year FE; SE clustered by firm",
+    "model": "y_it = a + rho*y_i,t-1 + year FE; SE clustered by firm; pooled (no firm FE, so between-firm differences are part of rho)",
     "r2": 0.519565,
     "half_life_years": 1.834323,
     "mean_reversion_1_minus_rho": 0.314685,
@@ -1041,8 +1041,22 @@
     "with_firm_fe": {
       "rho": 0.266371,
       "se": 0.044533,
+      "half_life_years": 0.523974,
       "n": 20576,
-      "note": "biased downward with short panels (Nickell); upper/lower bound only"
+      "model": "y_it = firm FE + year FE + rho*y_i,t-1; SE clustered by firm",
+      "note": "biased downward with short panels (Nickell); the pooled estimate is biased upward by persistent between-firm differences, so the truth lies between the two, not at either point"
+    },
+    "anderson_hsiao": {
+      "rho": 0.408633,
+      "se": 0.128076,
+      "t": 3.190547,
+      "p": 0.00142,
+      "half_life_years": 0.774519,
+      "n": 14435,
+      "n_firms": 2394,
+      "first_stage_partial_r2": 0.112856,
+      "model": "first difference of the AR(1), year dummies; lagged difference instrumented by the twice-lagged level",
+      "note": "consistent under sequential exogeneity but imprecise; shown as a third estimate, not as the headline"
     },
     "by_industry": [
       {
@@ -1052,7 +1066,12 @@
         "se": 0.057592,
         "half_life_years": 17.723428,
         "n": 275,
-        "firms": 33
+        "firms": 33,
+        "model": "pooled AR(1), year FE only (between + within firm)",
+        "rho_firm_fe": 0.564933,
+        "se_firm_fe": 0.116999,
+        "half_life_firm_fe": 1.213816,
+        "n_firm_fe": 275
       },
       {
         "sic2": "27",
@@ -1061,7 +1080,12 @@
         "se": 0.027545,
         "half_life_years": 14.094585,
         "n": 166,
-        "firms": 20
+        "firms": 20,
+        "model": "pooled AR(1), year FE only (between + within firm)",
+        "rho_firm_fe": 0.580878,
+        "se_firm_fe": 0.085166,
+        "half_life_firm_fe": 1.276011,
+        "n_firm_fe": 166
       },
       {
         "sic2": "51",
@@ -1070,7 +1094,12 @@
         "se": 0.055854,
         "half_life_years": 12.755269,
         "n": 432,
-        "firms": 61
+        "firms": 61,
+        "model": "pooled AR(1), year FE only (between + within firm)",
+        "rho_firm_fe": 0.615355,
+        "se_firm_fe": 0.254744,
+        "half_life_firm_fe": 1.427535,
+        "n_firm_fe": 432
       },
       {
         "sic2": "20",
@@ -1079,7 +1108,12 @@
         "se": 0.04588,
         "half_life_years": 9.554814,
         "n": 903,
-        "firms": 128
+        "firms": 128,
+        "model": "pooled AR(1), year FE only (between + within firm)",
+        "rho_firm_fe": 0.397464,
+        "se_firm_fe": 0.042881,
+        "half_life_firm_fe": 0.751256,
+        "n_firm_fe": 903
       },
       {
         "sic2": "25",
@@ -1088,7 +1122,12 @@
         "se": 0.041172,
         "half_life_years": 9.174233,
         "n": 229,
-        "firms": 23
+        "firms": 23,
+        "model": "pooled AR(1), year FE only (between + within firm)",
+        "rho_firm_fe": 0.624426,
+        "se_firm_fe": 0.027449,
+        "half_life_firm_fe": 1.471891,
+        "n_firm_fe": 229
       },
       {
         "sic2": "56",
@@ -1097,7 +1136,12 @@
         "se": 0.036823,
         "half_life_years": 9.138697,
         "n": 232,
-        "firms": 29
+        "firms": 29,
+        "model": "pooled AR(1), year FE only (between + within firm)",
+        "rho_firm_fe": 0.400929,
+        "se_firm_fe": 0.136545,
+        "half_life_firm_fe": 0.75839,
+        "n_firm_fe": 232
       },
       {
         "sic2": "33",
@@ -1106,7 +1150,12 @@
         "se": 0.053066,
         "half_life_years": 7.124048,
         "n": 397,
-        "firms": 47
+        "firms": 47,
+        "model": "pooled AR(1), year FE only (between + within firm)",
+        "rho_firm_fe": 0.220304,
+        "se_firm_fe": 0.198502,
+        "half_life_firm_fe": 0.458204,
+        "n_firm_fe": 397
       },
       {
         "sic2": "34",
@@ -1115,7 +1164,12 @@
         "se": 0.092339,
         "half_life_years": 5.400311,
         "n": 488,
-        "firms": 57
+        "firms": 57,
+        "model": "pooled AR(1), year FE only (between + within firm)",
+        "rho_firm_fe": 0.499445,
+        "se_firm_fe": 0.153304,
+        "half_life_firm_fe": 0.998402,
+        "n_firm_fe": 488
       },
       {
         "sic2": "32",
@@ -1124,7 +1178,12 @@
         "se": 0.059733,
         "half_life_years": 5.163227,
         "n": 159,
-        "firms": 23
+        "firms": 23,
+        "model": "pooled AR(1), year FE only (between + within firm)",
+        "rho_firm_fe": 0.592562,
+        "se_firm_fe": 0.087692,
+        "half_life_firm_fe": 1.324572,
+        "n_firm_fe": 159
       },
       {
         "sic2": "35",
@@ -1133,7 +1192,12 @@
         "se": 0.024058,
         "half_life_years": 4.820075,
         "n": 1804,
-        "firms": 221
+        "firms": 221,
+        "model": "pooled AR(1), year FE only (between + within firm)",
+        "rho_firm_fe": 0.337505,
+        "se_firm_fe": 0.058602,
+        "half_life_firm_fe": 0.638155,
+        "n_firm_fe": 1804
       },
       {
         "sic2": "13",
@@ -1142,7 +1206,12 @@
         "se": 0.057569,
         "half_life_years": 4.80919,
         "n": 179,
-        "firms": 35
+        "firms": 35,
+        "model": "pooled AR(1), year FE only (between + within firm)",
+        "rho_firm_fe": 0.471352,
+        "se_firm_fe": 0.302543,
+        "half_life_firm_fe": 0.921553,
+        "n_firm_fe": 179
       },
       {
         "sic2": "55",
@@ -1151,7 +1220,12 @@
         "se": 0.082248,
         "half_life_years": 4.591525,
         "n": 226,
-        "firms": 26
+        "firms": 26,
+        "model": "pooled AR(1), year FE only (between + within firm)",
+        "rho_firm_fe": 0.529057,
+        "se_firm_fe": 0.030614,
+        "half_life_firm_fe": 1.088726,
+        "n_firm_fe": 226
       },
       {
         "sic2": "39",
@@ -1160,7 +1234,12 @@
         "se": 0.056253,
         "half_life_years": 3.988909,
         "n": 306,
-        "firms": 48
+        "firms": 48,
+        "model": "pooled AR(1), year FE only (between + within firm)",
+        "rho_firm_fe": 0.637068,
+        "se_firm_fe": 0.139026,
+        "half_life_firm_fe": 1.537327,
+        "n_firm_fe": 306
       },
       {
         "sic2": "59",
@@ -1169,7 +1248,12 @@
         "se": 0.057041,
         "half_life_years": 3.921347,
         "n": 581,
-        "firms": 97
+        "firms": 97,
+        "model": "pooled AR(1), year FE only (between + within firm)",
+        "rho_firm_fe": 0.293527,
+        "se_firm_fe": 0.220653,
+        "half_life_firm_fe": 0.565472,
+        "n_firm_fe": 581
       },
       {
         "sic2": "87",
@@ -1178,7 +1262,12 @@
         "se": 0.052363,
         "half_life_years": 3.859053,
         "n": 139,
-        "firms": 25
+        "firms": 25,
+        "model": "pooled AR(1), year FE only (between + within firm)",
+        "rho_firm_fe": 0.152079,
+        "se_firm_fe": 0.116626,
+        "half_life_firm_fe": 0.368038,
+        "n_firm_fe": 139
       },
       {
         "sic2": "50",
@@ -1187,7 +1276,12 @@
         "se": 0.087634,
         "half_life_years": 3.773492,
         "n": 600,
-        "firms": 81
+        "firms": 81,
+        "model": "pooled AR(1), year FE only (between + within firm)",
+        "rho_firm_fe": 0.491889,
+        "se_firm_fe": 0.136377,
+        "half_life_firm_fe": 0.976947,
+        "n_firm_fe": 600
       },
       {
         "sic2": "26",
@@ -1196,7 +1290,12 @@
         "se": 0.073955,
         "half_life_years": 3.363148,
         "n": 203,
-        "firms": 30
+        "firms": 30,
+        "model": "pooled AR(1), year FE only (between + within firm)",
+        "rho_firm_fe": 0.2108,
+        "se_firm_fe": 0.105827,
+        "half_life_firm_fe": 0.445226,
+        "n_firm_fe": 203
       },
       {
         "sic2": "48",
@@ -1205,7 +1304,12 @@
         "se": 0.110644,
         "half_life_years": 2.985865,
         "n": 243,
-        "firms": 50
+        "firms": 50,
+        "model": "pooled AR(1), year FE only (between + within firm)",
+        "rho_firm_fe": 0.077405,
+        "se_firm_fe": 0.1296,
+        "half_life_firm_fe": 0.270897,
+        "n_firm_fe": 243
       },
       {
         "sic2": "36",
@@ -1214,7 +1318,12 @@
         "se": 0.029116,
         "half_life_years": 2.594999,
         "n": 2944,
-        "firms": 394
+        "firms": 394,
+        "model": "pooled AR(1), year FE only (between + within firm)",
+        "rho_firm_fe": 0.417865,
+        "se_firm_fe": 0.046763,
+        "half_life_firm_fe": 0.794349,
+        "n_firm_fe": 2944
       },
       {
         "sic2": "73",
@@ -1223,7 +1332,12 @@
         "se": 0.056452,
         "half_life_years": 2.415264,
         "n": 1028,
-        "firms": 196
+        "firms": 196,
+        "model": "pooled AR(1), year FE only (between + within firm)",
+        "rho_firm_fe": 0.383205,
+        "se_firm_fe": 0.088346,
+        "half_life_firm_fe": 0.722641,
+        "n_firm_fe": 1028
       },
       {
         "sic2": "38",
@@ -1232,7 +1346,12 @@
         "se": 0.039899,
         "half_life_years": 2.407693,
         "n": 2688,
-        "firms": 366
+        "firms": 366,
+        "model": "pooled AR(1), year FE only (between + within firm)",
+        "rho_firm_fe": 0.302253,
+        "se_firm_fe": 0.081248,
+        "half_life_firm_fe": 0.579317,
+        "n_firm_fe": 2688
       },
       {
         "sic2": "80",
@@ -1241,7 +1360,12 @@
         "se": 0.098995,
         "half_life_years": 1.803369,
         "n": 230,
-        "firms": 44
+        "firms": 44,
+        "model": "pooled AR(1), year FE only (between + within firm)",
+        "rho_firm_fe": 0.363966,
+        "se_firm_fe": 0.102252,
+        "half_life_firm_fe": 0.685812,
+        "n_firm_fe": 230
       },
       {
         "sic2": "37",
@@ -1250,7 +1374,12 @@
         "se": 0.052922,
         "half_life_years": 1.768872,
         "n": 1009,
-        "firms": 130
+        "firms": 130,
+        "model": "pooled AR(1), year FE only (between + within firm)",
+        "rho_firm_fe": 0.127196,
+        "se_firm_fe": 0.106249,
+        "half_life_firm_fe": 0.336149,
+        "n_firm_fe": 1009
       },
       {
         "sic2": "01",
@@ -1259,7 +1388,12 @@
         "se": 0.059325,
         "half_life_years": 1.668928,
         "n": 145,
-        "firms": 27
+        "firms": 27,
+        "model": "pooled AR(1), year FE only (between + within firm)",
+        "rho_firm_fe": 0.376928,
+        "se_firm_fe": 0.156214,
+        "half_life_firm_fe": 0.710409,
+        "n_firm_fe": 145
       },
       {
         "sic2": "23",
@@ -1268,7 +1402,12 @@
         "se": 0.196257,
         "half_life_years": 1.352283,
         "n": 220,
-        "firms": 27
+        "firms": 27,
+        "model": "pooled AR(1), year FE only (between + within firm)",
+        "rho_firm_fe": 0.131082,
+        "se_firm_fe": 0.093725,
+        "half_life_firm_fe": 0.341127,
+        "n_firm_fe": 220
       },
       {
         "sic2": "28",
@@ -1277,7 +1416,12 @@
         "se": 0.038062,
         "half_life_years": 1.318986,
         "n": 2878,
-        "firms": 438
+        "firms": 438,
+        "model": "pooled AR(1), year FE only (between + within firm)",
+        "rho_firm_fe": 0.241891,
+        "se_firm_fe": 0.067471,
+        "half_life_firm_fe": 0.488384,
+        "n_firm_fe": 2878
       },
       {
         "sic2": "58",
@@ -1286,7 +1430,12 @@
         "se": 0.136623,
         "half_life_years": 0.573405,
         "n": 164,
-        "firms": 33
+        "firms": 33,
+        "model": "pooled AR(1), year FE only (between + within firm)",
+        "rho_firm_fe": -0.046252,
+        "se_firm_fe": 0.133671,
+        "half_life_firm_fe": null,
+        "n_firm_fe": 164
       }
     ]
   },
@@ -1298,7 +1447,7 @@
       "p": 0.0,
       "n": 20576,
       "stars": "***",
-      "model": "y_it = a + rho*y_i,t-1 + year FE; SE clustered by firm",
+      "model": "y_it = a + rho*y_i,t-1 + year FE; SE clustered by firm; pooled (no firm FE, so between-firm differences are part of rho)",
       "r2": 0.535629,
       "half_life_years": 2.138919,
       "mean_reversion_1_minus_rho": 0.276796,
@@ -1306,8 +1455,22 @@
       "with_firm_fe": {
         "rho": 0.255163,
         "se": 0.026177,
+        "half_life_years": 0.507483,
         "n": 20576,
-        "note": "biased downward with short panels (Nickell); upper/lower bound only"
+        "model": "y_it = firm FE + year FE + rho*y_i,t-1; SE clustered by firm",
+        "note": "biased downward with short panels (Nickell); the pooled estimate is biased upward by persistent between-firm differences, so the truth lies between the two, not at either point"
+      },
+      "anderson_hsiao": {
+        "rho": 0.390064,
+        "se": 0.051643,
+        "t": 7.553053,
+        "p": 0.0,
+        "half_life_years": 0.73626,
+        "n": 14435,
+        "n_firms": 2394,
+        "first_stage_partial_r2": 0.107064,
+        "model": "first difference of the AR(1), year dummies; lagged difference instrumented by the twice-lagged level",
+        "note": "consistent under sequential exogeneity but imprecise; shown as a third estimate, not as the headline"
       },
       "by_industry": [
         {
@@ -1317,7 +1480,12 @@
           "se": 0.035945,
           "half_life_years": 21.848646,
           "n": 432,
-          "firms": 61
+          "firms": 61,
+          "model": "pooled AR(1), year FE only (between + within firm)",
+          "rho_firm_fe": 0.385084,
+          "se_firm_fe": 0.137323,
+          "half_life_firm_fe": 0.726346,
+          "n_firm_fe": 432
         },
         {
           "sic2": "55",
@@ -1326,7 +1494,12 @@
           "se": 0.073799,
           "half_life_years": 9.270549,
           "n": 226,
-          "firms": 26
+          "firms": 26,
+          "model": "pooled AR(1), year FE only (between + within firm)",
+          "rho_firm_fe": 0.600114,
+          "se_firm_fe": 0.03073,
+          "half_life_firm_fe": 1.35742,
+          "n_firm_fe": 226
         },
         {
           "sic2": "56",
@@ -1335,7 +1508,12 @@
           "se": 0.038556,
           "half_life_years": 7.708946,
           "n": 232,
-          "firms": 29
+          "firms": 29,
+          "model": "pooled AR(1), year FE only (between + within firm)",
+          "rho_firm_fe": 0.255351,
+          "se_firm_fe": 0.078332,
+          "half_life_firm_fe": 0.507757,
+          "n_firm_fe": 232
         },
         {
           "sic2": "27",
@@ -1344,7 +1522,12 @@
           "se": 0.039271,
           "half_life_years": 7.223344,
           "n": 166,
-          "firms": 20
+          "firms": 20,
+          "model": "pooled AR(1), year FE only (between + within firm)",
+          "rho_firm_fe": 0.394473,
+          "se_firm_fe": 0.094809,
+          "half_life_firm_fe": 0.745157,
+          "n_firm_fe": 166
         },
         {
           "sic2": "23",
@@ -1353,7 +1536,12 @@
           "se": 0.0434,
           "half_life_years": 6.22614,
           "n": 220,
-          "firms": 27
+          "firms": 27,
+          "model": "pooled AR(1), year FE only (between + within firm)",
+          "rho_firm_fe": 0.358553,
+          "se_firm_fe": 0.197604,
+          "half_life_firm_fe": 0.675794,
+          "n_firm_fe": 220
         },
         {
           "sic2": "32",
@@ -1362,7 +1550,12 @@
           "se": 0.039242,
           "half_life_years": 3.971704,
           "n": 159,
-          "firms": 23
+          "firms": 23,
+          "model": "pooled AR(1), year FE only (between + within firm)",
+          "rho_firm_fe": 0.336703,
+          "se_firm_fe": 0.149942,
+          "half_life_firm_fe": 0.63676,
+          "n_firm_fe": 159
         },
         {
           "sic2": "39",
@@ -1371,7 +1564,12 @@
           "se": 0.041017,
           "half_life_years": 3.639004,
           "n": 306,
-          "firms": 48
+          "firms": 48,
+          "model": "pooled AR(1), year FE only (between + within firm)",
+          "rho_firm_fe": 0.590779,
+          "se_firm_fe": 0.091473,
+          "half_life_firm_fe": 1.316985,
+          "n_firm_fe": 306
         },
         {
           "sic2": "58",
@@ -1380,7 +1578,12 @@
           "se": 0.028929,
           "half_life_years": 3.480217,
           "n": 164,
-          "firms": 33
+          "firms": 33,
+          "model": "pooled AR(1), year FE only (between + within firm)",
+          "rho_firm_fe": 0.038112,
+          "se_firm_fe": 0.239123,
+          "half_life_firm_fe": 0.212152,
+          "n_firm_fe": 164
         },
         {
           "sic2": "25",
@@ -1389,7 +1592,12 @@
           "se": 0.026977,
           "half_life_years": 3.249469,
           "n": 229,
-          "firms": 23
+          "firms": 23,
+          "model": "pooled AR(1), year FE only (between + within firm)",
+          "rho_firm_fe": 0.636582,
+          "se_firm_fe": 0.047414,
+          "half_life_firm_fe": 1.534729,
+          "n_firm_fe": 229
         },
         {
           "sic2": "33",
@@ -1398,7 +1606,12 @@
           "se": 0.106952,
           "half_life_years": 2.979518,
           "n": 397,
-          "firms": 47
+          "firms": 47,
+          "model": "pooled AR(1), year FE only (between + within firm)",
+          "rho_firm_fe": 0.054394,
+          "se_firm_fe": 0.155875,
+          "half_life_firm_fe": 0.238073,
+          "n_firm_fe": 397
         },
         {
           "sic2": "35",
@@ -1407,7 +1620,12 @@
           "se": 0.033966,
           "half_life_years": 2.834536,
           "n": 1804,
-          "firms": 221
+          "firms": 221,
+          "model": "pooled AR(1), year FE only (between + within firm)",
+          "rho_firm_fe": 0.240343,
+          "se_firm_fe": 0.042847,
+          "half_life_firm_fe": 0.486185,
+          "n_firm_fe": 1804
         },
         {
           "sic2": "59",
@@ -1416,7 +1634,12 @@
           "se": 0.080622,
           "half_life_years": 2.727404,
           "n": 581,
-          "firms": 97
+          "firms": 97,
+          "model": "pooled AR(1), year FE only (between + within firm)",
+          "rho_firm_fe": 0.504477,
+          "se_firm_fe": 0.114902,
+          "half_life_firm_fe": 1.013027,
+          "n_firm_fe": 581
         },
         {
           "sic2": "01",
@@ -1425,7 +1648,12 @@
           "se": 0.054607,
           "half_life_years": 2.644918,
           "n": 145,
-          "firms": 27
+          "firms": 27,
+          "model": "pooled AR(1), year FE only (between + within firm)",
+          "rho_firm_fe": 0.064557,
+          "se_firm_fe": 0.15386,
+          "half_life_firm_fe": 0.252954,
+          "n_firm_fe": 145
         },
         {
           "sic2": "30",
@@ -1434,7 +1662,12 @@
           "se": 0.043125,
           "half_life_years": 2.426384,
           "n": 275,
-          "firms": 33
+          "firms": 33,
+          "model": "pooled AR(1), year FE only (between + within firm)",
+          "rho_firm_fe": 0.267177,
+          "se_firm_fe": 0.080565,
+          "half_life_firm_fe": 0.525173,
+          "n_firm_fe": 275
         },
         {
           "sic2": "73",
@@ -1443,7 +1676,12 @@
           "se": 0.044312,
           "half_life_years": 2.095776,
           "n": 1028,
-          "firms": 196
+          "firms": 196,
+          "model": "pooled AR(1), year FE only (between + within firm)",
+          "rho_firm_fe": 0.21486,
+          "se_firm_fe": 0.105431,
+          "half_life_firm_fe": 0.450748,
+          "n_firm_fe": 1028
         },
         {
           "sic2": "38",
@@ -1452,7 +1690,12 @@
           "se": 0.033965,
           "half_life_years": 1.932223,
           "n": 2688,
-          "firms": 366
+          "firms": 366,
+          "model": "pooled AR(1), year FE only (between + within firm)",
+          "rho_firm_fe": 0.287494,
+          "se_firm_fe": 0.04968,
+          "half_life_firm_fe": 0.556051,
+          "n_firm_fe": 2688
         },
         {
           "sic2": "28",
@@ -1461,7 +1704,12 @@
           "se": 0.034605,
           "half_life_years": 1.763737,
           "n": 2878,
-          "firms": 438
+          "firms": 438,
+          "model": "pooled AR(1), year FE only (between + within firm)",
+          "rho_firm_fe": 0.211007,
+          "se_firm_fe": 0.046622,
+          "half_life_firm_fe": 0.445507,
+          "n_firm_fe": 2878
         },
         {
           "sic2": "36",
@@ -1470,7 +1718,12 @@
           "se": 0.040033,
           "half_life_years": 1.699686,
           "n": 2944,
-          "firms": 394
+          "firms": 394,
+          "model": "pooled AR(1), year FE only (between + within firm)",
+          "rho_firm_fe": 0.331485,
+          "se_firm_fe": 0.058728,
+          "half_life_firm_fe": 0.627752,
+          "n_firm_fe": 2944
         },
         {
           "sic2": "37",
@@ -1479,7 +1732,12 @@
           "se": 0.080715,
           "half_life_years": 1.618616,
           "n": 1009,
-          "firms": 130
+          "firms": 130,
+          "model": "pooled AR(1), year FE only (between + within firm)",
+          "rho_firm_fe": 0.066161,
+          "se_firm_fe": 0.105227,
+          "half_life_firm_fe": 0.25524,
+          "n_firm_fe": 1009
         },
         {
           "sic2": "80",
@@ -1488,7 +1746,12 @@
           "se": 0.107556,
           "half_life_years": 1.569709,
           "n": 230,
-          "firms": 44
+          "firms": 44,
+          "model": "pooled AR(1), year FE only (between + within firm)",
+          "rho_firm_fe": 0.245674,
+          "se_firm_fe": 0.140022,
+          "half_life_firm_fe": 0.493783,
+          "n_firm_fe": 230
         },
         {
           "sic2": "87",
@@ -1497,7 +1760,12 @@
           "se": 0.071423,
           "half_life_years": 1.544523,
           "n": 139,
-          "firms": 25
+          "firms": 25,
+          "model": "pooled AR(1), year FE only (between + within firm)",
+          "rho_firm_fe": 0.358292,
+          "se_firm_fe": 0.139789,
+          "half_life_firm_fe": 0.675313,
+          "n_firm_fe": 139
         },
         {
           "sic2": "48",
@@ -1506,7 +1774,12 @@
           "se": 0.079557,
           "half_life_years": 1.53966,
           "n": 243,
-          "firms": 50
+          "firms": 50,
+          "model": "pooled AR(1), year FE only (between + within firm)",
+          "rho_firm_fe": 0.18237,
+          "se_firm_fe": 0.180397,
+          "half_life_firm_fe": 0.407322,
+          "n_firm_fe": 243
         },
         {
           "sic2": "20",
@@ -1515,7 +1788,12 @@
           "se": 0.074,
           "half_life_years": 1.527507,
           "n": 903,
-          "firms": 128
+          "firms": 128,
+          "model": "pooled AR(1), year FE only (between + within firm)",
+          "rho_firm_fe": -0.035407,
+          "se_firm_fe": 0.100587,
+          "half_life_firm_fe": null,
+          "n_firm_fe": 903
         },
         {
           "sic2": "34",
@@ -1524,7 +1802,12 @@
           "se": 0.075421,
           "half_life_years": 1.485197,
           "n": 488,
-          "firms": 57
+          "firms": 57,
+          "model": "pooled AR(1), year FE only (between + within firm)",
+          "rho_firm_fe": 0.118562,
+          "se_firm_fe": 0.194621,
+          "half_life_firm_fe": 0.325067,
+          "n_firm_fe": 488
         },
         {
           "sic2": "26",
@@ -1533,7 +1816,12 @@
           "se": 0.094749,
           "half_life_years": 1.413957,
           "n": 203,
-          "firms": 30
+          "firms": 30,
+          "model": "pooled AR(1), year FE only (between + within firm)",
+          "rho_firm_fe": 0.030958,
+          "se_firm_fe": 0.070383,
+          "half_life_firm_fe": 0.19946,
+          "n_firm_fe": 203
         },
         {
           "sic2": "13",
@@ -1542,7 +1830,12 @@
           "se": 0.084861,
           "half_life_years": 1.050251,
           "n": 179,
-          "firms": 35
+          "firms": 35,
+          "model": "pooled AR(1), year FE only (between + within firm)",
+          "rho_firm_fe": -0.035234,
+          "se_firm_fe": 0.092854,
+          "half_life_firm_fe": null,
+          "n_firm_fe": 179
         },
         {
           "sic2": "50",
@@ -1551,7 +1844,12 @@
           "se": 0.152959,
           "half_life_years": 0.525971,
           "n": 600,
-          "firms": 81
+          "firms": 81,
+          "model": "pooled AR(1), year FE only (between + within firm)",
+          "rho_firm_fe": 0.313661,
+          "se_firm_fe": 0.114991,
+          "half_life_firm_fe": 0.597828,
+          "n_firm_fe": 600
         }
       ]
     },
@@ -1562,7 +1860,7 @@
       "p": 0.0,
       "n": 20576,
       "stars": "***",
-      "model": "y_it = a + rho*y_i,t-1 + year FE; SE clustered by firm",
+      "model": "y_it = a + rho*y_i,t-1 + year FE; SE clustered by firm; pooled (no firm FE, so between-firm differences are part of rho)",
       "r2": 0.529792,
       "half_life_years": 1.616431,
       "mean_reversion_1_minus_rho": 0.348718,
@@ -1570,8 +1868,22 @@
       "with_firm_fe": {
         "rho": 0.191863,
         "se": 0.035816,
+        "half_life_years": 0.419841,
         "n": 20576,
-        "note": "biased downward with short panels (Nickell); upper/lower bound only"
+        "model": "y_it = firm FE + year FE + rho*y_i,t-1; SE clustered by firm",
+        "note": "biased downward with short panels (Nickell); the pooled estimate is biased upward by persistent between-firm differences, so the truth lies between the two, not at either point"
+      },
+      "anderson_hsiao": {
+        "rho": 0.500999,
+        "se": 0.121381,
+        "t": 4.12748,
+        "p": 3.7e-05,
+        "half_life_years": 1.002889,
+        "n": 14435,
+        "n_firms": 2394,
+        "first_stage_partial_r2": 0.100685,
+        "model": "first difference of the AR(1), year dummies; lagged difference instrumented by the twice-lagged level",
+        "note": "consistent under sequential exogeneity but imprecise; shown as a third estimate, not as the headline"
       },
       "by_industry": [
         {
@@ -1581,7 +1893,12 @@
           "se": 0.065372,
           "half_life_years": 21.444965,
           "n": 432,
-          "firms": 61
+          "firms": 61,
+          "model": "pooled AR(1), year FE only (between + within firm)",
+          "rho_firm_fe": 0.690453,
+          "se_firm_fe": 0.234272,
+          "half_life_firm_fe": 1.871309,
+          "n_firm_fe": 432
         },
         {
           "sic2": "32",
@@ -1590,7 +1907,12 @@
           "se": 0.015981,
           "half_life_years": 14.151711,
           "n": 159,
-          "firms": 23
+          "firms": 23,
+          "model": "pooled AR(1), year FE only (between + within firm)",
+          "rho_firm_fe": 0.312355,
+          "se_firm_fe": 0.077686,
+          "half_life_firm_fe": 0.595684,
+          "n_firm_fe": 159
         },
         {
           "sic2": "27",
@@ -1599,7 +1921,12 @@
           "se": 0.039687,
           "half_life_years": 11.712547,
           "n": 166,
-          "firms": 20
+          "firms": 20,
+          "model": "pooled AR(1), year FE only (between + within firm)",
+          "rho_firm_fe": 0.604633,
+          "se_firm_fe": 0.075037,
+          "half_life_firm_fe": 1.377659,
+          "n_firm_fe": 166
         },
         {
           "sic2": "56",
@@ -1608,7 +1935,12 @@
           "se": 0.035934,
           "half_life_years": 7.929711,
           "n": 232,
-          "firms": 29
+          "firms": 29,
+          "model": "pooled AR(1), year FE only (between + within firm)",
+          "rho_firm_fe": 0.268153,
+          "se_firm_fe": 0.183456,
+          "half_life_firm_fe": 0.526628,
+          "n_firm_fe": 232
         },
         {
           "sic2": "34",
@@ -1617,7 +1949,12 @@
           "se": 0.06493,
           "half_life_years": 7.782073,
           "n": 488,
-          "firms": 57
+          "firms": 57,
+          "model": "pooled AR(1), year FE only (between + within firm)",
+          "rho_firm_fe": 0.347764,
+          "se_firm_fe": 0.18522,
+          "half_life_firm_fe": 0.656245,
+          "n_firm_fe": 488
         },
         {
           "sic2": "33",
@@ -1626,7 +1963,12 @@
           "se": 0.044254,
           "half_life_years": 7.438725,
           "n": 397,
-          "firms": 47
+          "firms": 47,
+          "model": "pooled AR(1), year FE only (between + within firm)",
+          "rho_firm_fe": 0.309486,
+          "se_firm_fe": 0.112857,
+          "half_life_firm_fe": 0.590997,
+          "n_firm_fe": 397
         },
         {
           "sic2": "20",
@@ -1635,7 +1977,12 @@
           "se": 0.080791,
           "half_life_years": 5.573845,
           "n": 903,
-          "firms": 128
+          "firms": 128,
+          "model": "pooled AR(1), year FE only (between + within firm)",
+          "rho_firm_fe": 0.177282,
+          "se_firm_fe": 0.129963,
+          "half_life_firm_fe": 0.40066,
+          "n_firm_fe": 903
         },
         {
           "sic2": "30",
@@ -1644,7 +1991,12 @@
           "se": 0.064877,
           "half_life_years": 5.163577,
           "n": 275,
-          "firms": 33
+          "firms": 33,
+          "model": "pooled AR(1), year FE only (between + within firm)",
+          "rho_firm_fe": 0.467367,
+          "se_firm_fe": 0.144233,
+          "half_life_firm_fe": 0.911268,
+          "n_firm_fe": 275
         },
         {
           "sic2": "35",
@@ -1653,7 +2005,12 @@
           "se": 0.027346,
           "half_life_years": 4.452073,
           "n": 1804,
-          "firms": 221
+          "firms": 221,
+          "model": "pooled AR(1), year FE only (between + within firm)",
+          "rho_firm_fe": 0.367026,
+          "se_firm_fe": 0.075842,
+          "half_life_firm_fe": 0.691541,
+          "n_firm_fe": 1804
         },
         {
           "sic2": "26",
@@ -1662,7 +2019,12 @@
           "se": 0.043388,
           "half_life_years": 4.239437,
           "n": 203,
-          "firms": 30
+          "firms": 30,
+          "model": "pooled AR(1), year FE only (between + within firm)",
+          "rho_firm_fe": 0.130695,
+          "se_firm_fe": 0.08328,
+          "half_life_firm_fe": 0.340632,
+          "n_firm_fe": 203
         },
         {
           "sic2": "48",
@@ -1671,7 +2033,12 @@
           "se": 0.024294,
           "half_life_years": 4.149139,
           "n": 243,
-          "firms": 50
+          "firms": 50,
+          "model": "pooled AR(1), year FE only (between + within firm)",
+          "rho_firm_fe": 0.682955,
+          "se_firm_fe": 0.118048,
+          "half_life_firm_fe": 1.817725,
+          "n_firm_fe": 243
         },
         {
           "sic2": "39",
@@ -1680,7 +2047,12 @@
           "se": 0.052172,
           "half_life_years": 3.990967,
           "n": 306,
-          "firms": 48
+          "firms": 48,
+          "model": "pooled AR(1), year FE only (between + within firm)",
+          "rho_firm_fe": 0.676272,
+          "se_firm_fe": 0.166475,
+          "half_life_firm_fe": 1.77203,
+          "n_firm_fe": 306
         },
         {
           "sic2": "13",
@@ -1689,7 +2061,12 @@
           "se": 0.045461,
           "half_life_years": 2.892368,
           "n": 179,
-          "firms": 35
+          "firms": 35,
+          "model": "pooled AR(1), year FE only (between + within firm)",
+          "rho_firm_fe": -0.090612,
+          "se_firm_fe": 0.206136,
+          "half_life_firm_fe": null,
+          "n_firm_fe": 179
         },
         {
           "sic2": "59",
@@ -1698,7 +2075,12 @@
           "se": 0.068485,
           "half_life_years": 2.85347,
           "n": 581,
-          "firms": 97
+          "firms": 97,
+          "model": "pooled AR(1), year FE only (between + within firm)",
+          "rho_firm_fe": 0.155398,
+          "se_firm_fe": 0.138254,
+          "half_life_firm_fe": 0.372307,
+          "n_firm_fe": 581
         },
         {
           "sic2": "87",
@@ -1707,7 +2089,12 @@
           "se": 0.079722,
           "half_life_years": 2.831616,
           "n": 139,
-          "firms": 25
+          "firms": 25,
+          "model": "pooled AR(1), year FE only (between + within firm)",
+          "rho_firm_fe": 0.046899,
+          "se_firm_fe": 0.106584,
+          "half_life_firm_fe": 0.226537,
+          "n_firm_fe": 139
         },
         {
           "sic2": "25",
@@ -1716,7 +2103,12 @@
           "se": 0.123733,
           "half_life_years": 2.754468,
           "n": 229,
-          "firms": 23
+          "firms": 23,
+          "model": "pooled AR(1), year FE only (between + within firm)",
+          "rho_firm_fe": 0.465223,
+          "se_firm_fe": 0.020814,
+          "half_life_firm_fe": 0.905793,
+          "n_firm_fe": 229
         },
         {
           "sic2": "38",
@@ -1725,7 +2117,12 @@
           "se": 0.026042,
           "half_life_years": 2.581205,
           "n": 2688,
-          "firms": 366
+          "firms": 366,
+          "model": "pooled AR(1), year FE only (between + within firm)",
+          "rho_firm_fe": 0.271679,
+          "se_firm_fe": 0.05102,
+          "half_life_firm_fe": 0.531907,
+          "n_firm_fe": 2688
         },
         {
           "sic2": "55",
@@ -1734,7 +2131,12 @@
           "se": 0.089099,
           "half_life_years": 2.548844,
           "n": 226,
-          "firms": 26
+          "firms": 26,
+          "model": "pooled AR(1), year FE only (between + within firm)",
+          "rho_firm_fe": 0.431401,
+          "se_firm_fe": 0.017832,
+          "half_life_firm_fe": 0.824471,
+          "n_firm_fe": 226
         },
         {
           "sic2": "36",
@@ -1743,7 +2145,12 @@
           "se": 0.044468,
           "half_life_years": 2.334749,
           "n": 2944,
-          "firms": 394
+          "firms": 394,
+          "model": "pooled AR(1), year FE only (between + within firm)",
+          "rho_firm_fe": 0.259516,
+          "se_firm_fe": 0.073374,
+          "half_life_firm_fe": 0.513848,
+          "n_firm_fe": 2944
         },
         {
           "sic2": "50",
@@ -1752,7 +2159,12 @@
           "se": 0.108392,
           "half_life_years": 2.142758,
           "n": 600,
-          "firms": 81
+          "firms": 81,
+          "model": "pooled AR(1), year FE only (between + within firm)",
+          "rho_firm_fe": 0.49586,
+          "se_firm_fe": 0.073586,
+          "half_life_firm_fe": 0.988146,
+          "n_firm_fe": 600
         },
         {
           "sic2": "37",
@@ -1761,7 +2173,12 @@
           "se": 0.0559,
           "half_life_years": 1.872054,
           "n": 1009,
-          "firms": 130
+          "firms": 130,
+          "model": "pooled AR(1), year FE only (between + within firm)",
+          "rho_firm_fe": 0.121475,
+          "se_firm_fe": 0.101632,
+          "half_life_firm_fe": 0.32881,
+          "n_firm_fe": 1009
         },
         {
           "sic2": "58",
@@ -1770,7 +2187,12 @@
           "se": 0.140981,
           "half_life_years": 1.643215,
           "n": 164,
-          "firms": 33
+          "firms": 33,
+          "model": "pooled AR(1), year FE only (between + within firm)",
+          "rho_firm_fe": -0.881592,
+          "se_firm_fe": 0.234987,
+          "half_life_firm_fe": null,
+          "n_firm_fe": 164
         },
         {
           "sic2": "01",
@@ -1779,7 +2201,12 @@
           "se": 0.104436,
           "half_life_years": 1.378869,
           "n": 145,
-          "firms": 27
+          "firms": 27,
+          "model": "pooled AR(1), year FE only (between + within firm)",
+          "rho_firm_fe": 0.295233,
+          "se_firm_fe": 0.143355,
+          "half_life_firm_fe": 0.568157,
+          "n_firm_fe": 145
         },
         {
           "sic2": "28",
@@ -1788,7 +2215,12 @@
           "se": 0.03388,
           "half_life_years": 1.090601,
           "n": 2878,
-          "firms": 438
+          "firms": 438,
+          "model": "pooled AR(1), year FE only (between + within firm)",
+          "rho_firm_fe": 0.18089,
+          "se_firm_fe": 0.054033,
+          "half_life_firm_fe": 0.405381,
+          "n_firm_fe": 2878
         },
         {
           "sic2": "80",
@@ -1797,7 +2229,12 @@
           "se": 0.148157,
           "half_life_years": 1.016719,
           "n": 230,
-          "firms": 44
+          "firms": 44,
+          "model": "pooled AR(1), year FE only (between + within firm)",
+          "rho_firm_fe": 0.613246,
+          "se_firm_fe": 0.083038,
+          "half_life_firm_fe": 1.417509,
+          "n_firm_fe": 230
         },
         {
           "sic2": "23",
@@ -1806,7 +2243,12 @@
           "se": 0.123516,
           "half_life_years": 1.006121,
           "n": 220,
-          "firms": 27
+          "firms": 27,
+          "model": "pooled AR(1), year FE only (between + within firm)",
+          "rho_firm_fe": 0.042972,
+          "se_firm_fe": 0.112344,
+          "half_life_firm_fe": 0.220241,
+          "n_firm_fe": 220
         },
         {
           "sic2": "73",
@@ -1815,7 +2257,12 @@
           "se": 0.0915,
           "half_life_years": 0.600274,
           "n": 1028,
-          "firms": 196
+          "firms": 196,
+          "model": "pooled AR(1), year FE only (between + within firm)",
+          "rho_firm_fe": -0.086844,
+          "se_firm_fe": 0.098283,
+          "half_life_firm_fe": null,
+          "n_firm_fe": 1028
         }
       ]
     },
@@ -1826,7 +2273,7 @@
       "p": 0.0,
       "n": 20564,
       "stars": "***",
-      "model": "y_it = a + rho*y_i,t-1 + year FE; SE clustered by firm",
+      "model": "y_it = a + rho*y_i,t-1 + year FE; SE clustered by firm; pooled (no firm FE, so between-firm differences are part of rho)",
       "r2": 0.49745,
       "half_life_years": 1.440552,
       "mean_reversion_1_minus_rho": 0.381939,
@@ -1834,8 +2281,22 @@
       "with_firm_fe": {
         "rho": 0.218089,
         "se": 0.049427,
+        "half_life_years": 0.455163,
         "n": 20564,
-        "note": "biased downward with short panels (Nickell); upper/lower bound only"
+        "model": "y_it = firm FE + year FE + rho*y_i,t-1; SE clustered by firm",
+        "note": "biased downward with short panels (Nickell); the pooled estimate is biased upward by persistent between-firm differences, so the truth lies between the two, not at either point"
+      },
+      "anderson_hsiao": {
+        "rho": 0.423791,
+        "se": 0.145152,
+        "t": 2.919631,
+        "p": 0.003504,
+        "half_life_years": 0.807378,
+        "n": 14430,
+        "n_firms": 2392,
+        "first_stage_partial_r2": 0.161037,
+        "model": "first difference of the AR(1), year dummies; lagged difference instrumented by the twice-lagged level",
+        "note": "consistent under sequential exogeneity but imprecise; shown as a third estimate, not as the headline"
       },
       "by_industry": [
         {
@@ -1845,7 +2306,12 @@
           "se": 0.019523,
           "half_life_years": 56.04214,
           "n": 164,
-          "firms": 33
+          "firms": 33,
+          "model": "pooled AR(1), year FE only (between + within firm)",
+          "rho_firm_fe": 0.321038,
+          "se_firm_fe": 0.182758,
+          "half_life_firm_fe": 0.61006,
+          "n_firm_fe": 164
         },
         {
           "sic2": "30",
@@ -1854,7 +2320,12 @@
           "se": 0.147392,
           "half_life_years": 38.859035,
           "n": 275,
-          "firms": 33
+          "firms": 33,
+          "model": "pooled AR(1), year FE only (between + within firm)",
+          "rho_firm_fe": 0.5193,
+          "se_firm_fe": 0.128873,
+          "half_life_firm_fe": 1.057799,
+          "n_firm_fe": 275
         },
         {
           "sic2": "55",
@@ -1863,7 +2334,12 @@
           "se": 0.06319,
           "half_life_years": 11.385589,
           "n": 226,
-          "firms": 26
+          "firms": 26,
+          "model": "pooled AR(1), year FE only (between + within firm)",
+          "rho_firm_fe": 0.436503,
+          "se_firm_fe": 0.072566,
+          "half_life_firm_fe": 0.836164,
+          "n_firm_fe": 226
         },
         {
           "sic2": "27",
@@ -1872,7 +2348,12 @@
           "se": 0.047305,
           "half_life_years": 10.094653,
           "n": 166,
-          "firms": 20
+          "firms": 20,
+          "model": "pooled AR(1), year FE only (between + within firm)",
+          "rho_firm_fe": 0.577911,
+          "se_firm_fe": 0.144678,
+          "half_life_firm_fe": 1.264094,
+          "n_firm_fe": 166
         },
         {
           "sic2": "13",
@@ -1881,7 +2362,12 @@
           "se": 0.06278,
           "half_life_years": 6.159001,
           "n": 179,
-          "firms": 35
+          "firms": 35,
+          "model": "pooled AR(1), year FE only (between + within firm)",
+          "rho_firm_fe": 0.598368,
+          "se_firm_fe": 0.233039,
+          "half_life_firm_fe": 1.349719,
+          "n_firm_fe": 179
         },
         {
           "sic2": "56",
@@ -1890,7 +2376,12 @@
           "se": 0.029841,
           "half_life_years": 6.112779,
           "n": 232,
-          "firms": 29
+          "firms": 29,
+          "model": "pooled AR(1), year FE only (between + within firm)",
+          "rho_firm_fe": 0.388128,
+          "se_firm_fe": 0.071365,
+          "half_life_firm_fe": 0.732389,
+          "n_firm_fe": 232
         },
         {
           "sic2": "26",
@@ -1899,7 +2390,12 @@
           "se": 0.031044,
           "half_life_years": 5.134017,
           "n": 203,
-          "firms": 30
+          "firms": 30,
+          "model": "pooled AR(1), year FE only (between + within firm)",
+          "rho_firm_fe": 0.144973,
+          "se_firm_fe": 0.08351,
+          "half_life_firm_fe": 0.358919,
+          "n_firm_fe": 203
         },
         {
           "sic2": "48",
@@ -1908,7 +2404,12 @@
           "se": 0.071529,
           "half_life_years": 5.102565,
           "n": 243,
-          "firms": 50
+          "firms": 50,
+          "model": "pooled AR(1), year FE only (between + within firm)",
+          "rho_firm_fe": 0.422337,
+          "se_firm_fe": 0.185892,
+          "half_life_firm_fe": 0.804159,
+          "n_firm_fe": 243
         },
         {
           "sic2": "32",
@@ -1917,7 +2418,12 @@
           "se": 0.06953,
           "half_life_years": 4.405423,
           "n": 159,
-          "firms": 23
+          "firms": 23,
+          "model": "pooled AR(1), year FE only (between + within firm)",
+          "rho_firm_fe": 0.243198,
+          "se_firm_fe": 0.24515,
+          "half_life_firm_fe": 0.490246,
+          "n_firm_fe": 159
         },
         {
           "sic2": "20",
@@ -1926,7 +2432,12 @@
           "se": 0.082563,
           "half_life_years": 4.028658,
           "n": 903,
-          "firms": 128
+          "firms": 128,
+          "model": "pooled AR(1), year FE only (between + within firm)",
+          "rho_firm_fe": 0.229157,
+          "se_firm_fe": 0.116044,
+          "half_life_firm_fe": 0.470457,
+          "n_firm_fe": 903
         },
         {
           "sic2": "25",
@@ -1935,7 +2446,12 @@
           "se": 0.090898,
           "half_life_years": 3.405911,
           "n": 229,
-          "firms": 23
+          "firms": 23,
+          "model": "pooled AR(1), year FE only (between + within firm)",
+          "rho_firm_fe": 0.421335,
+          "se_firm_fe": 0.035918,
+          "half_life_firm_fe": 0.80195,
+          "n_firm_fe": 229
         },
         {
           "sic2": "87",
@@ -1944,7 +2460,12 @@
           "se": 0.115003,
           "half_life_years": 3.160018,
           "n": 139,
-          "firms": 25
+          "firms": 25,
+          "model": "pooled AR(1), year FE only (between + within firm)",
+          "rho_firm_fe": 0.107836,
+          "se_firm_fe": 0.041032,
+          "half_life_firm_fe": 0.311227,
+          "n_firm_fe": 139
         },
         {
           "sic2": "59",
@@ -1953,7 +2474,12 @@
           "se": 0.092027,
           "half_life_years": 3.102565,
           "n": 581,
-          "firms": 97
+          "firms": 97,
+          "model": "pooled AR(1), year FE only (between + within firm)",
+          "rho_firm_fe": -0.248013,
+          "se_firm_fe": 0.237628,
+          "half_life_firm_fe": null,
+          "n_firm_fe": 581
         },
         {
           "sic2": "34",
@@ -1962,7 +2488,12 @@
           "se": 0.227602,
           "half_life_years": 2.937892,
           "n": 488,
-          "firms": 57
+          "firms": 57,
+          "model": "pooled AR(1), year FE only (between + within firm)",
+          "rho_firm_fe": 0.460813,
+          "se_firm_fe": 0.187027,
+          "half_life_firm_fe": 0.894657,
+          "n_firm_fe": 488
         },
         {
           "sic2": "38",
@@ -1971,7 +2502,12 @@
           "se": 0.052693,
           "half_life_years": 2.442689,
           "n": 2688,
-          "firms": 366
+          "firms": 366,
+          "model": "pooled AR(1), year FE only (between + within firm)",
+          "rho_firm_fe": 0.332402,
+          "se_firm_fe": 0.100913,
+          "half_life_firm_fe": 0.629327,
+          "n_firm_fe": 2688
         },
         {
           "sic2": "35",
@@ -1980,7 +2516,12 @@
           "se": 0.034335,
           "half_life_years": 2.267048,
           "n": 1804,
-          "firms": 221
+          "firms": 221,
+          "model": "pooled AR(1), year FE only (between + within firm)",
+          "rho_firm_fe": 0.219872,
+          "se_firm_fe": 0.079367,
+          "half_life_firm_fe": 0.45761,
+          "n_firm_fe": 1804
         },
         {
           "sic2": "73",
@@ -1989,7 +2530,12 @@
           "se": 0.082261,
           "half_life_years": 2.244101,
           "n": 1028,
-          "firms": 196
+          "firms": 196,
+          "model": "pooled AR(1), year FE only (between + within firm)",
+          "rho_firm_fe": 0.128561,
+          "se_firm_fe": 0.169154,
+          "half_life_firm_fe": 0.337898,
+          "n_firm_fe": 1028
         },
         {
           "sic2": "51",
@@ -1998,7 +2544,12 @@
           "se": 0.171243,
           "half_life_years": 1.979764,
           "n": 432,
-          "firms": 61
+          "firms": 61,
+          "model": "pooled AR(1), year FE only (between + within firm)",
+          "rho_firm_fe": 0.577886,
+          "se_firm_fe": 0.11988,
+          "half_life_firm_fe": 1.263993,
+          "n_firm_fe": 432
         },
         {
           "sic2": "36",
@@ -2007,7 +2558,12 @@
           "se": 0.032811,
           "half_life_years": 1.862336,
           "n": 2944,
-          "firms": 394
+          "firms": 394,
+          "model": "pooled AR(1), year FE only (between + within firm)",
+          "rho_firm_fe": 0.298284,
+          "se_firm_fe": 0.074541,
+          "half_life_firm_fe": 0.572986,
+          "n_firm_fe": 2944
         },
         {
           "sic2": "33",
@@ -2016,7 +2572,12 @@
           "se": 0.129223,
           "half_life_years": 1.852948,
           "n": 397,
-          "firms": 47
+          "firms": 47,
+          "model": "pooled AR(1), year FE only (between + within firm)",
+          "rho_firm_fe": 0.239399,
+          "se_firm_fe": 0.117959,
+          "half_life_firm_fe": 0.484846,
+          "n_firm_fe": 397
         },
         {
           "sic2": "80",
@@ -2025,7 +2586,12 @@
           "se": 0.033505,
           "half_life_years": 1.78362,
           "n": 230,
-          "firms": 44
+          "firms": 44,
+          "model": "pooled AR(1), year FE only (between + within firm)",
+          "rho_firm_fe": 0.174141,
+          "se_firm_fe": 0.175884,
+          "half_life_firm_fe": 0.396563,
+          "n_firm_fe": 230
         },
         {
           "sic2": "28",
@@ -2034,7 +2600,12 @@
           "se": 0.033886,
           "half_life_years": 1.186364,
           "n": 2866,
-          "firms": 435
+          "firms": 435,
+          "model": "pooled AR(1), year FE only (between + within firm)",
+          "rho_firm_fe": 0.2058,
+          "se_firm_fe": 0.061767,
+          "half_life_firm_fe": 0.438464,
+          "n_firm_fe": 2866
         },
         {
           "sic2": "39",
@@ -2043,7 +2614,12 @@
           "se": 0.069888,
           "half_life_years": 1.052004,
           "n": 306,
-          "firms": 48
+          "firms": 48,
+          "model": "pooled AR(1), year FE only (between + within firm)",
+          "rho_firm_fe": 0.393175,
+          "se_firm_fe": 0.075277,
+          "half_life_firm_fe": 0.742524,
+          "n_firm_fe": 306
         },
         {
           "sic2": "01",
@@ -2052,7 +2628,12 @@
           "se": 0.097867,
           "half_life_years": 0.955687,
           "n": 145,
-          "firms": 27
+          "firms": 27,
+          "model": "pooled AR(1), year FE only (between + within firm)",
+          "rho_firm_fe": -0.155949,
+          "se_firm_fe": 0.212678,
+          "half_life_firm_fe": null,
+          "n_firm_fe": 145
         },
         {
           "sic2": "37",
@@ -2061,7 +2642,12 @@
           "se": 0.123106,
           "half_life_years": 0.832381,
           "n": 1009,
-          "firms": 130
+          "firms": 130,
+          "model": "pooled AR(1), year FE only (between + within firm)",
+          "rho_firm_fe": 0.085254,
+          "se_firm_fe": 0.076079,
+          "half_life_firm_fe": 0.281524,
+          "n_firm_fe": 1009
         },
         {
           "sic2": "23",
@@ -2070,7 +2656,12 @@
           "se": 0.105394,
           "half_life_years": 0.592287,
           "n": 220,
-          "firms": 27
+          "firms": 27,
+          "model": "pooled AR(1), year FE only (between + within firm)",
+          "rho_firm_fe": -0.166937,
+          "se_firm_fe": 0.100755,
+          "half_life_firm_fe": null,
+          "n_firm_fe": 220
         },
         {
           "sic2": "50",
@@ -2079,7 +2670,12 @@
           "se": 0.10718,
           "half_life_years": 0.33069,
           "n": 600,
-          "firms": 81
+          "firms": 81,
+          "model": "pooled AR(1), year FE only (between + within firm)",
+          "rho_firm_fe": 0.573554,
+          "se_firm_fe": 0.044389,
+          "half_life_firm_fe": 1.246885,
+          "n_firm_fe": 600
         }
       ]
     }
@@ -2091,7 +2687,7 @@
     "p": 0.0,
     "n": 20724,
     "stars": "***",
-    "model": "y_it = a + rho*y_i,t-1 + year FE; SE clustered by firm",
+    "model": "y_it = a + rho*y_i,t-1 + year FE; SE clustered by firm; pooled (no firm FE, so between-firm differences are part of rho)",
     "r2": 0.363889,
     "half_life_years": 1.113064,
     "mean_reversion_1_minus_rho": 0.463526,
@@ -2099,8 +2695,22 @@
     "with_firm_fe": {
       "rho": 0.188702,
       "se": 0.040989,
+      "half_life_years": 0.415659,
       "n": 20724,
-      "note": "biased downward with short panels (Nickell); upper/lower bound only"
+      "model": "y_it = firm FE + year FE + rho*y_i,t-1; SE clustered by firm",
+      "note": "biased downward with short panels (Nickell); the pooled estimate is biased upward by persistent between-firm differences, so the truth lies between the two, not at either point"
+    },
+    "anderson_hsiao": {
+      "rho": 0.268792,
+      "se": 0.105056,
+      "t": 2.558547,
+      "p": 0.010511,
+      "half_life_years": 0.527582,
+      "n": 14510,
+      "n_firms": 2418,
+      "first_stage_partial_r2": 0.164816,
+      "model": "first difference of the AR(1), year dummies; lagged difference instrumented by the twice-lagged level",
+      "note": "consistent under sequential exogeneity but imprecise; shown as a third estimate, not as the headline"
     },
     "by_industry": [
       {
@@ -2108,9 +2718,14 @@
         "industry": "Mining & energy",
         "rho": 1.390321,
         "se": 0.281894,
-        "half_life_years": NaN,
+        "half_life_years": null,
         "n": 179,
-        "firms": 35
+        "firms": 35,
+        "model": "pooled AR(1), year FE only (between + within firm)",
+        "rho_firm_fe": 1.10505,
+        "se_firm_fe": 0.68469,
+        "half_life_firm_fe": null,
+        "n_firm_fe": 179
       },
       {
         "sic2": "27",
@@ -2119,7 +2734,12 @@
         "se": 0.027545,
         "half_life_years": 14.094585,
         "n": 166,
-        "firms": 20
+        "firms": 20,
+        "model": "pooled AR(1), year FE only (between + within firm)",
+        "rho_firm_fe": 0.580878,
+        "se_firm_fe": 0.085166,
+        "half_life_firm_fe": 1.276011,
+        "n_firm_fe": 166
       },
       {
         "sic2": "25",
@@ -2128,7 +2748,12 @@
         "se": 0.041172,
         "half_life_years": 9.174233,
         "n": 229,
-        "firms": 23
+        "firms": 23,
+        "model": "pooled AR(1), year FE only (between + within firm)",
+        "rho_firm_fe": 0.624426,
+        "se_firm_fe": 0.027449,
+        "half_life_firm_fe": 1.471891,
+        "n_firm_fe": 229
       },
       {
         "sic2": "56",
@@ -2137,7 +2762,12 @@
         "se": 0.036823,
         "half_life_years": 9.138697,
         "n": 232,
-        "firms": 29
+        "firms": 29,
+        "model": "pooled AR(1), year FE only (between + within firm)",
+        "rho_firm_fe": 0.400929,
+        "se_firm_fe": 0.136545,
+        "half_life_firm_fe": 0.75839,
+        "n_firm_fe": 232
       },
       {
         "sic2": "33",
@@ -2146,7 +2776,12 @@
         "se": 0.053066,
         "half_life_years": 7.124048,
         "n": 397,
-        "firms": 47
+        "firms": 47,
+        "model": "pooled AR(1), year FE only (between + within firm)",
+        "rho_firm_fe": 0.220304,
+        "se_firm_fe": 0.198502,
+        "half_life_firm_fe": 0.458204,
+        "n_firm_fe": 397
       },
       {
         "sic2": "30",
@@ -2155,7 +2790,12 @@
         "se": 0.087165,
         "half_life_years": 6.17124,
         "n": 277,
-        "firms": 33
+        "firms": 33,
+        "model": "pooled AR(1), year FE only (between + within firm)",
+        "rho_firm_fe": 0.306696,
+        "se_firm_fe": 0.285204,
+        "half_life_firm_fe": 0.586469,
+        "n_firm_fe": 277
       },
       {
         "sic2": "48",
@@ -2164,7 +2804,12 @@
         "se": 0.178314,
         "half_life_years": 5.880172,
         "n": 244,
-        "firms": 50
+        "firms": 50,
+        "model": "pooled AR(1), year FE only (between + within firm)",
+        "rho_firm_fe": 0.328496,
+        "se_firm_fe": 0.275638,
+        "half_life_firm_fe": 0.622645,
+        "n_firm_fe": 244
       },
       {
         "sic2": "55",
@@ -2173,7 +2818,12 @@
         "se": 0.068433,
         "half_life_years": 4.471027,
         "n": 226,
-        "firms": 26
+        "firms": 26,
+        "model": "pooled AR(1), year FE only (between + within firm)",
+        "rho_firm_fe": 0.615639,
+        "se_firm_fe": 0.019668,
+        "half_life_firm_fe": 1.42889,
+        "n_firm_fe": 226
       },
       {
         "sic2": "32",
@@ -2182,7 +2832,12 @@
         "se": 0.05711,
         "half_life_years": 4.25415,
         "n": 161,
-        "firms": 24
+        "firms": 24,
+        "model": "pooled AR(1), year FE only (between + within firm)",
+        "rho_firm_fe": 0.585362,
+        "se_firm_fe": 0.089195,
+        "half_life_firm_fe": 1.294332,
+        "n_firm_fe": 161
       },
       {
         "sic2": "26",
@@ -2191,7 +2846,12 @@
         "se": 0.073955,
         "half_life_years": 3.363148,
         "n": 203,
-        "firms": 30
+        "firms": 30,
+        "model": "pooled AR(1), year FE only (between + within firm)",
+        "rho_firm_fe": 0.2108,
+        "se_firm_fe": 0.105827,
+        "half_life_firm_fe": 0.445226,
+        "n_firm_fe": 203
       },
       {
         "sic2": "87",
@@ -2200,7 +2860,12 @@
         "se": 0.034602,
         "half_life_years": 2.988367,
         "n": 142,
-        "firms": 25
+        "firms": 25,
+        "model": "pooled AR(1), year FE only (between + within firm)",
+        "rho_firm_fe": 0.112122,
+        "se_firm_fe": 0.133146,
+        "half_life_firm_fe": 0.316771,
+        "n_firm_fe": 142
       },
       {
         "sic2": "36",
@@ -2209,7 +2874,12 @@
         "se": 0.066752,
         "half_life_years": 2.471225,
         "n": 2954,
-        "firms": 400
+        "firms": 400,
+        "model": "pooled AR(1), year FE only (between + within firm)",
+        "rho_firm_fe": 0.537549,
+        "se_firm_fe": 0.117039,
+        "half_life_firm_fe": 1.116654,
+        "n_firm_fe": 2954
       },
       {
         "sic2": "59",
@@ -2218,7 +2888,12 @@
         "se": 0.112364,
         "half_life_years": 1.717233,
         "n": 586,
-        "firms": 98
+        "firms": 98,
+        "model": "pooled AR(1), year FE only (between + within firm)",
+        "rho_firm_fe": 0.038953,
+        "se_firm_fe": 0.250491,
+        "half_life_firm_fe": 0.213579,
+        "n_firm_fe": 586
       },
       {
         "sic2": "34",
@@ -2227,7 +2902,12 @@
         "se": 0.13525,
         "half_life_years": 1.650055,
         "n": 490,
-        "firms": 58
+        "firms": 58,
+        "model": "pooled AR(1), year FE only (between + within firm)",
+        "rho_firm_fe": 0.224695,
+        "se_firm_fe": 0.162403,
+        "half_life_firm_fe": 0.464261,
+        "n_firm_fe": 490
       },
       {
         "sic2": "73",
@@ -2236,7 +2916,12 @@
         "se": 0.10803,
         "half_life_years": 1.552534,
         "n": 1042,
-        "firms": 198
+        "firms": 198,
+        "model": "pooled AR(1), year FE only (between + within firm)",
+        "rho_firm_fe": 0.183966,
+        "se_firm_fe": 0.160233,
+        "half_life_firm_fe": 0.409419,
+        "n_firm_fe": 1042
       },
       {
         "sic2": "38",
@@ -2245,7 +2930,12 @@
         "se": 0.051691,
         "half_life_years": 1.243773,
         "n": 2719,
-        "firms": 368
+        "firms": 368,
+        "model": "pooled AR(1), year FE only (between + within firm)",
+        "rho_firm_fe": 0.248915,
+        "se_firm_fe": 0.073981,
+        "half_life_firm_fe": 0.498435,
+        "n_firm_fe": 2719
       },
       {
         "sic2": "01",
@@ -2254,7 +2944,12 @@
         "se": 0.212905,
         "half_life_years": 1.204064,
         "n": 145,
-        "firms": 27
+        "firms": 27,
+        "model": "pooled AR(1), year FE only (between + within firm)",
+        "rho_firm_fe": 0.353048,
+        "se_firm_fe": 0.384957,
+        "half_life_firm_fe": 0.66575,
+        "n_firm_fe": 145
       },
       {
         "sic2": "50",
@@ -2263,7 +2958,12 @@
         "se": 0.326779,
         "half_life_years": 1.153726,
         "n": 600,
-        "firms": 81
+        "firms": 81,
+        "model": "pooled AR(1), year FE only (between + within firm)",
+        "rho_firm_fe": 0.577844,
+        "se_firm_fe": 0.0911,
+        "half_life_firm_fe": 1.263828,
+        "n_firm_fe": 600
       },
       {
         "sic2": "37",
@@ -2272,7 +2972,12 @@
         "se": 0.126335,
         "half_life_years": 1.146709,
         "n": 1017,
-        "firms": 132
+        "firms": 132,
+        "model": "pooled AR(1), year FE only (between + within firm)",
+        "rho_firm_fe": 0.212726,
+        "se_firm_fe": 0.138611,
+        "half_life_firm_fe": 0.447842,
+        "n_firm_fe": 1017
       },
       {
         "sic2": "20",
@@ -2281,7 +2986,12 @@
         "se": 0.129539,
         "half_life_years": 1.14386,
         "n": 913,
-        "firms": 130
+        "firms": 130,
+        "model": "pooled AR(1), year FE only (between + within firm)",
+        "rho_firm_fe": 0.075475,
+        "se_firm_fe": 0.034855,
+        "half_life_firm_fe": 0.26825,
+        "n_firm_fe": 913
       },
       {
         "sic2": "23",
@@ -2290,7 +3000,12 @@
         "se": 0.216715,
         "half_life_years": 1.053216,
         "n": 220,
-        "firms": 27
+        "firms": 27,
+        "model": "pooled AR(1), year FE only (between + within firm)",
+        "rho_firm_fe": 0.074693,
+        "se_firm_fe": 0.078633,
+        "half_life_firm_fe": 0.267174,
+        "n_firm_fe": 220
       },
       {
         "sic2": "35",
@@ -2299,7 +3014,12 @@
         "se": 0.11441,
         "half_life_years": 1.022222,
         "n": 1809,
-        "firms": 222
+        "firms": 222,
+        "model": "pooled AR(1), year FE only (between + within firm)",
+        "rho_firm_fe": 0.118749,
+        "se_firm_fe": 0.087666,
+        "half_life_firm_fe": 0.325308,
+        "n_firm_fe": 1809
       },
       {
         "sic2": "28",
@@ -2308,7 +3028,12 @@
         "se": 0.045949,
         "half_life_years": 0.929647,
         "n": 2905,
-        "firms": 449
+        "firms": 449,
+        "model": "pooled AR(1), year FE only (between + within firm)",
+        "rho_firm_fe": 0.161198,
+        "se_firm_fe": 0.063214,
+        "half_life_firm_fe": 0.379781,
+        "n_firm_fe": 2905
       },
       {
         "sic2": "51",
@@ -2317,7 +3042,12 @@
         "se": 0.140764,
         "half_life_years": 0.824396,
         "n": 438,
-        "firms": 61
+        "firms": 61,
+        "model": "pooled AR(1), year FE only (between + within firm)",
+        "rho_firm_fe": 0.145865,
+        "se_firm_fe": 0.165598,
+        "half_life_firm_fe": 0.360063,
+        "n_firm_fe": 438
       },
       {
         "sic2": "80",
@@ -2326,7 +3056,12 @@
         "se": 0.077334,
         "half_life_years": 0.756776,
         "n": 236,
-        "firms": 45
+        "firms": 45,
+        "model": "pooled AR(1), year FE only (between + within firm)",
+        "rho_firm_fe": -0.074199,
+        "se_firm_fe": 0.158096,
+        "half_life_firm_fe": null,
+        "n_firm_fe": 236
       },
       {
         "sic2": "39",
@@ -2335,7 +3070,12 @@
         "se": 0.150221,
         "half_life_years": 0.751971,
         "n": 309,
-        "firms": 50
+        "firms": 50,
+        "model": "pooled AR(1), year FE only (between + within firm)",
+        "rho_firm_fe": 0.265584,
+        "se_firm_fe": 0.19724,
+        "half_life_firm_fe": 0.522805,
+        "n_firm_fe": 309
       },
       {
         "sic2": "58",
@@ -2344,7 +3084,12 @@
         "se": 0.094285,
         "half_life_years": 0.519689,
         "n": 165,
-        "firms": 33
+        "firms": 33,
+        "model": "pooled AR(1), year FE only (between + within firm)",
+        "rho_firm_fe": -0.234865,
+        "se_firm_fe": 0.03948,
+        "half_life_firm_fe": null,
+        "n_firm_fe": 165
       }
     ]
   },
@@ -2353,7 +3098,7 @@
     "n_firms": 2852,
     "median_spearman": 0.0,
     "share_positive": 0.481066,
-    "note": "0.00 / 48.1% mean the linear coefficient is not a pattern in the median firm; it is below 0.5, so most firms are negative, not positive"
+    "note": "median Spearman = 0.00 and 48.1% of firms positive: the median firm shows no monotone CCC-ROA association, not a negative one. The linear coefficient is identified by firms with larger CCC variation, not by a sign shared by most firms."
   },
   "ccc_roa": {
     "beta": 0.000139,
@@ -2878,6 +3623,7 @@
   "robustness_ccc_roa": [
     {
       "spec": "1. baseline: CCC winsorized 1/99 industry-year, firm+year FE, controls",
+      "sample": "main",
       "dep_var": "roa",
       "term": "ccc_w",
       "beta": 0.000139,
@@ -2891,6 +3637,7 @@
     },
     {
       "spec": "2. no winsorization (raw CCC and raw ROA)",
+      "sample": "main",
       "dep_var": "roa",
       "term": "ccc",
       "beta": 0.00014,
@@ -2904,6 +3651,7 @@
     },
     {
       "spec": "3. average balances (mean of t and t-1)",
+      "sample": "main",
       "dep_var": "roa",
       "term": "ccc_avg",
       "beta": 4e-05,
@@ -2917,6 +3665,7 @@
     },
     {
       "spec": "4. alternative DPO denominator (revenue)",
+      "sample": "main",
       "dep_var": "roa",
       "term": "ccc_dpo_rev_w",
       "beta": 6.8e-05,
@@ -2930,6 +3679,7 @@
     },
     {
       "spec": "5. only negative-CCC firm-years",
+      "sample": "main",
       "dep_var": "roa",
       "term": "ccc_w",
       "beta": 0.000106,
@@ -2943,6 +3693,7 @@
     },
     {
       "spec": "6. only non-negative-CCC firm-years",
+      "sample": "main",
       "dep_var": "roa",
       "term": "ccc_w",
       "beta": 9.9e-05,
@@ -2956,6 +3707,7 @@
     },
     {
       "spec": "7. drop |CCC| > 365 days",
+      "sample": "main",
       "dep_var": "roa",
       "term": "ccc_w",
       "beta": 0.000376,
@@ -2969,6 +3721,7 @@
     },
     {
       "spec": "8. balanced panel 2015-2024 (all 10 years present)",
+      "sample": "main",
       "dep_var": "roa",
       "term": "ccc_w",
       "beta": 0.000204,
@@ -2982,19 +3735,21 @@
     },
     {
       "spec": "9. only firm-years using the charter's preferred tag for every input",
+      "sample": "main",
       "dep_var": "roa",
       "term": "ccc_w",
-      "beta": 0.000134,
-      "se": 6.6e-05,
-      "t": 2.020084,
-      "p": 0.043446,
-      "stars": "**",
-      "n": 4566,
-      "firms": 810,
+      "beta": 0.000123,
+      "se": 6.7e-05,
+      "t": 1.826494,
+      "p": 0.067856,
+      "stars": "*",
+      "n": 4542,
+      "firms": 806,
       "note": "roa_it = firm FE + year FE + b*CCC_it + log(assets) + gross margin; SE clustered by firm; ROA and CCC each used as supplied (roa_w on ccc_w; winsorized 1/99 when the column ends in _w)"
     },
     {
       "spec": "10. 2020 revenue growth: 3-digit SIC FE (vs 2-digit in headline)",
+      "sample": "main",
       "dep_var": "sales_growth_2020",
       "term": "ccc_w_lag",
       "beta": 5.9e-05,
@@ -3008,6 +3763,7 @@
     },
     {
       "spec": "11. baseline without controls (firm+year FE only)",
+      "sample": "main",
       "dep_var": "roa",
       "term": "ccc_w",
       "beta": 0.000184,
@@ -3021,6 +3777,7 @@
     },
     {
       "spec": "12. including financials, real estate & utilities (panel_full)",
+      "sample": "panel_full",
       "dep_var": "roa",
       "term": "ccc_w",
       "beta": 0.00023,
@@ -3105,12 +3862,20 @@
       "firms": 2956
     }
   ],
+  "robustness_summary": {
+    "n_specs_main_sample": 11,
+    "n_significant_p05": 7,
+    "n_positive": 11,
+    "n_specs_all": 12,
+    "n_significant_p05_all": 7,
+    "rule": "two-sided p < 0.05 on the CCC coefficient; main-sample specs exclude spec 12, which uses panel_full"
+  },
   "attrition": [
     {
       "level": "fact",
       "step": "F0. us-gaap facts, project tags, annual filings, consolidated, qtrs 0/4",
       "n": 2536529,
-      "firms": NaN
+      "firms": null
     },
     {
       "level": "fact",
@@ -3122,19 +3887,19 @@
       "level": "fact",
       "step": "F2. dropped: IFRS taxonomy (ifrs-full)",
       "n": 23790,
-      "firms": NaN
+      "firms": null
     },
     {
       "level": "fact",
       "step": "F3. dropped: duplicate tag/period, older filing",
       "n": 1257640,
-      "firms": NaN
+      "firms": null
     },
     {
       "level": "fact",
       "step": "F4. dropped: flow fact without annual duration (qtrs != 4)",
       "n": 1603,
-      "firms": NaN
+      "firms": null
     },
     {
       "level": "firm-year",
@@ -3146,19 +3911,19 @@
       "level": "firm-year",
       "step": "0a. dropped: duplicate fiscal-year label",
       "n": 1567,
-      "firms": NaN
+      "firms": null
     },
     {
       "level": "firm-year",
       "step": "0b. dropped: fiscal year outside 2010-2024",
       "n": 9556,
-      "firms": NaN
+      "firms": null
     },
     {
       "level": "firm-year",
       "step": "0c. firm-years in 2010-2024 window",
       "n": 105865,
-      "firms": NaN
+      "firms": 14232.0
     },
     {
       "level": "firm-year",
@@ -3399,6 +4164,43 @@
       "tier": "extra"
     }
   ],
+  "tag_sensitivity": {
+    "preferred_ap": {
+      "tag": "AccountsPayableCurrent",
+      "n": 22542,
+      "ccc_median": 80.537284,
+      "dpo_median": 47.993974,
+      "negative_ccc_share": 0.118312,
+      "n_negative": 2667
+    },
+    "fallback_ap": {
+      "tag": "AccountsPayableAndAccruedLiabilitiesCurrent",
+      "n": 2799,
+      "ccc_median": 3.759441,
+      "dpo_median": 111.691347,
+      "negative_ccc_share": 0.481243,
+      "n_negative": 1347
+    },
+    "pooled_negative_ccc_share": 0.158399,
+    "n_negative": 4014,
+    "fallback_share_panel": 0.110453,
+    "pooled_ccc_median": 74.965423,
+    "median_of_firm_median_ccc": 66.33565,
+    "n_firms": 3158,
+    "definition": "headline sample, unscreened; preferred vs fallback AP tag; ccc and dpo medians in days",
+    "bias": "the fallback adds accrued liabilities to trade payables, so it raises DPO and lowers CCC; the pooled median therefore understates the preferred-tag CCC level",
+    "fallback_share_tag_usage": 0.215858,
+    "tag_usage_denominator": "share of firm-years in the pre-filter tagged universe that reported any AP tag",
+    "preferred_only_ccc_roa": {
+      "spec": "9. only firm-years using the charter's preferred tag for every input",
+      "beta": 0.000123,
+      "se": 6.7e-05,
+      "t": 1.826494,
+      "p": 0.067856,
+      "n": 4542,
+      "note": "cleaner measurement (preferred tag for every input); weaker than the mixed-tag headline"
+    }
+  },
   "build_log": {
     "n_annual_filings_cached": 105027,
     "n_ciks_with_annual_filing": 15401,
@@ -3414,8 +4216,56 @@
     "firms_flow_balance_matched_on_exact_end": 14268,
     "firm_years_dropped_duplicate_fiscal_year": 1567,
     "firm_years_outside_2010_2024_window": 9556,
-    "firm_years_in_2010_2024_window": 105865
+    "firm_years_in_2010_2024_window": 105865,
+    "firms_in_2010_2024_window": 14232
   },
+  "attrition_missing_items": [
+    {
+      "item": "revenue",
+      "n_firm_years": 26071,
+      "share_of_dropped": 0.334509
+    },
+    {
+      "item": "cogs",
+      "n_firm_years": 55272,
+      "share_of_dropped": 0.709179
+    },
+    {
+      "item": "ar",
+      "n_firm_years": 47782,
+      "share_of_dropped": 0.613077
+    },
+    {
+      "item": "inventory",
+      "n_firm_years": 63363,
+      "share_of_dropped": 0.812992
+    },
+    {
+      "item": "ap",
+      "n_firm_years": 31957,
+      "share_of_dropped": 0.410031
+    },
+    {
+      "item": "any item missing (rows dropped)",
+      "n_firm_years": 77938,
+      "share_of_dropped": 1.0
+    },
+    {
+      "item": "exactly one item missing",
+      "n_firm_years": 20375,
+      "share_of_dropped": 0.261426
+    },
+    {
+      "item": "more than one item missing",
+      "n_firm_years": 57563,
+      "share_of_dropped": 0.738574
+    },
+    {
+      "item": "missing item-cells (sum of the five rows above)",
+      "n_firm_years": 224445,
+      "share_of_dropped": null
+    }
+  ],
   "funnel": {
     "ciks_with_annual_filing": 15401,
     "ciks_with_project_tag": 14268,
@@ -3452,6 +4302,6 @@
     "all_match": true,
     "n_unavailable": 0,
     "max_abs_rel_diff": 0.0,
-    "note": "panel value vs latest 10-K fact within 7 days of the panel fiscal-year end (companyfacts API); unavailable comparisons stay in the denominator"
+    "note": "internal spot check: panel value vs latest 10-K fact within 7 days of the panel fiscal-year end (companyfacts API). It validates parsing and period alignment for these three issuers, not the tag choice, the fallback order or coverage of the wider panel; unavailable comparisons stay in the denominator"
   }
 }

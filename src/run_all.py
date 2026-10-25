@@ -12,7 +12,6 @@ not fetched again, so the pipeline runs fully offline.
 from __future__ import annotations
 
 import argparse
-import json
 import sys
 import time
 import traceback
@@ -27,6 +26,7 @@ import analysis  # noqa: E402
 import build_panel  # noqa: E402
 import download_sec  # noqa: E402
 import figures  # noqa: E402
+from json_utils import write_json  # noqa: E402
 
 LOG = ROOT / "outputs" / "run_log.json"
 
@@ -78,7 +78,7 @@ def main(argv: list[str] | None = None) -> int:
                "finished_utc": datetime.now(timezone.utc).isoformat(timespec="seconds"),
                "total_seconds": round(time.time() - t0, 1),
                "steps": log}
-    LOG.write_text(json.dumps(payload, indent=2))
+    write_json(LOG, payload)
     print(f"\nTotal: {time.time() - t0:.1f}s -> {LOG.relative_to(ROOT)}")
     return 0
 

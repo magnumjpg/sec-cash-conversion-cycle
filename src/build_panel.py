@@ -20,13 +20,13 @@ data/processed/panel.csv          main sample, firm-year
 data/processed/panel.parquet      same, typed
 data/processed/panel_full.csv     pre-exclusion rows with exclusion flags
 outputs/tables/attrition.csv      CIK/firm-year attrition by reason
+outputs/tables/attrition_missing_items.csv  decomposition of the missing-input drop
 outputs/tables/tag_usage.csv      which XBRL tag supplied each concept
 outputs/tables/coverage_by_year.csv
 """
 
 from __future__ import annotations
 
-import json
 import sys
 from pathlib import Path
 
@@ -34,6 +34,7 @@ import numpy as np
 import pandas as pd
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
+from json_utils import write_json  # noqa: E402
 from tags import (  # noqa: E402
     FLOW_CONCEPTS, FORMS, INSTANT_CONCEPTS, TAG_MAP, TAG_RANK, CONCEPT_OF_TAG,
     TIER_OF_TAG, sic2, sic_division,
@@ -190,6 +191,7 @@ def build_panel() -> dict:
     log["firm_years_outside_2010_2024_window"] = int((~in_window).sum())
     panel = panel[in_window].copy()
     log["firm_years_in_2010_2024_window"] = int(len(panel))
+    log["firms_in_2010_2024_window"] = int(panel["cik"].nunique())
 
     # universe metadata: latest SIC / name / ticker per CIK
     meta = subs.sort_values("filed").drop_duplicates("cik", keep="last")[["cik", "name", "sic"]]
@@ -244,7 +246,8 @@ def build_panel() -> dict:
     record_n("0b. dropped: fiscal year outside 2010-2024",
              log["firm_years_outside_2010_2024_window"])
     record_n("0c. firm-years in 2010-2024 window",
-             log["firm_years_in_2010_2024_window"])
+             log["firm_years_in_2010_2024_window"],
+             log.get("firms_in_2010_2024_window"))
 
     u = panel[[c for c in panel.columns if c.startswith("uom_")]]
     usd_ok = ~(u.notna() & (u != "USD")).any(axis=1)
@@ -252,8 +255,43 @@ def build_panel() -> dict:
     panel = panel[usd_ok].copy()
 
     need = ["revenue", "cogs", "ar", "inventory", "ap"]
-    present = panel[need].notna().all(axis=1)
+    miss = panel[need].isna()
+    present = ~miss.any(axis=1)
     record("2. dropped: missing revenue/COGS/AR/inventory/AP", panel[~present])
+
+    # Decompose that one bucket. A firm-year can miss more than one input, so
+    # the per-item counts overlap and intentionally sum to more than the number
+    # of dropped rows; both totals are written so the overlap is visible.
+    dropped_missing = panel[~present]
+    n_dropped_missing = int(len(dropped_missing))
+    missing_rows: list[dict] = []
+    for item in need:
+        n_missing = int(miss.loc[~present, item].sum())
+        missing_rows.append({
+            "item": item,
+            "n_firm_years": n_missing,
+            "share_of_dropped": round(n_missing / n_dropped_missing, 6)
+            if n_dropped_missing else None,
+        })
+    n_missing_per_row = miss.loc[~present].sum(axis=1)
+    missing_rows.extend([
+        {"item": "any item missing (rows dropped)", "n_firm_years": n_dropped_missing,
+         "share_of_dropped": 1.0},
+        {"item": "exactly one item missing", "n_firm_years": int((n_missing_per_row == 1).sum()),
+         "share_of_dropped": round(float((n_missing_per_row == 1).mean()), 6)},
+        {"item": "more than one item missing", "n_firm_years": int((n_missing_per_row > 1).sum()),
+         "share_of_dropped": round(float((n_missing_per_row > 1).mean()), 6)},
+        {"item": "missing item-cells (sum of the five rows above)",
+         "n_firm_years": int(n_missing_per_row.sum()),
+         "share_of_dropped": None},
+    ])
+    missing_df = pd.DataFrame(missing_rows)
+    missing_df.to_csv(TABLES / "attrition_missing_items.csv", index=False)
+    missing_records = [
+        {k: (None if pd.isna(v) else v) for k, v in row.items()}
+        for row in missing_df.to_dict(orient="records")
+    ]
+
     panel = panel[present].copy()
 
     pos = (panel["revenue"] > 0) & (panel["cogs"] > 0)
@@ -368,12 +406,12 @@ def build_panel() -> dict:
         "year_max": int(main["fiscal_year"].max()),
         "n_industries_sic2": int(main["sic2"].nunique()),
         "attrition": att.to_dict(orient="records"),
+        "attrition_missing_items": missing_records,
         "tag_usage_top": usage_out.head(40).to_dict(orient="records"),
         "raw": {k: int(v) for k, v in log.items()},
         "rows_per_year": cov.set_index("fiscal_year")["rows"].to_dict(),
     }
-    with open(ROOT / "outputs" / "panel_stats.json", "w", encoding="utf-8") as fh:
-        json.dump(stats, fh, indent=2, default=int)
+    write_json(ROOT / "outputs" / "panel_stats.json", stats)
 
     print(f"panel: {len(main):,} firm-years, {main['cik'].nunique():,} firms, "
           f"{main['fiscal_year'].min()}-{main['fiscal_year'].max()}")
