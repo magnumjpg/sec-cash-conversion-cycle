@@ -2,22 +2,23 @@
 
 [![CI](https://github.com/magnumjpg/sec-cash-conversion-cycle/actions/workflows/ci.yml/badge.svg)](https://github.com/magnumjpg/sec-cash-conversion-cycle/actions/workflows/ci.yml) [![tests](https://img.shields.io/badge/tests-30%20passed-brightgreen)](#) [![Python](https://img.shields.io/badge/python-3.11-blue)](https://www.python.org/) [![License](https://img.shields.io/badge/license-MIT-green)](LICENSE) [![Data](https://img.shields.io/badge/data-SEC%20XBRL%20filings-informational)](DATA.md)
 
-[Resumen en español](#resumen-en-español) · [Método](METHOD.md) · [Limitaciones](LIMITATIONS.md) · [Decisiones](DECISIONS.md)
+[Resumen en español](#resumen-en-español) · [Method](METHOD.md) · [Limitations](LIMITATIONS.md) · [Decisions](DECISIONS.md)
 
-**At a glance**
+**US listed firms hold about 75 days of working capital in their cash conversion cycle, and the level is mostly a firm trait rather than an industry one.**
+
+*SEC XBRL · 2010–2024 · 25,341 firm-years · 3,158 firms · 30 tests*
+
+---
+
+## At a glance
 
 - **Question:** how long is the cash conversion cycle (CCC) of US listed firms, and is it associated with profitability and with the 2020/2022 shocks?
 - **Data:** SEC XBRL Financial Statement Data Sets, fiscal years 2010–2024, **25,341 firm-years / 3,158 firms**.
 - **Method:** CCC from fiscal-year-end balances; firm+year FE for the ROA association; pooled and firm-FE AR(1) for persistence.
 - **Headline:** pooled firm-year median CCC **74.97 days** (median of firm-level medians **66.34**); CCC–ROA **β = +0.000139**.
-- **Main caveat:** the CCC level is tag-sensitive (11.0% of panel rows use an AP fallback), persistence is a **range (ρ ≈ 0.27–0.69)**, and everything here is descriptive.
+- **Caveat:** the CCC level is tag-sensitive (11.0% of panel rows use an AP fallback), persistence is a **range (ρ ≈ 0.27–0.69)**, and everything here is descriptive.
 
-**Question.** How long is the cash conversion cycle (CCC) of US listed firms, is
-it a stable characteristic or a fast mean-reverting ratio, and is it associated
-with profitability and with how firms fared in the 2020 demand shock and the
-2022 cost shock?
-
-**Answer in one line.** The pooled firm-year median CCC is **75 days** on 25,341
+**The answer in one paragraph.** The pooled firm-year median CCC is **75 days** on 25,341
 firm-years (the median of firm-level medians is 66.3), and CCC is mostly a
 *firm* trait rather than an industry one (64.2% of its variance is between
 firms, 6.0% between industries). Persistence is a **range, not a point**: a
@@ -28,9 +29,7 @@ is *positively* but weakly associated with ROA (β = +0.000139, n = 23,408) — 
 opposite of the working-capital story — while its FY2020/FY2022 shock exposure
 is weak and non-monotone.
 
----
-
-## Building the panel
+## 1. Building the panel
 
 The panel is built from SEC XBRL filings, not from a vendor. The source is the
 SEC Financial Statement Data Sets (bulk extracts of the same facts as
@@ -78,7 +77,7 @@ All ratios use fiscal-year-end balances. Lags are used only when consecutive
 fiscal-year ends are 350–380 days apart, so a year-end change does not create a
 fake 15-month year.
 
-## 1. Level and structure
+## 2. Level and structure
 
 | Measure | Median, days |
 |---|---:|
@@ -101,6 +100,10 @@ to **134.80 days in instruments**; communications (2.63), personal services
 (7.84) and petroleum refining (18.87) also sit near or below zero. That is the
 "negative CCC as a business model" group: they collect from customers before
 they pay suppliers.
+
+![Figure 1 — CCC by industry](outputs/figures/fig1_ccc_by_industry.png)
+
+*Figure 1. Median cash conversion cycle by two-digit SIC industry, 2010–2024. Bars are industry medians, whiskers the interquartile range, and the dashed line the 75-day sample median; only industries with at least 150 firm-years are shown. Source: `outputs/figures/fig1_ccc_by_industry.png`.*
 
 The pooled CCC level mixes two payables concepts, and the project does not hide
 it. In the main panel, 2,799 firm-years (11.0%) use
@@ -150,7 +153,7 @@ screen is not neutral: the dropped group has a median CCC of −197.41 days, and
 the kept sample's median is 77.93 days. That difference is disclosed, not
 hidden.
 
-## 2. Persistence: a range, bounded by two biased estimators
+## 3. Persistence: a range, bounded by two biased estimators
 
 Two estimators bracket the AR(1) coefficient; neither is the truth on its own.
 
@@ -183,6 +186,10 @@ identify the latter.
 | DIO only (winsorized), pooled | 0.651 | 1.62 | 20,576 |
 | DPO only (winsorized), pooled | 0.618 | 1.44 | 20,564 |
 
+![Figure 2 — Persistence of the cash conversion cycle](outputs/figures/fig2_persistence.png)
+
+*Figure 2. Pooled AR(1) of the cash conversion cycle: CCC in year t against year t−1, with 20-bin medians and the fitted slope ρ = 0.685 (half-life 1.83 years, N = 20,576). Source: `outputs/figures/fig2_persistence.png`.*
+
 The by-industry table uses the same **pooled** estimator (year FE only, so it
 mixes between- and within-firm variation) and is labelled that way in
 `outputs/tables/persistence_by_industry_ccc.csv`; a firm-FE ρ is reported
@@ -194,7 +201,7 @@ CCC is persistent enough to be a meaningful firm characteristic, but the data
 do not support a single "X% of the gap closes each year" claim: the pooled and
 within estimators disagree by a factor of about 2.6.
 
-## 3. CCC and ROA: positive, small, and against the prior
+## 4. CCC and ROA: positive, small, and against the prior
 
 `ROA_it = α_i + δ_t + β·CCC_it + γ·log(assets)_it + θ·gross_margin_it + ε_it`,
 firm and year fixed effects, SEs clustered by firm, CCC and ROA winsorized 1/99
@@ -229,7 +236,11 @@ be able to support more sales and absorb shocks. A third reading — that
 lengthening CCC *causes* higher ROA — is not supported by this design and is not
 claimed. The association is small: 0.06 SD.
 
-## 4. Shock exposure: weak and non-monotone
+![Figure 3 — CCC and ROA within firm-year](outputs/figures/fig3_ccc_vs_roa.png)
+
+*Figure 3. Cash conversion cycle and ROA with firm and year fixed effects removed, with 20-bin medians and the fitted slope β = +0.000139 (t = 3.8, N = 23,408). Source: `outputs/figures/fig3_ccc_vs_roa.png`.*
+
+## 5. Shock exposure: weak and non-monotone
 
 Cross-sections with 2-digit SIC fixed effects and HC1 standard errors;
 pre-shock CCC is the winsorized lagged value. Descriptive only. The labels are
@@ -275,7 +286,7 @@ does not contain write-down tags and the source zips were deleted, so recovering
 them requires re-downloading the quarterly extracts (`DECISIONS.md → D-12`). The
 resilience evidence here is profitability, revenue, cash and gross margin only.
 
-## What this does not prove
+## 6. What this does not prove
 
 - **No causality.** CCC is chosen jointly with industry, growth, bargaining
   power, supplier terms and product mix. A positive CCC–ROA coefficient does not
@@ -305,7 +316,7 @@ resilience evidence here is profitability, revenue, cash and gross margin only.
   estimator move the persistence estimate between 0.27 and 0.69 and the ROA
   coefficient between 0.00004 and 0.00038. Full list: `LIMITATIONS.md`.
 
-## Literature and positioning
+## 7. Literature and positioning
 
 The working-capital literature mostly reports a *negative* association between
 CCC and profitability; this panel is a descriptive measurement exercise, not a
@@ -349,7 +360,7 @@ the headline level. It is not a causal estimate of the return to shortening the
 CCC, and it does not use the CRSP/Compustat data that most of the cited papers
 use.
 
-## Reproduce
+## 8. Reproduce
 
 ```
 python src/download_sec.py            # all cached quarters (no-op if present)
@@ -375,7 +386,7 @@ volumes, cache layout and the full attrition funnel are in `DATA.md`.
 | `python src/verify_known_firms.py` | ok — internal spot check 63/63 |
 | `python src/run_all.py --skip-download --test` | ok — 30 tests passed |
 
-## Files
+## 9. Files
 
 ```
 02_working_capital_sec/
@@ -406,11 +417,14 @@ volumes, cache layout and the full attrition funnel are in `DATA.md`.
   .github/workflows/ci.yml  install + pytest on Python 3.11
 ```
 
-Figures: CCC by industry (fig1), persistence scatter (fig2), CCC vs ROA within
-firm-year (fig3), 2020 shock exposure (fig4), CCC time series (fig5), 2022
-margin change by pre-shock CCC quintile (fig6).
+Figures: [CCC by industry](outputs/figures/fig1_ccc_by_industry.png) (fig1),
+[persistence scatter](outputs/figures/fig2_persistence.png) (fig2),
+[CCC vs ROA within firm-year](outputs/figures/fig3_ccc_vs_roa.png) (fig3),
+[2020 shock exposure](outputs/figures/fig4_shock_2020.png) (fig4),
+[CCC time series](outputs/figures/fig5_ccc_time_series.png) (fig5) and
+[2022 margin change by pre-shock CCC quintile](outputs/figures/fig6_shock_2022.png) (fig6).
 
-## Headline numbers, all from `outputs/results.json`
+## Appendix — Headline numbers, all from `outputs/results.json`
 
 | Key | Value |
 |---|---:|
