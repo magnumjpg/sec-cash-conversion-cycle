@@ -1,5 +1,9 @@
 # Cash Conversion and Resilience — 15 Years of SEC Filings
 
+[![CI](https://github.com/magnumjpg/sec-cash-conversion-cycle/actions/workflows/ci.yml/badge.svg)](https://github.com/magnumjpg/sec-cash-conversion-cycle/actions/workflows/ci.yml) [![tests](https://img.shields.io/badge/tests-30%20passed-brightgreen)](#) [![Python](https://img.shields.io/badge/python-3.11-blue)](https://www.python.org/) [![License](https://img.shields.io/badge/license-MIT-green)](LICENSE) [![Data](https://img.shields.io/badge/data-SEC%20XBRL%20filings-informational)](DATA.md)
+
+[Resumen en español](#resumen-en-español) · [Método](METHOD.md) · [Limitaciones](LIMITATIONS.md) · [Decisiones](DECISIONS.md)
+
 **At a glance**
 
 - **Question:** how long is the cash conversion cycle (CCC) of US listed firms, and is it associated with profitability and with the 2020/2022 shocks?
