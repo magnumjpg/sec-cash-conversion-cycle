@@ -1,6 +1,9 @@
 concept,tag,firm_years,tier,preferred,share_of_concept
-ap,AccountsPayableCurrent,62195,charter,True,0.7841419133592213
-ap,AccountsPayableAndAccruedLiabilitiesCurrent,17121,charter,False,0.21585808664077866
+accrued_liabilities,AccruedLiabilitiesCurrent,40931,charter,True,0.8633774890313871
+accrued_liabilities,OtherAccruedLiabilitiesCurrent,6477,extra,False,0.1366225109686129
+ap,AccountsPayableCurrent,62195,charter,True,0.7498432677469136
+ap,AccountsPayableAndAccruedLiabilitiesCurrent,17004,charter,False,0.20500578703703703
+ap,AccountsPayableTradeCurrent,3745,extra,False,0.045150945216049385
 ar,AccountsReceivableNetCurrent,54812,charter,True,0.8828399317076313
 ar,ReceivablesNetCurrent,6577,charter,False,0.10593370486099926
 ar,AccountsReceivableGrossCurrent,697,charter,False,0.011226363431369391
@@ -16,10 +19,13 @@ equity,StockholdersEquityIncludingPortionAttributableToNoncontrollingInterest,97
 inventory,InventoryNet,44910,charter,True,0.9855167873601053
 inventory,InventoryGross,482,charter,False,0.010577134079438227
 inventory,InventoryFinishedGoodsNetOfReserves,178,charter,False,0.0039060785604564407
+inventory_write_down,InventoryWriteDown,7833,charter,True,1.0
 liabilities_current,LiabilitiesCurrent,87918,charter,True,1.0
 net_income,NetIncomeLoss,110036,charter,True,0.9449936019099802
 net_income,ProfitLoss,6405,extra,False,0.05500639809001984
 op_income,OperatingIncomeLoss,87219,charter,True,1.0
+ppe_net,PropertyPlantAndEquipmentNet,82338,charter,True,0.9996964656459818
+ppe_net,PropertyPlantAndEquipmentNetExcludingCapitalLeasedAssets,25,extra,False,0.00030353435401818776
 revenue,Revenues,38816,charter,False,0.4496599979148083
 revenue,RevenueFromContractWithCustomerExcludingAssessedTax,22301,charter,True,0.2583436627550016
 revenue,SalesRevenueNet,16743,charter,False,0.19395757793403845

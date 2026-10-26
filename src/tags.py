@@ -10,12 +10,17 @@ Column `tier` tells where a tag comes from:
   "extra"    -> not in the charter; added as a last-resort fallback, documented in
                 DECISIONS.md (D-05).  Never preferred over a charter tag.
 
-Mapping version: 1.0.0  (2026-10)
+Mapping version: 2.0.0  (2026-10)
+
+Mapping 2.0.0 adds the tags needed to audit the two accounting problems found in the
+external review: accrued liabilities (to reconstruct trade AP), net PP&E (to
+control for capital intensity) and inventory write-downs (a resilience outcome
+that v1.0.0 never cached).
 """
 
 from __future__ import annotations
 
-MAPPING_VERSION = "1.0.0"
+MAPPING_VERSION = "2.0.0"
 
 # concept -> list of (tag, tier)
 TAG_MAP: dict[str, list[tuple[str, str]]] = {
@@ -43,7 +48,23 @@ TAG_MAP: dict[str, list[tuple[str, str]]] = {
     ],
     "ap": [
         ("AccountsPayableCurrent", "charter"),
+        ("AccountsPayableTradeCurrent", "extra"),
         ("AccountsPayableAndAccruedLiabilitiesCurrent", "charter"),
+    ],
+    # Only used to *decompose* the AP fallback.  `AccountsPayableAndAccrued`
+    # minus `AccruedLiabilitiesCurrent` is a residual trade-AP proxy, not a
+    # directly reported trade payable; the panel keeps the quality flag.
+    "accrued_liabilities": [
+        ("AccruedLiabilitiesCurrent", "charter"),
+        ("OtherAccruedLiabilitiesCurrent", "extra"),
+    ],
+    "ppe_net": [
+        ("PropertyPlantAndEquipmentNet", "charter"),
+        ("PropertyPlantAndEquipmentNetExcludingCapitalLeasedAssets", "extra"),
+    ],
+    "inventory_write_down": [
+        ("InventoryWriteDown", "charter"),
+        ("InventoryImpairmentLoss", "extra"),
     ],
     "op_income": [
         ("OperatingIncomeLoss", "charter"),
@@ -75,9 +96,9 @@ TAG_MAP: dict[str, list[tuple[str, str]]] = {
 }
 
 # Balance-sheet (point-in-time, qtrs == 0) vs income-statement (duration, qtrs == 4).
-INSTANT_CONCEPTS = ["ar", "inventory", "ap", "assets", "assets_current",
-                    "liabilities_current", "cash", "equity"]
-FLOW_CONCEPTS = ["revenue", "cogs", "op_income", "net_income"]
+INSTANT_CONCEPTS = ["ar", "inventory", "ap", "accrued_liabilities", "ppe_net",
+                    "assets", "assets_current", "liabilities_current", "cash", "equity"]
+FLOW_CONCEPTS = ["revenue", "cogs", "op_income", "net_income", "inventory_write_down"]
 
 # Used by download_sec.py to slice num.txt before caching.
 TAG_UNIVERSE: set[str] = {tag for tags in TAG_MAP.values() for tag, _ in tags}
@@ -94,7 +115,35 @@ TIER_OF_TAG: dict[str, str] = {
 }
 PREFERRED_TAG: dict[str, str] = {c: tags[0][0] for c, tags in TAG_MAP.items()}
 
+# Direct trade-payable tags vs. the contaminated AP+accruals fallback.
+AP_DIRECT_TAGS = {"AccountsPayableCurrent", "AccountsPayableTradeCurrent"}
+AP_FALLBACK_TAG = "AccountsPayableAndAccruedLiabilitiesCurrent"
+
 FORMS = {"10-K", "10-K/A", "20-F", "20-F/A", "40-F", "40-F/A"}
+QUARTERLY_FORMS = {"10-Q", "10-Q/A", "10-K", "10-K/A", "20-F", "20-F/A", "40-F", "40-F/A"}
+
+
+def trade_ap(ap_value: float | None, ap_tag: str | None,
+             accrued_value: float | None) -> tuple[float | None, str]:
+    """Return (trade AP, quality).
+
+    Quality is one of:
+      "direct"                 the filing reported a trade-payable tag
+      "reconstructed"          AP+accruals minus accrued liabilities, positive
+      "fallback_contaminated"  AP+accruals with no usable accrual split
+    """
+    if ap_value is None or (isinstance(ap_value, float) and ap_value != ap_value):
+        return None, "missing"
+    if ap_tag in AP_DIRECT_TAGS:
+        return float(ap_value), "direct"
+    if ap_tag == AP_FALLBACK_TAG and accrued_value is not None:
+        try:
+            residual = float(ap_value) - float(accrued_value)
+        except (TypeError, ValueError):
+            return None, "fallback_contaminated"
+        if residual > 0:
+            return residual, "reconstructed"
+    return None, "fallback_contaminated"
 
 # 2-digit SIC -> short label (SIC divisions; used only for display/grouping).
 SIC_DIVISIONS: dict[str, str] = {

@@ -1,0 +1,46 @@
+{
+  "n_rows_current_period": 1020566,
+  "n_rows_ifrs_excluded": 50,
+  "n_rows_project_tags_usd": 1019020,
+  "duplicate_tag_values_collapsed": 15654,
+  "instant_facts": 534714,
+  "quarterly_flow_facts": 217210,
+  "fiscal_year_labels_implausible": 3,
+  "firm_quarters_outside_window": 174,
+  "firm_quarters": 72811,
+  "firms": 8097,
+  "rows_out": 72811,
+  "firms_out": 8097,
+  "quarters": [
+    "2018Q1",
+    "2018Q2",
+    "2018Q3",
+    "2018Q4",
+    "2019Q1",
+    "2019Q2",
+    "2019Q3",
+    "2019Q4",
+    "2020Q1",
+    "2020Q2",
+    "2020Q3",
+    "2020Q4",
+    "2021Q1",
+    "2021Q2",
+    "2021Q3",
+    "2021Q4",
+    "2022Q1",
+    "2022Q2",
+    "2022Q3",
+    "2022Q4"
+  ],
+  "ap_quality_counts": {
+    "direct": 42903,
+    "fallback_contaminated": 29720,
+    "reconstructed": 188
+  },
+  "coverage": {
+    "sales_growth_yoy": 35273,
+    "gross_margin_change_yoy": 21108,
+    "write_down_to_cogs_q": 1053
+  }
+}

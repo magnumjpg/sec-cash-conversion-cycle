@@ -1,0 +1,5 @@
+measure,value,share_negative_ccc,rows
+"median CCC, clean AP (days)",80.382955,0.116389,24272
+"median CCC, all rows with resolved AP (days)",75.424063,0.153296,26974
+"CCC-ROA beta, capital-intensity controls",0.00013,,22811
+"CCC-ROA beta, industry x year FE",0.000131,,22811

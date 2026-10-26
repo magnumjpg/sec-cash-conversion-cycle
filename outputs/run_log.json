@@ -1,36 +1,48 @@
 {
-  "started_utc": "2026-10-25T14:53:30+00:00",
-  "finished_utc": "2026-10-25T14:54:15+00:00",
-  "total_seconds": 44.3,
+  "started_utc": "2026-10-26T11:24:00+00:00",
+  "finished_utc": "2026-10-26T11:29:12+00:00",
+  "total_seconds": 312.1,
   "steps": [
     {
       "step": "build_panel",
       "status": "ok",
-      "seconds": 12.3,
+      "seconds": 29.0,
+      "error": null
+    },
+    {
+      "step": "build_quarterly",
+      "status": "ok",
+      "seconds": 11.9,
+      "error": null
+    },
+    {
+      "step": "analysis_quarterly",
+      "status": "ok",
+      "seconds": 4.1,
       "error": null
     },
     {
       "step": "verify_known_firms",
       "status": "ok",
-      "seconds": 0.2,
+      "seconds": 0.4,
       "error": null
     },
     {
       "step": "analysis",
       "status": "ok",
-      "seconds": 22.2,
+      "seconds": 239.5,
       "error": null
     },
     {
       "step": "figures",
       "status": "ok",
-      "seconds": 6.8,
+      "seconds": 23.1,
       "error": null
     },
     {
       "step": "pytest",
       "status": "ok",
-      "seconds": 2.8,
+      "seconds": 4.1,
       "error": null
     }
   ]

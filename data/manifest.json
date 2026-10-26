@@ -1,5 +1,5 @@
 {
-  "generated_at_utc": "2026-10-24T22:34:11+00:00",
+  "generated_at_utc": "2026-10-26T10:48:46+00:00",
   "user_agent": "portfolio-research/1.0 (portfolio-research@example.com)",
   "files": [
     {
@@ -7,7 +7,7 @@
       "path": "data/raw/company_tickers.json",
       "bytes": 798155,
       "sha256": "6f9cc4500a98fb4c048328d7df392ed48c092613ec0c3e93cd6c7a3502886074",
-      "fetched_at_utc": "2026-10-24T22:33:47+00:00",
+      "fetched_at_utc": "2026-10-26T10:32:44+00:00",
       "note": "SEC company ticker listing",
       "source_bytes": 798155,
       "retained": true
@@ -17,7 +17,7 @@
       "path": "data/raw/company_tickers_exchange.json",
       "bytes": 523122,
       "sha256": "f5a8b5c09137999ca3815f91df8b97a3602f24d0818255001e38bc77aae9c472",
-      "fetched_at_utc": "2026-10-24T22:33:48+00:00",
+      "fetched_at_utc": "2026-10-26T10:32:45+00:00",
       "note": "SEC company ticker listing",
       "source_bytes": 523122,
       "retained": true
@@ -27,17 +27,19 @@
       "path": "data/raw/fsds/2010q1_forms.parquet",
       "bytes": 2228,
       "sha256": "3d5c0669227a65ac4e8d704cda1c9b1b415819199298309728446944a93daa4a",
-      "fetched_at_utc": "2026-10-24T21:58:43+00:00",
-      "note": "reconstructed from local cache",
+      "fetched_at_utc": "2026-10-26T10:32:46+00:00",
+      "note": "derived from https://www.sec.gov/files/dera/data/financial-statement-data-sets/2010q1.zip (5311282 bytes); sub/num filtered to annual forms + project tags, qtrs 0,4",
+      "source_bytes": 5311282,
       "retained": true
     },
     {
       "url": "https://www.sec.gov/files/dera/data/financial-statement-data-sets/2010q1.zip",
       "path": "data/raw/fsds/2010q1_num.parquet",
-      "bytes": 129330,
-      "sha256": "5cd4ae175f76c33f77587926bc13397f801df1f97e23e46ed69d1e043663fa20",
-      "fetched_at_utc": "2026-10-24T21:58:43+00:00",
-      "note": "reconstructed from local cache",
+      "bytes": 140012,
+      "sha256": "773713c17d9b6eca1ebd0e9908ee97751b81e6dfb51c06fc06c28127d92acd3f",
+      "fetched_at_utc": "2026-10-26T10:32:46+00:00",
+      "note": "derived from https://www.sec.gov/files/dera/data/financial-statement-data-sets/2010q1.zip (5311282 bytes); sub/num filtered to annual forms + project tags, qtrs 0,4",
+      "source_bytes": 5311282,
       "retained": true
     },
     {
@@ -45,8 +47,9 @@
       "path": "data/raw/fsds/2010q1_sub.parquet",
       "bytes": 20718,
       "sha256": "8ef2922e28c317fe8a663ffc1b9e410eec0f50ac23b69be5eb5580484656b339",
-      "fetched_at_utc": "2026-10-24T21:58:43+00:00",
-      "note": "reconstructed from local cache",
+      "fetched_at_utc": "2026-10-26T10:32:46+00:00",
+      "note": "derived from https://www.sec.gov/files/dera/data/financial-statement-data-sets/2010q1.zip (5311282 bytes); sub/num filtered to annual forms + project tags, qtrs 0,4",
+      "source_bytes": 5311282,
       "retained": true
     },
     {
@@ -54,17 +57,19 @@
       "path": "data/raw/fsds/2010q2_forms.parquet",
       "bytes": 2259,
       "sha256": "4f7889692a82beb137702dfb75ef4f603a3945cf00928355a3dc369079723d80",
-      "fetched_at_utc": "2026-10-24T21:58:45+00:00",
-      "note": "reconstructed from local cache",
+      "fetched_at_utc": "2026-10-26T10:32:48+00:00",
+      "note": "derived from https://www.sec.gov/files/dera/data/financial-statement-data-sets/2010q2.zip (3994236 bytes); sub/num filtered to annual forms + project tags, qtrs 0,4",
+      "source_bytes": 3994236,
       "retained": true
     },
     {
       "url": "https://www.sec.gov/files/dera/data/financial-statement-data-sets/2010q2.zip",
       "path": "data/raw/fsds/2010q2_num.parquet",
-      "bytes": 19404,
-      "sha256": "1a1192123da2610df3389e44229d08893853b8cfca1d40b9405975350c03b854",
-      "fetched_at_utc": "2026-10-24T21:58:45+00:00",
-      "note": "reconstructed from local cache",
+      "bytes": 20749,
+      "sha256": "f60a5ef1f51818d2ca67b25331eeff59a8c97a76f6b7f52ae3c1f29ecd0933ba",
+      "fetched_at_utc": "2026-10-26T10:32:48+00:00",
+      "note": "derived from https://www.sec.gov/files/dera/data/financial-statement-data-sets/2010q2.zip (3994236 bytes); sub/num filtered to annual forms + project tags, qtrs 0,4",
+      "source_bytes": 3994236,
       "retained": true
     },
     {
@@ -72,8 +77,9 @@
       "path": "data/raw/fsds/2010q2_sub.parquet",
       "bytes": 7514,
       "sha256": "c84d25c3bd65c454b783e6c3f7daf769caa9d403b0c35aa1c2ed4a88ba4df294",
-      "fetched_at_utc": "2026-10-24T21:58:45+00:00",
-      "note": "reconstructed from local cache",
+      "fetched_at_utc": "2026-10-26T10:32:48+00:00",
+      "note": "derived from https://www.sec.gov/files/dera/data/financial-statement-data-sets/2010q2.zip (3994236 bytes); sub/num filtered to annual forms + project tags, qtrs 0,4",
+      "source_bytes": 3994236,
       "retained": true
     },
     {
@@ -81,17 +87,19 @@
       "path": "data/raw/fsds/2010q3_forms.parquet",
       "bytes": 2286,
       "sha256": "5b5588aed1abbf89ba90b2f7188216b886de8b0267f22d02b2d8a5fb375e1660",
-      "fetched_at_utc": "2026-10-24T21:58:49+00:00",
-      "note": "reconstructed from local cache",
+      "fetched_at_utc": "2026-10-26T10:32:51+00:00",
+      "note": "derived from https://www.sec.gov/files/dera/data/financial-statement-data-sets/2010q3.zip (13745950 bytes); sub/num filtered to annual forms + project tags, qtrs 0,4",
+      "source_bytes": 13745950,
       "retained": true
     },
     {
       "url": "https://www.sec.gov/files/dera/data/financial-statement-data-sets/2010q3.zip",
       "path": "data/raw/fsds/2010q3_num.parquet",
-      "bytes": 20151,
-      "sha256": "9afb5d70415ab17a0054d217b9b82ca3b695bd66d2375ee3f9c78355de57adab",
-      "fetched_at_utc": "2026-10-24T21:58:49+00:00",
-      "note": "reconstructed from local cache",
+      "bytes": 21620,
+      "sha256": "8ea2318c8908ecd55c3af317712168af397c0bcf7ff614aa0ebd5073e145188a",
+      "fetched_at_utc": "2026-10-26T10:32:51+00:00",
+      "note": "derived from https://www.sec.gov/files/dera/data/financial-statement-data-sets/2010q3.zip (13745950 bytes); sub/num filtered to annual forms + project tags, qtrs 0,4",
+      "source_bytes": 13745950,
       "retained": true
     },
     {
@@ -99,8 +107,9 @@
       "path": "data/raw/fsds/2010q3_sub.parquet",
       "bytes": 7533,
       "sha256": "94b1d03046fd5490950c632cf2eb3143d9612899b56be8be6693d4713006bb7f",
-      "fetched_at_utc": "2026-10-24T21:58:49+00:00",
-      "note": "reconstructed from local cache",
+      "fetched_at_utc": "2026-10-26T10:32:51+00:00",
+      "note": "derived from https://www.sec.gov/files/dera/data/financial-statement-data-sets/2010q3.zip (13745950 bytes); sub/num filtered to annual forms + project tags, qtrs 0,4",
+      "source_bytes": 13745950,
       "retained": true
     },
     {
@@ -108,17 +117,19 @@
       "path": "data/raw/fsds/2010q4_forms.parquet",
       "bytes": 2270,
       "sha256": "08101ada87729b8d216816c48b30e62a6c6e2ab6f6d1a729eac4df9fb6258fee",
-      "fetched_at_utc": "2026-10-24T21:58:53+00:00",
-      "note": "reconstructed from local cache",
+      "fetched_at_utc": "2026-10-26T10:32:53+00:00",
+      "note": "derived from https://www.sec.gov/files/dera/data/financial-statement-data-sets/2010q4.zip (14679781 bytes); sub/num filtered to annual forms + project tags, qtrs 0,4",
+      "source_bytes": 14679781,
       "retained": true
     },
     {
       "url": "https://www.sec.gov/files/dera/data/financial-statement-data-sets/2010q4.zip",
       "path": "data/raw/fsds/2010q4_num.parquet",
-      "bytes": 41403,
-      "sha256": "911fc9235d1c628cc71132513ebcd98eb406a7f85656e9d8688ca87cc7292b10",
-      "fetched_at_utc": "2026-10-24T21:58:53+00:00",
-      "note": "reconstructed from local cache",
+      "bytes": 45012,
+      "sha256": "2fde2760a388bc9adcc49bdad004b80ab45441a94f8bb741f09629c617cb5e50",
+      "fetched_at_utc": "2026-10-26T10:32:53+00:00",
+      "note": "derived from https://www.sec.gov/files/dera/data/financial-statement-data-sets/2010q4.zip (14679781 bytes); sub/num filtered to annual forms + project tags, qtrs 0,4",
+      "source_bytes": 14679781,
       "retained": true
     },
     {
@@ -126,8 +137,9 @@
       "path": "data/raw/fsds/2010q4_sub.parquet",
       "bytes": 10206,
       "sha256": "b007cb050877c097df9d630e5e6b00a0dcc0cf55389a59934db24d9904902650",
-      "fetched_at_utc": "2026-10-24T21:58:53+00:00",
-      "note": "reconstructed from local cache",
+      "fetched_at_utc": "2026-10-26T10:32:53+00:00",
+      "note": "derived from https://www.sec.gov/files/dera/data/financial-statement-data-sets/2010q4.zip (14679781 bytes); sub/num filtered to annual forms + project tags, qtrs 0,4",
+      "source_bytes": 14679781,
       "retained": true
     },
     {
@@ -135,17 +147,19 @@
       "path": "data/raw/fsds/2011q1_forms.parquet",
       "bytes": 2313,
       "sha256": "d88083ffcd35673f6c45e1440d9d21b22bf4b36f44e5e94f9cbe7c93eb0573a0",
-      "fetched_at_utc": "2026-10-24T21:58:58+00:00",
-      "note": "reconstructed from local cache",
+      "fetched_at_utc": "2026-10-26T10:32:56+00:00",
+      "note": "derived from https://www.sec.gov/files/dera/data/financial-statement-data-sets/2011q1.zip (19615544 bytes); sub/num filtered to annual forms + project tags, qtrs 0,4",
+      "source_bytes": 19615544,
       "retained": true
     },
     {
       "url": "https://www.sec.gov/files/dera/data/financial-statement-data-sets/2011q1.zip",
       "path": "data/raw/fsds/2011q1_num.parquet",
-      "bytes": 358851,
-      "sha256": "86f93c4e2de2c27ac2a0d559e0432555f0a5b1b1993568a1657948e4e9dc485e",
-      "fetched_at_utc": "2026-10-24T21:58:58+00:00",
-      "note": "reconstructed from local cache",
+      "bytes": 392381,
+      "sha256": "aebb0b10c42464189d5f74680232ead3a725d5c989789b01a0142ad5c5c85bea",
+      "fetched_at_utc": "2026-10-26T10:32:56+00:00",
+      "note": "derived from https://www.sec.gov/files/dera/data/financial-statement-data-sets/2011q1.zip (19615544 bytes); sub/num filtered to annual forms + project tags, qtrs 0,4",
+      "source_bytes": 19615544,
       "retained": true
     },
     {
@@ -153,8 +167,9 @@
       "path": "data/raw/fsds/2011q1_sub.parquet",
       "bytes": 47275,
       "sha256": "ff14540ef04ed93dc1cfa0cf91f6589c915020cb1dd9430d33fbd05e11f27621",
-      "fetched_at_utc": "2026-10-24T21:58:58+00:00",
-      "note": "reconstructed from local cache",
+      "fetched_at_utc": "2026-10-26T10:32:56+00:00",
+      "note": "derived from https://www.sec.gov/files/dera/data/financial-statement-data-sets/2011q1.zip (19615544 bytes); sub/num filtered to annual forms + project tags, qtrs 0,4",
+      "source_bytes": 19615544,
       "retained": true
     },
     {
@@ -162,17 +177,19 @@
       "path": "data/raw/fsds/2011q2_forms.parquet",
       "bytes": 2307,
       "sha256": "4c5f4062d2c355f90519037c1451eb7ac4fa8ee6c0e6d197fc80bc9cc894af80",
-      "fetched_at_utc": "2026-10-24T21:59:02+00:00",
-      "note": "reconstructed from local cache",
+      "fetched_at_utc": "2026-10-26T10:32:59+00:00",
+      "note": "derived from https://www.sec.gov/files/dera/data/financial-statement-data-sets/2011q2.zip (15001310 bytes); sub/num filtered to annual forms + project tags, qtrs 0,4",
+      "source_bytes": 15001310,
       "retained": true
     },
     {
       "url": "https://www.sec.gov/files/dera/data/financial-statement-data-sets/2011q2.zip",
       "path": "data/raw/fsds/2011q2_num.parquet",
-      "bytes": 50955,
-      "sha256": "5741cc5d6e7eba98ef39fb886425bb593ec26ab8165a6ad55118ff3554c92048",
-      "fetched_at_utc": "2026-10-24T21:59:02+00:00",
-      "note": "reconstructed from local cache",
+      "bytes": 56080,
+      "sha256": "337e3c183af32de1a1c3360b45de9a16cd32a6d8d1b0445b7f4a0d19c54440b4",
+      "fetched_at_utc": "2026-10-26T10:32:59+00:00",
+      "note": "derived from https://www.sec.gov/files/dera/data/financial-statement-data-sets/2011q2.zip (15001310 bytes); sub/num filtered to annual forms + project tags, qtrs 0,4",
+      "source_bytes": 15001310,
       "retained": true
     },
     {
@@ -180,8 +197,9 @@
       "path": "data/raw/fsds/2011q2_sub.parquet",
       "bytes": 11126,
       "sha256": "301b43bb8fb1f9b33214b3d8d23c1ca50cb718f708af58b333d75084b63825b3",
-      "fetched_at_utc": "2026-10-24T21:59:02+00:00",
-      "note": "reconstructed from local cache",
+      "fetched_at_utc": "2026-10-26T10:32:59+00:00",
+      "note": "derived from https://www.sec.gov/files/dera/data/financial-statement-data-sets/2011q2.zip (15001310 bytes); sub/num filtered to annual forms + project tags, qtrs 0,4",
+      "source_bytes": 15001310,
       "retained": true
     },
     {
@@ -189,17 +207,19 @@
       "path": "data/raw/fsds/2011q3_forms.parquet",
       "bytes": 2328,
       "sha256": "5a8ac26e62dcf6340bf0b9627e8c0b780ccef3f19e13bea18ba8e04ba960c14b",
-      "fetched_at_utc": "2026-10-24T21:59:15+00:00",
-      "note": "reconstructed from local cache",
+      "fetched_at_utc": "2026-10-26T10:33:07+00:00",
+      "note": "derived from https://www.sec.gov/files/dera/data/financial-statement-data-sets/2011q3.zip (57941919 bytes); sub/num filtered to annual forms + project tags, qtrs 0,4",
+      "source_bytes": 57941919,
       "retained": true
     },
     {
       "url": "https://www.sec.gov/files/dera/data/financial-statement-data-sets/2011q3.zip",
       "path": "data/raw/fsds/2011q3_num.parquet",
-      "bytes": 53126,
-      "sha256": "474498ec65a4de7895e0535f3ad59f6e673ed1f61d0fbc8c9304905c7a7e5187",
-      "fetched_at_utc": "2026-10-24T21:59:15+00:00",
-      "note": "reconstructed from local cache",
+      "bytes": 58805,
+      "sha256": "62c19690fb69dc95d00dae3d5ba8607dc380c01d79457a225b3f79e32025fd7a",
+      "fetched_at_utc": "2026-10-26T10:33:07+00:00",
+      "note": "derived from https://www.sec.gov/files/dera/data/financial-statement-data-sets/2011q3.zip (57941919 bytes); sub/num filtered to annual forms + project tags, qtrs 0,4",
+      "source_bytes": 57941919,
       "retained": true
     },
     {
@@ -207,8 +227,9 @@
       "path": "data/raw/fsds/2011q3_sub.parquet",
       "bytes": 11954,
       "sha256": "401f21439c56c0d5113ec74d9e01775bdff042713cc22919f79f3c0b011896e2",
-      "fetched_at_utc": "2026-10-24T21:59:15+00:00",
-      "note": "reconstructed from local cache",
+      "fetched_at_utc": "2026-10-26T10:33:07+00:00",
+      "note": "derived from https://www.sec.gov/files/dera/data/financial-statement-data-sets/2011q3.zip (57941919 bytes); sub/num filtered to annual forms + project tags, qtrs 0,4",
+      "source_bytes": 57941919,
       "retained": true
     },
     {
@@ -216,17 +237,19 @@
       "path": "data/raw/fsds/2011q4_forms.parquet",
       "bytes": 2397,
       "sha256": "e4198c2a9a2880a3917caccba6a15617e4b33b0b9f90c6d61ab00dc94b9b0196",
-      "fetched_at_utc": "2026-10-24T21:59:30+00:00",
-      "note": "reconstructed from local cache",
+      "fetched_at_utc": "2026-10-26T10:33:16+00:00",
+      "note": "derived from https://www.sec.gov/files/dera/data/financial-statement-data-sets/2011q4.zip (64306658 bytes); sub/num filtered to annual forms + project tags, qtrs 0,4",
+      "source_bytes": 64306658,
       "retained": true
     },
     {
       "url": "https://www.sec.gov/files/dera/data/financial-statement-data-sets/2011q4.zip",
       "path": "data/raw/fsds/2011q4_num.parquet",
-      "bytes": 118709,
-      "sha256": "0950486b1cf8cf46cfa84818d1ed058e295be46cd97f606ff56875c059dac8f0",
-      "fetched_at_utc": "2026-10-24T21:59:30+00:00",
-      "note": "reconstructed from local cache",
+      "bytes": 130487,
+      "sha256": "252c259132d6a1c38c345debba2eaa8b2ef94e894e916afcba32860785b13bb5",
+      "fetched_at_utc": "2026-10-26T10:33:16+00:00",
+      "note": "derived from https://www.sec.gov/files/dera/data/financial-statement-data-sets/2011q4.zip (64306658 bytes); sub/num filtered to annual forms + project tags, qtrs 0,4",
+      "source_bytes": 64306658,
       "retained": true
     },
     {
@@ -234,8 +257,9 @@
       "path": "data/raw/fsds/2011q4_sub.parquet",
       "bytes": 21222,
       "sha256": "e468e46c12ca5a6c785fc9b74f4552ad193c710bb117e7775f46d1222bb8f552",
-      "fetched_at_utc": "2026-10-24T21:59:30+00:00",
-      "note": "reconstructed from local cache",
+      "fetched_at_utc": "2026-10-26T10:33:16+00:00",
+      "note": "derived from https://www.sec.gov/files/dera/data/financial-statement-data-sets/2011q4.zip (64306658 bytes); sub/num filtered to annual forms + project tags, qtrs 0,4",
+      "source_bytes": 64306658,
       "retained": true
     },
     {
@@ -243,17 +267,19 @@
       "path": "data/raw/fsds/2012q1_forms.parquet",
       "bytes": 2448,
       "sha256": "5f2c0b338d0178c635258f55d41f85cc6bbf30cdf172e293ea32c1f9d306ba8a",
-      "fetched_at_utc": "2026-10-24T21:59:47+00:00",
-      "note": "reconstructed from local cache",
+      "fetched_at_utc": "2026-10-26T10:33:27+00:00",
+      "note": "derived from https://www.sec.gov/files/dera/data/financial-statement-data-sets/2012q1.zip (85474601 bytes); sub/num filtered to annual forms + project tags, qtrs 0,4",
+      "source_bytes": 85474601,
       "retained": true
     },
     {
       "url": "https://www.sec.gov/files/dera/data/financial-statement-data-sets/2012q1.zip",
       "path": "data/raw/fsds/2012q1_num.parquet",
-      "bytes": 1326416,
-      "sha256": "f1eac8373a4725390969a8dd882f144b523f9295fe2bb3f7da175bb433232996",
-      "fetched_at_utc": "2026-10-24T21:59:47+00:00",
-      "note": "reconstructed from local cache",
+      "bytes": 1447856,
+      "sha256": "f64f3fc11007e9d06d614aa868dc5f6ac507bd15a08fcbdc28112fa83bdf075a",
+      "fetched_at_utc": "2026-10-26T10:33:27+00:00",
+      "note": "derived from https://www.sec.gov/files/dera/data/financial-statement-data-sets/2012q1.zip (85474601 bytes); sub/num filtered to annual forms + project tags, qtrs 0,4",
+      "source_bytes": 85474601,
       "retained": true
     },
     {
@@ -261,8 +287,9 @@
       "path": "data/raw/fsds/2012q1_sub.parquet",
       "bytes": 184845,
       "sha256": "bf0187bbd87cdb2365b0fa80313c2e5e99b7b8bdf313b04298d7f1fd7f3a93c5",
-      "fetched_at_utc": "2026-10-24T21:59:47+00:00",
-      "note": "reconstructed from local cache",
+      "fetched_at_utc": "2026-10-26T10:33:27+00:00",
+      "note": "derived from https://www.sec.gov/files/dera/data/financial-statement-data-sets/2012q1.zip (85474601 bytes); sub/num filtered to annual forms + project tags, qtrs 0,4",
+      "source_bytes": 85474601,
       "retained": true
     },
     {
@@ -270,17 +297,19 @@
       "path": "data/raw/fsds/2012q2_forms.parquet",
       "bytes": 2432,
       "sha256": "fc275c5448f02e9cd18d4f5ba654ceaa44149d6a147e4d3f230e06e5045b8064",
-      "fetched_at_utc": "2026-10-24T22:00:05+00:00",
-      "note": "reconstructed from local cache",
+      "fetched_at_utc": "2026-10-26T10:33:36+00:00",
+      "note": "derived from https://www.sec.gov/files/dera/data/financial-statement-data-sets/2012q2.zip (80075771 bytes); sub/num filtered to annual forms + project tags, qtrs 0,4",
+      "source_bytes": 80075771,
       "retained": true
     },
     {
       "url": "https://www.sec.gov/files/dera/data/financial-statement-data-sets/2012q2.zip",
       "path": "data/raw/fsds/2012q2_num.parquet",
-      "bytes": 444100,
-      "sha256": "049f2fce146a4c191fc4112e1fb816fb838002bc9fe1ca41869fa62c17cd892b",
-      "fetched_at_utc": "2026-10-24T22:00:05+00:00",
-      "note": "reconstructed from local cache",
+      "bytes": 486038,
+      "sha256": "c56b365f1c2ee7fc322b73543851fdac36f0ef39d0f3a700a2c46d0566e7c892",
+      "fetched_at_utc": "2026-10-26T10:33:36+00:00",
+      "note": "derived from https://www.sec.gov/files/dera/data/financial-statement-data-sets/2012q2.zip (80075771 bytes); sub/num filtered to annual forms + project tags, qtrs 0,4",
+      "source_bytes": 80075771,
       "retained": true
     },
     {
@@ -288,8 +317,9 @@
       "path": "data/raw/fsds/2012q2_sub.parquet",
       "bytes": 63743,
       "sha256": "f5328fd963aff5e57d7592591ebd5d4258e2ddcce82da86af08dc9d217cbb79c",
-      "fetched_at_utc": "2026-10-24T22:00:05+00:00",
-      "note": "reconstructed from local cache",
+      "fetched_at_utc": "2026-10-26T10:33:36+00:00",
+      "note": "derived from https://www.sec.gov/files/dera/data/financial-statement-data-sets/2012q2.zip (80075771 bytes); sub/num filtered to annual forms + project tags, qtrs 0,4",
+      "source_bytes": 80075771,
       "retained": true
     },
     {
@@ -297,17 +327,19 @@
       "path": "data/raw/fsds/2012q3_forms.parquet",
       "bytes": 2400,
       "sha256": "8857509c44cd644e9ac7f930784e68ac9dcb00dd939492422403a57e7c8617c5",
-      "fetched_at_utc": "2026-10-24T22:00:26+00:00",
-      "note": "reconstructed from local cache",
+      "fetched_at_utc": "2026-10-26T10:33:47+00:00",
+      "note": "derived from https://www.sec.gov/files/dera/data/financial-statement-data-sets/2012q3.zip (89608234 bytes); sub/num filtered to annual forms + project tags, qtrs 0,4",
+      "source_bytes": 89608234,
       "retained": true
     },
     {
       "url": "https://www.sec.gov/files/dera/data/financial-statement-data-sets/2012q3.zip",
       "path": "data/raw/fsds/2012q3_num.parquet",
-      "bytes": 212722,
-      "sha256": "ffbe2109fe8d99d2dd12d02201eed101451f7a52515a1eddbdb616bd3ffe2c30",
-      "fetched_at_utc": "2026-10-24T22:00:26+00:00",
-      "note": "reconstructed from local cache",
+      "bytes": 233663,
+      "sha256": "a0ca8ef0cf458322a6ac76232faa88fd699a75abd2685a621f31fc6224f64b6d",
+      "fetched_at_utc": "2026-10-26T10:33:47+00:00",
+      "note": "derived from https://www.sec.gov/files/dera/data/financial-statement-data-sets/2012q3.zip (89608234 bytes); sub/num filtered to annual forms + project tags, qtrs 0,4",
+      "source_bytes": 89608234,
       "retained": true
     },
     {
@@ -315,8 +347,9 @@
       "path": "data/raw/fsds/2012q3_sub.parquet",
       "bytes": 33666,
       "sha256": "eff709b24bcb62cfa93006520236f17f0ab01149ed19cc281447ef5ec246d280",
-      "fetched_at_utc": "2026-10-24T22:00:26+00:00",
-      "note": "reconstructed from local cache",
+      "fetched_at_utc": "2026-10-26T10:33:47+00:00",
+      "note": "derived from https://www.sec.gov/files/dera/data/financial-statement-data-sets/2012q3.zip (89608234 bytes); sub/num filtered to annual forms + project tags, qtrs 0,4",
+      "source_bytes": 89608234,
       "retained": true
     },
     {
@@ -324,17 +357,19 @@
       "path": "data/raw/fsds/2012q4_forms.parquet",
       "bytes": 2410,
       "sha256": "876d4e3b56c55efd7f003b7a135a0263f180d00c326cb1505f12de719d9fd9cb",
-      "fetched_at_utc": "2026-10-24T22:00:48+00:00",
-      "note": "reconstructed from local cache",
+      "fetched_at_utc": "2026-10-26T10:33:57+00:00",
+      "note": "derived from https://www.sec.gov/files/dera/data/financial-statement-data-sets/2012q4.zip (95805256 bytes); sub/num filtered to annual forms + project tags, qtrs 0,4",
+      "source_bytes": 95805256,
       "retained": true
     },
     {
       "url": "https://www.sec.gov/files/dera/data/financial-statement-data-sets/2012q4.zip",
       "path": "data/raw/fsds/2012q4_num.parquet",
-      "bytes": 234988,
-      "sha256": "c2291d080c6bf84a752c43c34ba06e2a6337a8228a293175ecfbaec54977081e",
-      "fetched_at_utc": "2026-10-24T22:00:48+00:00",
-      "note": "reconstructed from local cache",
+      "bytes": 257736,
+      "sha256": "0f508a58869888f2ee3045d000604ed96d2de800f8aa4f32cc9fde9b01664efb",
+      "fetched_at_utc": "2026-10-26T10:33:57+00:00",
+      "note": "derived from https://www.sec.gov/files/dera/data/financial-statement-data-sets/2012q4.zip (95805256 bytes); sub/num filtered to annual forms + project tags, qtrs 0,4",
+      "source_bytes": 95805256,
       "retained": true
     },
     {
@@ -342,8 +377,9 @@
       "path": "data/raw/fsds/2012q4_sub.parquet",
       "bytes": 36153,
       "sha256": "f9aa346ed7cfd0fbb47841820f5b1344fbc2d7dc6c44f591773203ffd87f4ffb",
-      "fetched_at_utc": "2026-10-24T22:00:48+00:00",
-      "note": "reconstructed from local cache",
+      "fetched_at_utc": "2026-10-26T10:33:57+00:00",
+      "note": "derived from https://www.sec.gov/files/dera/data/financial-statement-data-sets/2012q4.zip (95805256 bytes); sub/num filtered to annual forms + project tags, qtrs 0,4",
+      "source_bytes": 95805256,
       "retained": true
     },
     {
@@ -351,17 +387,19 @@
       "path": "data/raw/fsds/2013q1_forms.parquet",
       "bytes": 2396,
       "sha256": "88a56ca9d56e08c5d432f7f1bd7de3617f29ba6d4f9e72c75c482b4a282340b3",
-      "fetched_at_utc": "2026-10-24T22:01:12+00:00",
-      "note": "reconstructed from local cache",
+      "fetched_at_utc": "2026-10-26T10:34:09+00:00",
+      "note": "derived from https://www.sec.gov/files/dera/data/financial-statement-data-sets/2013q1.zip (99173442 bytes); sub/num filtered to annual forms + project tags, qtrs 0,4",
+      "source_bytes": 99173442,
       "retained": true
     },
     {
       "url": "https://www.sec.gov/files/dera/data/financial-statement-data-sets/2013q1.zip",
       "path": "data/raw/fsds/2013q1_num.parquet",
-      "bytes": 1220275,
-      "sha256": "309fec99b059943bd6fa45361a79b2fa4ee59b235282d1c1fdd9a78abe620331",
-      "fetched_at_utc": "2026-10-24T22:01:12+00:00",
-      "note": "reconstructed from local cache",
+      "bytes": 1331548,
+      "sha256": "9f1a0e61a17fff92289f84b82e271b6ba26d7b173e7d7fe739c9d43541ef75e9",
+      "fetched_at_utc": "2026-10-26T10:34:09+00:00",
+      "note": "derived from https://www.sec.gov/files/dera/data/financial-statement-data-sets/2013q1.zip (99173442 bytes); sub/num filtered to annual forms + project tags, qtrs 0,4",
+      "source_bytes": 99173442,
       "retained": true
     },
     {
@@ -369,8 +407,9 @@
       "path": "data/raw/fsds/2013q1_sub.parquet",
       "bytes": 165842,
       "sha256": "9148338576445f0ea4f8b4e463d3e31114e5e427f1b71e3e112266f432db33b5",
-      "fetched_at_utc": "2026-10-24T22:01:12+00:00",
-      "note": "reconstructed from local cache",
+      "fetched_at_utc": "2026-10-26T10:34:09+00:00",
+      "note": "derived from https://www.sec.gov/files/dera/data/financial-statement-data-sets/2013q1.zip (99173442 bytes); sub/num filtered to annual forms + project tags, qtrs 0,4",
+      "source_bytes": 99173442,
       "retained": true
     },
     {
@@ -378,17 +417,19 @@
       "path": "data/raw/fsds/2013q2_forms.parquet",
       "bytes": 2436,
       "sha256": "0f348a98eb41f3b23d979e482335f5a8d8bd52d578bbb133ae84e098faf0d413",
-      "fetched_at_utc": "2026-10-24T22:01:33+00:00",
-      "note": "reconstructed from local cache",
+      "fetched_at_utc": "2026-10-26T10:34:21+00:00",
+      "note": "derived from https://www.sec.gov/files/dera/data/financial-statement-data-sets/2013q2.zip (96917655 bytes); sub/num filtered to annual forms + project tags, qtrs 0,4",
+      "source_bytes": 96917655,
       "retained": true
     },
     {
       "url": "https://www.sec.gov/files/dera/data/financial-statement-data-sets/2013q2.zip",
       "path": "data/raw/fsds/2013q2_num.parquet",
-      "bytes": 531681,
-      "sha256": "3e48295b846fef0cf2f67e3a87bcd093a9b84e0030b3978546faf3b935e00657",
-      "fetched_at_utc": "2026-10-24T22:01:33+00:00",
-      "note": "reconstructed from local cache",
+      "bytes": 581234,
+      "sha256": "0bde209f45cf63041392b15e7c75012db82eab6c07dc4e805965e0c1f551019c",
+      "fetched_at_utc": "2026-10-26T10:34:21+00:00",
+      "note": "derived from https://www.sec.gov/files/dera/data/financial-statement-data-sets/2013q2.zip (96917655 bytes); sub/num filtered to annual forms + project tags, qtrs 0,4",
+      "source_bytes": 96917655,
       "retained": true
     },
     {
@@ -396,8 +437,9 @@
       "path": "data/raw/fsds/2013q2_sub.parquet",
       "bytes": 75162,
       "sha256": "2c1f1edbc87ddc82a66aca0bbd43e7c5875bc12010af2961d91e3d60ae25d005",
-      "fetched_at_utc": "2026-10-24T22:01:33+00:00",
-      "note": "reconstructed from local cache",
+      "fetched_at_utc": "2026-10-26T10:34:21+00:00",
+      "note": "derived from https://www.sec.gov/files/dera/data/financial-statement-data-sets/2013q2.zip (96917655 bytes); sub/num filtered to annual forms + project tags, qtrs 0,4",
+      "source_bytes": 96917655,
       "retained": true
     },
     {
@@ -405,17 +447,19 @@
       "path": "data/raw/fsds/2013q3_forms.parquet",
       "bytes": 2432,
       "sha256": "bdcc933f1719fd66ae9a8aae85f2740f994837100ccc20c70864b3a9ea07e8e1",
-      "fetched_at_utc": "2026-10-24T22:01:56+00:00",
-      "note": "reconstructed from local cache",
+      "fetched_at_utc": "2026-10-26T10:34:33+00:00",
+      "note": "derived from https://www.sec.gov/files/dera/data/financial-statement-data-sets/2013q3.zip (98355005 bytes); sub/num filtered to annual forms + project tags, qtrs 0,4",
+      "source_bytes": 98355005,
       "retained": true
     },
     {
       "url": "https://www.sec.gov/files/dera/data/financial-statement-data-sets/2013q3.zip",
       "path": "data/raw/fsds/2013q3_num.parquet",
-      "bytes": 236890,
-      "sha256": "a191285da744eb1566e35485ecb8053bb5c8affe84f88470df41788101b496e8",
-      "fetched_at_utc": "2026-10-24T22:01:56+00:00",
-      "note": "reconstructed from local cache",
+      "bytes": 259831,
+      "sha256": "e31a5ef1f2a6c3faf9bda65434d8cbf85bedd5a2a662bb5296491e6211e0e820",
+      "fetched_at_utc": "2026-10-26T10:34:33+00:00",
+      "note": "derived from https://www.sec.gov/files/dera/data/financial-statement-data-sets/2013q3.zip (98355005 bytes); sub/num filtered to annual forms + project tags, qtrs 0,4",
+      "source_bytes": 98355005,
       "retained": true
     },
     {
@@ -423,8 +467,9 @@
       "path": "data/raw/fsds/2013q3_sub.parquet",
       "bytes": 36430,
       "sha256": "5040e1883d1448a91a5ff2e117a21b0a624b5635b317c27aee2ed45efa224862",
-      "fetched_at_utc": "2026-10-24T22:01:56+00:00",
-      "note": "reconstructed from local cache",
+      "fetched_at_utc": "2026-10-26T10:34:33+00:00",
+      "note": "derived from https://www.sec.gov/files/dera/data/financial-statement-data-sets/2013q3.zip (98355005 bytes); sub/num filtered to annual forms + project tags, qtrs 0,4",
+      "source_bytes": 98355005,
       "retained": true
     },
     {
@@ -432,17 +477,19 @@
       "path": "data/raw/fsds/2013q4_forms.parquet",
       "bytes": 2441,
       "sha256": "28220d8e56a6b7a81ae4af21419e4fef9b1cfe44c29773173e5afc70f5ff8a59",
-      "fetched_at_utc": "2026-10-24T22:02:20+00:00",
-      "note": "reconstructed from local cache",
+      "fetched_at_utc": "2026-10-26T10:34:45+00:00",
+      "note": "derived from https://www.sec.gov/files/dera/data/financial-statement-data-sets/2013q4.zip (92335773 bytes); sub/num filtered to annual forms + project tags, qtrs 0,4",
+      "source_bytes": 92335773,
       "retained": true
     },
     {
       "url": "https://www.sec.gov/files/dera/data/financial-statement-data-sets/2013q4.zip",
       "path": "data/raw/fsds/2013q4_num.parquet",
-      "bytes": 220381,
-      "sha256": "8569ad305caf645b147f889b00c1598cb6be24c83855289bc47b88e20bd65c30",
-      "fetched_at_utc": "2026-10-24T22:02:20+00:00",
-      "note": "reconstructed from local cache",
+      "bytes": 240719,
+      "sha256": "a9c34cf5915d09f4487e64f58de53f9e6b9527d64169b52b82ea0b2ff6431593",
+      "fetched_at_utc": "2026-10-26T10:34:45+00:00",
+      "note": "derived from https://www.sec.gov/files/dera/data/financial-statement-data-sets/2013q4.zip (92335773 bytes); sub/num filtered to annual forms + project tags, qtrs 0,4",
+      "source_bytes": 92335773,
       "retained": true
     },
     {
@@ -450,8 +497,9 @@
       "path": "data/raw/fsds/2013q4_sub.parquet",
       "bytes": 34194,
       "sha256": "840a141446b5fcb8d1e1c52d6dc971fffb8bc16b9db0f692a28299e92900405b",
-      "fetched_at_utc": "2026-10-24T22:02:19+00:00",
-      "note": "reconstructed from local cache",
+      "fetched_at_utc": "2026-10-26T10:34:44+00:00",
+      "note": "derived from https://www.sec.gov/files/dera/data/financial-statement-data-sets/2013q4.zip (92335773 bytes); sub/num filtered to annual forms + project tags, qtrs 0,4",
+      "source_bytes": 92335773,
       "retained": true
     },
     {
@@ -459,17 +507,19 @@
       "path": "data/raw/fsds/2014q1_forms.parquet",
       "bytes": 2460,
       "sha256": "607c8668decaf0fdd520969f6ed75ad3210661aa30279f85c1e19a0dc2d594de",
-      "fetched_at_utc": "2026-10-24T22:02:50+00:00",
-      "note": "reconstructed from local cache",
+      "fetched_at_utc": "2026-10-26T10:35:01+00:00",
+      "note": "derived from https://www.sec.gov/files/dera/data/financial-statement-data-sets/2014q1.zip (102843522 bytes); sub/num filtered to annual forms + project tags, qtrs 0,4",
+      "source_bytes": 102843522,
       "retained": true
     },
     {
       "url": "https://www.sec.gov/files/dera/data/financial-statement-data-sets/2014q1.zip",
       "path": "data/raw/fsds/2014q1_num.parquet",
-      "bytes": 1349649,
-      "sha256": "538db8ea4d9bff40a8f0e20a9dcb3d9f9742bfaa8691519952bf99d232d68a74",
-      "fetched_at_utc": "2026-10-24T22:02:50+00:00",
-      "note": "reconstructed from local cache",
+      "bytes": 1471703,
+      "sha256": "5e8b70532b70445c413fcf55db5def6a52a1c52d841e574936ca585151f0c370",
+      "fetched_at_utc": "2026-10-26T10:35:00+00:00",
+      "note": "derived from https://www.sec.gov/files/dera/data/financial-statement-data-sets/2014q1.zip (102843522 bytes); sub/num filtered to annual forms + project tags, qtrs 0,4",
+      "source_bytes": 102843522,
       "retained": true
     },
     {
@@ -477,8 +527,9 @@
       "path": "data/raw/fsds/2014q1_sub.parquet",
       "bytes": 182588,
       "sha256": "69b5a670281da4bf4e4b84dc9a4e5719db543a226d7ccaedfc797341e44cf89b",
-      "fetched_at_utc": "2026-10-24T22:02:50+00:00",
-      "note": "reconstructed from local cache",
+      "fetched_at_utc": "2026-10-26T10:35:00+00:00",
+      "note": "derived from https://www.sec.gov/files/dera/data/financial-statement-data-sets/2014q1.zip (102843522 bytes); sub/num filtered to annual forms + project tags, qtrs 0,4",
+      "source_bytes": 102843522,
       "retained": true
     },
     {
@@ -486,17 +537,19 @@
       "path": "data/raw/fsds/2014q2_forms.parquet",
       "bytes": 2445,
       "sha256": "591cfa1ff693e47ab43f5e04fd5c0b88df94ee8720bf96656f432f2ecb04531f",
-      "fetched_at_utc": "2026-10-24T22:03:13+00:00",
-      "note": "reconstructed from local cache",
+      "fetched_at_utc": "2026-10-26T10:35:13+00:00",
+      "note": "derived from https://www.sec.gov/files/dera/data/financial-statement-data-sets/2014q2.zip (85032839 bytes); sub/num filtered to annual forms + project tags, qtrs 0,4",
+      "source_bytes": 85032839,
       "retained": true
     },
     {
       "url": "https://www.sec.gov/files/dera/data/financial-statement-data-sets/2014q2.zip",
       "path": "data/raw/fsds/2014q2_num.parquet",
-      "bytes": 405220,
-      "sha256": "72df8fb321dd1bc9a597d84b97a1719db91d8b763369696377ffbbe9481e74d1",
-      "fetched_at_utc": "2026-10-24T22:03:13+00:00",
-      "note": "reconstructed from local cache",
+      "bytes": 447743,
+      "sha256": "ad1edbfa50ac7868d3d04c1f30e3dfdc0d82430ed2da8f050455c860ad5c4e4f",
+      "fetched_at_utc": "2026-10-26T10:35:13+00:00",
+      "note": "derived from https://www.sec.gov/files/dera/data/financial-statement-data-sets/2014q2.zip (85032839 bytes); sub/num filtered to annual forms + project tags, qtrs 0,4",
+      "source_bytes": 85032839,
       "retained": true
     },
     {
@@ -504,8 +557,9 @@
       "path": "data/raw/fsds/2014q2_sub.parquet",
       "bytes": 57390,
       "sha256": "5f8da2b73c6a257459bb088da75bab591bec1c51daf1b118b63751b2dd467c24",
-      "fetched_at_utc": "2026-10-24T22:03:13+00:00",
-      "note": "reconstructed from local cache",
+      "fetched_at_utc": "2026-10-26T10:35:13+00:00",
+      "note": "derived from https://www.sec.gov/files/dera/data/financial-statement-data-sets/2014q2.zip (85032839 bytes); sub/num filtered to annual forms + project tags, qtrs 0,4",
+      "source_bytes": 85032839,
       "retained": true
     },
     {
@@ -513,17 +567,19 @@
       "path": "data/raw/fsds/2014q3_forms.parquet",
       "bytes": 2458,
       "sha256": "68a39997f46d469bc23c465b695e38b9b74262b693a3c7884323e0ae38f8a29b",
-      "fetched_at_utc": "2026-10-24T22:03:36+00:00",
-      "note": "reconstructed from local cache",
+      "fetched_at_utc": "2026-10-26T10:35:26+00:00",
+      "note": "derived from https://www.sec.gov/files/dera/data/financial-statement-data-sets/2014q3.zip (87408142 bytes); sub/num filtered to annual forms + project tags, qtrs 0,4",
+      "source_bytes": 87408142,
       "retained": true
     },
     {
       "url": "https://www.sec.gov/files/dera/data/financial-statement-data-sets/2014q3.zip",
       "path": "data/raw/fsds/2014q3_num.parquet",
-      "bytes": 205588,
-      "sha256": "bdb8965fd011b6dccfb847e35f822d7263805e7dd196c01094d4ecec65ba3230",
-      "fetched_at_utc": "2026-10-24T22:03:36+00:00",
-      "note": "reconstructed from local cache",
+      "bytes": 227730,
+      "sha256": "d9bd48180fb0ff19f499be89f4ca7b0e6d963d18caa0751a9f710740c2d0b10f",
+      "fetched_at_utc": "2026-10-26T10:35:26+00:00",
+      "note": "derived from https://www.sec.gov/files/dera/data/financial-statement-data-sets/2014q3.zip (87408142 bytes); sub/num filtered to annual forms + project tags, qtrs 0,4",
+      "source_bytes": 87408142,
       "retained": true
     },
     {
@@ -531,8 +587,9 @@
       "path": "data/raw/fsds/2014q3_sub.parquet",
       "bytes": 33793,
       "sha256": "e8d2b48e9aec74ad8107e9abd1f8331a44f7d1117ef46c97a9dfe57eceb42ead",
-      "fetched_at_utc": "2026-10-24T22:03:36+00:00",
-      "note": "reconstructed from local cache",
+      "fetched_at_utc": "2026-10-26T10:35:26+00:00",
+      "note": "derived from https://www.sec.gov/files/dera/data/financial-statement-data-sets/2014q3.zip (87408142 bytes); sub/num filtered to annual forms + project tags, qtrs 0,4",
+      "source_bytes": 87408142,
       "retained": true
     },
     {
@@ -540,17 +597,19 @@
       "path": "data/raw/fsds/2014q4_forms.parquet",
       "bytes": 2405,
       "sha256": "b8eaba366aeb1204769d5e4d5a7ea276bd0cc71f1bf2ae7b86e3132b41c3ce79",
-      "fetched_at_utc": "2026-10-24T22:04:00+00:00",
-      "note": "reconstructed from local cache",
+      "fetched_at_utc": "2026-10-26T10:35:34+00:00",
+      "note": "derived from https://www.sec.gov/files/dera/data/financial-statement-data-sets/2014q4.zip (87639973 bytes); sub/num filtered to annual forms + project tags, qtrs 0,4",
+      "source_bytes": 87639973,
       "retained": true
     },
     {
       "url": "https://www.sec.gov/files/dera/data/financial-statement-data-sets/2014q4.zip",
       "path": "data/raw/fsds/2014q4_num.parquet",
-      "bytes": 193967,
-      "sha256": "da0e68adacf9a7d88123750e0f99c25d2159a04ac7a42100131288104a4e1c04",
-      "fetched_at_utc": "2026-10-24T22:04:00+00:00",
-      "note": "reconstructed from local cache",
+      "bytes": 215066,
+      "sha256": "1de6757c47262defb259a1c11ce8584a89d112e6b03622994308c5f326219323",
+      "fetched_at_utc": "2026-10-26T10:35:34+00:00",
+      "note": "derived from https://www.sec.gov/files/dera/data/financial-statement-data-sets/2014q4.zip (87639973 bytes); sub/num filtered to annual forms + project tags, qtrs 0,4",
+      "source_bytes": 87639973,
       "retained": true
     },
     {
@@ -558,8 +617,9 @@
       "path": "data/raw/fsds/2014q4_sub.parquet",
       "bytes": 31927,
       "sha256": "44cd468567dac769a360e5404aca4dfec187ace4e79199f2cb69a2339ee20233",
-      "fetched_at_utc": "2026-10-24T22:04:00+00:00",
-      "note": "reconstructed from local cache",
+      "fetched_at_utc": "2026-10-26T10:35:34+00:00",
+      "note": "derived from https://www.sec.gov/files/dera/data/financial-statement-data-sets/2014q4.zip (87639973 bytes); sub/num filtered to annual forms + project tags, qtrs 0,4",
+      "source_bytes": 87639973,
       "retained": true
     },
     {
@@ -567,17 +627,19 @@
       "path": "data/raw/fsds/2015q1_forms.parquet",
       "bytes": 2387,
       "sha256": "b16e6362c66f3a1d6aafcb27b46c1f8c13fd87fa0925bc7fb23694b730cfe14c",
-      "fetched_at_utc": "2026-10-24T21:58:38+00:00",
-      "note": "reconstructed from local cache",
+      "fetched_at_utc": "2026-10-26T10:35:43+00:00",
+      "note": "derived from https://www.sec.gov/files/dera/data/financial-statement-data-sets/2015q1.zip (98944359 bytes); sub/num filtered to annual forms + project tags, qtrs 0,4",
+      "source_bytes": 98944359,
       "retained": true
     },
     {
       "url": "https://www.sec.gov/files/dera/data/financial-statement-data-sets/2015q1.zip",
       "path": "data/raw/fsds/2015q1_num.parquet",
-      "bytes": 1345275,
-      "sha256": "09d5df05ce9216fc230e731d90cb8c5b7f8eac7c064c505493fdfd3259624794",
-      "fetched_at_utc": "2026-10-24T21:58:38+00:00",
-      "note": "reconstructed from local cache",
+      "bytes": 1470294,
+      "sha256": "4292feabac12099fce50c7002c0f938c9c7912f49a213a512ffd6df70a66eb09",
+      "fetched_at_utc": "2026-10-26T10:35:43+00:00",
+      "note": "derived from https://www.sec.gov/files/dera/data/financial-statement-data-sets/2015q1.zip (98944359 bytes); sub/num filtered to annual forms + project tags, qtrs 0,4",
+      "source_bytes": 98944359,
       "retained": true
     },
     {
@@ -585,8 +647,9 @@
       "path": "data/raw/fsds/2015q1_sub.parquet",
       "bytes": 183686,
       "sha256": "64abf9bc3821260ea9837e1d91df00cd0c569645e312b566f01e32b100ae7eaf",
-      "fetched_at_utc": "2026-10-24T21:58:38+00:00",
-      "note": "reconstructed from local cache",
+      "fetched_at_utc": "2026-10-26T10:35:43+00:00",
+      "note": "derived from https://www.sec.gov/files/dera/data/financial-statement-data-sets/2015q1.zip (98944359 bytes); sub/num filtered to annual forms + project tags, qtrs 0,4",
+      "source_bytes": 98944359,
       "retained": true
     },
     {
@@ -594,17 +657,19 @@
       "path": "data/raw/fsds/2015q2_forms.parquet",
       "bytes": 2404,
       "sha256": "168fc43c5a6b922cfdb906dd099a072e566b7704d277cfee416b225f48d7aa4b",
-      "fetched_at_utc": "2026-10-24T22:04:19+00:00",
-      "note": "reconstructed from local cache",
+      "fetched_at_utc": "2026-10-26T10:35:51+00:00",
+      "note": "derived from https://www.sec.gov/files/dera/data/financial-statement-data-sets/2015q2.zip (78908272 bytes); sub/num filtered to annual forms + project tags, qtrs 0,4",
+      "source_bytes": 78908272,
       "retained": true
     },
     {
       "url": "https://www.sec.gov/files/dera/data/financial-statement-data-sets/2015q2.zip",
       "path": "data/raw/fsds/2015q2_num.parquet",
-      "bytes": 366163,
-      "sha256": "ea232b292bbbd38d2ca588faf17e30f1912ee51afaf66341716dc4db7df673eb",
-      "fetched_at_utc": "2026-10-24T22:04:19+00:00",
-      "note": "reconstructed from local cache",
+      "bytes": 402510,
+      "sha256": "95cbbf32dfcfd30258438e62be90b7a4059547407f4450335afe9a68de854dcb",
+      "fetched_at_utc": "2026-10-26T10:35:51+00:00",
+      "note": "derived from https://www.sec.gov/files/dera/data/financial-statement-data-sets/2015q2.zip (78908272 bytes); sub/num filtered to annual forms + project tags, qtrs 0,4",
+      "source_bytes": 78908272,
       "retained": true
     },
     {
@@ -612,8 +677,9 @@
       "path": "data/raw/fsds/2015q2_sub.parquet",
       "bytes": 53409,
       "sha256": "e04241055013a65a0c6b2bf4d6661d3022a4ac876eb7d8c862b90cb60a066b3a",
-      "fetched_at_utc": "2026-10-24T22:04:19+00:00",
-      "note": "reconstructed from local cache",
+      "fetched_at_utc": "2026-10-26T10:35:51+00:00",
+      "note": "derived from https://www.sec.gov/files/dera/data/financial-statement-data-sets/2015q2.zip (78908272 bytes); sub/num filtered to annual forms + project tags, qtrs 0,4",
+      "source_bytes": 78908272,
       "retained": true
     },
     {
@@ -621,17 +687,19 @@
       "path": "data/raw/fsds/2015q3_forms.parquet",
       "bytes": 2373,
       "sha256": "c8a734fa9778edef36caf617c58511571d7cb6475d829e691266d0710939819b",
-      "fetched_at_utc": "2026-10-24T22:04:39+00:00",
-      "note": "reconstructed from local cache",
+      "fetched_at_utc": "2026-10-26T10:36:02+00:00",
+      "note": "derived from https://www.sec.gov/files/dera/data/financial-statement-data-sets/2015q3.zip (82751989 bytes); sub/num filtered to annual forms + project tags, qtrs 0,4",
+      "source_bytes": 82751989,
       "retained": true
     },
     {
       "url": "https://www.sec.gov/files/dera/data/financial-statement-data-sets/2015q3.zip",
       "path": "data/raw/fsds/2015q3_num.parquet",
-      "bytes": 186393,
-      "sha256": "586ede70934f12dd07918d7d4cc53d74d53309074526df239625553d0ab8aaba",
-      "fetched_at_utc": "2026-10-24T22:04:39+00:00",
-      "note": "reconstructed from local cache",
+      "bytes": 207282,
+      "sha256": "c1433628e2b6693bbdd1a38efe879cfd4d43720397018e1cfc43f37079f947ab",
+      "fetched_at_utc": "2026-10-26T10:36:02+00:00",
+      "note": "derived from https://www.sec.gov/files/dera/data/financial-statement-data-sets/2015q3.zip (82751989 bytes); sub/num filtered to annual forms + project tags, qtrs 0,4",
+      "source_bytes": 82751989,
       "retained": true
     },
     {
@@ -639,8 +707,9 @@
       "path": "data/raw/fsds/2015q3_sub.parquet",
       "bytes": 31457,
       "sha256": "69b00e12d737ba47d966127d57900f33418aaae43540cf9ec922ea1ef78f44c2",
-      "fetched_at_utc": "2026-10-24T22:04:39+00:00",
-      "note": "reconstructed from local cache",
+      "fetched_at_utc": "2026-10-26T10:36:01+00:00",
+      "note": "derived from https://www.sec.gov/files/dera/data/financial-statement-data-sets/2015q3.zip (82751989 bytes); sub/num filtered to annual forms + project tags, qtrs 0,4",
+      "source_bytes": 82751989,
       "retained": true
     },
     {
@@ -648,17 +717,19 @@
       "path": "data/raw/fsds/2015q4_forms.parquet",
       "bytes": 2373,
       "sha256": "7d10dce3f28ad4e7c027780dcb76c8a241cb5d407fbd7e7e26c98e33ba46f1b3",
-      "fetched_at_utc": "2026-10-24T22:04:59+00:00",
-      "note": "reconstructed from local cache",
+      "fetched_at_utc": "2026-10-26T10:36:14+00:00",
+      "note": "derived from https://www.sec.gov/files/dera/data/financial-statement-data-sets/2015q4.zip (83007568 bytes); sub/num filtered to annual forms + project tags, qtrs 0,4",
+      "source_bytes": 83007568,
       "retained": true
     },
     {
       "url": "https://www.sec.gov/files/dera/data/financial-statement-data-sets/2015q4.zip",
       "path": "data/raw/fsds/2015q4_num.parquet",
-      "bytes": 172058,
-      "sha256": "6c2ca329ad2a7b173a35a33808f7bdd043542b28546d843c56d2f3d9c4a42a52",
-      "fetched_at_utc": "2026-10-24T22:04:59+00:00",
-      "note": "reconstructed from local cache",
+      "bytes": 188813,
+      "sha256": "634c0b14f08a75a156b39a14f721d00fd733cfc67151b09d30bb3d9d0d2f0727",
+      "fetched_at_utc": "2026-10-26T10:36:14+00:00",
+      "note": "derived from https://www.sec.gov/files/dera/data/financial-statement-data-sets/2015q4.zip (83007568 bytes); sub/num filtered to annual forms + project tags, qtrs 0,4",
+      "source_bytes": 83007568,
       "retained": true
     },
     {
@@ -666,8 +737,9 @@
       "path": "data/raw/fsds/2015q4_sub.parquet",
       "bytes": 29235,
       "sha256": "772faeaecb37805e9afe11966a4688e7d0397ab231a3ba5423388b5c9c225b96",
-      "fetched_at_utc": "2026-10-24T22:04:59+00:00",
-      "note": "reconstructed from local cache",
+      "fetched_at_utc": "2026-10-26T10:36:14+00:00",
+      "note": "derived from https://www.sec.gov/files/dera/data/financial-statement-data-sets/2015q4.zip (83007568 bytes); sub/num filtered to annual forms + project tags, qtrs 0,4",
+      "source_bytes": 83007568,
       "retained": true
     },
     {
@@ -675,17 +747,19 @@
       "path": "data/raw/fsds/2016q1_forms.parquet",
       "bytes": 2413,
       "sha256": "9368898bb1c5a8468f1ea5d7ca360ebc4965f12abf0694fae04794edb2eb8658",
-      "fetched_at_utc": "2026-10-24T22:05:21+00:00",
-      "note": "reconstructed from local cache",
+      "fetched_at_utc": "2026-10-26T10:36:27+00:00",
+      "note": "derived from https://www.sec.gov/files/dera/data/financial-statement-data-sets/2016q1.zip (95470843 bytes); sub/num filtered to annual forms + project tags, qtrs 0,4",
+      "source_bytes": 95470843,
       "retained": true
     },
     {
       "url": "https://www.sec.gov/files/dera/data/financial-statement-data-sets/2016q1.zip",
       "path": "data/raw/fsds/2016q1_num.parquet",
-      "bytes": 1277777,
-      "sha256": "e916c48715fb06f1438bdb061840dad3e7c75bc8f0a67e028050bed510f0b1d0",
-      "fetched_at_utc": "2026-10-24T22:05:21+00:00",
-      "note": "reconstructed from local cache",
+      "bytes": 1395234,
+      "sha256": "d62256e2eb2d8e3acbd4ad2e8dae7991f9cdee5fe46e9a0707cb8ac57e22ac95",
+      "fetched_at_utc": "2026-10-26T10:36:27+00:00",
+      "note": "derived from https://www.sec.gov/files/dera/data/financial-statement-data-sets/2016q1.zip (95470843 bytes); sub/num filtered to annual forms + project tags, qtrs 0,4",
+      "source_bytes": 95470843,
       "retained": true
     },
     {
@@ -693,8 +767,9 @@
       "path": "data/raw/fsds/2016q1_sub.parquet",
       "bytes": 176985,
       "sha256": "cbf1dd0d2697dc3c3ea4bce85aa8992c702795b4264092f28bc97be77580c458",
-      "fetched_at_utc": "2026-10-24T22:05:21+00:00",
-      "note": "reconstructed from local cache",
+      "fetched_at_utc": "2026-10-26T10:36:26+00:00",
+      "note": "derived from https://www.sec.gov/files/dera/data/financial-statement-data-sets/2016q1.zip (95470843 bytes); sub/num filtered to annual forms + project tags, qtrs 0,4",
+      "source_bytes": 95470843,
       "retained": true
     },
     {
@@ -702,17 +777,19 @@
       "path": "data/raw/fsds/2016q2_forms.parquet",
       "bytes": 2374,
       "sha256": "b88d8e1107b310fddf7056db5451b817b7f601fa9e259c7f33186dcc22dd3274",
-      "fetched_at_utc": "2026-10-24T22:05:38+00:00",
-      "note": "reconstructed from local cache",
+      "fetched_at_utc": "2026-10-26T10:36:36+00:00",
+      "note": "derived from https://www.sec.gov/files/dera/data/financial-statement-data-sets/2016q2.zip (73848835 bytes); sub/num filtered to annual forms + project tags, qtrs 0,4",
+      "source_bytes": 73848835,
       "retained": true
     },
     {
       "url": "https://www.sec.gov/files/dera/data/financial-statement-data-sets/2016q2.zip",
       "path": "data/raw/fsds/2016q2_num.parquet",
-      "bytes": 331409,
-      "sha256": "f93f4531351ebd2e36f0b89cbd1cc0ef07f0ab2e418ea9fd949e53dfe0fa04b0",
-      "fetched_at_utc": "2026-10-24T22:05:38+00:00",
-      "note": "reconstructed from local cache",
+      "bytes": 363579,
+      "sha256": "f62e496532f1021e4f0992d4a1f480146e67e3016d1e84306d381915008ccf4d",
+      "fetched_at_utc": "2026-10-26T10:36:36+00:00",
+      "note": "derived from https://www.sec.gov/files/dera/data/financial-statement-data-sets/2016q2.zip (73848835 bytes); sub/num filtered to annual forms + project tags, qtrs 0,4",
+      "source_bytes": 73848835,
       "retained": true
     },
     {
@@ -720,8 +797,9 @@
       "path": "data/raw/fsds/2016q2_sub.parquet",
       "bytes": 48758,
       "sha256": "30a3befc0151cfcdd63b719fa2fc90b2625f0c09ece4df34c516f28364f44fde",
-      "fetched_at_utc": "2026-10-24T22:05:38+00:00",
-      "note": "reconstructed from local cache",
+      "fetched_at_utc": "2026-10-26T10:36:36+00:00",
+      "note": "derived from https://www.sec.gov/files/dera/data/financial-statement-data-sets/2016q2.zip (73848835 bytes); sub/num filtered to annual forms + project tags, qtrs 0,4",
+      "source_bytes": 73848835,
       "retained": true
     },
     {
@@ -729,17 +807,19 @@
       "path": "data/raw/fsds/2016q3_forms.parquet",
       "bytes": 2375,
       "sha256": "4cb966c32cf912e82c37493302b750b4754765dcbf338a8ca54ecf36a02047f7",
-      "fetched_at_utc": "2026-10-24T22:05:56+00:00",
-      "note": "reconstructed from local cache",
+      "fetched_at_utc": "2026-10-26T10:36:46+00:00",
+      "note": "derived from https://www.sec.gov/files/dera/data/financial-statement-data-sets/2016q3.zip (71116399 bytes); sub/num filtered to annual forms + project tags, qtrs 0,4",
+      "source_bytes": 71116399,
       "retained": true
     },
     {
       "url": "https://www.sec.gov/files/dera/data/financial-statement-data-sets/2016q3.zip",
       "path": "data/raw/fsds/2016q3_num.parquet",
-      "bytes": 112758,
-      "sha256": "4947979292eff302c25fe7a422782862ce897ed1ad9e08bf3df2b04808860d7b",
-      "fetched_at_utc": "2026-10-24T22:05:56+00:00",
-      "note": "reconstructed from local cache",
+      "bytes": 124433,
+      "sha256": "19a127f4de04ffcbefdafa3ea61929969823a282dfb8158b5f6045c48c496724",
+      "fetched_at_utc": "2026-10-26T10:36:46+00:00",
+      "note": "derived from https://www.sec.gov/files/dera/data/financial-statement-data-sets/2016q3.zip (71116399 bytes); sub/num filtered to annual forms + project tags, qtrs 0,4",
+      "source_bytes": 71116399,
       "retained": true
     },
     {
@@ -747,8 +827,9 @@
       "path": "data/raw/fsds/2016q3_sub.parquet",
       "bytes": 21206,
       "sha256": "3c85c2c4b66b8dc4e830b09b13cb64406f10807f637a180457065713ba61d28c",
-      "fetched_at_utc": "2026-10-24T22:05:56+00:00",
-      "note": "reconstructed from local cache",
+      "fetched_at_utc": "2026-10-26T10:36:46+00:00",
+      "note": "derived from https://www.sec.gov/files/dera/data/financial-statement-data-sets/2016q3.zip (71116399 bytes); sub/num filtered to annual forms + project tags, qtrs 0,4",
+      "source_bytes": 71116399,
       "retained": true
     },
     {
@@ -756,17 +837,19 @@
       "path": "data/raw/fsds/2016q4_forms.parquet",
       "bytes": 2409,
       "sha256": "14fd45cdbfea6082f2ca1816e9a71ebda72e2bbb34bc32325b85da5811d16a94",
-      "fetched_at_utc": "2026-10-24T22:06:13+00:00",
-      "note": "reconstructed from local cache",
+      "fetched_at_utc": "2026-10-26T10:36:56+00:00",
+      "note": "derived from https://www.sec.gov/files/dera/data/financial-statement-data-sets/2016q4.zip (79400707 bytes); sub/num filtered to annual forms + project tags, qtrs 0,4",
+      "source_bytes": 79400707,
       "retained": true
     },
     {
       "url": "https://www.sec.gov/files/dera/data/financial-statement-data-sets/2016q4.zip",
       "path": "data/raw/fsds/2016q4_num.parquet",
-      "bytes": 157991,
-      "sha256": "9adc4579adb0551ef03fc4115e1a508380dc5fb4895145b51e536e96262c94ad",
-      "fetched_at_utc": "2026-10-24T22:06:13+00:00",
-      "note": "reconstructed from local cache",
+      "bytes": 173527,
+      "sha256": "45746c66de01677958126e4d5d30c82d3e560c61fb4af5bac27fd69b0377d618",
+      "fetched_at_utc": "2026-10-26T10:36:56+00:00",
+      "note": "derived from https://www.sec.gov/files/dera/data/financial-statement-data-sets/2016q4.zip (79400707 bytes); sub/num filtered to annual forms + project tags, qtrs 0,4",
+      "source_bytes": 79400707,
       "retained": true
     },
     {
@@ -774,8 +857,9 @@
       "path": "data/raw/fsds/2016q4_sub.parquet",
       "bytes": 27543,
       "sha256": "46752cbd3c8ee5fd0efb6ad1fe0880f2c67e0735b8a59bdd9be4983e75df15f6",
-      "fetched_at_utc": "2026-10-24T22:06:13+00:00",
-      "note": "reconstructed from local cache",
+      "fetched_at_utc": "2026-10-26T10:36:56+00:00",
+      "note": "derived from https://www.sec.gov/files/dera/data/financial-statement-data-sets/2016q4.zip (79400707 bytes); sub/num filtered to annual forms + project tags, qtrs 0,4",
+      "source_bytes": 79400707,
       "retained": true
     },
     {
@@ -783,17 +867,19 @@
       "path": "data/raw/fsds/2017q1_forms.parquet",
       "bytes": 2394,
       "sha256": "daadc1ec0815d61dd4337ef2d67a3160535ec01b57734b4cb068dd7c53b1734c",
-      "fetched_at_utc": "2026-10-24T22:06:32+00:00",
-      "note": "reconstructed from local cache",
+      "fetched_at_utc": "2026-10-26T10:37:09+00:00",
+      "note": "derived from https://www.sec.gov/files/dera/data/financial-statement-data-sets/2017q1.zip (92433981 bytes); sub/num filtered to annual forms + project tags, qtrs 0,4",
+      "source_bytes": 92433981,
       "retained": true
     },
     {
       "url": "https://www.sec.gov/files/dera/data/financial-statement-data-sets/2017q1.zip",
       "path": "data/raw/fsds/2017q1_num.parquet",
-      "bytes": 1255275,
-      "sha256": "c1b75b10bb86d3dc5dfaa114f73793591ecd9ca47ed13706b03166f12f9f4c7e",
-      "fetched_at_utc": "2026-10-24T22:06:32+00:00",
-      "note": "reconstructed from local cache",
+      "bytes": 1370645,
+      "sha256": "7543378494748b603010ad9b32b1600807489759c4b555cbfac3ac343e274ca3",
+      "fetched_at_utc": "2026-10-26T10:37:09+00:00",
+      "note": "derived from https://www.sec.gov/files/dera/data/financial-statement-data-sets/2017q1.zip (92433981 bytes); sub/num filtered to annual forms + project tags, qtrs 0,4",
+      "source_bytes": 92433981,
       "retained": true
     },
     {
@@ -801,8 +887,9 @@
       "path": "data/raw/fsds/2017q1_sub.parquet",
       "bytes": 169236,
       "sha256": "96e7c7cf587c310b96bb404a5d0ef07174643ad4cfef541162f43769efc1ad1a",
-      "fetched_at_utc": "2026-10-24T22:06:32+00:00",
-      "note": "reconstructed from local cache",
+      "fetched_at_utc": "2026-10-26T10:37:09+00:00",
+      "note": "derived from https://www.sec.gov/files/dera/data/financial-statement-data-sets/2017q1.zip (92433981 bytes); sub/num filtered to annual forms + project tags, qtrs 0,4",
+      "source_bytes": 92433981,
       "retained": true
     },
     {
@@ -810,17 +897,19 @@
       "path": "data/raw/fsds/2017q2_forms.parquet",
       "bytes": 2430,
       "sha256": "992e1308d0b8b2e200c83bdf7626a5a374e385bd720699c04128598135c87107",
-      "fetched_at_utc": "2026-10-24T22:06:47+00:00",
-      "note": "reconstructed from local cache",
+      "fetched_at_utc": "2026-10-26T10:37:19+00:00",
+      "note": "derived from https://www.sec.gov/files/dera/data/financial-statement-data-sets/2017q2.zip (71429748 bytes); sub/num filtered to annual forms + project tags, qtrs 0,4",
+      "source_bytes": 71429748,
       "retained": true
     },
     {
       "url": "https://www.sec.gov/files/dera/data/financial-statement-data-sets/2017q2.zip",
       "path": "data/raw/fsds/2017q2_num.parquet",
-      "bytes": 303574,
-      "sha256": "8ccb1f94d6c24625534410de34cd459ce002f735bb1a2e9b396e9ef78fd8908c",
-      "fetched_at_utc": "2026-10-24T22:06:47+00:00",
-      "note": "reconstructed from local cache",
+      "bytes": 332823,
+      "sha256": "fea722e3f0d211b3f6cbcd43876e114f8acc988a51cef0b6dae4ac9b4cbf7a90",
+      "fetched_at_utc": "2026-10-26T10:37:19+00:00",
+      "note": "derived from https://www.sec.gov/files/dera/data/financial-statement-data-sets/2017q2.zip (71429748 bytes); sub/num filtered to annual forms + project tags, qtrs 0,4",
+      "source_bytes": 71429748,
       "retained": true
     },
     {
@@ -828,8 +917,9 @@
       "path": "data/raw/fsds/2017q2_sub.parquet",
       "bytes": 45352,
       "sha256": "d5a993f2c3b5640c1d35b848bcd4b42da697cc904bca07bf9610420125ee2962",
-      "fetched_at_utc": "2026-10-24T22:06:47+00:00",
-      "note": "reconstructed from local cache",
+      "fetched_at_utc": "2026-10-26T10:37:19+00:00",
+      "note": "derived from https://www.sec.gov/files/dera/data/financial-statement-data-sets/2017q2.zip (71429748 bytes); sub/num filtered to annual forms + project tags, qtrs 0,4",
+      "source_bytes": 71429748,
       "retained": true
     },
     {
@@ -837,17 +927,19 @@
       "path": "data/raw/fsds/2017q3_forms.parquet",
       "bytes": 2393,
       "sha256": "abd576c9cd7106348a9904d7dd247b151bee081c4cb3c8a79915e80d7fcfd675",
-      "fetched_at_utc": "2026-10-24T22:07:04+00:00",
-      "note": "reconstructed from local cache",
+      "fetched_at_utc": "2026-10-26T10:37:31+00:00",
+      "note": "derived from https://www.sec.gov/files/dera/data/financial-statement-data-sets/2017q3.zip (74356472 bytes); sub/num filtered to annual forms + project tags, qtrs 0,4",
+      "source_bytes": 74356472,
       "retained": true
     },
     {
       "url": "https://www.sec.gov/files/dera/data/financial-statement-data-sets/2017q3.zip",
       "path": "data/raw/fsds/2017q3_num.parquet",
-      "bytes": 156014,
-      "sha256": "a57b461f1e56436d059756d117ae66143e876a7e28424b31c5a2022366223591",
-      "fetched_at_utc": "2026-10-24T22:07:04+00:00",
-      "note": "reconstructed from local cache",
+      "bytes": 172020,
+      "sha256": "5e5185a28ecc99659dda1d6ec0d09ba888ca8986f1efdda76bc2d88c1775ecf4",
+      "fetched_at_utc": "2026-10-26T10:37:31+00:00",
+      "note": "derived from https://www.sec.gov/files/dera/data/financial-statement-data-sets/2017q3.zip (74356472 bytes); sub/num filtered to annual forms + project tags, qtrs 0,4",
+      "source_bytes": 74356472,
       "retained": true
     },
     {
@@ -855,8 +947,9 @@
       "path": "data/raw/fsds/2017q3_sub.parquet",
       "bytes": 27125,
       "sha256": "856c5df62909155974f25407011c20a5309b93626f3cd9334b789b0503e1f2f0",
-      "fetched_at_utc": "2026-10-24T22:07:04+00:00",
-      "note": "reconstructed from local cache",
+      "fetched_at_utc": "2026-10-26T10:37:31+00:00",
+      "note": "derived from https://www.sec.gov/files/dera/data/financial-statement-data-sets/2017q3.zip (74356472 bytes); sub/num filtered to annual forms + project tags, qtrs 0,4",
+      "source_bytes": 74356472,
       "retained": true
     },
     {
@@ -864,17 +957,19 @@
       "path": "data/raw/fsds/2017q4_forms.parquet",
       "bytes": 2393,
       "sha256": "6e843d64d7801ee2941cbc839b7ab84b0af32f117fb9ec752ded89e2ff36c1a2",
-      "fetched_at_utc": "2026-10-24T22:07:23+00:00",
-      "note": "reconstructed from local cache",
+      "fetched_at_utc": "2026-10-26T10:37:41+00:00",
+      "note": "derived from https://www.sec.gov/files/dera/data/financial-statement-data-sets/2017q4.zip (76051784 bytes); sub/num filtered to annual forms + project tags, qtrs 0,4",
+      "source_bytes": 76051784,
       "retained": true
     },
     {
       "url": "https://www.sec.gov/files/dera/data/financial-statement-data-sets/2017q4.zip",
       "path": "data/raw/fsds/2017q4_num.parquet",
-      "bytes": 158465,
-      "sha256": "9c664dbdd23177d652deeec0321b28c33d0cf4a5342167b43ee9df5c50b2fffb",
-      "fetched_at_utc": "2026-10-24T22:07:23+00:00",
-      "note": "reconstructed from local cache",
+      "bytes": 173768,
+      "sha256": "c0c739c14036131068ac349f5690d123011a97672cdfb4876211670deb7e2813",
+      "fetched_at_utc": "2026-10-26T10:37:41+00:00",
+      "note": "derived from https://www.sec.gov/files/dera/data/financial-statement-data-sets/2017q4.zip (76051784 bytes); sub/num filtered to annual forms + project tags, qtrs 0,4",
+      "source_bytes": 76051784,
       "retained": true
     },
     {
@@ -882,8 +977,9 @@
       "path": "data/raw/fsds/2017q4_sub.parquet",
       "bytes": 27028,
       "sha256": "b7bb880ddfed50d649e4c5666b4ce061d291c17ecda3d10fe255265512da7576",
-      "fetched_at_utc": "2026-10-24T22:07:23+00:00",
-      "note": "reconstructed from local cache",
+      "fetched_at_utc": "2026-10-26T10:37:41+00:00",
+      "note": "derived from https://www.sec.gov/files/dera/data/financial-statement-data-sets/2017q4.zip (76051784 bytes); sub/num filtered to annual forms + project tags, qtrs 0,4",
+      "source_bytes": 76051784,
       "retained": true
     },
     {
@@ -891,17 +987,19 @@
       "path": "data/raw/fsds/2018q1_forms.parquet",
       "bytes": 2413,
       "sha256": "bd1d64f5128f849bd964e400694c15739d960aa267226602667a64a91bd30c8b",
-      "fetched_at_utc": "2026-10-24T22:07:45+00:00",
-      "note": "reconstructed from local cache",
+      "fetched_at_utc": "2026-10-26T10:37:53+00:00",
+      "note": "derived from https://www.sec.gov/files/dera/data/financial-statement-data-sets/2018q1.zip (93176693 bytes); sub/num filtered to annual forms + project tags, qtrs 0,4",
+      "source_bytes": 93176693,
       "retained": true
     },
     {
       "url": "https://www.sec.gov/files/dera/data/financial-statement-data-sets/2018q1.zip",
       "path": "data/raw/fsds/2018q1_num.parquet",
-      "bytes": 1183502,
-      "sha256": "729ac90b281c42e6855467d1f371c7f1a081d36e3820d0ee243f05c8689b5b8f",
-      "fetched_at_utc": "2026-10-24T22:07:45+00:00",
-      "note": "reconstructed from local cache",
+      "bytes": 1289193,
+      "sha256": "2f512d1255bae522aeed61ed821e7b087e0013e445e812561d443e1f7ef170cd",
+      "fetched_at_utc": "2026-10-26T10:37:53+00:00",
+      "note": "derived from https://www.sec.gov/files/dera/data/financial-statement-data-sets/2018q1.zip (93176693 bytes); sub/num filtered to annual forms + project tags, qtrs 0,4",
+      "source_bytes": 93176693,
       "retained": true
     },
     {
@@ -909,8 +1007,9 @@
       "path": "data/raw/fsds/2018q1_sub.parquet",
       "bytes": 163068,
       "sha256": "d21e5c5b7fcbf5741137b98fd285eab74ff685ba42125e19f02a79fbe622d1d9",
-      "fetched_at_utc": "2026-10-24T22:07:45+00:00",
-      "note": "reconstructed from local cache",
+      "fetched_at_utc": "2026-10-26T10:37:53+00:00",
+      "note": "derived from https://www.sec.gov/files/dera/data/financial-statement-data-sets/2018q1.zip (93176693 bytes); sub/num filtered to annual forms + project tags, qtrs 0,4",
+      "source_bytes": 93176693,
       "retained": true
     },
     {
@@ -918,17 +1017,19 @@
       "path": "data/raw/fsds/2018q2_forms.parquet",
       "bytes": 2421,
       "sha256": "2d7d1177a6e964dd5d463adbc6d24338be1cf708ff5c59a35de98afaac5ea4bf",
-      "fetched_at_utc": "2026-10-24T22:08:03+00:00",
-      "note": "reconstructed from local cache",
+      "fetched_at_utc": "2026-10-26T10:38:04+00:00",
+      "note": "derived from https://www.sec.gov/files/dera/data/financial-statement-data-sets/2018q2.zip (91972487 bytes); sub/num filtered to annual forms + project tags, qtrs 0,4",
+      "source_bytes": 91972487,
       "retained": true
     },
     {
       "url": "https://www.sec.gov/files/dera/data/financial-statement-data-sets/2018q2.zip",
       "path": "data/raw/fsds/2018q2_num.parquet",
-      "bytes": 394500,
-      "sha256": "e8cc93468b0f94491ed548d16a2fe5a769cd0d80f94cc2111b19b56ca1b93007",
-      "fetched_at_utc": "2026-10-24T22:08:03+00:00",
-      "note": "reconstructed from local cache",
+      "bytes": 434865,
+      "sha256": "fd1d0805d4cf560e719c2a61fb96fa3ca06a37220bec2d79737c07e3fa8e4b99",
+      "fetched_at_utc": "2026-10-26T10:38:04+00:00",
+      "note": "derived from https://www.sec.gov/files/dera/data/financial-statement-data-sets/2018q2.zip (91972487 bytes); sub/num filtered to annual forms + project tags, qtrs 0,4",
+      "source_bytes": 91972487,
       "retained": true
     },
     {
@@ -936,8 +1037,9 @@
       "path": "data/raw/fsds/2018q2_sub.parquet",
       "bytes": 59340,
       "sha256": "9e29e61e34dd3ff93992d7e89ce6cc44921b377365f9964b391333a0dc1b79fd",
-      "fetched_at_utc": "2026-10-24T22:08:03+00:00",
-      "note": "reconstructed from local cache",
+      "fetched_at_utc": "2026-10-26T10:38:04+00:00",
+      "note": "derived from https://www.sec.gov/files/dera/data/financial-statement-data-sets/2018q2.zip (91972487 bytes); sub/num filtered to annual forms + project tags, qtrs 0,4",
+      "source_bytes": 91972487,
       "retained": true
     },
     {
@@ -945,17 +1047,19 @@
       "path": "data/raw/fsds/2018q3_forms.parquet",
       "bytes": 2405,
       "sha256": "87b5be420010dda5c5acd12b8c2590120ba5477f27c7f82597d43fe24688564a",
-      "fetched_at_utc": "2026-10-24T22:08:21+00:00",
-      "note": "reconstructed from local cache",
+      "fetched_at_utc": "2026-10-26T10:38:14+00:00",
+      "note": "derived from https://www.sec.gov/files/dera/data/financial-statement-data-sets/2018q3.zip (87202498 bytes); sub/num filtered to annual forms + project tags, qtrs 0,4",
+      "source_bytes": 87202498,
       "retained": true
     },
     {
       "url": "https://www.sec.gov/files/dera/data/financial-statement-data-sets/2018q3.zip",
       "path": "data/raw/fsds/2018q3_num.parquet",
-      "bytes": 150262,
-      "sha256": "1b3464578d1cc41932a06507789372264c58907551516f67da8b5f73dade8ec9",
-      "fetched_at_utc": "2026-10-24T22:08:21+00:00",
-      "note": "reconstructed from local cache",
+      "bytes": 165434,
+      "sha256": "3529bb79cd4da4a155599434df200cb336ae8be6dcd701e7706e31c618c5b138",
+      "fetched_at_utc": "2026-10-26T10:38:14+00:00",
+      "note": "derived from https://www.sec.gov/files/dera/data/financial-statement-data-sets/2018q3.zip (87202498 bytes); sub/num filtered to annual forms + project tags, qtrs 0,4",
+      "source_bytes": 87202498,
       "retained": true
     },
     {
@@ -963,8 +1067,9 @@
       "path": "data/raw/fsds/2018q3_sub.parquet",
       "bytes": 26429,
       "sha256": "20f604f21f4bc9f54b3a99ccc096663219bd73d664735d2c370c54629c4ce622",
-      "fetched_at_utc": "2026-10-24T22:08:21+00:00",
-      "note": "reconstructed from local cache",
+      "fetched_at_utc": "2026-10-26T10:38:14+00:00",
+      "note": "derived from https://www.sec.gov/files/dera/data/financial-statement-data-sets/2018q3.zip (87202498 bytes); sub/num filtered to annual forms + project tags, qtrs 0,4",
+      "source_bytes": 87202498,
       "retained": true
     },
     {
@@ -972,17 +1077,19 @@
       "path": "data/raw/fsds/2018q4_forms.parquet",
       "bytes": 2377,
       "sha256": "7c9c515515264dad1b54cc5788b80e397776757abfdf3f239cb69899fd9bf8d1",
-      "fetched_at_utc": "2026-10-24T22:08:36+00:00",
-      "note": "reconstructed from local cache",
+      "fetched_at_utc": "2026-10-26T10:38:24+00:00",
+      "note": "derived from https://www.sec.gov/files/dera/data/financial-statement-data-sets/2018q4.zip (62895777 bytes); sub/num filtered to annual forms + project tags, qtrs 0,4",
+      "source_bytes": 62895777,
       "retained": true
     },
     {
       "url": "https://www.sec.gov/files/dera/data/financial-statement-data-sets/2018q4.zip",
       "path": "data/raw/fsds/2018q4_num.parquet",
-      "bytes": 145805,
-      "sha256": "dcf6104318311ec1dc631673acd860ff9791777ec5d11c407767a748424dcc3e",
-      "fetched_at_utc": "2026-10-24T22:08:36+00:00",
-      "note": "reconstructed from local cache",
+      "bytes": 159314,
+      "sha256": "e52022dc258e5b739c3029712bc950f6c3f68e999958d9a2bdd9b21f307b9526",
+      "fetched_at_utc": "2026-10-26T10:38:24+00:00",
+      "note": "derived from https://www.sec.gov/files/dera/data/financial-statement-data-sets/2018q4.zip (62895777 bytes); sub/num filtered to annual forms + project tags, qtrs 0,4",
+      "source_bytes": 62895777,
       "retained": true
     },
     {
@@ -990,8 +1097,9 @@
       "path": "data/raw/fsds/2018q4_sub.parquet",
       "bytes": 26752,
       "sha256": "ed4aa6f67bfd8c4a22ca995b46f937d2feb6fc719cace2e5e8ef55128662b34c",
-      "fetched_at_utc": "2026-10-24T22:08:36+00:00",
-      "note": "reconstructed from local cache",
+      "fetched_at_utc": "2026-10-26T10:38:24+00:00",
+      "note": "derived from https://www.sec.gov/files/dera/data/financial-statement-data-sets/2018q4.zip (62895777 bytes); sub/num filtered to annual forms + project tags, qtrs 0,4",
+      "source_bytes": 62895777,
       "retained": true
     },
     {
@@ -999,17 +1107,19 @@
       "path": "data/raw/fsds/2019q1_forms.parquet",
       "bytes": 2401,
       "sha256": "f5ab0dd1aed7334cd6b27cd20427a233f9987fc4cf29fbfd08317ba562a2dd27",
-      "fetched_at_utc": "2026-10-24T22:08:56+00:00",
-      "note": "reconstructed from local cache",
+      "fetched_at_utc": "2026-10-26T10:38:37+00:00",
+      "note": "derived from https://www.sec.gov/files/dera/data/financial-statement-data-sets/2019q1.zip (95895180 bytes); sub/num filtered to annual forms + project tags, qtrs 0,4",
+      "source_bytes": 95895180,
       "retained": true
     },
     {
       "url": "https://www.sec.gov/files/dera/data/financial-statement-data-sets/2019q1.zip",
       "path": "data/raw/fsds/2019q1_num.parquet",
-      "bytes": 1185751,
-      "sha256": "98c799bb367bf3a80e63e73affce00625640af1579b1d8165be9fc79cd10c465",
-      "fetched_at_utc": "2026-10-24T22:08:56+00:00",
-      "note": "reconstructed from local cache",
+      "bytes": 1287924,
+      "sha256": "4aa19aa158e96f1f604cd58616e76bb40a7f7f6480244806bde3847740affa74",
+      "fetched_at_utc": "2026-10-26T10:38:37+00:00",
+      "note": "derived from https://www.sec.gov/files/dera/data/financial-statement-data-sets/2019q1.zip (95895180 bytes); sub/num filtered to annual forms + project tags, qtrs 0,4",
+      "source_bytes": 95895180,
       "retained": true
     },
     {
@@ -1017,8 +1127,9 @@
       "path": "data/raw/fsds/2019q1_sub.parquet",
       "bytes": 151021,
       "sha256": "847456e02f4fa0f8058ecfc9b038e323af3413533aac03bab6bac7e19b0495ef",
-      "fetched_at_utc": "2026-10-24T22:08:56+00:00",
-      "note": "reconstructed from local cache",
+      "fetched_at_utc": "2026-10-26T10:38:37+00:00",
+      "note": "derived from https://www.sec.gov/files/dera/data/financial-statement-data-sets/2019q1.zip (95895180 bytes); sub/num filtered to annual forms + project tags, qtrs 0,4",
+      "source_bytes": 95895180,
       "retained": true
     },
     {
@@ -1026,17 +1137,19 @@
       "path": "data/raw/fsds/2019q2_forms.parquet",
       "bytes": 2399,
       "sha256": "11c0857bc5b0bcc5e74681a0da21d42acd3a2e36ab7060827e5e8d5a2f0df0eb",
-      "fetched_at_utc": "2026-10-24T22:09:16+00:00",
-      "note": "reconstructed from local cache",
+      "fetched_at_utc": "2026-10-26T10:38:48+00:00",
+      "note": "derived from https://www.sec.gov/files/dera/data/financial-statement-data-sets/2019q2.zip (90155728 bytes); sub/num filtered to annual forms + project tags, qtrs 0,4",
+      "source_bytes": 90155728,
       "retained": true
     },
     {
       "url": "https://www.sec.gov/files/dera/data/financial-statement-data-sets/2019q2.zip",
       "path": "data/raw/fsds/2019q2_num.parquet",
-      "bytes": 399406,
-      "sha256": "4536ea605559560d0fbcbe8eda2d83c4be4e4a39ebe35a12a0c3833310b14217",
-      "fetched_at_utc": "2026-10-24T22:09:16+00:00",
-      "note": "reconstructed from local cache",
+      "bytes": 440156,
+      "sha256": "b4712a9f2993a7c9761cac82645171159ba928676cffcfadaafd398c7963ce84",
+      "fetched_at_utc": "2026-10-26T10:38:48+00:00",
+      "note": "derived from https://www.sec.gov/files/dera/data/financial-statement-data-sets/2019q2.zip (90155728 bytes); sub/num filtered to annual forms + project tags, qtrs 0,4",
+      "source_bytes": 90155728,
       "retained": true
     },
     {
@@ -1044,8 +1157,9 @@
       "path": "data/raw/fsds/2019q2_sub.parquet",
       "bytes": 58127,
       "sha256": "c2196a499bff06f2927ea726b40d553c156f92c88cfb90548f9ac0863d89ee32",
-      "fetched_at_utc": "2026-10-24T22:09:16+00:00",
-      "note": "reconstructed from local cache",
+      "fetched_at_utc": "2026-10-26T10:38:48+00:00",
+      "note": "derived from https://www.sec.gov/files/dera/data/financial-statement-data-sets/2019q2.zip (90155728 bytes); sub/num filtered to annual forms + project tags, qtrs 0,4",
+      "source_bytes": 90155728,
       "retained": true
     },
     {
@@ -1053,17 +1167,19 @@
       "path": "data/raw/fsds/2019q3_forms.parquet",
       "bytes": 2394,
       "sha256": "05e5cfc310b4ecf981167a78ff9bc23dcbfd7fbbb3a26ae4ff81ff2ec4091812",
-      "fetched_at_utc": "2026-10-24T22:09:37+00:00",
-      "note": "reconstructed from local cache",
+      "fetched_at_utc": "2026-10-26T10:39:14+00:00",
+      "note": "derived from https://www.sec.gov/files/dera/data/financial-statement-data-sets/2019q3.zip (89829588 bytes); sub/num filtered to annual forms + project tags, qtrs 0,4",
+      "source_bytes": 89829588,
       "retained": true
     },
     {
       "url": "https://www.sec.gov/files/dera/data/financial-statement-data-sets/2019q3.zip",
       "path": "data/raw/fsds/2019q3_num.parquet",
-      "bytes": 149826,
-      "sha256": "20421aa00297a94ea5649e85989a91aef1bb43b215b9efe2cfc0027843b02439",
-      "fetched_at_utc": "2026-10-24T22:09:37+00:00",
-      "note": "reconstructed from local cache",
+      "bytes": 165105,
+      "sha256": "c61a7f3b70c539ecc5f113dc56ccce7a0848dd3ef6c620c039992c31ee2431f2",
+      "fetched_at_utc": "2026-10-26T10:39:14+00:00",
+      "note": "derived from https://www.sec.gov/files/dera/data/financial-statement-data-sets/2019q3.zip (89829588 bytes); sub/num filtered to annual forms + project tags, qtrs 0,4",
+      "source_bytes": 89829588,
       "retained": true
     },
     {
@@ -1071,8 +1187,9 @@
       "path": "data/raw/fsds/2019q3_sub.parquet",
       "bytes": 26427,
       "sha256": "90158d2493ebc15d42b6209c0e4d018c127352ab4ece88931ef33200236f634e",
-      "fetched_at_utc": "2026-10-24T22:09:37+00:00",
-      "note": "reconstructed from local cache",
+      "fetched_at_utc": "2026-10-26T10:39:14+00:00",
+      "note": "derived from https://www.sec.gov/files/dera/data/financial-statement-data-sets/2019q3.zip (89829588 bytes); sub/num filtered to annual forms + project tags, qtrs 0,4",
+      "source_bytes": 89829588,
       "retained": true
     },
     {
@@ -1080,17 +1197,19 @@
       "path": "data/raw/fsds/2019q4_forms.parquet",
       "bytes": 2376,
       "sha256": "c82e979aa420ee45215bf34416870a6fe4bd4db814bd7c4aeb351da89a0a8b74",
-      "fetched_at_utc": "2026-10-24T22:10:00+00:00",
-      "note": "reconstructed from local cache",
+      "fetched_at_utc": "2026-10-26T10:39:27+00:00",
+      "note": "derived from https://www.sec.gov/files/dera/data/financial-statement-data-sets/2019q4.zip (98753299 bytes); sub/num filtered to annual forms + project tags, qtrs 0,4",
+      "source_bytes": 98753299,
       "retained": true
     },
     {
       "url": "https://www.sec.gov/files/dera/data/financial-statement-data-sets/2019q4.zip",
       "path": "data/raw/fsds/2019q4_num.parquet",
-      "bytes": 150315,
-      "sha256": "1391ec6c7a49dcf0afa4d1fdd1d3909f3c1e64a60b9693a281fd7fdf17416cd6",
-      "fetched_at_utc": "2026-10-24T22:10:00+00:00",
-      "note": "reconstructed from local cache",
+      "bytes": 164788,
+      "sha256": "98aca5ac3da5946bb44aa53f625d2571beaf9686ef6c4a3e2a824101689958f2",
+      "fetched_at_utc": "2026-10-26T10:39:27+00:00",
+      "note": "derived from https://www.sec.gov/files/dera/data/financial-statement-data-sets/2019q4.zip (98753299 bytes); sub/num filtered to annual forms + project tags, qtrs 0,4",
+      "source_bytes": 98753299,
       "retained": true
     },
     {
@@ -1098,8 +1217,9 @@
       "path": "data/raw/fsds/2019q4_sub.parquet",
       "bytes": 25631,
       "sha256": "b9a1c4b3427a3d46115a175ec360ffd3802afa9e6bfb0c96e975488bac23cecf",
-      "fetched_at_utc": "2026-10-24T22:10:00+00:00",
-      "note": "reconstructed from local cache",
+      "fetched_at_utc": "2026-10-26T10:39:27+00:00",
+      "note": "derived from https://www.sec.gov/files/dera/data/financial-statement-data-sets/2019q4.zip (98753299 bytes); sub/num filtered to annual forms + project tags, qtrs 0,4",
+      "source_bytes": 98753299,
       "retained": true
     },
     {
@@ -1107,17 +1227,19 @@
       "path": "data/raw/fsds/2020q1_forms.parquet",
       "bytes": 2423,
       "sha256": "98466c419f2efddc60fe9a0e19cfab6a48d66fd8be82e52e685b304b06c18029",
-      "fetched_at_utc": "2026-10-24T22:10:27+00:00",
-      "note": "reconstructed from local cache",
+      "fetched_at_utc": "2026-10-26T10:39:41+00:00",
+      "note": "derived from https://www.sec.gov/files/dera/data/financial-statement-data-sets/2020q1.zip (96584608 bytes); sub/num filtered to annual forms + project tags, qtrs 0,4",
+      "source_bytes": 96584608,
       "retained": true
     },
     {
       "url": "https://www.sec.gov/files/dera/data/financial-statement-data-sets/2020q1.zip",
       "path": "data/raw/fsds/2020q1_num.parquet",
-      "bytes": 1213658,
-      "sha256": "1f9fcd46aa3d7ab0488799d95988c21addbf9feafcfea29676ce771aba051d45",
-      "fetched_at_utc": "2026-10-24T22:10:27+00:00",
-      "note": "reconstructed from local cache",
+      "bytes": 1317244,
+      "sha256": "43e29b0b7090e4e744f6c55bf31b8d6d9f2e1e6c64905f641d137eb8e97564c3",
+      "fetched_at_utc": "2026-10-26T10:39:41+00:00",
+      "note": "derived from https://www.sec.gov/files/dera/data/financial-statement-data-sets/2020q1.zip (96584608 bytes); sub/num filtered to annual forms + project tags, qtrs 0,4",
+      "source_bytes": 96584608,
       "retained": true
     },
     {
@@ -1125,8 +1247,9 @@
       "path": "data/raw/fsds/2020q1_sub.parquet",
       "bytes": 155571,
       "sha256": "204b9349626e17cce04074d1d8e18bdb8863cd336f5b02b1db738c28a33f388e",
-      "fetched_at_utc": "2026-10-24T22:10:27+00:00",
-      "note": "reconstructed from local cache",
+      "fetched_at_utc": "2026-10-26T10:39:41+00:00",
+      "note": "derived from https://www.sec.gov/files/dera/data/financial-statement-data-sets/2020q1.zip (96584608 bytes); sub/num filtered to annual forms + project tags, qtrs 0,4",
+      "source_bytes": 96584608,
       "retained": true
     },
     {
@@ -1134,17 +1257,19 @@
       "path": "data/raw/fsds/2020q2_forms.parquet",
       "bytes": 2452,
       "sha256": "df3509bd290671532846f93470f25e9f6d466cb6cee7ab6d4333f53d1b7855ce",
-      "fetched_at_utc": "2026-10-24T22:10:50+00:00",
-      "note": "reconstructed from local cache",
+      "fetched_at_utc": "2026-10-26T10:39:51+00:00",
+      "note": "derived from https://www.sec.gov/files/dera/data/financial-statement-data-sets/2020q2.zip (82008710 bytes); sub/num filtered to annual forms + project tags, qtrs 0,4",
+      "source_bytes": 82008710,
       "retained": true
     },
     {
       "url": "https://www.sec.gov/files/dera/data/financial-statement-data-sets/2020q2.zip",
       "path": "data/raw/fsds/2020q2_num.parquet",
-      "bytes": 333137,
-      "sha256": "923ba96889a29c25853206eadb7a8bfdf465d085e6439e8095968730b83a0b6f",
-      "fetched_at_utc": "2026-10-24T22:10:50+00:00",
-      "note": "reconstructed from local cache",
+      "bytes": 362507,
+      "sha256": "ecb5f16288226bdd2a544d8105edbbefe2eac5b594b06e738ee53e2424add005",
+      "fetched_at_utc": "2026-10-26T10:39:51+00:00",
+      "note": "derived from https://www.sec.gov/files/dera/data/financial-statement-data-sets/2020q2.zip (82008710 bytes); sub/num filtered to annual forms + project tags, qtrs 0,4",
+      "source_bytes": 82008710,
       "retained": true
     },
     {
@@ -1152,8 +1277,9 @@
       "path": "data/raw/fsds/2020q2_sub.parquet",
       "bytes": 48126,
       "sha256": "e0e4b11d2bda5c4ac24493feb1e6f7b5022044d8d15ba5b372eee3b76de984fd",
-      "fetched_at_utc": "2026-10-24T22:10:50+00:00",
-      "note": "reconstructed from local cache",
+      "fetched_at_utc": "2026-10-26T10:39:51+00:00",
+      "note": "derived from https://www.sec.gov/files/dera/data/financial-statement-data-sets/2020q2.zip (82008710 bytes); sub/num filtered to annual forms + project tags, qtrs 0,4",
+      "source_bytes": 82008710,
       "retained": true
     },
     {
@@ -1161,17 +1287,19 @@
       "path": "data/raw/fsds/2020q3_forms.parquet",
       "bytes": 2424,
       "sha256": "12c4c44979fff8b9fd12287e1d32c516ccd1116a63841d3106449da48478638d",
-      "fetched_at_utc": "2026-10-24T22:11:16+00:00",
-      "note": "reconstructed from local cache",
+      "fetched_at_utc": "2026-10-26T10:40:05+00:00",
+      "note": "derived from https://www.sec.gov/files/dera/data/financial-statement-data-sets/2020q3.zip (87582976 bytes); sub/num filtered to annual forms + project tags, qtrs 0,4",
+      "source_bytes": 87582976,
       "retained": true
     },
     {
       "url": "https://www.sec.gov/files/dera/data/financial-statement-data-sets/2020q3.zip",
       "path": "data/raw/fsds/2020q3_num.parquet",
-      "bytes": 152037,
-      "sha256": "68a591379f1b1f869b6606603a6090e931b41f7c199e3474136457b35390f7a7",
-      "fetched_at_utc": "2026-10-24T22:11:16+00:00",
-      "note": "reconstructed from local cache",
+      "bytes": 166739,
+      "sha256": "5194e92094831bc265940f94857638e5008f90dc846c9d49e4136d3b1315d1da",
+      "fetched_at_utc": "2026-10-26T10:40:05+00:00",
+      "note": "derived from https://www.sec.gov/files/dera/data/financial-statement-data-sets/2020q3.zip (87582976 bytes); sub/num filtered to annual forms + project tags, qtrs 0,4",
+      "source_bytes": 87582976,
       "retained": true
     },
     {
@@ -1179,8 +1307,9 @@
       "path": "data/raw/fsds/2020q3_sub.parquet",
       "bytes": 25721,
       "sha256": "b924d071b6a24c79caafa542b2b1cfc508b42a4e27743e6885e9b646ffde6e66",
-      "fetched_at_utc": "2026-10-24T22:11:16+00:00",
-      "note": "reconstructed from local cache",
+      "fetched_at_utc": "2026-10-26T10:40:04+00:00",
+      "note": "derived from https://www.sec.gov/files/dera/data/financial-statement-data-sets/2020q3.zip (87582976 bytes); sub/num filtered to annual forms + project tags, qtrs 0,4",
+      "source_bytes": 87582976,
       "retained": true
     },
     {
@@ -1188,17 +1317,19 @@
       "path": "data/raw/fsds/2020q4_forms.parquet",
       "bytes": 2385,
       "sha256": "edad5f7694350d12f10a42f13b2d65682f8e5496ebc82d374b8b24e3889ba143",
-      "fetched_at_utc": "2026-10-24T22:11:40+00:00",
-      "note": "reconstructed from local cache",
+      "fetched_at_utc": "2026-10-26T10:40:17+00:00",
+      "note": "derived from https://www.sec.gov/files/dera/data/financial-statement-data-sets/2020q4.zip (89811373 bytes); sub/num filtered to annual forms + project tags, qtrs 0,4",
+      "source_bytes": 89811373,
       "retained": true
     },
     {
       "url": "https://www.sec.gov/files/dera/data/financial-statement-data-sets/2020q4.zip",
       "path": "data/raw/fsds/2020q4_num.parquet",
-      "bytes": 143714,
-      "sha256": "31717878fa734f588bf82cc02cf944ff65553130f75fa835e1f8295a50f2c483",
-      "fetched_at_utc": "2026-10-24T22:11:40+00:00",
-      "note": "reconstructed from local cache",
+      "bytes": 156313,
+      "sha256": "0cdf9e986065fc3186b57745ca7cb63bede94b4d7eac9854043f730a1fc0b142",
+      "fetched_at_utc": "2026-10-26T10:40:17+00:00",
+      "note": "derived from https://www.sec.gov/files/dera/data/financial-statement-data-sets/2020q4.zip (89811373 bytes); sub/num filtered to annual forms + project tags, qtrs 0,4",
+      "source_bytes": 89811373,
       "retained": true
     },
     {
@@ -1206,8 +1337,9 @@
       "path": "data/raw/fsds/2020q4_sub.parquet",
       "bytes": 24860,
       "sha256": "b3d7903d87c20e1f0469b4b53b62f495c91cf53616f19ce0537ef7605d7f7f29",
-      "fetched_at_utc": "2026-10-24T22:11:40+00:00",
-      "note": "reconstructed from local cache",
+      "fetched_at_utc": "2026-10-26T10:40:17+00:00",
+      "note": "derived from https://www.sec.gov/files/dera/data/financial-statement-data-sets/2020q4.zip (89811373 bytes); sub/num filtered to annual forms + project tags, qtrs 0,4",
+      "source_bytes": 89811373,
       "retained": true
     },
     {
@@ -1215,17 +1347,19 @@
       "path": "data/raw/fsds/2021q1_forms.parquet",
       "bytes": 2422,
       "sha256": "f050707ed6de368c9cf726cdb31bfce23aeeaab122f4fe2cca463809b3b1c72c",
-      "fetched_at_utc": "2026-10-24T22:12:02+00:00",
-      "note": "reconstructed from local cache",
+      "fetched_at_utc": "2026-10-26T10:40:32+00:00",
+      "note": "derived from https://www.sec.gov/files/dera/data/financial-statement-data-sets/2021q1.zip (97900752 bytes); sub/num filtered to annual forms + project tags, qtrs 0,4",
+      "source_bytes": 97900752,
       "retained": true
     },
     {
       "url": "https://www.sec.gov/files/dera/data/financial-statement-data-sets/2021q1.zip",
       "path": "data/raw/fsds/2021q1_num.parquet",
-      "bytes": 1287629,
-      "sha256": "f5ab9b1a9c9ae72a3f9943a9b60d16b45f5be3c3ff23e76610829a48cdb4debc",
-      "fetched_at_utc": "2026-10-24T22:12:02+00:00",
-      "note": "reconstructed from local cache",
+      "bytes": 1393158,
+      "sha256": "5a27cc05a03f25ebaf2637036ac0d61111224f8ebde3ba5b78b31392daa6af14",
+      "fetched_at_utc": "2026-10-26T10:40:32+00:00",
+      "note": "derived from https://www.sec.gov/files/dera/data/financial-statement-data-sets/2021q1.zip (97900752 bytes); sub/num filtered to annual forms + project tags, qtrs 0,4",
+      "source_bytes": 97900752,
       "retained": true
     },
     {
@@ -1233,8 +1367,9 @@
       "path": "data/raw/fsds/2021q1_sub.parquet",
       "bytes": 167107,
       "sha256": "eb3df3367362af9f8634c3972208a42a9100a4ce36e280f0c86733f9382ba0a0",
-      "fetched_at_utc": "2026-10-24T22:12:02+00:00",
-      "note": "reconstructed from local cache",
+      "fetched_at_utc": "2026-10-26T10:40:32+00:00",
+      "note": "derived from https://www.sec.gov/files/dera/data/financial-statement-data-sets/2021q1.zip (97900752 bytes); sub/num filtered to annual forms + project tags, qtrs 0,4",
+      "source_bytes": 97900752,
       "retained": true
     },
     {
@@ -1242,17 +1377,19 @@
       "path": "data/raw/fsds/2021q2_forms.parquet",
       "bytes": 2463,
       "sha256": "6f18bfcd02be3f43faafab954cfc963e90b50af5bd5395f2c65c5af887f937b2",
-      "fetched_at_utc": "2026-10-24T22:12:30+00:00",
-      "note": "reconstructed from local cache",
+      "fetched_at_utc": "2026-10-26T10:40:44+00:00",
+      "note": "derived from https://www.sec.gov/files/dera/data/financial-statement-data-sets/2021q2.zip (90864175 bytes); sub/num filtered to annual forms + project tags, qtrs 0,4",
+      "source_bytes": 90864175,
       "retained": true
     },
     {
       "url": "https://www.sec.gov/files/dera/data/financial-statement-data-sets/2021q2.zip",
       "path": "data/raw/fsds/2021q2_num.parquet",
-      "bytes": 357953,
-      "sha256": "32fbb4720cc40a25b954bbc2a1b4186daeb873277932752afaf2520bac42b06f",
-      "fetched_at_utc": "2026-10-24T22:12:30+00:00",
-      "note": "reconstructed from local cache",
+      "bytes": 388426,
+      "sha256": "ace356b4ab9be2585616fa5d75b6c8c6e5c4df1ec1af9f128edb914c9ec9d21b",
+      "fetched_at_utc": "2026-10-26T10:40:44+00:00",
+      "note": "derived from https://www.sec.gov/files/dera/data/financial-statement-data-sets/2021q2.zip (90864175 bytes); sub/num filtered to annual forms + project tags, qtrs 0,4",
+      "source_bytes": 90864175,
       "retained": true
     },
     {
@@ -1260,8 +1397,9 @@
       "path": "data/raw/fsds/2021q2_sub.parquet",
       "bytes": 55792,
       "sha256": "ad6977ec1475c0f6a315ba0f04493956ff1e5087e87736296f4878451071d630",
-      "fetched_at_utc": "2026-10-24T22:12:30+00:00",
-      "note": "reconstructed from local cache",
+      "fetched_at_utc": "2026-10-26T10:40:44+00:00",
+      "note": "derived from https://www.sec.gov/files/dera/data/financial-statement-data-sets/2021q2.zip (90864175 bytes); sub/num filtered to annual forms + project tags, qtrs 0,4",
+      "source_bytes": 90864175,
       "retained": true
     },
     {
@@ -1269,17 +1407,19 @@
       "path": "data/raw/fsds/2021q3_forms.parquet",
       "bytes": 2432,
       "sha256": "7bc2a9d7fb4e7cec0cf05ad7882a5a54aa15cac0ea82db8ea70e9678b4449407",
-      "fetched_at_utc": "2026-10-24T22:13:55+00:00",
-      "note": "reconstructed from local cache",
+      "fetched_at_utc": "2026-10-26T10:40:57+00:00",
+      "note": "derived from https://www.sec.gov/files/dera/data/financial-statement-data-sets/2021q3.zip (97252395 bytes); sub/num filtered to annual forms + project tags, qtrs 0,4",
+      "source_bytes": 97252395,
       "retained": true
     },
     {
       "url": "https://www.sec.gov/files/dera/data/financial-statement-data-sets/2021q3.zip",
       "path": "data/raw/fsds/2021q3_num.parquet",
-      "bytes": 152094,
-      "sha256": "cb441dd0b47ea0a6a20ade613bb264d37051dc80ee066c6e23b37cbe47b206ad",
-      "fetched_at_utc": "2026-10-24T22:13:55+00:00",
-      "note": "reconstructed from local cache",
+      "bytes": 165514,
+      "sha256": "69bc2bfe3cf7417f218fbf804db22721add97df71ef7241316d30392febbf5b2",
+      "fetched_at_utc": "2026-10-26T10:40:57+00:00",
+      "note": "derived from https://www.sec.gov/files/dera/data/financial-statement-data-sets/2021q3.zip (97252395 bytes); sub/num filtered to annual forms + project tags, qtrs 0,4",
+      "source_bytes": 97252395,
       "retained": true
     },
     {
@@ -1287,8 +1427,9 @@
       "path": "data/raw/fsds/2021q3_sub.parquet",
       "bytes": 27585,
       "sha256": "a89cdfe967461a9d160c610bc53538703ce5361b4efd786fb1efbdee8eb5ebe5",
-      "fetched_at_utc": "2026-10-24T22:13:55+00:00",
-      "note": "reconstructed from local cache",
+      "fetched_at_utc": "2026-10-26T10:40:57+00:00",
+      "note": "derived from https://www.sec.gov/files/dera/data/financial-statement-data-sets/2021q3.zip (97252395 bytes); sub/num filtered to annual forms + project tags, qtrs 0,4",
+      "source_bytes": 97252395,
       "retained": true
     },
     {
@@ -1296,18 +1437,18 @@
       "path": "data/raw/fsds/2021q4_forms.parquet",
       "bytes": 2440,
       "sha256": "17c6afca86447a10ad44b1347f341765c84fdc84f03da61722fa76ecbd720456",
-      "fetched_at_utc": "2026-10-24T22:34:11+00:00",
-      "note": "derived from https://www.sec.gov/files/dera/data/financial-statement-data-sets/2021q4.zip (102642081 bytes); sub/num filtered to annual forms + project tags",
+      "fetched_at_utc": "2026-10-26T10:41:13+00:00",
+      "note": "derived from https://www.sec.gov/files/dera/data/financial-statement-data-sets/2021q4.zip (102642081 bytes); sub/num filtered to annual forms + project tags, qtrs 0,4",
       "source_bytes": 102642081,
       "retained": true
     },
     {
       "url": "https://www.sec.gov/files/dera/data/financial-statement-data-sets/2021q4.zip",
       "path": "data/raw/fsds/2021q4_num.parquet",
-      "bytes": 159621,
-      "sha256": "8b852a53346d74f7b0f779918821babcb438f2de36bf7ae120de568b35e40e57",
-      "fetched_at_utc": "2026-10-24T22:34:11+00:00",
-      "note": "derived from https://www.sec.gov/files/dera/data/financial-statement-data-sets/2021q4.zip (102642081 bytes); sub/num filtered to annual forms + project tags",
+      "bytes": 173295,
+      "sha256": "389ff05019977a10fd24fffe96094afb748679ece54184509363f2a9609c9edd",
+      "fetched_at_utc": "2026-10-26T10:41:13+00:00",
+      "note": "derived from https://www.sec.gov/files/dera/data/financial-statement-data-sets/2021q4.zip (102642081 bytes); sub/num filtered to annual forms + project tags, qtrs 0,4",
       "source_bytes": 102642081,
       "retained": true
     },
@@ -1316,8 +1457,8 @@
       "path": "data/raw/fsds/2021q4_sub.parquet",
       "bytes": 28519,
       "sha256": "9a94959e737bbd9c2777e70fd6ade69cb09f8cf484f9cda9cd5473641aa4dbce",
-      "fetched_at_utc": "2026-10-24T22:34:11+00:00",
-      "note": "derived from https://www.sec.gov/files/dera/data/financial-statement-data-sets/2021q4.zip (102642081 bytes); sub/num filtered to annual forms + project tags",
+      "fetched_at_utc": "2026-10-26T10:41:13+00:00",
+      "note": "derived from https://www.sec.gov/files/dera/data/financial-statement-data-sets/2021q4.zip (102642081 bytes); sub/num filtered to annual forms + project tags, qtrs 0,4",
       "source_bytes": 102642081,
       "retained": true
     },
@@ -1326,17 +1467,19 @@
       "path": "data/raw/fsds/2022q1_forms.parquet",
       "bytes": 2470,
       "sha256": "541406aa5a5460ecb4abf0331c2418fb020f3df97fb8e3afe979604bc8f064ab",
-      "fetched_at_utc": "2026-10-24T22:14:27+00:00",
-      "note": "reconstructed from local cache",
+      "fetched_at_utc": "2026-10-26T10:41:29+00:00",
+      "note": "derived from https://www.sec.gov/files/dera/data/financial-statement-data-sets/2022q1.zip (103669919 bytes); sub/num filtered to annual forms + project tags, qtrs 0,4",
+      "source_bytes": 103669919,
       "retained": true
     },
     {
       "url": "https://www.sec.gov/files/dera/data/financial-statement-data-sets/2022q1.zip",
       "path": "data/raw/fsds/2022q1_num.parquet",
-      "bytes": 1400623,
-      "sha256": "660a7a866a1e50e13617cb9fc346db101cb98f8bd416ad7d65e83be3e3f1a985",
-      "fetched_at_utc": "2026-10-24T22:14:27+00:00",
-      "note": "reconstructed from local cache",
+      "bytes": 1509794,
+      "sha256": "76d4f3bc375f639d727e088a6dbb372008a7a0a5e8fbdb52ef9800d1cc1cac81",
+      "fetched_at_utc": "2026-10-26T10:41:29+00:00",
+      "note": "derived from https://www.sec.gov/files/dera/data/financial-statement-data-sets/2022q1.zip (103669919 bytes); sub/num filtered to annual forms + project tags, qtrs 0,4",
+      "source_bytes": 103669919,
       "retained": true
     },
     {
@@ -1344,8 +1487,9 @@
       "path": "data/raw/fsds/2022q1_sub.parquet",
       "bytes": 187018,
       "sha256": "7a46601f0e959dfa444de8adf112c7a6ed65e97a338a62d0aca96645e7297a16",
-      "fetched_at_utc": "2026-10-24T22:14:27+00:00",
-      "note": "reconstructed from local cache",
+      "fetched_at_utc": "2026-10-26T10:41:28+00:00",
+      "note": "derived from https://www.sec.gov/files/dera/data/financial-statement-data-sets/2022q1.zip (103669919 bytes); sub/num filtered to annual forms + project tags, qtrs 0,4",
+      "source_bytes": 103669919,
       "retained": true
     },
     {
@@ -1353,17 +1497,19 @@
       "path": "data/raw/fsds/2022q2_forms.parquet",
       "bytes": 2473,
       "sha256": "de99cc89f9dbfd765177739da4ce112b437f4f193dd97183a29ac34a4151da54",
-      "fetched_at_utc": "2026-10-24T22:14:50+00:00",
-      "note": "reconstructed from local cache",
+      "fetched_at_utc": "2026-10-26T10:41:42+00:00",
+      "note": "derived from https://www.sec.gov/files/dera/data/financial-statement-data-sets/2022q2.zip (97089251 bytes); sub/num filtered to annual forms + project tags, qtrs 0,4",
+      "source_bytes": 97089251,
       "retained": true
     },
     {
       "url": "https://www.sec.gov/files/dera/data/financial-statement-data-sets/2022q2.zip",
       "path": "data/raw/fsds/2022q2_num.parquet",
-      "bytes": 387598,
-      "sha256": "1e89b7a8c609f3e005a115dfd9738fdb0b0c552121ea26dc61c30300d609bdce",
-      "fetched_at_utc": "2026-10-24T22:14:50+00:00",
-      "note": "reconstructed from local cache",
+      "bytes": 418840,
+      "sha256": "6d23f212b232a48cf57462a038ff0f62204c84c62474d34717173a0717f21d6e",
+      "fetched_at_utc": "2026-10-26T10:41:42+00:00",
+      "note": "derived from https://www.sec.gov/files/dera/data/financial-statement-data-sets/2022q2.zip (97089251 bytes); sub/num filtered to annual forms + project tags, qtrs 0,4",
+      "source_bytes": 97089251,
       "retained": true
     },
     {
@@ -1371,8 +1517,9 @@
       "path": "data/raw/fsds/2022q2_sub.parquet",
       "bytes": 58034,
       "sha256": "9b13e86b3923c9a5ee83b2d365d1d180ce0c33fd83123932eadb7faa5941a93d",
-      "fetched_at_utc": "2026-10-24T22:14:50+00:00",
-      "note": "reconstructed from local cache",
+      "fetched_at_utc": "2026-10-26T10:41:42+00:00",
+      "note": "derived from https://www.sec.gov/files/dera/data/financial-statement-data-sets/2022q2.zip (97089251 bytes); sub/num filtered to annual forms + project tags, qtrs 0,4",
+      "source_bytes": 97089251,
       "retained": true
     },
     {
@@ -1380,17 +1527,19 @@
       "path": "data/raw/fsds/2022q3_forms.parquet",
       "bytes": 2464,
       "sha256": "307f1ed6642fa07b69f600602ab110a500898255d30578fa1820ccb798eb04c3",
-      "fetched_at_utc": "2026-10-24T22:15:15+00:00",
-      "note": "reconstructed from local cache",
+      "fetched_at_utc": "2026-10-26T10:41:56+00:00",
+      "note": "derived from https://www.sec.gov/files/dera/data/financial-statement-data-sets/2022q3.zip (97589396 bytes); sub/num filtered to annual forms + project tags, qtrs 0,4",
+      "source_bytes": 97589396,
       "retained": true
     },
     {
       "url": "https://www.sec.gov/files/dera/data/financial-statement-data-sets/2022q3.zip",
       "path": "data/raw/fsds/2022q3_num.parquet",
-      "bytes": 155185,
-      "sha256": "2ed4dfc470bf37bd33a5ab502a1212b6dd7a59b99170d3b148d8c35fd4083136",
-      "fetched_at_utc": "2026-10-24T22:15:15+00:00",
-      "note": "reconstructed from local cache",
+      "bytes": 169246,
+      "sha256": "4863a7c94afb3f3d60241d5f04e0168aea4e62920c3339b1c437587c3a24dc7d",
+      "fetched_at_utc": "2026-10-26T10:41:56+00:00",
+      "note": "derived from https://www.sec.gov/files/dera/data/financial-statement-data-sets/2022q3.zip (97589396 bytes); sub/num filtered to annual forms + project tags, qtrs 0,4",
+      "source_bytes": 97589396,
       "retained": true
     },
     {
@@ -1398,8 +1547,9 @@
       "path": "data/raw/fsds/2022q3_sub.parquet",
       "bytes": 27004,
       "sha256": "8cad34c4621ecab0cf00a7251fc70bb3b422a7a05875392a8a24eb489d005a57",
-      "fetched_at_utc": "2026-10-24T22:15:15+00:00",
-      "note": "reconstructed from local cache",
+      "fetched_at_utc": "2026-10-26T10:41:56+00:00",
+      "note": "derived from https://www.sec.gov/files/dera/data/financial-statement-data-sets/2022q3.zip (97589396 bytes); sub/num filtered to annual forms + project tags, qtrs 0,4",
+      "source_bytes": 97589396,
       "retained": true
     },
     {
@@ -1407,17 +1557,19 @@
       "path": "data/raw/fsds/2022q4_forms.parquet",
       "bytes": 2393,
       "sha256": "17cf29e749210451d93e4b8dea49e82d98ba23e1adbacccc127ae481a8710c11",
-      "fetched_at_utc": "2026-10-24T22:15:43+00:00",
-      "note": "reconstructed from local cache",
+      "fetched_at_utc": "2026-10-26T10:42:16+00:00",
+      "note": "derived from https://www.sec.gov/files/dera/data/financial-statement-data-sets/2022q4.zip (111091525 bytes); sub/num filtered to annual forms + project tags, qtrs 0,4",
+      "source_bytes": 111091525,
       "retained": true
     },
     {
       "url": "https://www.sec.gov/files/dera/data/financial-statement-data-sets/2022q4.zip",
       "path": "data/raw/fsds/2022q4_num.parquet",
-      "bytes": 156863,
-      "sha256": "6752c9bda61ad655e564b32c122b215b714ed37f627a76bf2a716f6c55e5ad2e",
-      "fetched_at_utc": "2026-10-24T22:15:43+00:00",
-      "note": "reconstructed from local cache",
+      "bytes": 170141,
+      "sha256": "956bfb63de7b58249c4005538c27bf82e398282ae63ca9e34d34ad9d1b2fc882",
+      "fetched_at_utc": "2026-10-26T10:42:16+00:00",
+      "note": "derived from https://www.sec.gov/files/dera/data/financial-statement-data-sets/2022q4.zip (111091525 bytes); sub/num filtered to annual forms + project tags, qtrs 0,4",
+      "source_bytes": 111091525,
       "retained": true
     },
     {
@@ -1425,8 +1577,9 @@
       "path": "data/raw/fsds/2022q4_sub.parquet",
       "bytes": 26692,
       "sha256": "bc6ff6c39853568b4ee29ca481ca98699f88e129296cf3dd9992a20501fb07ca",
-      "fetched_at_utc": "2026-10-24T22:15:43+00:00",
-      "note": "reconstructed from local cache",
+      "fetched_at_utc": "2026-10-26T10:42:16+00:00",
+      "note": "derived from https://www.sec.gov/files/dera/data/financial-statement-data-sets/2022q4.zip (111091525 bytes); sub/num filtered to annual forms + project tags, qtrs 0,4",
+      "source_bytes": 111091525,
       "retained": true
     },
     {
@@ -1434,17 +1587,19 @@
       "path": "data/raw/fsds/2023q1_forms.parquet",
       "bytes": 2444,
       "sha256": "b8415d7d0bcda2abeaade6e13b95fb3c20cd22da38ca157a62a57c356c8aff46",
-      "fetched_at_utc": "2026-10-24T22:16:10+00:00",
-      "note": "reconstructed from local cache",
+      "fetched_at_utc": "2026-10-26T10:42:31+00:00",
+      "note": "derived from https://www.sec.gov/files/dera/data/financial-statement-data-sets/2023q1.zip (113974946 bytes); sub/num filtered to annual forms + project tags, qtrs 0,4",
+      "source_bytes": 113974946,
       "retained": true
     },
     {
       "url": "https://www.sec.gov/files/dera/data/financial-statement-data-sets/2023q1.zip",
       "path": "data/raw/fsds/2023q1_num.parquet",
-      "bytes": 1409783,
-      "sha256": "1b879a84af5f726075f0c45823e3234dfff9829861de58d3e0b0716426e6cb25",
-      "fetched_at_utc": "2026-10-24T22:16:10+00:00",
-      "note": "reconstructed from local cache",
+      "bytes": 1518373,
+      "sha256": "26ff04a765fc6164646a99342f967277c0bab8da966880676ba9ecaf45be23c8",
+      "fetched_at_utc": "2026-10-26T10:42:31+00:00",
+      "note": "derived from https://www.sec.gov/files/dera/data/financial-statement-data-sets/2023q1.zip (113974946 bytes); sub/num filtered to annual forms + project tags, qtrs 0,4",
+      "source_bytes": 113974946,
       "retained": true
     },
     {
@@ -1452,8 +1607,9 @@
       "path": "data/raw/fsds/2023q1_sub.parquet",
       "bytes": 180206,
       "sha256": "7896d2e0dc39d97f94d14fa258277266d9a9b165939f9337d7ecaa9f6def4ea4",
-      "fetched_at_utc": "2026-10-24T22:16:10+00:00",
-      "note": "reconstructed from local cache",
+      "fetched_at_utc": "2026-10-26T10:42:31+00:00",
+      "note": "derived from https://www.sec.gov/files/dera/data/financial-statement-data-sets/2023q1.zip (113974946 bytes); sub/num filtered to annual forms + project tags, qtrs 0,4",
+      "source_bytes": 113974946,
       "retained": true
     },
     {
@@ -1461,17 +1617,19 @@
       "path": "data/raw/fsds/2023q2_forms.parquet",
       "bytes": 2440,
       "sha256": "d975382c0f594f4b4e9ab3fdd626a7cc8be891d727f84ba4a68a09b2a61ac99e",
-      "fetched_at_utc": "2026-10-24T22:16:39+00:00",
-      "note": "reconstructed from local cache",
+      "fetched_at_utc": "2026-10-26T10:42:47+00:00",
+      "note": "derived from https://www.sec.gov/files/dera/data/financial-statement-data-sets/2023q2.zip (116914392 bytes); sub/num filtered to annual forms + project tags, qtrs 0,4",
+      "source_bytes": 116914392,
       "retained": true
     },
     {
       "url": "https://www.sec.gov/files/dera/data/financial-statement-data-sets/2023q2.zip",
       "path": "data/raw/fsds/2023q2_num.parquet",
-      "bytes": 401161,
-      "sha256": "c01d2c14ebf1daa8d3c7d47abec30907bbaffe71b08353ebb98002f755a57aa5",
-      "fetched_at_utc": "2026-10-24T22:16:39+00:00",
-      "note": "reconstructed from local cache",
+      "bytes": 437515,
+      "sha256": "91ea484588cafe98501ec2a01d9195761e4f4620955511eda585977701080d2a",
+      "fetched_at_utc": "2026-10-26T10:42:47+00:00",
+      "note": "derived from https://www.sec.gov/files/dera/data/financial-statement-data-sets/2023q2.zip (116914392 bytes); sub/num filtered to annual forms + project tags, qtrs 0,4",
+      "source_bytes": 116914392,
       "retained": true
     },
     {
@@ -1479,8 +1637,9 @@
       "path": "data/raw/fsds/2023q2_sub.parquet",
       "bytes": 57036,
       "sha256": "b044ffce0d07fee94fa5c25b0cfd7728ed89779df4c529073a6c96e94ec3f955",
-      "fetched_at_utc": "2026-10-24T22:16:39+00:00",
-      "note": "reconstructed from local cache",
+      "fetched_at_utc": "2026-10-26T10:42:47+00:00",
+      "note": "derived from https://www.sec.gov/files/dera/data/financial-statement-data-sets/2023q2.zip (116914392 bytes); sub/num filtered to annual forms + project tags, qtrs 0,4",
+      "source_bytes": 116914392,
       "retained": true
     },
     {
@@ -1488,17 +1647,19 @@
       "path": "data/raw/fsds/2023q3_forms.parquet",
       "bytes": 2468,
       "sha256": "60e7850722e043bae3d0de95b3efbca311b9ff9c3a0376b9e88c5cf4363b0bcb",
-      "fetched_at_utc": "2026-10-24T22:17:06+00:00",
-      "note": "reconstructed from local cache",
+      "fetched_at_utc": "2026-10-26T10:43:13+00:00",
+      "note": "derived from https://www.sec.gov/files/dera/data/financial-statement-data-sets/2023q3.zip (117776944 bytes); sub/num filtered to annual forms + project tags, qtrs 0,4",
+      "source_bytes": 117776944,
       "retained": true
     },
     {
       "url": "https://www.sec.gov/files/dera/data/financial-statement-data-sets/2023q3.zip",
       "path": "data/raw/fsds/2023q3_num.parquet",
-      "bytes": 153033,
-      "sha256": "e3a4ec4d8cf603dd99b4517f5932da759d588ef4dc2d8dbfa50ef4ee966e55eb",
-      "fetched_at_utc": "2026-10-24T22:17:06+00:00",
-      "note": "reconstructed from local cache",
+      "bytes": 166113,
+      "sha256": "4376d7ad5b7c9627677e1b9856151e3104732314ce06402213c3b2fdac41f607",
+      "fetched_at_utc": "2026-10-26T10:43:13+00:00",
+      "note": "derived from https://www.sec.gov/files/dera/data/financial-statement-data-sets/2023q3.zip (117776944 bytes); sub/num filtered to annual forms + project tags, qtrs 0,4",
+      "source_bytes": 117776944,
       "retained": true
     },
     {
@@ -1506,8 +1667,9 @@
       "path": "data/raw/fsds/2023q3_sub.parquet",
       "bytes": 25699,
       "sha256": "86531ec5ae1de7732ac32b27b07a8c3b8a2b971abdcdd11b61c2bab990fa0470",
-      "fetched_at_utc": "2026-10-24T22:17:06+00:00",
-      "note": "reconstructed from local cache",
+      "fetched_at_utc": "2026-10-26T10:43:13+00:00",
+      "note": "derived from https://www.sec.gov/files/dera/data/financial-statement-data-sets/2023q3.zip (117776944 bytes); sub/num filtered to annual forms + project tags, qtrs 0,4",
+      "source_bytes": 117776944,
       "retained": true
     },
     {
@@ -1515,17 +1677,19 @@
       "path": "data/raw/fsds/2023q4_forms.parquet",
       "bytes": 2441,
       "sha256": "e2082939c42751d9fd2b8cc78b6002124599bc7723f513dd08f8bd1713ea55ce",
-      "fetched_at_utc": "2026-10-24T22:17:32+00:00",
-      "note": "reconstructed from local cache",
+      "fetched_at_utc": "2026-10-26T10:43:31+00:00",
+      "note": "derived from https://www.sec.gov/files/dera/data/financial-statement-data-sets/2023q4.zip (120272357 bytes); sub/num filtered to annual forms + project tags, qtrs 0,4",
+      "source_bytes": 120272357,
       "retained": true
     },
     {
       "url": "https://www.sec.gov/files/dera/data/financial-statement-data-sets/2023q4.zip",
       "path": "data/raw/fsds/2023q4_num.parquet",
-      "bytes": 150075,
-      "sha256": "05e918979c04588c7dd9d2196e4016a5fb537541325625727f275e14f7e7bea7",
-      "fetched_at_utc": "2026-10-24T22:17:32+00:00",
-      "note": "reconstructed from local cache",
+      "bytes": 162776,
+      "sha256": "a1662816a4f3d6f391028f1792bb30cb2c69593305425303ba6308b7036715c0",
+      "fetched_at_utc": "2026-10-26T10:43:31+00:00",
+      "note": "derived from https://www.sec.gov/files/dera/data/financial-statement-data-sets/2023q4.zip (120272357 bytes); sub/num filtered to annual forms + project tags, qtrs 0,4",
+      "source_bytes": 120272357,
       "retained": true
     },
     {
@@ -1533,8 +1697,9 @@
       "path": "data/raw/fsds/2023q4_sub.parquet",
       "bytes": 25684,
       "sha256": "735cc46d4290840cf001e9520e60122e78460f235f965ff1268025c1af189d58",
-      "fetched_at_utc": "2026-10-24T22:17:32+00:00",
-      "note": "reconstructed from local cache",
+      "fetched_at_utc": "2026-10-26T10:43:31+00:00",
+      "note": "derived from https://www.sec.gov/files/dera/data/financial-statement-data-sets/2023q4.zip (120272357 bytes); sub/num filtered to annual forms + project tags, qtrs 0,4",
+      "source_bytes": 120272357,
       "retained": true
     },
     {
@@ -1542,17 +1707,19 @@
       "path": "data/raw/fsds/2024q1_forms.parquet",
       "bytes": 2465,
       "sha256": "5049930573ea4d56bd88affc317e00a14f1787bfd1be3fe4ed8efc8e8cba3c5c",
-      "fetched_at_utc": "2026-10-24T22:17:59+00:00",
-      "note": "reconstructed from local cache",
+      "fetched_at_utc": "2026-10-26T10:44:11+00:00",
+      "note": "derived from https://www.sec.gov/files/dera/data/financial-statement-data-sets/2024q1.zip (124336804 bytes); sub/num filtered to annual forms + project tags, qtrs 0,4",
+      "source_bytes": 124336804,
       "retained": true
     },
     {
       "url": "https://www.sec.gov/files/dera/data/financial-statement-data-sets/2024q1.zip",
       "path": "data/raw/fsds/2024q1_num.parquet",
-      "bytes": 1235227,
-      "sha256": "fa34ae410d6c1511cbfb8023a5b45e2c5e9e5877dc7c4a4d1dc15505f16f29dc",
-      "fetched_at_utc": "2026-10-24T22:17:59+00:00",
-      "note": "reconstructed from local cache",
+      "bytes": 1330534,
+      "sha256": "c53a6da2c777e17e49d2bf7b30603de8d9ddf7508378d3aace0f3f1abeab676a",
+      "fetched_at_utc": "2026-10-26T10:44:11+00:00",
+      "note": "derived from https://www.sec.gov/files/dera/data/financial-statement-data-sets/2024q1.zip (124336804 bytes); sub/num filtered to annual forms + project tags, qtrs 0,4",
+      "source_bytes": 124336804,
       "retained": true
     },
     {
@@ -1560,8 +1727,9 @@
       "path": "data/raw/fsds/2024q1_sub.parquet",
       "bytes": 168246,
       "sha256": "a093d4231f0dab74e09d579c711d8bb1c903a9a0c815849fea9e9bc196b67b7f",
-      "fetched_at_utc": "2026-10-24T22:17:58+00:00",
-      "note": "reconstructed from local cache",
+      "fetched_at_utc": "2026-10-26T10:44:11+00:00",
+      "note": "derived from https://www.sec.gov/files/dera/data/financial-statement-data-sets/2024q1.zip (124336804 bytes); sub/num filtered to annual forms + project tags, qtrs 0,4",
+      "source_bytes": 124336804,
       "retained": true
     },
     {
@@ -1569,17 +1737,19 @@
       "path": "data/raw/fsds/2024q2_forms.parquet",
       "bytes": 2491,
       "sha256": "3f0c8e99b39412bfe33b8b455fd5c16a75859286ef9c666bf4fbfe820bc7f476",
-      "fetched_at_utc": "2026-10-24T22:18:31+00:00",
-      "note": "reconstructed from local cache",
+      "fetched_at_utc": "2026-10-26T10:44:26+00:00",
+      "note": "derived from https://www.sec.gov/files/dera/data/financial-statement-data-sets/2024q2.zip (119119954 bytes); sub/num filtered to annual forms + project tags, qtrs 0,4",
+      "source_bytes": 119119954,
       "retained": true
     },
     {
       "url": "https://www.sec.gov/files/dera/data/financial-statement-data-sets/2024q2.zip",
       "path": "data/raw/fsds/2024q2_num.parquet",
-      "bytes": 461689,
-      "sha256": "85543d8e26f9fe0f04d3459446f051b4bf99c90a1b7f9d15e8605f3f5bd3fc79",
-      "fetched_at_utc": "2026-10-24T22:18:31+00:00",
-      "note": "reconstructed from local cache",
+      "bytes": 500198,
+      "sha256": "4742cea1c7c6483942516fbfeb19f5b559683a1f352e01e74429891a2226768a",
+      "fetched_at_utc": "2026-10-26T10:44:26+00:00",
+      "note": "derived from https://www.sec.gov/files/dera/data/financial-statement-data-sets/2024q2.zip (119119954 bytes); sub/num filtered to annual forms + project tags, qtrs 0,4",
+      "source_bytes": 119119954,
       "retained": true
     },
     {
@@ -1587,8 +1757,9 @@
       "path": "data/raw/fsds/2024q2_sub.parquet",
       "bytes": 63442,
       "sha256": "345177bff97c1d5305dba17cfe2ae3b2ccecf2d19141f16436df40c62eeeefdf",
-      "fetched_at_utc": "2026-10-24T22:18:31+00:00",
-      "note": "reconstructed from local cache",
+      "fetched_at_utc": "2026-10-26T10:44:26+00:00",
+      "note": "derived from https://www.sec.gov/files/dera/data/financial-statement-data-sets/2024q2.zip (119119954 bytes); sub/num filtered to annual forms + project tags, qtrs 0,4",
+      "source_bytes": 119119954,
       "retained": true
     },
     {
@@ -1596,17 +1767,19 @@
       "path": "data/raw/fsds/2024q3_forms.parquet",
       "bytes": 2487,
       "sha256": "09c38ba75fc6d14139d4832a87f2cc1a2ef72fd9e19d95cb0a481704a398fed3",
-      "fetched_at_utc": "2026-10-24T22:18:58+00:00",
-      "note": "reconstructed from local cache",
+      "fetched_at_utc": "2026-10-26T10:44:51+00:00",
+      "note": "derived from https://www.sec.gov/files/dera/data/financial-statement-data-sets/2024q3.zip (118280418 bytes); sub/num filtered to annual forms + project tags, qtrs 0,4",
+      "source_bytes": 118280418,
       "retained": true
     },
     {
       "url": "https://www.sec.gov/files/dera/data/financial-statement-data-sets/2024q3.zip",
       "path": "data/raw/fsds/2024q3_num.parquet",
-      "bytes": 172646,
-      "sha256": "9cabc69c13a4e1d4dca36a79d6c3745a2f488933bba8951221b808bf633b80bc",
-      "fetched_at_utc": "2026-10-24T22:18:58+00:00",
-      "note": "reconstructed from local cache",
+      "bytes": 187997,
+      "sha256": "f2aa9c3dbe3d97a6a44e7c985b01b242d7fa284202c8e749b695187837f098d3",
+      "fetched_at_utc": "2026-10-26T10:44:51+00:00",
+      "note": "derived from https://www.sec.gov/files/dera/data/financial-statement-data-sets/2024q3.zip (118280418 bytes); sub/num filtered to annual forms + project tags, qtrs 0,4",
+      "source_bytes": 118280418,
       "retained": true
     },
     {
@@ -1614,8 +1787,9 @@
       "path": "data/raw/fsds/2024q3_sub.parquet",
       "bytes": 28295,
       "sha256": "92c30f67e675ec72c8953af94c9b53c707350e3b34fadfbf22867a395f303cc2",
-      "fetched_at_utc": "2026-10-24T22:18:58+00:00",
-      "note": "reconstructed from local cache",
+      "fetched_at_utc": "2026-10-26T10:44:51+00:00",
+      "note": "derived from https://www.sec.gov/files/dera/data/financial-statement-data-sets/2024q3.zip (118280418 bytes); sub/num filtered to annual forms + project tags, qtrs 0,4",
+      "source_bytes": 118280418,
       "retained": true
     },
     {
@@ -1623,17 +1797,19 @@
       "path": "data/raw/fsds/2024q4_forms.parquet",
       "bytes": 2467,
       "sha256": "7599a5e561b68a988dcf4b19a4bc5dfa381ece8e3261ec76ee1fe3a62d0d2025",
-      "fetched_at_utc": "2026-10-24T22:19:25+00:00",
-      "note": "reconstructed from local cache",
+      "fetched_at_utc": "2026-10-26T10:45:11+00:00",
+      "note": "derived from https://www.sec.gov/files/dera/data/financial-statement-data-sets/2024q4.zip (122932548 bytes); sub/num filtered to annual forms + project tags, qtrs 0,4",
+      "source_bytes": 122932548,
       "retained": true
     },
     {
       "url": "https://www.sec.gov/files/dera/data/financial-statement-data-sets/2024q4.zip",
       "path": "data/raw/fsds/2024q4_num.parquet",
-      "bytes": 159278,
-      "sha256": "c6ba37549e9129bf1917b947d87361c02cdc310a466cb518a36aecf9a71442e6",
-      "fetched_at_utc": "2026-10-24T22:19:25+00:00",
-      "note": "reconstructed from local cache",
+      "bytes": 172402,
+      "sha256": "a0d89813ab8f8533324ef4f9a7264a4cacc344a6ae5c5396277333fdfa9f2e18",
+      "fetched_at_utc": "2026-10-26T10:45:11+00:00",
+      "note": "derived from https://www.sec.gov/files/dera/data/financial-statement-data-sets/2024q4.zip (122932548 bytes); sub/num filtered to annual forms + project tags, qtrs 0,4",
+      "source_bytes": 122932548,
       "retained": true
     },
     {
@@ -1641,8 +1817,9 @@
       "path": "data/raw/fsds/2024q4_sub.parquet",
       "bytes": 27248,
       "sha256": "5b4ce8d1ac89ace2963dde450ea4d2beecc8cd0f8b5e058b467186542e17ca72",
-      "fetched_at_utc": "2026-10-24T22:19:25+00:00",
-      "note": "reconstructed from local cache",
+      "fetched_at_utc": "2026-10-26T10:45:11+00:00",
+      "note": "derived from https://www.sec.gov/files/dera/data/financial-statement-data-sets/2024q4.zip (122932548 bytes); sub/num filtered to annual forms + project tags, qtrs 0,4",
+      "source_bytes": 122932548,
       "retained": true
     },
     {
@@ -1650,17 +1827,19 @@
       "path": "data/raw/fsds/2025q1_forms.parquet",
       "bytes": 2551,
       "sha256": "88d9a0439cc1057cd3d0c3b57072b3dc4b47f8605cfd30cc0b03f7c141d91d58",
-      "fetched_at_utc": "2026-10-24T22:19:52+00:00",
-      "note": "reconstructed from local cache",
+      "fetched_at_utc": "2026-10-26T10:45:29+00:00",
+      "note": "derived from https://www.sec.gov/files/dera/data/financial-statement-data-sets/2025q1.zip (127765057 bytes); sub/num filtered to annual forms + project tags, qtrs 0,4",
+      "source_bytes": 127765057,
       "retained": true
     },
     {
       "url": "https://www.sec.gov/files/dera/data/financial-statement-data-sets/2025q1.zip",
       "path": "data/raw/fsds/2025q1_num.parquet",
-      "bytes": 1276641,
-      "sha256": "e5f5097720557b6cbfe8c581107248a18734ded3530a24fb4b85d727a51518e1",
-      "fetched_at_utc": "2026-10-24T22:19:52+00:00",
-      "note": "reconstructed from local cache",
+      "bytes": 1373758,
+      "sha256": "05081b0aa0fb15aa5f6fd08cb1232e351780a0000ab509fa6bc625198517ca8e",
+      "fetched_at_utc": "2026-10-26T10:45:29+00:00",
+      "note": "derived from https://www.sec.gov/files/dera/data/financial-statement-data-sets/2025q1.zip (127765057 bytes); sub/num filtered to annual forms + project tags, qtrs 0,4",
+      "source_bytes": 127765057,
       "retained": true
     },
     {
@@ -1668,8 +1847,9 @@
       "path": "data/raw/fsds/2025q1_sub.parquet",
       "bytes": 166724,
       "sha256": "baeafac9f11af44c39651ee05093ea64cb1814623dfd5a84a39c175920a05f33",
-      "fetched_at_utc": "2026-10-24T22:19:52+00:00",
-      "note": "reconstructed from local cache",
+      "fetched_at_utc": "2026-10-26T10:45:29+00:00",
+      "note": "derived from https://www.sec.gov/files/dera/data/financial-statement-data-sets/2025q1.zip (127765057 bytes); sub/num filtered to annual forms + project tags, qtrs 0,4",
+      "source_bytes": 127765057,
       "retained": true
     },
     {
@@ -1677,17 +1857,19 @@
       "path": "data/raw/fsds/2025q2_forms.parquet",
       "bytes": 2506,
       "sha256": "337cabfcca204fdeb26e05ccd4f1f24bd5636af18e5b178b5e2afb8ab5989e04",
-      "fetched_at_utc": "2026-10-24T22:20:13+00:00",
-      "note": "reconstructed from local cache",
+      "fetched_at_utc": "2026-10-26T10:45:43+00:00",
+      "note": "derived from https://www.sec.gov/files/dera/data/financial-statement-data-sets/2025q2.zip (78973768 bytes); sub/num filtered to annual forms + project tags, qtrs 0,4",
+      "source_bytes": 78973768,
       "retained": true
     },
     {
       "url": "https://www.sec.gov/files/dera/data/financial-statement-data-sets/2025q2.zip",
       "path": "data/raw/fsds/2025q2_num.parquet",
-      "bytes": 346676,
-      "sha256": "3c1edb0eede4ae69bd3733cebcba9f6ed851ec65478a9bbbc4c87d98b65e9eff",
-      "fetched_at_utc": "2026-10-24T22:20:13+00:00",
-      "note": "reconstructed from local cache",
+      "bytes": 370387,
+      "sha256": "9fae1a85b08b04d16c5956715bb4879880213bfbd2f6a395a8276173616d0802",
+      "fetched_at_utc": "2026-10-26T10:45:43+00:00",
+      "note": "derived from https://www.sec.gov/files/dera/data/financial-statement-data-sets/2025q2.zip (78973768 bytes); sub/num filtered to annual forms + project tags, qtrs 0,4",
+      "source_bytes": 78973768,
       "retained": true
     },
     {
@@ -1695,8 +1877,9 @@
       "path": "data/raw/fsds/2025q2_sub.parquet",
       "bytes": 51951,
       "sha256": "fe72630aa7073f4a5757fbd92fcd2176e320ca8fe13b81869229fac6f0145d28",
-      "fetched_at_utc": "2026-10-24T22:20:13+00:00",
-      "note": "reconstructed from local cache",
+      "fetched_at_utc": "2026-10-26T10:45:43+00:00",
+      "note": "derived from https://www.sec.gov/files/dera/data/financial-statement-data-sets/2025q2.zip (78973768 bytes); sub/num filtered to annual forms + project tags, qtrs 0,4",
+      "source_bytes": 78973768,
       "retained": true
     },
     {
@@ -1704,17 +1887,19 @@
       "path": "data/raw/fsds/2025q3_forms.parquet",
       "bytes": 2459,
       "sha256": "3984ee9b68b47e06acbf422faecfe0dcbd3e2832aaa6853588e98ecb93d1bd89",
-      "fetched_at_utc": "2026-10-24T22:20:44+00:00",
-      "note": "reconstructed from local cache",
+      "fetched_at_utc": "2026-10-26T10:45:59+00:00",
+      "note": "derived from https://www.sec.gov/files/dera/data/financial-statement-data-sets/2025q3.zip (127842298 bytes); sub/num filtered to annual forms + project tags, qtrs 0,4",
+      "source_bytes": 127842298,
       "retained": true
     },
     {
       "url": "https://www.sec.gov/files/dera/data/financial-statement-data-sets/2025q3.zip",
       "path": "data/raw/fsds/2025q3_num.parquet",
-      "bytes": 163078,
-      "sha256": "dae7a505266fb7956bbe419b9f669a013dd5db876d2aec804331138a1389cf5f",
-      "fetched_at_utc": "2026-10-24T22:20:44+00:00",
-      "note": "reconstructed from local cache",
+      "bytes": 177276,
+      "sha256": "20126d7f255df34c26701d4267795c08a3edc556182e2caecb8256f5b13cfe23",
+      "fetched_at_utc": "2026-10-26T10:45:59+00:00",
+      "note": "derived from https://www.sec.gov/files/dera/data/financial-statement-data-sets/2025q3.zip (127842298 bytes); sub/num filtered to annual forms + project tags, qtrs 0,4",
+      "source_bytes": 127842298,
       "retained": true
     },
     {
@@ -1722,8 +1907,9 @@
       "path": "data/raw/fsds/2025q3_sub.parquet",
       "bytes": 26968,
       "sha256": "9976021aad890cd347db8ed0c4d76ca1c00432fbec21213a8c22350116de51a7",
-      "fetched_at_utc": "2026-10-24T22:20:44+00:00",
-      "note": "reconstructed from local cache",
+      "fetched_at_utc": "2026-10-26T10:45:59+00:00",
+      "note": "derived from https://www.sec.gov/files/dera/data/financial-statement-data-sets/2025q3.zip (127842298 bytes); sub/num filtered to annual forms + project tags, qtrs 0,4",
+      "source_bytes": 127842298,
       "retained": true
     },
     {
@@ -1754,12 +1940,492 @@
       "retained": true
     },
     {
+      "url": "https://www.sec.gov/files/dera/data/financial-statement-data-sets/2019q1.zip",
+      "path": "data/raw/fsds_q/2019q1_forms.parquet",
+      "bytes": 2401,
+      "sha256": "f5ab0dd1aed7334cd6b27cd20427a233f9987fc4cf29fbfd08317ba562a2dd27",
+      "fetched_at_utc": "2026-10-26T10:46:15+00:00",
+      "note": "derived from https://www.sec.gov/files/dera/data/financial-statement-data-sets/2019q1.zip (95895180 bytes); sub/num filtered to quarterly forms + project tags, qtrs 0,1,2,3,4",
+      "source_bytes": 95895180,
+      "retained": true
+    },
+    {
+      "url": "https://www.sec.gov/files/dera/data/financial-statement-data-sets/2019q1.zip",
+      "path": "data/raw/fsds_q/2019q1_num.parquet",
+      "bytes": 2235025,
+      "sha256": "e5fff33d3468fade8c63050167732399c43d4faf3146eb123eaf70fd3b361d5c",
+      "fetched_at_utc": "2026-10-26T10:46:15+00:00",
+      "note": "derived from https://www.sec.gov/files/dera/data/financial-statement-data-sets/2019q1.zip (95895180 bytes); sub/num filtered to quarterly forms + project tags, qtrs 0,1,2,3,4",
+      "source_bytes": 95895180,
+      "retained": true
+    },
+    {
+      "url": "https://www.sec.gov/files/dera/data/financial-statement-data-sets/2019q1.zip",
+      "path": "data/raw/fsds_q/2019q1_sub.parquet",
+      "bytes": 193528,
+      "sha256": "5e1325ea64c06aeba6193be7e998c75e609a01cca54ca0a35b1df4dafd03c110",
+      "fetched_at_utc": "2026-10-26T10:46:15+00:00",
+      "note": "derived from https://www.sec.gov/files/dera/data/financial-statement-data-sets/2019q1.zip (95895180 bytes); sub/num filtered to quarterly forms + project tags, qtrs 0,1,2,3,4",
+      "source_bytes": 95895180,
+      "retained": true
+    },
+    {
+      "url": "https://www.sec.gov/files/dera/data/financial-statement-data-sets/2019q2.zip",
+      "path": "data/raw/fsds_q/2019q2_forms.parquet",
+      "bytes": 2399,
+      "sha256": "11c0857bc5b0bcc5e74681a0da21d42acd3a2e36ab7060827e5e8d5a2f0df0eb",
+      "fetched_at_utc": "2026-10-26T10:46:28+00:00",
+      "note": "derived from https://www.sec.gov/files/dera/data/financial-statement-data-sets/2019q2.zip (90155728 bytes); sub/num filtered to quarterly forms + project tags, qtrs 0,1,2,3,4",
+      "source_bytes": 90155728,
+      "retained": true
+    },
+    {
+      "url": "https://www.sec.gov/files/dera/data/financial-statement-data-sets/2019q2.zip",
+      "path": "data/raw/fsds_q/2019q2_num.parquet",
+      "bytes": 2224233,
+      "sha256": "a2cee310e83f029fca652e0c95826094c7e63af7beeceae5cab30a0437cd96f4",
+      "fetched_at_utc": "2026-10-26T10:46:28+00:00",
+      "note": "derived from https://www.sec.gov/files/dera/data/financial-statement-data-sets/2019q2.zip (90155728 bytes); sub/num filtered to quarterly forms + project tags, qtrs 0,1,2,3,4",
+      "source_bytes": 90155728,
+      "retained": true
+    },
+    {
+      "url": "https://www.sec.gov/files/dera/data/financial-statement-data-sets/2019q2.zip",
+      "path": "data/raw/fsds_q/2019q2_sub.parquet",
+      "bytes": 230226,
+      "sha256": "d1b9a5c4a2e9b9b35b9314e6610c236bb758859962fe45fdd0f2ed0c3057addf",
+      "fetched_at_utc": "2026-10-26T10:46:28+00:00",
+      "note": "derived from https://www.sec.gov/files/dera/data/financial-statement-data-sets/2019q2.zip (90155728 bytes); sub/num filtered to quarterly forms + project tags, qtrs 0,1,2,3,4",
+      "source_bytes": 90155728,
+      "retained": true
+    },
+    {
+      "url": "https://www.sec.gov/files/dera/data/financial-statement-data-sets/2019q3.zip",
+      "path": "data/raw/fsds_q/2019q3_forms.parquet",
+      "bytes": 2394,
+      "sha256": "05e5cfc310b4ecf981167a78ff9bc23dcbfd7fbbb3a26ae4ff81ff2ec4091812",
+      "fetched_at_utc": "2026-10-26T10:46:42+00:00",
+      "note": "derived from https://www.sec.gov/files/dera/data/financial-statement-data-sets/2019q3.zip (89829588 bytes); sub/num filtered to quarterly forms + project tags, qtrs 0,1,2,3,4",
+      "source_bytes": 89829588,
+      "retained": true
+    },
+    {
+      "url": "https://www.sec.gov/files/dera/data/financial-statement-data-sets/2019q3.zip",
+      "path": "data/raw/fsds_q/2019q3_num.parquet",
+      "bytes": 2314238,
+      "sha256": "7a127f4baf9badac463e86a22967bd8092c9f7506137a9cca6e6afd4435c74e4",
+      "fetched_at_utc": "2026-10-26T10:46:42+00:00",
+      "note": "derived from https://www.sec.gov/files/dera/data/financial-statement-data-sets/2019q3.zip (89829588 bytes); sub/num filtered to quarterly forms + project tags, qtrs 0,1,2,3,4",
+      "source_bytes": 89829588,
+      "retained": true
+    },
+    {
+      "url": "https://www.sec.gov/files/dera/data/financial-statement-data-sets/2019q3.zip",
+      "path": "data/raw/fsds_q/2019q3_sub.parquet",
+      "bytes": 206980,
+      "sha256": "3584fe182261651ab3cfc9faea7a633495389bc56f70448104681a9d93ffad22",
+      "fetched_at_utc": "2026-10-26T10:46:42+00:00",
+      "note": "derived from https://www.sec.gov/files/dera/data/financial-statement-data-sets/2019q3.zip (89829588 bytes); sub/num filtered to quarterly forms + project tags, qtrs 0,1,2,3,4",
+      "source_bytes": 89829588,
+      "retained": true
+    },
+    {
+      "url": "https://www.sec.gov/files/dera/data/financial-statement-data-sets/2019q4.zip",
+      "path": "data/raw/fsds_q/2019q4_forms.parquet",
+      "bytes": 2376,
+      "sha256": "c82e979aa420ee45215bf34416870a6fe4bd4db814bd7c4aeb351da89a0a8b74",
+      "fetched_at_utc": "2026-10-26T10:46:51+00:00",
+      "note": "derived from https://www.sec.gov/files/dera/data/financial-statement-data-sets/2019q4.zip (98753299 bytes); sub/num filtered to quarterly forms + project tags, qtrs 0,1,2,3,4",
+      "source_bytes": 98753299,
+      "retained": true
+    },
+    {
+      "url": "https://www.sec.gov/files/dera/data/financial-statement-data-sets/2019q4.zip",
+      "path": "data/raw/fsds_q/2019q4_num.parquet",
+      "bytes": 2415433,
+      "sha256": "00267ffadbdec431e27d9261c71d8a3ac9fbb704f5cf7ffb17986a9c841633f2",
+      "fetched_at_utc": "2026-10-26T10:46:51+00:00",
+      "note": "derived from https://www.sec.gov/files/dera/data/financial-statement-data-sets/2019q4.zip (98753299 bytes); sub/num filtered to quarterly forms + project tags, qtrs 0,1,2,3,4",
+      "source_bytes": 98753299,
+      "retained": true
+    },
+    {
+      "url": "https://www.sec.gov/files/dera/data/financial-statement-data-sets/2019q4.zip",
+      "path": "data/raw/fsds_q/2019q4_sub.parquet",
+      "bytes": 208259,
+      "sha256": "ddf2db113dbdd45d11f6093687f93e92264e2b404d5ec40cc98fd2d85ba34a9b",
+      "fetched_at_utc": "2026-10-26T10:46:51+00:00",
+      "note": "derived from https://www.sec.gov/files/dera/data/financial-statement-data-sets/2019q4.zip (98753299 bytes); sub/num filtered to quarterly forms + project tags, qtrs 0,1,2,3,4",
+      "source_bytes": 98753299,
+      "retained": true
+    },
+    {
+      "url": "https://www.sec.gov/files/dera/data/financial-statement-data-sets/2020q1.zip",
+      "path": "data/raw/fsds_q/2020q1_forms.parquet",
+      "bytes": 2423,
+      "sha256": "98466c419f2efddc60fe9a0e19cfab6a48d66fd8be82e52e685b304b06c18029",
+      "fetched_at_utc": "2026-10-26T10:47:01+00:00",
+      "note": "derived from https://www.sec.gov/files/dera/data/financial-statement-data-sets/2020q1.zip (96584608 bytes); sub/num filtered to quarterly forms + project tags, qtrs 0,1,2,3,4",
+      "source_bytes": 96584608,
+      "retained": true
+    },
+    {
+      "url": "https://www.sec.gov/files/dera/data/financial-statement-data-sets/2020q1.zip",
+      "path": "data/raw/fsds_q/2020q1_num.parquet",
+      "bytes": 2282527,
+      "sha256": "ddbeceb13ff0b5a94337a13b718cda5e36c36cbfcdf36bd7222230789d74b73c",
+      "fetched_at_utc": "2026-10-26T10:47:01+00:00",
+      "note": "derived from https://www.sec.gov/files/dera/data/financial-statement-data-sets/2020q1.zip (96584608 bytes); sub/num filtered to quarterly forms + project tags, qtrs 0,1,2,3,4",
+      "source_bytes": 96584608,
+      "retained": true
+    },
+    {
+      "url": "https://www.sec.gov/files/dera/data/financial-statement-data-sets/2020q1.zip",
+      "path": "data/raw/fsds_q/2020q1_sub.parquet",
+      "bytes": 196079,
+      "sha256": "6b88c7a54b43506c91f28e58bcba2d6cad5ddd128dd3b25930feea3d565cd0a9",
+      "fetched_at_utc": "2026-10-26T10:47:01+00:00",
+      "note": "derived from https://www.sec.gov/files/dera/data/financial-statement-data-sets/2020q1.zip (96584608 bytes); sub/num filtered to quarterly forms + project tags, qtrs 0,1,2,3,4",
+      "source_bytes": 96584608,
+      "retained": true
+    },
+    {
+      "url": "https://www.sec.gov/files/dera/data/financial-statement-data-sets/2020q2.zip",
+      "path": "data/raw/fsds_q/2020q2_forms.parquet",
+      "bytes": 2452,
+      "sha256": "df3509bd290671532846f93470f25e9f6d466cb6cee7ab6d4333f53d1b7855ce",
+      "fetched_at_utc": "2026-10-26T10:47:08+00:00",
+      "note": "derived from https://www.sec.gov/files/dera/data/financial-statement-data-sets/2020q2.zip (82008710 bytes); sub/num filtered to quarterly forms + project tags, qtrs 0,1,2,3,4",
+      "source_bytes": 82008710,
+      "retained": true
+    },
+    {
+      "url": "https://www.sec.gov/files/dera/data/financial-statement-data-sets/2020q2.zip",
+      "path": "data/raw/fsds_q/2020q2_num.parquet",
+      "bytes": 2024414,
+      "sha256": "19933d7b67d3646bc9299e9c6176cae514ce2c4239d88d1beb568f2147f315f6",
+      "fetched_at_utc": "2026-10-26T10:47:08+00:00",
+      "note": "derived from https://www.sec.gov/files/dera/data/financial-statement-data-sets/2020q2.zip (82008710 bytes); sub/num filtered to quarterly forms + project tags, qtrs 0,1,2,3,4",
+      "source_bytes": 82008710,
+      "retained": true
+    },
+    {
+      "url": "https://www.sec.gov/files/dera/data/financial-statement-data-sets/2020q2.zip",
+      "path": "data/raw/fsds_q/2020q2_sub.parquet",
+      "bytes": 216043,
+      "sha256": "1b777d166610a2501644654ee60160f035c14fccab62ead83799c835967ceb19",
+      "fetched_at_utc": "2026-10-26T10:47:08+00:00",
+      "note": "derived from https://www.sec.gov/files/dera/data/financial-statement-data-sets/2020q2.zip (82008710 bytes); sub/num filtered to quarterly forms + project tags, qtrs 0,1,2,3,4",
+      "source_bytes": 82008710,
+      "retained": true
+    },
+    {
+      "url": "https://www.sec.gov/files/dera/data/financial-statement-data-sets/2020q3.zip",
+      "path": "data/raw/fsds_q/2020q3_forms.parquet",
+      "bytes": 2424,
+      "sha256": "12c4c44979fff8b9fd12287e1d32c516ccd1116a63841d3106449da48478638d",
+      "fetched_at_utc": "2026-10-26T10:47:18+00:00",
+      "note": "derived from https://www.sec.gov/files/dera/data/financial-statement-data-sets/2020q3.zip (87582976 bytes); sub/num filtered to quarterly forms + project tags, qtrs 0,1,2,3,4",
+      "source_bytes": 87582976,
+      "retained": true
+    },
+    {
+      "url": "https://www.sec.gov/files/dera/data/financial-statement-data-sets/2020q3.zip",
+      "path": "data/raw/fsds_q/2020q3_num.parquet",
+      "bytes": 2311309,
+      "sha256": "5db0776955e87d07c961793e2eae6cd22742513e21b6c373282ae56dd0b0c6fa",
+      "fetched_at_utc": "2026-10-26T10:47:18+00:00",
+      "note": "derived from https://www.sec.gov/files/dera/data/financial-statement-data-sets/2020q3.zip (87582976 bytes); sub/num filtered to quarterly forms + project tags, qtrs 0,1,2,3,4",
+      "source_bytes": 87582976,
+      "retained": true
+    },
+    {
+      "url": "https://www.sec.gov/files/dera/data/financial-statement-data-sets/2020q3.zip",
+      "path": "data/raw/fsds_q/2020q3_sub.parquet",
+      "bytes": 203905,
+      "sha256": "1455293df67c6ef685c44117159c83d52360ba08cdca42ebd446c44d0c521143",
+      "fetched_at_utc": "2026-10-26T10:47:18+00:00",
+      "note": "derived from https://www.sec.gov/files/dera/data/financial-statement-data-sets/2020q3.zip (87582976 bytes); sub/num filtered to quarterly forms + project tags, qtrs 0,1,2,3,4",
+      "source_bytes": 87582976,
+      "retained": true
+    },
+    {
+      "url": "https://www.sec.gov/files/dera/data/financial-statement-data-sets/2020q4.zip",
+      "path": "data/raw/fsds_q/2020q4_forms.parquet",
+      "bytes": 2385,
+      "sha256": "edad5f7694350d12f10a42f13b2d65682f8e5496ebc82d374b8b24e3889ba143",
+      "fetched_at_utc": "2026-10-26T10:47:26+00:00",
+      "note": "derived from https://www.sec.gov/files/dera/data/financial-statement-data-sets/2020q4.zip (89811373 bytes); sub/num filtered to quarterly forms + project tags, qtrs 0,1,2,3,4",
+      "source_bytes": 89811373,
+      "retained": true
+    },
+    {
+      "url": "https://www.sec.gov/files/dera/data/financial-statement-data-sets/2020q4.zip",
+      "path": "data/raw/fsds_q/2020q4_num.parquet",
+      "bytes": 2342428,
+      "sha256": "53e8f581d75f1d812642d8772329c45d26b9eb3d00083f36a952e8bd35d4fcd0",
+      "fetched_at_utc": "2026-10-26T10:47:26+00:00",
+      "note": "derived from https://www.sec.gov/files/dera/data/financial-statement-data-sets/2020q4.zip (89811373 bytes); sub/num filtered to quarterly forms + project tags, qtrs 0,1,2,3,4",
+      "source_bytes": 89811373,
+      "retained": true
+    },
+    {
+      "url": "https://www.sec.gov/files/dera/data/financial-statement-data-sets/2020q4.zip",
+      "path": "data/raw/fsds_q/2020q4_sub.parquet",
+      "bytes": 206062,
+      "sha256": "df0da76e9af014a73222f5ad3536d5890db29cd595ae9db2c7411a21a62173dc",
+      "fetched_at_utc": "2026-10-26T10:47:26+00:00",
+      "note": "derived from https://www.sec.gov/files/dera/data/financial-statement-data-sets/2020q4.zip (89811373 bytes); sub/num filtered to quarterly forms + project tags, qtrs 0,1,2,3,4",
+      "source_bytes": 89811373,
+      "retained": true
+    },
+    {
+      "url": "https://www.sec.gov/files/dera/data/financial-statement-data-sets/2021q1.zip",
+      "path": "data/raw/fsds_q/2021q1_forms.parquet",
+      "bytes": 2422,
+      "sha256": "f050707ed6de368c9cf726cdb31bfce23aeeaab122f4fe2cca463809b3b1c72c",
+      "fetched_at_utc": "2026-10-26T10:47:36+00:00",
+      "note": "derived from https://www.sec.gov/files/dera/data/financial-statement-data-sets/2021q1.zip (97900752 bytes); sub/num filtered to quarterly forms + project tags, qtrs 0,1,2,3,4",
+      "source_bytes": 97900752,
+      "retained": true
+    },
+    {
+      "url": "https://www.sec.gov/files/dera/data/financial-statement-data-sets/2021q1.zip",
+      "path": "data/raw/fsds_q/2021q1_num.parquet",
+      "bytes": 2200129,
+      "sha256": "d8257b31720b8bb8a67391afb7da7f138031f2ccd60365af8cfd7cbb83bc4f3e",
+      "fetched_at_utc": "2026-10-26T10:47:36+00:00",
+      "note": "derived from https://www.sec.gov/files/dera/data/financial-statement-data-sets/2021q1.zip (97900752 bytes); sub/num filtered to quarterly forms + project tags, qtrs 0,1,2,3,4",
+      "source_bytes": 97900752,
+      "retained": true
+    },
+    {
+      "url": "https://www.sec.gov/files/dera/data/financial-statement-data-sets/2021q1.zip",
+      "path": "data/raw/fsds_q/2021q1_sub.parquet",
+      "bytes": 207112,
+      "sha256": "fbc675846c61d481ed45533926867d5968de13413ca3a1f3d1b10e7e0b6c7c14",
+      "fetched_at_utc": "2026-10-26T10:47:36+00:00",
+      "note": "derived from https://www.sec.gov/files/dera/data/financial-statement-data-sets/2021q1.zip (97900752 bytes); sub/num filtered to quarterly forms + project tags, qtrs 0,1,2,3,4",
+      "source_bytes": 97900752,
+      "retained": true
+    },
+    {
+      "url": "https://www.sec.gov/files/dera/data/financial-statement-data-sets/2021q2.zip",
+      "path": "data/raw/fsds_q/2021q2_forms.parquet",
+      "bytes": 2463,
+      "sha256": "6f18bfcd02be3f43faafab954cfc963e90b50af5bd5395f2c65c5af887f937b2",
+      "fetched_at_utc": "2026-10-26T10:47:44+00:00",
+      "note": "derived from https://www.sec.gov/files/dera/data/financial-statement-data-sets/2021q2.zip (90864175 bytes); sub/num filtered to quarterly forms + project tags, qtrs 0,1,2,3,4",
+      "source_bytes": 90864175,
+      "retained": true
+    },
+    {
+      "url": "https://www.sec.gov/files/dera/data/financial-statement-data-sets/2021q2.zip",
+      "path": "data/raw/fsds_q/2021q2_num.parquet",
+      "bytes": 2212206,
+      "sha256": "3b1c634039d821fddb98f6fbc1024f64c8f2c77a2087f4fe8e3f43f2db0d4561",
+      "fetched_at_utc": "2026-10-26T10:47:44+00:00",
+      "note": "derived from https://www.sec.gov/files/dera/data/financial-statement-data-sets/2021q2.zip (90864175 bytes); sub/num filtered to quarterly forms + project tags, qtrs 0,1,2,3,4",
+      "source_bytes": 90864175,
+      "retained": true
+    },
+    {
+      "url": "https://www.sec.gov/files/dera/data/financial-statement-data-sets/2021q2.zip",
+      "path": "data/raw/fsds_q/2021q2_sub.parquet",
+      "bytes": 241561,
+      "sha256": "52b35b78e71ba37620761f3dd37583246a56cb00ca111c5cced9003a8624d235",
+      "fetched_at_utc": "2026-10-26T10:47:44+00:00",
+      "note": "derived from https://www.sec.gov/files/dera/data/financial-statement-data-sets/2021q2.zip (90864175 bytes); sub/num filtered to quarterly forms + project tags, qtrs 0,1,2,3,4",
+      "source_bytes": 90864175,
+      "retained": true
+    },
+    {
+      "url": "https://www.sec.gov/files/dera/data/financial-statement-data-sets/2021q3.zip",
+      "path": "data/raw/fsds_q/2021q3_forms.parquet",
+      "bytes": 2432,
+      "sha256": "7bc2a9d7fb4e7cec0cf05ad7882a5a54aa15cac0ea82db8ea70e9678b4449407",
+      "fetched_at_utc": "2026-10-26T10:47:53+00:00",
+      "note": "derived from https://www.sec.gov/files/dera/data/financial-statement-data-sets/2021q3.zip (97252395 bytes); sub/num filtered to quarterly forms + project tags, qtrs 0,1,2,3,4",
+      "source_bytes": 97252395,
+      "retained": true
+    },
+    {
+      "url": "https://www.sec.gov/files/dera/data/financial-statement-data-sets/2021q3.zip",
+      "path": "data/raw/fsds_q/2021q3_num.parquet",
+      "bytes": 2523192,
+      "sha256": "fdca46d9ef5c0a1d1786eced53574e99f564783fa8b1b04bf5a29613ae201160",
+      "fetched_at_utc": "2026-10-26T10:47:53+00:00",
+      "note": "derived from https://www.sec.gov/files/dera/data/financial-statement-data-sets/2021q3.zip (97252395 bytes); sub/num filtered to quarterly forms + project tags, qtrs 0,1,2,3,4",
+      "source_bytes": 97252395,
+      "retained": true
+    },
+    {
+      "url": "https://www.sec.gov/files/dera/data/financial-statement-data-sets/2021q3.zip",
+      "path": "data/raw/fsds_q/2021q3_sub.parquet",
+      "bytes": 231197,
+      "sha256": "f7c603d38a7fcb34023718715fb447c84c9cba0815378b532c0fe95b0d50fbe4",
+      "fetched_at_utc": "2026-10-26T10:47:53+00:00",
+      "note": "derived from https://www.sec.gov/files/dera/data/financial-statement-data-sets/2021q3.zip (97252395 bytes); sub/num filtered to quarterly forms + project tags, qtrs 0,1,2,3,4",
+      "source_bytes": 97252395,
+      "retained": true
+    },
+    {
+      "url": "https://www.sec.gov/files/dera/data/financial-statement-data-sets/2021q4.zip",
+      "path": "data/raw/fsds_q/2021q4_forms.parquet",
+      "bytes": 2440,
+      "sha256": "17c6afca86447a10ad44b1347f341765c84fdc84f03da61722fa76ecbd720456",
+      "fetched_at_utc": "2026-10-26T10:48:03+00:00",
+      "note": "derived from https://www.sec.gov/files/dera/data/financial-statement-data-sets/2021q4.zip (102642081 bytes); sub/num filtered to quarterly forms + project tags, qtrs 0,1,2,3,4",
+      "source_bytes": 102642081,
+      "retained": true
+    },
+    {
+      "url": "https://www.sec.gov/files/dera/data/financial-statement-data-sets/2021q4.zip",
+      "path": "data/raw/fsds_q/2021q4_num.parquet",
+      "bytes": 2654324,
+      "sha256": "d1142402fe9bcbbde2a259dcb5ecfe6a6e1c95abe46cc7d07ab89e7828731e41",
+      "fetched_at_utc": "2026-10-26T10:48:03+00:00",
+      "note": "derived from https://www.sec.gov/files/dera/data/financial-statement-data-sets/2021q4.zip (102642081 bytes); sub/num filtered to quarterly forms + project tags, qtrs 0,1,2,3,4",
+      "source_bytes": 102642081,
+      "retained": true
+    },
+    {
+      "url": "https://www.sec.gov/files/dera/data/financial-statement-data-sets/2021q4.zip",
+      "path": "data/raw/fsds_q/2021q4_sub.parquet",
+      "bytes": 237067,
+      "sha256": "444a529b846fa131d58f0aa2c2682cf8435e97c00173707e23b8ef9508261865",
+      "fetched_at_utc": "2026-10-26T10:48:03+00:00",
+      "note": "derived from https://www.sec.gov/files/dera/data/financial-statement-data-sets/2021q4.zip (102642081 bytes); sub/num filtered to quarterly forms + project tags, qtrs 0,1,2,3,4",
+      "source_bytes": 102642081,
+      "retained": true
+    },
+    {
+      "url": "https://www.sec.gov/files/dera/data/financial-statement-data-sets/2022q1.zip",
+      "path": "data/raw/fsds_q/2022q1_forms.parquet",
+      "bytes": 2470,
+      "sha256": "541406aa5a5460ecb4abf0331c2418fb020f3df97fb8e3afe979604bc8f064ab",
+      "fetched_at_utc": "2026-10-26T10:48:13+00:00",
+      "note": "derived from https://www.sec.gov/files/dera/data/financial-statement-data-sets/2022q1.zip (103669919 bytes); sub/num filtered to quarterly forms + project tags, qtrs 0,1,2,3,4",
+      "source_bytes": 103669919,
+      "retained": true
+    },
+    {
+      "url": "https://www.sec.gov/files/dera/data/financial-statement-data-sets/2022q1.zip",
+      "path": "data/raw/fsds_q/2022q1_num.parquet",
+      "bytes": 2141093,
+      "sha256": "def43bbf6ecbb829b5ebe00adcc4e5f4f8a589debbc1407d45fe29cb2dbc80eb",
+      "fetched_at_utc": "2026-10-26T10:48:13+00:00",
+      "note": "derived from https://www.sec.gov/files/dera/data/financial-statement-data-sets/2022q1.zip (103669919 bytes); sub/num filtered to quarterly forms + project tags, qtrs 0,1,2,3,4",
+      "source_bytes": 103669919,
+      "retained": true
+    },
+    {
+      "url": "https://www.sec.gov/files/dera/data/financial-statement-data-sets/2022q1.zip",
+      "path": "data/raw/fsds_q/2022q1_sub.parquet",
+      "bytes": 230797,
+      "sha256": "62a7b37b7ffb8e77b1fbe56b2e5b07162e9435071349fe35025c4f24a7c68242",
+      "fetched_at_utc": "2026-10-26T10:48:13+00:00",
+      "note": "derived from https://www.sec.gov/files/dera/data/financial-statement-data-sets/2022q1.zip (103669919 bytes); sub/num filtered to quarterly forms + project tags, qtrs 0,1,2,3,4",
+      "source_bytes": 103669919,
+      "retained": true
+    },
+    {
+      "url": "https://www.sec.gov/files/dera/data/financial-statement-data-sets/2022q2.zip",
+      "path": "data/raw/fsds_q/2022q2_forms.parquet",
+      "bytes": 2473,
+      "sha256": "de99cc89f9dbfd765177739da4ce112b437f4f193dd97183a29ac34a4151da54",
+      "fetched_at_utc": "2026-10-26T10:48:22+00:00",
+      "note": "derived from https://www.sec.gov/files/dera/data/financial-statement-data-sets/2022q2.zip (97089251 bytes); sub/num filtered to quarterly forms + project tags, qtrs 0,1,2,3,4",
+      "source_bytes": 97089251,
+      "retained": true
+    },
+    {
+      "url": "https://www.sec.gov/files/dera/data/financial-statement-data-sets/2022q2.zip",
+      "path": "data/raw/fsds_q/2022q2_num.parquet",
+      "bytes": 2406517,
+      "sha256": "085c9185cd386ac4ab772e61dacf5b88f2e98ac210a207cc474056d9efb0c16f",
+      "fetched_at_utc": "2026-10-26T10:48:22+00:00",
+      "note": "derived from https://www.sec.gov/files/dera/data/financial-statement-data-sets/2022q2.zip (97089251 bytes); sub/num filtered to quarterly forms + project tags, qtrs 0,1,2,3,4",
+      "source_bytes": 97089251,
+      "retained": true
+    },
+    {
+      "url": "https://www.sec.gov/files/dera/data/financial-statement-data-sets/2022q2.zip",
+      "path": "data/raw/fsds_q/2022q2_sub.parquet",
+      "bytes": 259213,
+      "sha256": "8200e75ece864fa6a9abd5cf2d51cc1c9583fa007d4757bb540391c60acb3e62",
+      "fetched_at_utc": "2026-10-26T10:48:22+00:00",
+      "note": "derived from https://www.sec.gov/files/dera/data/financial-statement-data-sets/2022q2.zip (97089251 bytes); sub/num filtered to quarterly forms + project tags, qtrs 0,1,2,3,4",
+      "source_bytes": 97089251,
+      "retained": true
+    },
+    {
+      "url": "https://www.sec.gov/files/dera/data/financial-statement-data-sets/2022q3.zip",
+      "path": "data/raw/fsds_q/2022q3_forms.parquet",
+      "bytes": 2464,
+      "sha256": "307f1ed6642fa07b69f600602ab110a500898255d30578fa1820ccb798eb04c3",
+      "fetched_at_utc": "2026-10-26T10:48:31+00:00",
+      "note": "derived from https://www.sec.gov/files/dera/data/financial-statement-data-sets/2022q3.zip (97589396 bytes); sub/num filtered to quarterly forms + project tags, qtrs 0,1,2,3,4",
+      "source_bytes": 97589396,
+      "retained": true
+    },
+    {
+      "url": "https://www.sec.gov/files/dera/data/financial-statement-data-sets/2022q3.zip",
+      "path": "data/raw/fsds_q/2022q3_num.parquet",
+      "bytes": 2613060,
+      "sha256": "eda71319d57540880c66b40178108ff4c2620645761e339b58b845e51d754f5f",
+      "fetched_at_utc": "2026-10-26T10:48:31+00:00",
+      "note": "derived from https://www.sec.gov/files/dera/data/financial-statement-data-sets/2022q3.zip (97589396 bytes); sub/num filtered to quarterly forms + project tags, qtrs 0,1,2,3,4",
+      "source_bytes": 97589396,
+      "retained": true
+    },
+    {
+      "url": "https://www.sec.gov/files/dera/data/financial-statement-data-sets/2022q3.zip",
+      "path": "data/raw/fsds_q/2022q3_sub.parquet",
+      "bytes": 234223,
+      "sha256": "74c70f03ddc1b2ec130ae714af73b10b3ca42b21ad686d0b988c9afc440b3167",
+      "fetched_at_utc": "2026-10-26T10:48:31+00:00",
+      "note": "derived from https://www.sec.gov/files/dera/data/financial-statement-data-sets/2022q3.zip (97589396 bytes); sub/num filtered to quarterly forms + project tags, qtrs 0,1,2,3,4",
+      "source_bytes": 97589396,
+      "retained": true
+    },
+    {
+      "url": "https://www.sec.gov/files/dera/data/financial-statement-data-sets/2022q4.zip",
+      "path": "data/raw/fsds_q/2022q4_forms.parquet",
+      "bytes": 2393,
+      "sha256": "17cf29e749210451d93e4b8dea49e82d98ba23e1adbacccc127ae481a8710c11",
+      "fetched_at_utc": "2026-10-26T10:48:46+00:00",
+      "note": "derived from https://www.sec.gov/files/dera/data/financial-statement-data-sets/2022q4.zip (111091525 bytes); sub/num filtered to quarterly forms + project tags, qtrs 0,1,2,3,4",
+      "source_bytes": 111091525,
+      "retained": true
+    },
+    {
+      "url": "https://www.sec.gov/files/dera/data/financial-statement-data-sets/2022q4.zip",
+      "path": "data/raw/fsds_q/2022q4_num.parquet",
+      "bytes": 2728472,
+      "sha256": "c64551da8ec6916a8a3080d0381ff5012f514da074079c45ff7b8d1ca2160cc2",
+      "fetched_at_utc": "2026-10-26T10:48:46+00:00",
+      "note": "derived from https://www.sec.gov/files/dera/data/financial-statement-data-sets/2022q4.zip (111091525 bytes); sub/num filtered to quarterly forms + project tags, qtrs 0,1,2,3,4",
+      "source_bytes": 111091525,
+      "retained": true
+    },
+    {
+      "url": "https://www.sec.gov/files/dera/data/financial-statement-data-sets/2022q4.zip",
+      "path": "data/raw/fsds_q/2022q4_sub.parquet",
+      "bytes": 234660,
+      "sha256": "78d3e7604ef238e9e07a48007041b7f39cae7ad529aacce24de545a6a1535d41",
+      "fetched_at_utc": "2026-10-26T10:48:46+00:00",
+      "note": "derived from https://www.sec.gov/files/dera/data/financial-statement-data-sets/2022q4.zip (111091525 bytes); sub/num filtered to quarterly forms + project tags, qtrs 0,1,2,3,4",
+      "source_bytes": 111091525,
+      "retained": true
+    },
+    {
       "url": "https://www.sec.gov/files/dera/data/financial-statement-data-sets/2010q1.zip",
       "path": "data/raw/zips/2010q1.zip",
       "bytes": 5311282,
       "sha256": "2a4db2340ab1662d5135d7e17be1a58352c5959017350f0ef2174135f9996125",
-      "fetched_at_utc": "2026-10-24T21:58:42+00:00",
-      "note": "SEC FSDS 2010q1; source zip deleted after extraction, sha256 kept for provenance; source zip deleted after extraction, sha256 kept for provenance",
+      "fetched_at_utc": "2026-10-26T10:32:46+00:00",
+      "note": "SEC FSDS 2010q1; source zip deleted after extraction, sha256 kept for provenance",
       "source_bytes": 5311282,
       "retained": false
     },
@@ -1768,8 +2434,8 @@
       "path": "data/raw/zips/2010q2.zip",
       "bytes": 3994236,
       "sha256": "25f416b020fd3e62a67dbf8c6522c9f239e716099b61cf5d05a59a91ffdef1f1",
-      "fetched_at_utc": "2026-10-24T21:58:44+00:00",
-      "note": "SEC FSDS 2010q2; source zip deleted after extraction, sha256 kept for provenance; source zip deleted after extraction, sha256 kept for provenance",
+      "fetched_at_utc": "2026-10-26T10:32:47+00:00",
+      "note": "SEC FSDS 2010q2; source zip deleted after extraction, sha256 kept for provenance",
       "source_bytes": 3994236,
       "retained": false
     },
@@ -1778,8 +2444,8 @@
       "path": "data/raw/zips/2010q3.zip",
       "bytes": 13745950,
       "sha256": "52014faf614ca0d7b8040e364f5b3e99f28d5e96b711aa922b490056e2c1d7b5",
-      "fetched_at_utc": "2026-10-24T21:58:48+00:00",
-      "note": "SEC FSDS 2010q3; source zip deleted after extraction, sha256 kept for provenance; source zip deleted after extraction, sha256 kept for provenance",
+      "fetched_at_utc": "2026-10-26T10:32:49+00:00",
+      "note": "SEC FSDS 2010q3; source zip deleted after extraction, sha256 kept for provenance",
       "source_bytes": 13745950,
       "retained": false
     },
@@ -1788,8 +2454,8 @@
       "path": "data/raw/zips/2010q4.zip",
       "bytes": 14679781,
       "sha256": "3dc43a8559cba9e1a9bb5a283a99e1fdfd2b0eaa7a9460887d5b4c70d69cef63",
-      "fetched_at_utc": "2026-10-24T21:58:52+00:00",
-      "note": "SEC FSDS 2010q4; source zip deleted after extraction, sha256 kept for provenance; source zip deleted after extraction, sha256 kept for provenance",
+      "fetched_at_utc": "2026-10-26T10:32:52+00:00",
+      "note": "SEC FSDS 2010q4; source zip deleted after extraction, sha256 kept for provenance",
       "source_bytes": 14679781,
       "retained": false
     },
@@ -1798,8 +2464,8 @@
       "path": "data/raw/zips/2011q1.zip",
       "bytes": 19615544,
       "sha256": "e63b781a5e57e55d68e110a06d3f697e942a60e17f093bbdc1a16ac7152a7df5",
-      "fetched_at_utc": "2026-10-24T21:58:56+00:00",
-      "note": "SEC FSDS 2011q1; source zip deleted after extraction, sha256 kept for provenance; source zip deleted after extraction, sha256 kept for provenance",
+      "fetched_at_utc": "2026-10-26T10:32:54+00:00",
+      "note": "SEC FSDS 2011q1; source zip deleted after extraction, sha256 kept for provenance",
       "source_bytes": 19615544,
       "retained": false
     },
@@ -1808,8 +2474,8 @@
       "path": "data/raw/zips/2011q2.zip",
       "bytes": 15001310,
       "sha256": "10a6f98f14d2a341e938a379ea32beb4857b01d59facf04e6e7b3c68558a95d1",
-      "fetched_at_utc": "2026-10-24T21:59:01+00:00",
-      "note": "SEC FSDS 2011q2; source zip deleted after extraction, sha256 kept for provenance; source zip deleted after extraction, sha256 kept for provenance",
+      "fetched_at_utc": "2026-10-26T10:32:57+00:00",
+      "note": "SEC FSDS 2011q2; source zip deleted after extraction, sha256 kept for provenance",
       "source_bytes": 15001310,
       "retained": false
     },
@@ -1818,8 +2484,8 @@
       "path": "data/raw/zips/2011q3.zip",
       "bytes": 57941919,
       "sha256": "43b9beb243c6686a29df5cf817ed2cb3a7c86a7398bbc56e2fb4d0cf4784ac28",
-      "fetched_at_utc": "2026-10-24T21:59:11+00:00",
-      "note": "SEC FSDS 2011q3; source zip deleted after extraction, sha256 kept for provenance; source zip deleted after extraction, sha256 kept for provenance",
+      "fetched_at_utc": "2026-10-26T10:33:01+00:00",
+      "note": "SEC FSDS 2011q3; source zip deleted after extraction, sha256 kept for provenance",
       "source_bytes": 57941919,
       "retained": false
     },
@@ -1828,8 +2494,8 @@
       "path": "data/raw/zips/2011q4.zip",
       "bytes": 64306658,
       "sha256": "0f674f68094cc65c83da3c142775dcfd091250e293783c3e8211ee4e97bc083f",
-      "fetched_at_utc": "2026-10-24T21:59:26+00:00",
-      "note": "SEC FSDS 2011q4; source zip deleted after extraction, sha256 kept for provenance; source zip deleted after extraction, sha256 kept for provenance",
+      "fetched_at_utc": "2026-10-26T10:33:09+00:00",
+      "note": "SEC FSDS 2011q4; source zip deleted after extraction, sha256 kept for provenance",
       "source_bytes": 64306658,
       "retained": false
     },
@@ -1838,8 +2504,8 @@
       "path": "data/raw/zips/2012q1.zip",
       "bytes": 85474601,
       "sha256": "42ed1a5ecac978d4338bd51cd4bc15bf60cc821291eea492f8172fc4e803d5f6",
-      "fetched_at_utc": "2026-10-24T21:59:42+00:00",
-      "note": "SEC FSDS 2012q1; source zip deleted after extraction, sha256 kept for provenance; source zip deleted after extraction, sha256 kept for provenance",
+      "fetched_at_utc": "2026-10-26T10:33:18+00:00",
+      "note": "SEC FSDS 2012q1; source zip deleted after extraction, sha256 kept for provenance",
       "source_bytes": 85474601,
       "retained": false
     },
@@ -1848,8 +2514,8 @@
       "path": "data/raw/zips/2012q2.zip",
       "bytes": 80075771,
       "sha256": "0dbb10aa316c674f07849a28e67a25a0a59bd6ef2bc214cd1800c8a2d2a05df6",
-      "fetched_at_utc": "2026-10-24T21:59:59+00:00",
-      "note": "SEC FSDS 2012q2; source zip deleted after extraction, sha256 kept for provenance; source zip deleted after extraction, sha256 kept for provenance",
+      "fetched_at_utc": "2026-10-26T10:33:29+00:00",
+      "note": "SEC FSDS 2012q2; source zip deleted after extraction, sha256 kept for provenance",
       "source_bytes": 80075771,
       "retained": false
     },
@@ -1858,8 +2524,8 @@
       "path": "data/raw/zips/2012q3.zip",
       "bytes": 89608234,
       "sha256": "a5b705fab7948837fc890d820c2b809d4afdb0ff1836129ad5a16127275f0ebf",
-      "fetched_at_utc": "2026-10-24T22:00:19+00:00",
-      "note": "SEC FSDS 2012q3; source zip deleted after extraction, sha256 kept for provenance; source zip deleted after extraction, sha256 kept for provenance",
+      "fetched_at_utc": "2026-10-26T10:33:38+00:00",
+      "note": "SEC FSDS 2012q3; source zip deleted after extraction, sha256 kept for provenance",
       "source_bytes": 89608234,
       "retained": false
     },
@@ -1868,8 +2534,8 @@
       "path": "data/raw/zips/2012q4.zip",
       "bytes": 95805256,
       "sha256": "af6629de7547f5d75c85abf170550b9466768071fcd419d5fdf1a1d026436e98",
-      "fetched_at_utc": "2026-10-24T22:00:41+00:00",
-      "note": "SEC FSDS 2012q4; source zip deleted after extraction, sha256 kept for provenance; source zip deleted after extraction, sha256 kept for provenance",
+      "fetched_at_utc": "2026-10-26T10:33:49+00:00",
+      "note": "SEC FSDS 2012q4; source zip deleted after extraction, sha256 kept for provenance",
       "source_bytes": 95805256,
       "retained": false
     },
@@ -1878,8 +2544,8 @@
       "path": "data/raw/zips/2013q1.zip",
       "bytes": 99173442,
       "sha256": "329f4e3e40c0351001037ad1dea3fd28c07100f6f6d6d64d5998ea01b060a790",
-      "fetched_at_utc": "2026-10-24T22:01:04+00:00",
-      "note": "SEC FSDS 2013q1; source zip deleted after extraction, sha256 kept for provenance; source zip deleted after extraction, sha256 kept for provenance",
+      "fetched_at_utc": "2026-10-26T10:33:59+00:00",
+      "note": "SEC FSDS 2013q1; source zip deleted after extraction, sha256 kept for provenance",
       "source_bytes": 99173442,
       "retained": false
     },
@@ -1888,8 +2554,8 @@
       "path": "data/raw/zips/2013q2.zip",
       "bytes": 96917655,
       "sha256": "7cc764386ea9cb01d62e1a9f4fac38dc9c741e96886a953ddaad2def4eb489c7",
-      "fetched_at_utc": "2026-10-24T22:01:26+00:00",
-      "note": "SEC FSDS 2013q2; source zip deleted after extraction, sha256 kept for provenance; source zip deleted after extraction, sha256 kept for provenance",
+      "fetched_at_utc": "2026-10-26T10:34:11+00:00",
+      "note": "SEC FSDS 2013q2; source zip deleted after extraction, sha256 kept for provenance",
       "source_bytes": 96917655,
       "retained": false
     },
@@ -1898,8 +2564,8 @@
       "path": "data/raw/zips/2013q3.zip",
       "bytes": 98355005,
       "sha256": "c9134387b650a9194f14b3f832f16aa1a72255c20a0e0b954001a643933cc849",
-      "fetched_at_utc": "2026-10-24T22:01:51+00:00",
-      "note": "SEC FSDS 2013q3; source zip deleted after extraction, sha256 kept for provenance; source zip deleted after extraction, sha256 kept for provenance",
+      "fetched_at_utc": "2026-10-26T10:34:23+00:00",
+      "note": "SEC FSDS 2013q3; source zip deleted after extraction, sha256 kept for provenance",
       "source_bytes": 98355005,
       "retained": false
     },
@@ -1908,8 +2574,8 @@
       "path": "data/raw/zips/2013q4.zip",
       "bytes": 92335773,
       "sha256": "7781ac25ddbd4f6eb8eb85e838656181fb06e8bc16b1dd5efccb9e21f8f5baa7",
-      "fetched_at_utc": "2026-10-24T22:02:14+00:00",
-      "note": "SEC FSDS 2013q4; source zip deleted after extraction, sha256 kept for provenance; source zip deleted after extraction, sha256 kept for provenance",
+      "fetched_at_utc": "2026-10-26T10:34:35+00:00",
+      "note": "SEC FSDS 2013q4; source zip deleted after extraction, sha256 kept for provenance",
       "source_bytes": 92335773,
       "retained": false
     },
@@ -1918,8 +2584,8 @@
       "path": "data/raw/zips/2014q1.zip",
       "bytes": 102843522,
       "sha256": "bf55481c6e0088fb45e8efeb2d8de6912a9c3533da918376a24ca5f84144680f",
-      "fetched_at_utc": "2026-10-24T22:02:43+00:00",
-      "note": "SEC FSDS 2014q1; source zip deleted after extraction, sha256 kept for provenance; source zip deleted after extraction, sha256 kept for provenance",
+      "fetched_at_utc": "2026-10-26T10:34:47+00:00",
+      "note": "SEC FSDS 2014q1; source zip deleted after extraction, sha256 kept for provenance",
       "source_bytes": 102843522,
       "retained": false
     },
@@ -1928,8 +2594,8 @@
       "path": "data/raw/zips/2014q2.zip",
       "bytes": 85032839,
       "sha256": "ab03600231a08369a980a31dde8bb78b6cd49f56d39ab7b90ca5bc0cfd52aa7f",
-      "fetched_at_utc": "2026-10-24T22:03:08+00:00",
-      "note": "SEC FSDS 2014q2; source zip deleted after extraction, sha256 kept for provenance; source zip deleted after extraction, sha256 kept for provenance",
+      "fetched_at_utc": "2026-10-26T10:35:03+00:00",
+      "note": "SEC FSDS 2014q2; source zip deleted after extraction, sha256 kept for provenance",
       "source_bytes": 85032839,
       "retained": false
     },
@@ -1938,8 +2604,8 @@
       "path": "data/raw/zips/2014q3.zip",
       "bytes": 87408142,
       "sha256": "4d10510a2f17a6da8012d83f66bed7fbb434bca2529f7b2a92043c522d2c52b1",
-      "fetched_at_utc": "2026-10-24T22:03:29+00:00",
-      "note": "SEC FSDS 2014q3; source zip deleted after extraction, sha256 kept for provenance; source zip deleted after extraction, sha256 kept for provenance",
+      "fetched_at_utc": "2026-10-26T10:35:16+00:00",
+      "note": "SEC FSDS 2014q3; source zip deleted after extraction, sha256 kept for provenance",
       "source_bytes": 87408142,
       "retained": false
     },
@@ -1948,8 +2614,8 @@
       "path": "data/raw/zips/2014q4.zip",
       "bytes": 87639973,
       "sha256": "c82395b7df380a95b30d652784372a5439dea9ed750d89784822bb643cbc4930",
-      "fetched_at_utc": "2026-10-24T22:03:53+00:00",
-      "note": "SEC FSDS 2014q4; source zip deleted after extraction, sha256 kept for provenance; source zip deleted after extraction, sha256 kept for provenance",
+      "fetched_at_utc": "2026-10-26T10:35:28+00:00",
+      "note": "SEC FSDS 2014q4; source zip deleted after extraction, sha256 kept for provenance",
       "source_bytes": 87639973,
       "retained": false
     },
@@ -1958,8 +2624,8 @@
       "path": "data/raw/zips/2015q1.zip",
       "bytes": 98944359,
       "sha256": "baa9e434480b8299593b781e8156f855e0c4548677329f166f495cbae287e52e",
-      "fetched_at_utc": "2026-10-24T21:58:29+00:00",
-      "note": "SEC FSDS 2015q1; source zip deleted after extraction, sha256 kept for provenance; source zip deleted after extraction, sha256 kept for provenance",
+      "fetched_at_utc": "2026-10-26T10:35:36+00:00",
+      "note": "SEC FSDS 2015q1; source zip deleted after extraction, sha256 kept for provenance",
       "source_bytes": 98944359,
       "retained": false
     },
@@ -1968,8 +2634,8 @@
       "path": "data/raw/zips/2015q2.zip",
       "bytes": 78908272,
       "sha256": "d3cac325930af6ef145d26fb7e035d7933e900ce174a11adaabb33abd87fbfa1",
-      "fetched_at_utc": "2026-10-24T22:04:13+00:00",
-      "note": "SEC FSDS 2015q2; source zip deleted after extraction, sha256 kept for provenance; source zip deleted after extraction, sha256 kept for provenance",
+      "fetched_at_utc": "2026-10-26T10:35:45+00:00",
+      "note": "SEC FSDS 2015q2; source zip deleted after extraction, sha256 kept for provenance",
       "source_bytes": 78908272,
       "retained": false
     },
@@ -1978,8 +2644,8 @@
       "path": "data/raw/zips/2015q3.zip",
       "bytes": 82751989,
       "sha256": "9301fa2e346aa6b3a48a36cafab80d1aab5d7970e60bfd168d53ba852a4deca9",
-      "fetched_at_utc": "2026-10-24T22:04:32+00:00",
-      "note": "SEC FSDS 2015q3; source zip deleted after extraction, sha256 kept for provenance; source zip deleted after extraction, sha256 kept for provenance",
+      "fetched_at_utc": "2026-10-26T10:35:53+00:00",
+      "note": "SEC FSDS 2015q3; source zip deleted after extraction, sha256 kept for provenance",
       "source_bytes": 82751989,
       "retained": false
     },
@@ -1988,8 +2654,8 @@
       "path": "data/raw/zips/2015q4.zip",
       "bytes": 83007568,
       "sha256": "1723b41ef2a1d3ea6595f6052ef229a80e03cd183391ca9e297a894f9e589d83",
-      "fetched_at_utc": "2026-10-24T22:04:53+00:00",
-      "note": "SEC FSDS 2015q4; source zip deleted after extraction, sha256 kept for provenance; source zip deleted after extraction, sha256 kept for provenance",
+      "fetched_at_utc": "2026-10-26T10:36:04+00:00",
+      "note": "SEC FSDS 2015q4; source zip deleted after extraction, sha256 kept for provenance",
       "source_bytes": 83007568,
       "retained": false
     },
@@ -1998,8 +2664,8 @@
       "path": "data/raw/zips/2016q1.zip",
       "bytes": 95470843,
       "sha256": "5c89a6badede1b47ab540913c7484795c7fc4c2a4672ac601b34b8c0afe5a698",
-      "fetched_at_utc": "2026-10-24T22:05:13+00:00",
-      "note": "SEC FSDS 2016q1; source zip deleted after extraction, sha256 kept for provenance; source zip deleted after extraction, sha256 kept for provenance",
+      "fetched_at_utc": "2026-10-26T10:36:17+00:00",
+      "note": "SEC FSDS 2016q1; source zip deleted after extraction, sha256 kept for provenance",
       "source_bytes": 95470843,
       "retained": false
     },
@@ -2008,8 +2674,8 @@
       "path": "data/raw/zips/2016q2.zip",
       "bytes": 73848835,
       "sha256": "e91daef1f83ab3a6a7a25425f1f09ac6c100be8e42ac7a54e539e1b0c303449c",
-      "fetched_at_utc": "2026-10-24T22:05:33+00:00",
-      "note": "SEC FSDS 2016q2; source zip deleted after extraction, sha256 kept for provenance; source zip deleted after extraction, sha256 kept for provenance",
+      "fetched_at_utc": "2026-10-26T10:36:28+00:00",
+      "note": "SEC FSDS 2016q2; source zip deleted after extraction, sha256 kept for provenance",
       "source_bytes": 73848835,
       "retained": false
     },
@@ -2018,8 +2684,8 @@
       "path": "data/raw/zips/2016q3.zip",
       "bytes": 71116399,
       "sha256": "4d014b8ee4476887aba067c59bfef967d4b12c905d4b1b3f89e8ff7ff7310156",
-      "fetched_at_utc": "2026-10-24T22:05:50+00:00",
-      "note": "SEC FSDS 2016q3; source zip deleted after extraction, sha256 kept for provenance; source zip deleted after extraction, sha256 kept for provenance",
+      "fetched_at_utc": "2026-10-26T10:36:38+00:00",
+      "note": "SEC FSDS 2016q3; source zip deleted after extraction, sha256 kept for provenance",
       "source_bytes": 71116399,
       "retained": false
     },
@@ -2028,8 +2694,8 @@
       "path": "data/raw/zips/2016q4.zip",
       "bytes": 79400707,
       "sha256": "b8a9550c386ea95eefcc95fc3b3c19f2b1428c0a7f46d5d547a671c3f9284e26",
-      "fetched_at_utc": "2026-10-24T22:06:08+00:00",
-      "note": "SEC FSDS 2016q4; source zip deleted after extraction, sha256 kept for provenance; source zip deleted after extraction, sha256 kept for provenance",
+      "fetched_at_utc": "2026-10-26T10:36:48+00:00",
+      "note": "SEC FSDS 2016q4; source zip deleted after extraction, sha256 kept for provenance",
       "source_bytes": 79400707,
       "retained": false
     },
@@ -2038,8 +2704,8 @@
       "path": "data/raw/zips/2017q1.zip",
       "bytes": 92433981,
       "sha256": "ffb6989983c4c9f87e2f39166b20e4a21f024f0fe1adccc199e08da5fc94a915",
-      "fetched_at_utc": "2026-10-24T22:06:25+00:00",
-      "note": "SEC FSDS 2017q1; source zip deleted after extraction, sha256 kept for provenance; source zip deleted after extraction, sha256 kept for provenance",
+      "fetched_at_utc": "2026-10-26T10:36:59+00:00",
+      "note": "SEC FSDS 2017q1; source zip deleted after extraction, sha256 kept for provenance",
       "source_bytes": 92433981,
       "retained": false
     },
@@ -2048,8 +2714,8 @@
       "path": "data/raw/zips/2017q2.zip",
       "bytes": 71429748,
       "sha256": "63a590d7deaac8f82d22f08cb2ada46f199341ecc7e7a8a0a7d6a181cec1d53b",
-      "fetched_at_utc": "2026-10-24T22:06:42+00:00",
-      "note": "SEC FSDS 2017q2; source zip deleted after extraction, sha256 kept for provenance; source zip deleted after extraction, sha256 kept for provenance",
+      "fetched_at_utc": "2026-10-26T10:37:11+00:00",
+      "note": "SEC FSDS 2017q2; source zip deleted after extraction, sha256 kept for provenance",
       "source_bytes": 71429748,
       "retained": false
     },
@@ -2058,8 +2724,8 @@
       "path": "data/raw/zips/2017q3.zip",
       "bytes": 74356472,
       "sha256": "5aa58d799c4fb3f5f98974eb713696d1aebe747a01a794e7ac58517631b5735d",
-      "fetched_at_utc": "2026-10-24T22:06:59+00:00",
-      "note": "SEC FSDS 2017q3; source zip deleted after extraction, sha256 kept for provenance; source zip deleted after extraction, sha256 kept for provenance",
+      "fetched_at_utc": "2026-10-26T10:37:22+00:00",
+      "note": "SEC FSDS 2017q3; source zip deleted after extraction, sha256 kept for provenance",
       "source_bytes": 74356472,
       "retained": false
     },
@@ -2068,8 +2734,8 @@
       "path": "data/raw/zips/2017q4.zip",
       "bytes": 76051784,
       "sha256": "be03bfd71f356a7f53d82a40ee907bb51aec4f61d6ce97f059f2df785bc37658",
-      "fetched_at_utc": "2026-10-24T22:07:17+00:00",
-      "note": "SEC FSDS 2017q4; source zip deleted after extraction, sha256 kept for provenance; source zip deleted after extraction, sha256 kept for provenance",
+      "fetched_at_utc": "2026-10-26T10:37:33+00:00",
+      "note": "SEC FSDS 2017q4; source zip deleted after extraction, sha256 kept for provenance",
       "source_bytes": 76051784,
       "retained": false
     },
@@ -2078,8 +2744,8 @@
       "path": "data/raw/zips/2018q1.zip",
       "bytes": 93176693,
       "sha256": "f7f0083d28779ff373cd097ded88d5408eae9cc178f89014ca3ed8b24dc84185",
-      "fetched_at_utc": "2026-10-24T22:07:37+00:00",
-      "note": "SEC FSDS 2018q1; source zip deleted after extraction, sha256 kept for provenance; source zip deleted after extraction, sha256 kept for provenance",
+      "fetched_at_utc": "2026-10-26T10:37:43+00:00",
+      "note": "SEC FSDS 2018q1; source zip deleted after extraction, sha256 kept for provenance",
       "source_bytes": 93176693,
       "retained": false
     },
@@ -2088,8 +2754,8 @@
       "path": "data/raw/zips/2018q2.zip",
       "bytes": 91972487,
       "sha256": "99daaf8af1fb1ba94b100613536d9dbee5e9a356f0736190963a3a68af623d54",
-      "fetched_at_utc": "2026-10-24T22:07:57+00:00",
-      "note": "SEC FSDS 2018q2; source zip deleted after extraction, sha256 kept for provenance; source zip deleted after extraction, sha256 kept for provenance",
+      "fetched_at_utc": "2026-10-26T10:37:55+00:00",
+      "note": "SEC FSDS 2018q2; source zip deleted after extraction, sha256 kept for provenance",
       "source_bytes": 91972487,
       "retained": false
     },
@@ -2098,8 +2764,8 @@
       "path": "data/raw/zips/2018q3.zip",
       "bytes": 87202498,
       "sha256": "30030056223c456d5cb7a42722ffa990345fda12deb5cfff723b1ae47dc9bf8d",
-      "fetched_at_utc": "2026-10-24T22:08:15+00:00",
-      "note": "SEC FSDS 2018q3; source zip deleted after extraction, sha256 kept for provenance; source zip deleted after extraction, sha256 kept for provenance",
+      "fetched_at_utc": "2026-10-26T10:38:06+00:00",
+      "note": "SEC FSDS 2018q3; source zip deleted after extraction, sha256 kept for provenance",
       "source_bytes": 87202498,
       "retained": false
     },
@@ -2108,8 +2774,8 @@
       "path": "data/raw/zips/2018q4.zip",
       "bytes": 62895777,
       "sha256": "ecc103d0979dacdf6cfcc7f0b2273f7b6046c41a3aa7f2e2aacfb8ccd45bc122",
-      "fetched_at_utc": "2026-10-24T22:08:30+00:00",
-      "note": "SEC FSDS 2018q4; source zip deleted after extraction, sha256 kept for provenance; source zip deleted after extraction, sha256 kept for provenance",
+      "fetched_at_utc": "2026-10-26T10:38:16+00:00",
+      "note": "SEC FSDS 2018q4; source zip deleted after extraction, sha256 kept for provenance",
       "source_bytes": 62895777,
       "retained": false
     },
@@ -2118,8 +2784,8 @@
       "path": "data/raw/zips/2019q1.zip",
       "bytes": 95895180,
       "sha256": "49f6f0a00b6f1792d22893a3e261f7a329377048eb826079f1a16c7895b76d9d",
-      "fetched_at_utc": "2026-10-24T22:08:50+00:00",
-      "note": "SEC FSDS 2019q1; source zip deleted after extraction, sha256 kept for provenance; source zip deleted after extraction, sha256 kept for provenance",
+      "fetched_at_utc": "2026-10-26T10:46:03+00:00",
+      "note": "SEC FSDS 2019q1; source zip deleted after extraction, sha256 kept for provenance",
       "source_bytes": 95895180,
       "retained": false
     },
@@ -2128,8 +2794,8 @@
       "path": "data/raw/zips/2019q2.zip",
       "bytes": 90155728,
       "sha256": "765e42efd43687b4ac4ea59c83213857a52dca0a4bd5c490034bd5bea2b6fac3",
-      "fetched_at_utc": "2026-10-24T22:09:10+00:00",
-      "note": "SEC FSDS 2019q2; source zip deleted after extraction, sha256 kept for provenance; source zip deleted after extraction, sha256 kept for provenance",
+      "fetched_at_utc": "2026-10-26T10:46:18+00:00",
+      "note": "SEC FSDS 2019q2; source zip deleted after extraction, sha256 kept for provenance",
       "source_bytes": 90155728,
       "retained": false
     },
@@ -2138,8 +2804,8 @@
       "path": "data/raw/zips/2019q3.zip",
       "bytes": 89829588,
       "sha256": "4c57e36f04b54a2b9917537e12974cba68353f765affbf168bd506478780e13e",
-      "fetched_at_utc": "2026-10-24T22:09:30+00:00",
-      "note": "SEC FSDS 2019q3; source zip deleted after extraction, sha256 kept for provenance; source zip deleted after extraction, sha256 kept for provenance",
+      "fetched_at_utc": "2026-10-26T10:46:31+00:00",
+      "note": "SEC FSDS 2019q3; source zip deleted after extraction, sha256 kept for provenance",
       "source_bytes": 89829588,
       "retained": false
     },
@@ -2148,8 +2814,8 @@
       "path": "data/raw/zips/2019q4.zip",
       "bytes": 98753299,
       "sha256": "1f997c123b6d2fe892eeca0a5f12687e718ab5ae031f148b4a5d82f2689daec3",
-      "fetched_at_utc": "2026-10-24T22:09:52+00:00",
-      "note": "SEC FSDS 2019q4; source zip deleted after extraction, sha256 kept for provenance; source zip deleted after extraction, sha256 kept for provenance",
+      "fetched_at_utc": "2026-10-26T10:46:44+00:00",
+      "note": "SEC FSDS 2019q4; source zip deleted after extraction, sha256 kept for provenance",
       "source_bytes": 98753299,
       "retained": false
     },
@@ -2158,8 +2824,8 @@
       "path": "data/raw/zips/2020q1.zip",
       "bytes": 96584608,
       "sha256": "48ed9834c66d565c21130d087eae941b25770e2d7cc8351d17652612289fcd67",
-      "fetched_at_utc": "2026-10-24T22:10:13+00:00",
-      "note": "SEC FSDS 2020q1; source zip deleted after extraction, sha256 kept for provenance; source zip deleted after extraction, sha256 kept for provenance",
+      "fetched_at_utc": "2026-10-26T10:46:54+00:00",
+      "note": "SEC FSDS 2020q1; source zip deleted after extraction, sha256 kept for provenance",
       "source_bytes": 96584608,
       "retained": false
     },
@@ -2168,8 +2834,8 @@
       "path": "data/raw/zips/2020q2.zip",
       "bytes": 82008710,
       "sha256": "bd796ea10c88e21205da013f9c3f6a20b2b14d3de94f0075e9f529e0ef9a3543",
-      "fetched_at_utc": "2026-10-24T22:10:40+00:00",
-      "note": "SEC FSDS 2020q2; source zip deleted after extraction, sha256 kept for provenance; source zip deleted after extraction, sha256 kept for provenance",
+      "fetched_at_utc": "2026-10-26T10:47:03+00:00",
+      "note": "SEC FSDS 2020q2; source zip deleted after extraction, sha256 kept for provenance",
       "source_bytes": 82008710,
       "retained": false
     },
@@ -2178,8 +2844,8 @@
       "path": "data/raw/zips/2020q3.zip",
       "bytes": 87582976,
       "sha256": "6a402070d4b1f12db0d2256533b38705735684ecb58bc12ce53a61dd12abe26e",
-      "fetched_at_utc": "2026-10-24T22:11:02+00:00",
-      "note": "SEC FSDS 2020q3; source zip deleted after extraction, sha256 kept for provenance; source zip deleted after extraction, sha256 kept for provenance",
+      "fetched_at_utc": "2026-10-26T10:47:11+00:00",
+      "note": "SEC FSDS 2020q3; source zip deleted after extraction, sha256 kept for provenance",
       "source_bytes": 87582976,
       "retained": false
     },
@@ -2188,8 +2854,8 @@
       "path": "data/raw/zips/2020q4.zip",
       "bytes": 89811373,
       "sha256": "7cabec2c9b90511983623e6db3869b24c7a894466bd409f060a8da32790ae68e",
-      "fetched_at_utc": "2026-10-24T22:11:33+00:00",
-      "note": "SEC FSDS 2020q4; source zip deleted after extraction, sha256 kept for provenance; source zip deleted after extraction, sha256 kept for provenance",
+      "fetched_at_utc": "2026-10-26T10:47:20+00:00",
+      "note": "SEC FSDS 2020q4; source zip deleted after extraction, sha256 kept for provenance",
       "source_bytes": 89811373,
       "retained": false
     },
@@ -2198,8 +2864,8 @@
       "path": "data/raw/zips/2021q1.zip",
       "bytes": 97900752,
       "sha256": "6a776a9fa3d974476101efa9a4bfc531b7cdc2763abd45a6f70dd240a223843b",
-      "fetched_at_utc": "2026-10-24T22:11:53+00:00",
-      "note": "SEC FSDS 2021q1; source zip deleted after extraction, sha256 kept for provenance; source zip deleted after extraction, sha256 kept for provenance",
+      "fetched_at_utc": "2026-10-26T10:47:29+00:00",
+      "note": "SEC FSDS 2021q1; source zip deleted after extraction, sha256 kept for provenance",
       "source_bytes": 97900752,
       "retained": false
     },
@@ -2208,8 +2874,8 @@
       "path": "data/raw/zips/2021q2.zip",
       "bytes": 90864175,
       "sha256": "528b91432896eba74661c20481edb327809f3a0bf00e01d81821fe8e6078bc33",
-      "fetched_at_utc": "2026-10-24T22:12:15+00:00",
-      "note": "SEC FSDS 2021q2; source zip deleted after extraction, sha256 kept for provenance; source zip deleted after extraction, sha256 kept for provenance",
+      "fetched_at_utc": "2026-10-26T10:47:38+00:00",
+      "note": "SEC FSDS 2021q2; source zip deleted after extraction, sha256 kept for provenance",
       "source_bytes": 90864175,
       "retained": false
     },
@@ -2218,8 +2884,8 @@
       "path": "data/raw/zips/2021q3.zip",
       "bytes": 97252395,
       "sha256": "0fae2ceb149c0fe7e83b35b19157f910c864dee7e25d5ecf8b93dc42ee261b99",
-      "fetched_at_utc": "2026-10-24T22:13:48+00:00",
-      "note": "SEC FSDS 2021q3; source zip deleted after extraction, sha256 kept for provenance; source zip deleted after extraction, sha256 kept for provenance",
+      "fetched_at_utc": "2026-10-26T10:47:46+00:00",
+      "note": "SEC FSDS 2021q3; source zip deleted after extraction, sha256 kept for provenance",
       "source_bytes": 97252395,
       "retained": false
     },
@@ -2228,7 +2894,7 @@
       "path": "data/raw/zips/2021q4.zip",
       "bytes": 102642081,
       "sha256": "30d21449c0488e71dfb88ba8f85644a0e72194864e95111b3c1c120b3514c594",
-      "fetched_at_utc": "2026-10-24T22:34:03+00:00",
+      "fetched_at_utc": "2026-10-26T10:47:55+00:00",
       "note": "SEC FSDS 2021q4; source zip deleted after extraction, sha256 kept for provenance",
       "source_bytes": 102642081,
       "retained": false
@@ -2238,8 +2904,8 @@
       "path": "data/raw/zips/2022q1.zip",
       "bytes": 103669919,
       "sha256": "2ebeef77727a383f878bc28ff22498fd292a8dbab04216877b4b130ca00c1520",
-      "fetched_at_utc": "2026-10-24T22:14:20+00:00",
-      "note": "SEC FSDS 2022q1; source zip deleted after extraction, sha256 kept for provenance; source zip deleted after extraction, sha256 kept for provenance",
+      "fetched_at_utc": "2026-10-26T10:48:06+00:00",
+      "note": "SEC FSDS 2022q1; source zip deleted after extraction, sha256 kept for provenance",
       "source_bytes": 103669919,
       "retained": false
     },
@@ -2248,8 +2914,8 @@
       "path": "data/raw/zips/2022q2.zip",
       "bytes": 97089251,
       "sha256": "8939a4cafeabf7c94bde48be0e8c444f6332e4a9663698a89242eddd1036d27e",
-      "fetched_at_utc": "2026-10-24T22:14:43+00:00",
-      "note": "SEC FSDS 2022q2; source zip deleted after extraction, sha256 kept for provenance; source zip deleted after extraction, sha256 kept for provenance",
+      "fetched_at_utc": "2026-10-26T10:48:15+00:00",
+      "note": "SEC FSDS 2022q2; source zip deleted after extraction, sha256 kept for provenance",
       "source_bytes": 97089251,
       "retained": false
     },
@@ -2258,8 +2924,8 @@
       "path": "data/raw/zips/2022q3.zip",
       "bytes": 97589396,
       "sha256": "4bbfdc953177acf1a430a9f0a624dd8244bc81292d42872107d0446d06167c26",
-      "fetched_at_utc": "2026-10-24T22:15:04+00:00",
-      "note": "SEC FSDS 2022q3; source zip deleted after extraction, sha256 kept for provenance; source zip deleted after extraction, sha256 kept for provenance",
+      "fetched_at_utc": "2026-10-26T10:48:24+00:00",
+      "note": "SEC FSDS 2022q3; source zip deleted after extraction, sha256 kept for provenance",
       "source_bytes": 97589396,
       "retained": false
     },
@@ -2268,8 +2934,8 @@
       "path": "data/raw/zips/2022q4.zip",
       "bytes": 111091525,
       "sha256": "83bdc7a9545479eb64d118688c888ba8e7554ebc774f3ab8a8b0cc1decb87f28",
-      "fetched_at_utc": "2026-10-24T22:15:32+00:00",
-      "note": "SEC FSDS 2022q4; source zip deleted after extraction, sha256 kept for provenance; source zip deleted after extraction, sha256 kept for provenance",
+      "fetched_at_utc": "2026-10-26T10:48:34+00:00",
+      "note": "SEC FSDS 2022q4; source zip deleted after extraction, sha256 kept for provenance",
       "source_bytes": 111091525,
       "retained": false
     },
@@ -2278,8 +2944,8 @@
       "path": "data/raw/zips/2023q1.zip",
       "bytes": 113974946,
       "sha256": "479638c1be4088fa2ae42d2947468913eaff5ad0f093c412ba4340af8a8f791e",
-      "fetched_at_utc": "2026-10-24T22:16:02+00:00",
-      "note": "SEC FSDS 2023q1; source zip deleted after extraction, sha256 kept for provenance; source zip deleted after extraction, sha256 kept for provenance",
+      "fetched_at_utc": "2026-10-26T10:42:18+00:00",
+      "note": "SEC FSDS 2023q1; source zip deleted after extraction, sha256 kept for provenance",
       "source_bytes": 113974946,
       "retained": false
     },
@@ -2288,8 +2954,8 @@
       "path": "data/raw/zips/2023q2.zip",
       "bytes": 116914392,
       "sha256": "f028f1e8d24313e7619aa87c7c683a459452e7e81a8e5ba72d7ce39ddf62bda9",
-      "fetched_at_utc": "2026-10-24T22:16:29+00:00",
-      "note": "SEC FSDS 2023q2; source zip deleted after extraction, sha256 kept for provenance; source zip deleted after extraction, sha256 kept for provenance",
+      "fetched_at_utc": "2026-10-26T10:42:34+00:00",
+      "note": "SEC FSDS 2023q2; source zip deleted after extraction, sha256 kept for provenance",
       "source_bytes": 116914392,
       "retained": false
     },
@@ -2298,8 +2964,8 @@
       "path": "data/raw/zips/2023q3.zip",
       "bytes": 117776944,
       "sha256": "f075d721dde4393dabd49c1746578294ada4665ec29c85c2b3184f44f6f09187",
-      "fetched_at_utc": "2026-10-24T22:16:58+00:00",
-      "note": "SEC FSDS 2023q3; source zip deleted after extraction, sha256 kept for provenance; source zip deleted after extraction, sha256 kept for provenance",
+      "fetched_at_utc": "2026-10-26T10:43:01+00:00",
+      "note": "SEC FSDS 2023q3; source zip deleted after extraction, sha256 kept for provenance",
       "source_bytes": 117776944,
       "retained": false
     },
@@ -2308,8 +2974,8 @@
       "path": "data/raw/zips/2023q4.zip",
       "bytes": 120272357,
       "sha256": "ad23c5505e59b7305e16bfebb8bb839476689330b85a3e1ce216f809b18d1521",
-      "fetched_at_utc": "2026-10-24T22:17:23+00:00",
-      "note": "SEC FSDS 2023q4; source zip deleted after extraction, sha256 kept for provenance; source zip deleted after extraction, sha256 kept for provenance",
+      "fetched_at_utc": "2026-10-26T10:43:18+00:00",
+      "note": "SEC FSDS 2023q4; source zip deleted after extraction, sha256 kept for provenance",
       "source_bytes": 120272357,
       "retained": false
     },
@@ -2318,8 +2984,8 @@
       "path": "data/raw/zips/2024q1.zip",
       "bytes": 124336804,
       "sha256": "94c7894b00903f8ff7186c4250ba1c1daa1bde8b3a0b26fae68f72608b2ffc9b",
-      "fetched_at_utc": "2026-10-24T22:17:50+00:00",
-      "note": "SEC FSDS 2024q1; source zip deleted after extraction, sha256 kept for provenance; source zip deleted after extraction, sha256 kept for provenance",
+      "fetched_at_utc": "2026-10-26T10:43:58+00:00",
+      "note": "SEC FSDS 2024q1; source zip deleted after extraction, sha256 kept for provenance",
       "source_bytes": 124336804,
       "retained": false
     },
@@ -2328,8 +2994,8 @@
       "path": "data/raw/zips/2024q2.zip",
       "bytes": 119119954,
       "sha256": "698796e9f0946501d3dc74e7696a6c8c71cf32b66026e053722a784236b37761",
-      "fetched_at_utc": "2026-10-24T22:18:18+00:00",
-      "note": "SEC FSDS 2024q2; source zip deleted after extraction, sha256 kept for provenance; source zip deleted after extraction, sha256 kept for provenance",
+      "fetched_at_utc": "2026-10-26T10:44:14+00:00",
+      "note": "SEC FSDS 2024q2; source zip deleted after extraction, sha256 kept for provenance",
       "source_bytes": 119119954,
       "retained": false
     },
@@ -2338,8 +3004,8 @@
       "path": "data/raw/zips/2024q3.zip",
       "bytes": 118280418,
       "sha256": "b1823f2d65189f0d5ecbb1968d683c59df762129ae1b23bda0394093a69e0da9",
-      "fetched_at_utc": "2026-10-24T22:18:50+00:00",
-      "note": "SEC FSDS 2024q3; source zip deleted after extraction, sha256 kept for provenance; source zip deleted after extraction, sha256 kept for provenance",
+      "fetched_at_utc": "2026-10-26T10:44:38+00:00",
+      "note": "SEC FSDS 2024q3; source zip deleted after extraction, sha256 kept for provenance",
       "source_bytes": 118280418,
       "retained": false
     },
@@ -2348,8 +3014,8 @@
       "path": "data/raw/zips/2024q4.zip",
       "bytes": 122932548,
       "sha256": "9a2cbbaf39c94aa642b33d512f4def92b198d3bfd12d2267bcd27abe55b9902d",
-      "fetched_at_utc": "2026-10-24T22:19:17+00:00",
-      "note": "SEC FSDS 2024q4; source zip deleted after extraction, sha256 kept for provenance; source zip deleted after extraction, sha256 kept for provenance",
+      "fetched_at_utc": "2026-10-26T10:44:58+00:00",
+      "note": "SEC FSDS 2024q4; source zip deleted after extraction, sha256 kept for provenance",
       "source_bytes": 122932548,
       "retained": false
     },
@@ -2358,8 +3024,8 @@
       "path": "data/raw/zips/2025q1.zip",
       "bytes": 127765057,
       "sha256": "4386e7057cc216b6fc729d8f957998acb831d29be7b16f6d8ed0f6b1ab74eba5",
-      "fetched_at_utc": "2026-10-24T22:19:42+00:00",
-      "note": "SEC FSDS 2025q1; source zip deleted after extraction, sha256 kept for provenance; source zip deleted after extraction, sha256 kept for provenance",
+      "fetched_at_utc": "2026-10-26T10:45:14+00:00",
+      "note": "SEC FSDS 2025q1; source zip deleted after extraction, sha256 kept for provenance",
       "source_bytes": 127765057,
       "retained": false
     },
@@ -2368,8 +3034,8 @@
       "path": "data/raw/zips/2025q2.zip",
       "bytes": 78973768,
       "sha256": "81bf19bdb5606d5ee0164a8de8b7e96d5546170e42e59bcbf95b652ca83ac5d7",
-      "fetched_at_utc": "2026-10-24T22:20:04+00:00",
-      "note": "SEC FSDS 2025q2; source zip deleted after extraction, sha256 kept for provenance; source zip deleted after extraction, sha256 kept for provenance",
+      "fetched_at_utc": "2026-10-26T10:45:31+00:00",
+      "note": "SEC FSDS 2025q2; source zip deleted after extraction, sha256 kept for provenance",
       "source_bytes": 78973768,
       "retained": false
     },
@@ -2378,8 +3044,8 @@
       "path": "data/raw/zips/2025q3.zip",
       "bytes": 127842298,
       "sha256": "ebe25fa74c3655f4738ed9eb144af3953c3981c80f57d74829fb9ad68b114710",
-      "fetched_at_utc": "2026-10-24T22:20:32+00:00",
-      "note": "SEC FSDS 2025q3; source zip deleted after extraction, sha256 kept for provenance; source zip deleted after extraction, sha256 kept for provenance",
+      "fetched_at_utc": "2026-10-26T10:45:45+00:00",
+      "note": "SEC FSDS 2025q3; source zip deleted after extraction, sha256 kept for provenance",
       "source_bytes": 127842298,
       "retained": false
     },
@@ -2388,8 +3054,8 @@
       "path": "data/raw/zips/2025q4.zip",
       "bytes": 65830170,
       "sha256": "2b36ac3850c022cf19edd882e31c3c453c7666677b9fdd2e1f7748fdb5768c6e",
-      "fetched_at_utc": "2026-10-24T22:20:53+00:00",
-      "note": "SEC FSDS 2025q4; source zip deleted after extraction, sha256 kept for provenance; source zip deleted after extraction, sha256 kept for provenance",
+      "fetched_at_utc": "2026-10-26T10:46:01+00:00",
+      "note": "SEC FSDS 2025q4; source zip deleted after extraction, sha256 kept for provenance",
       "source_bytes": 65830170,
       "retained": false
     }

@@ -3,6 +3,12 @@
 A record of what was tried, what broke, and what changed. Not a polished
 narrative: the point is that the false starts are visible.
 
+> **Status note (audit remediation).** Sections 1–11 describe the
+> pre-remediation build and are kept as history. Their panel counts (25,341 /
+> 3,158), mixed-AP headline (74.97 days), tag-sensitivity numbers and annual
+> shock estimates are **superseded** by §12. The current numbers are in
+> `README.md`, `outputs/results.json` and `outputs/quarterly_results.json`.
+
 ---
 
 ## 1. Choosing a source, and rejecting the obvious one
@@ -254,33 +260,157 @@ slip: `ln(0.5)/ln(0.266)` is 0.52, and that is the value reported.
 
 ---
 
+## 12. Third audit: AP contamination, between/within, and annual-only shocks
+
+A senior financial audit scored the project 8.2/10 and made three criticisms that
+were about measurement, not formatting:
+
+1. the AP fallback contaminated the headline CCC level;
+2. the positive CCC–ROA coefficient was being read as a within-firm result when
+   it is mostly between firms;
+3. the shocks were measured only on annual 10-K windows.
+
+All three were remediated, and the fixes changed the numbers.
+
+### 12.1 Re-download and trade-AP reconstruction
+
+The annual cache was refreshed (64/64 quarters; 2,846,675 filtered facts) and a
+quarterly cache was downloaded (2019q1–2022q4, 16/16 files). Tag mapping moved
+to **mapping 2.0.0** with three new concepts: `accrued_liabilities`, `ppe_net`,
+`inventory_write_down`, plus `AccountsPayableTradeCurrent` as a direct AP tag.
+
+The AP rule is now:
+
+```
+direct:         AccountsPayableCurrent or AccountsPayableTradeCurrent
+reconstructed:  AccountsPayableAndAccruedLiabilitiesCurrent
+                - AccruedLiabilitiesCurrent, kept only if positive
+contaminated:   combined tag with no usable split -> excluded from the headline
+```
+
+Only **71 of 2,773 fallback rows (2.56%)** could be reconstructed. That is the
+expected result: issuers use the combined tag precisely when they do not report
+the accrual split. The panel therefore has 24,201 direct, 71 reconstructed and
+2,702 contaminated firm-years. The clean-AP headline is **80.38 days** on 24,272
+rows / 3,010 firms, with an 11.64% negative share. The mixed-AP all-row median is
+**75.42 days** (15.33% negative) and is kept only as a sensitivity. This is a
+better answer than the old 74.97-day mixed headline, which averaged two
+accounting concepts.
+
+### 12.2 Between vs within, and the components
+
+The headline regression added **capital intensity** (net PP&E / assets) and
+**asset turnover** (revenue / assets). The coefficient barely moved:
++0.000130 (t = 3.23) versus +0.000124 without the controls. Industry × year FE
+gives +0.000131 (t = 3.42). The important result is the split:
+
+- **between firms:** +0.000525 (t = 4.80), about four times the headline;
+- **components within firm:** DSO +0.000473 (t = 3.18), DIO −0.000055
+  (t = −1.73), DPO −0.000108 (t = −3.35).
+
+So the old sentence "100 extra CCC days are associated with +1.39 pp of ROA" was
+technically the regression but misleading as an interpretation. The positive
+association is a composition fact about firms that carry receivables/inventory;
+within a firm, more payables are associated with **lower** ROA. The rank check
+(median −0.014, 47.2% positive) already hinted at this; it now has a direct
+between/within decomposition behind it.
+
+### 12.3 Quarterly 10-Q panel, and two bugs found while building it
+
+`build_quarterly.py` creates 72,811 firm-quarters / 8,097 firms / 20 quarters
+from 10-Q facts, with calendar quarter labels from the period end. The shock
+sample is 8,588 firm-quarters / 1,852 firms.
+
+Two defects surfaced during the build and were fixed before the results were
+used:
+
+1. **Duplicate rows from the YoY merge.** The first version matched each quarter
+   to `(cik, fy+1, fp)`. Transition periods can put two period ends under the
+   same `(fy, fp)`, so the merge duplicated 292 rows and inflated the panel.
+   The fix matches the actual period end to the observation closest to one year
+   earlier (within 45 days); `build_quarterly.py` now asserts one row per
+   `(cik, ddate)`.
+2. **The "pre-shock" exposure was measured after the shock.** The first version
+   merged the 10-Q to the annual panel on the 10-Q's own `fy`. For a December
+   filer, a 2020Q1 10-Q carries `fy = 2020`, so the merge used **FY2020** — the
+   shock year — as the "pre-shock" balance. This produced a spurious 2022
+   cash/assets coefficient (t = −2.52). The fix maps each quarterly row to
+   `shock_year − 1` (FY2019 for 2020, FY2021 for 2022) before merging.
+
+After the fixes, **no pooled quarterly coefficient clears 5%**: 2020 sales
+t = 1.48, 2020 write-down t = 0.94, 2022 gross margin +0.000023 (t = 1.89,
+p = 0.059), 2022 cash t = −0.43. The annual FY2022 negative margin slope
+(t = −2.06; December-only t = −1.50) is **not confirmed** quarterly. The earlier
+significant quarterly cash result is now documented as a bug, not a robustness
+check.
+
+### 12.4 What the remediation did not change
+
+The variance story is stable: 6.24% between industries, 64.54% between firms.
+Persistence is still a range, now 0.24–0.69 (pooled 0.688, firm FE 0.243, IV
+0.413). The 3-year rule, the SIC exclusions and the fiscal-year label for the
+annual panel are unchanged. The project is still descriptive.
+
+---
+
+## 13. Reproduction and test discipline after the audit remediation
+
+- `python src/run_all.py --skip-download --test` rebuilds both panels, both
+  analyses, all 7 figures and runs **38 tests**.
+- Tests cover the clean-CCC identity, the AP-quality partition (direct /
+  reconstructed / contaminated), the scalar and vector AP rules, the quarterly
+  panel identities, the pre-shock quarterly design, strict JSON (including
+  `quarterly_results.json` and `quarterly_stats.json`), the manifest for both
+  caches, and the headline numbers against the panel.
+- Two table/JSON mismatches found by the tests were fixed rather than papered
+  over: the DPO persistence row was estimating `dpo_w` (mixed AP) while the JSON
+  used `dpo_clean_w`; the tag-sensitivity test initially compared reconstructed
+  rows on `ccc` instead of `ccc_clean`.
+- `quarterly_panel.csv` is tracked (24.8 MB); `quarterly_panel.parquet` and
+  `panel_full.csv.gz` are gitignored and rebuilt locally.
+
+---
+
 ## What I would do differently
 
 1. **Check the lag bound before interpreting an AR(1).** A ρ of 0.00001 is a
    specification bug until proven otherwise.
 2. **Decide the screen before looking at the mean.** The mean CCC was garbage and
    should have been anticipated from the XBRL scale problem.
-3. **Keep the source zips.** Deleting them to save disk is why write-downs are
-   missing.
+3. **Keep the source zips.** Deleting them to save disk is why write-downs were
+   missing in the first build; the remediation had to re-download 64 quarters.
 4. **Run the rank check earlier.** The linear coefficient looked more robust
    before the within-firm median correlation was computed.
+5. **Never merge a shock panel on the outcome-year label.** The pre-shock
+   balance must be keyed to `shock_year − 1`, not to the 10-Q's `fy`. This was
+   the most consequential bug of the whole project.
+6. **Make the merge key unique before trusting row counts.** A `(fy, fp)` join
+   silently duplicated 292 quarterly rows. The test suite now asserts one row
+   per firm-quarter.
+7. **Report between and within separately from the start.** A single positive
+   coefficient hid the fact that the association is mostly cross-sectional.
 
 ---
 
 ## Honest summary
 
 The project set out to measure whether working capital predicts profitability
-and resilience. It found:
+and resilience. After the audit remediation it finds:
 
-- a large, stable descriptive fact (pooled median CCC 75 days; DIO alone is 84
-  days and DPO offsets half of the operating cycle);
-- that industry explains little of it (6% of variance) and firm identity a lot
-  (64%);
-- a persistence range of 0.27–0.69, not a single half-life;
-- a positive, small CCC–ROA association, against the prior, which survives
-  specification checks but is significant in only 7 of 11 main-sample
-  specifications and is invisible in the median firm;
-- no detectable 2020 revenue effect, and a 2022 margin effect that is
-  non-monotone.
+- a large, stable descriptive fact: clean trade-AP pooled median CCC **80.4
+  days** on 24,272 firm-years (DIO 84.0, DPO 47.9), with an all-row mixed-AP
+  sensitivity of 75.4;
+- that industry explains little of it (6.24% of variance) and firm identity a
+  lot (64.54%);
+- a persistence range of **0.24–0.69**, not a single half-life;
+- a positive, small CCC–ROA association (+0.000130, t = 3.23) that is mostly
+  **between firms** (+0.000525), is not a within-firm "longer CCC is better"
+  result (DPO is negative), and is significant in 9 of 13 main specifications
+  but weaker under preferred tags (p = 0.086);
+- no detectable 2020 or 2022 shock effect once outcomes are measured in calendar
+  quarters with a pre-shock balance sheet; the annual 2022 margin slope is
+  fragile (December-only t = −1.50) and not confirmed quarterly;
+- a write-down outcome that is now measured, but on a selected 17.3% of rows,
+  and is null.
 
 That is a descriptive project with one uncomfortable result, not a causal story.

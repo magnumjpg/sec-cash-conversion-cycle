@@ -36,8 +36,8 @@ import pandas as pd
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 from json_utils import write_json  # noqa: E402
 from tags import (  # noqa: E402
-    FLOW_CONCEPTS, FORMS, INSTANT_CONCEPTS, TAG_MAP, TAG_RANK, CONCEPT_OF_TAG,
-    TIER_OF_TAG, sic2, sic_division,
+    AP_DIRECT_TAGS, AP_FALLBACK_TAG, FLOW_CONCEPTS, FORMS, INSTANT_CONCEPTS,
+    TAG_MAP, TAG_RANK, CONCEPT_OF_TAG, TIER_OF_TAG, sic2, sic_division,
 )
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -132,7 +132,35 @@ def resolve_tags(df: pd.DataFrame) -> tuple[pd.DataFrame, pd.DataFrame, dict]:
     wide = pivot_block(flow).merge(pivot_block(inst), on=["cik", "ddate"], how="inner",
                                    suffixes=("", "_bal"))
     counts["firm_years_flow_balance_matched_on_exact_end"] = int(len(wide))
-    return wide.reset_index(), usage, counts
+    wide = wide.reset_index()
+    wide = add_ap_quality(wide)
+    return wide, usage, counts
+
+
+def add_ap_quality(df: pd.DataFrame) -> pd.DataFrame:
+    """Split reported AP into direct trade AP vs. an AP+accruals fallback.
+
+    `AccountsPayableAndAccruedLiabilitiesCurrent` is not a trade payable.  When
+    the issuer also reports `AccruedLiabilitiesCurrent`, the residual
+    `AP+accruals - accruals` is a trade-AP proxy; when it does not, the row is
+    kept in the full sample but flagged `fallback_contaminated` and excluded
+    from the clean measurement used for the headline.
+    """
+    df = df.copy()
+    ap = df.get("ap", pd.Series(np.nan, index=df.index))
+    tag = df.get("tag_ap", pd.Series(pd.NA, index=df.index))
+    accrued = df.get("accrued_liabilities", pd.Series(np.nan, index=df.index))
+    direct = tag.isin(AP_DIRECT_TAGS) & ap.notna()
+    residual = ap - accrued
+    reconstructed = (tag == AP_FALLBACK_TAG) & accrued.notna() & (residual > 0)
+    df["ap_clean"] = np.where(direct, ap, np.where(reconstructed, residual, np.nan))
+    df["ap_reconstructed"] = np.where(reconstructed, residual, np.nan)
+    df["ap_quality"] = np.select(
+        [direct, reconstructed],
+        ["direct", "reconstructed"],
+        default="fallback_contaminated",
+    )
+    return df
 
 
 def fiscal_year_map(subs: pd.DataFrame) -> pd.DataFrame:
@@ -150,6 +178,10 @@ def build_panel() -> dict:
 
     subs, nums = load_raw()
     log: dict = {}
+    # The current cache also holds 10-Q facts for the quarterly shock panel.  The
+    # annual panel must never see them: a 10-Q fact tagged at the same period
+    # end could otherwise win the "latest filed" rule.
+    subs = subs[subs["form"].isin(FORMS)].copy()
     log["n_annual_filings_cached"] = int(len(subs))
     log["n_ciks_with_annual_filing"] = int(subs["cik"].nunique())
 
@@ -324,6 +356,13 @@ def build_panel() -> dict:
 
     panel = panel.sort_values(["cik", "ddate"]).reset_index(drop=True)
 
+    # New concepts may be entirely absent in an older cache.  Keep the
+    # columns explicit so downstream measures fail loudly on values, not names.
+    for frame in (panel, panel_all):
+        for col in ["accrued_liabilities", "ppe_net", "inventory_write_down"]:
+            if col not in frame.columns:
+                frame[col] = np.nan
+
     # ---------------- measures (charter §4)
     def add_core_measures(df: pd.DataFrame) -> pd.DataFrame:
         df = df.copy()
@@ -331,13 +370,34 @@ def build_panel() -> dict:
         df["dio"] = 365 * df["inventory"] / df["cogs"]
         df["dpo"] = 365 * df["ap"] / df["cogs"]
         df["ccc"] = df["dso"] + df["dio"] - df["dpo"]
+        # Clean measurement: direct trade AP, or AP+accruals minus accruals.
+        # Rows where the split is impossible stay in `ccc` (full sample) but
+        # carry a missing `ccc_clean`, so they cannot enter the headline.
+        df["dpo_clean"] = 365 * df["ap_clean"] / df["cogs"]
+        df["ccc_clean"] = df["dso"] + df["dio"] - df["dpo_clean"]
         df["negative_ccc"] = (df["ccc"] < 0).astype(int)
+        df["negative_ccc_clean"] = np.where(
+            df["ccc_clean"].notna(), (df["ccc_clean"] < 0).astype(float), np.nan)
         df["gross_margin"] = (df["revenue"] - df["cogs"]) / df["revenue"]
         df["roa"] = df["net_income"] / df["assets"]
         df["cash_ratio"] = df["cash"] / df["assets"]
         df["current_ratio"] = df["assets_current"] / df["liabilities_current"]
         df["nwc_to_sales"] = (df["ar"] + df["inventory"] - df["ap"]) / df["revenue"]
         df["log_assets"] = np.log(df["assets"].where(df["assets"] > 0))
+        # Structural controls the external review asked for: capital intensity
+        # and asset turnover, both available for every firm-year.
+        df["capital_intensity"] = df["ppe_net"] / df["assets"]
+        df["noncurrent_asset_share"] = (df["assets"] - df["assets_current"]) / df["assets"]
+        # PP&E is missing for a minority of issuers; the non-current asset share
+        # is a transparent fallback, so the control does not silently drop rows.
+        df["capital_intensity_used"] = df["capital_intensity"].where(
+            df["capital_intensity"].notna(), df["noncurrent_asset_share"])
+        df["asset_turnover"] = df["revenue"] / df["assets"]
+        # Inventory write-downs: annual expense scaled by COGS (flow/flow) and
+        # by inventory (flow/stock).  Only a minority of issuers tag them, so
+        # coverage is reported alongside every use.
+        df["write_down_to_cogs"] = df["inventory_write_down"] / df["cogs"]
+        df["write_down_to_inventory"] = df["inventory_write_down"] / df["inventory"]
         return df
 
     panel_all = add_core_measures(panel_all)
@@ -346,8 +406,11 @@ def build_panel() -> dict:
     p = panel
     p["days_since_prev"] = p.groupby("cik")["fiscal_year_end"].diff().dt.days
     lag_ok = p["days_since_prev"].between(LAG_DAYS_MIN, LAG_DAYS_MAX)
-    for col in ["ccc", "dso", "dio", "dpo", "ar", "inventory", "ap", "revenue",
-                "cogs", "gross_margin", "roa", "assets"]:
+    for col in ["ccc", "ccc_clean", "dso", "dio", "dpo", "dpo_clean", "ar",
+                "inventory", "ap", "ap_clean", "revenue", "cogs", "gross_margin",
+                "roa", "assets", "ppe_net", "capital_intensity",
+                "noncurrent_asset_share", "asset_turnover", "capital_intensity_used",
+                "write_down_to_cogs"]:
         p[f"{col}_lag"] = p.groupby("cik")[col].shift(1).where(lag_ok)
 
     p["dso_avg"] = 365 * (p["ar"] + p["ar_lag"]) / 2 / p["revenue"]
@@ -357,6 +420,8 @@ def build_panel() -> dict:
     p["ccc_change"] = p["ccc"] - p["ccc_lag"]
     p["sales_growth"] = p["revenue"] / p["revenue_lag"] - 1
     p["ccc_volatility"] = p.groupby("cik")["ccc"].transform(lambda s: s.std(ddof=1))
+    p["ccc_clean_volatility"] = p.groupby("cik")["ccc_clean"].transform(
+        lambda s: s.std(ddof=1))
 
     p["tag_revenue"] = p["tag_revenue"].astype(str)
     p["tag_cogs"] = p["tag_cogs"].astype(str)
@@ -368,13 +433,24 @@ def build_panel() -> dict:
     keep_cols = [
         "cik", "name", "ticker", "exchange", "sic", "sic2", "sic3", "industry",
         "fiscal_year", "fiscal_year_end", "form", "filed_date", "revenue", "cogs",
-        "ar", "inventory", "ap", "assets", "assets_current", "liabilities_current",
-        "cash", "equity", "net_income", "op_income",
-        "dso", "dio", "dpo", "ccc", "dso_avg", "dio_avg", "dpo_avg", "ccc_avg",
-        "negative_ccc", "gross_margin", "roa", "cash_ratio", "current_ratio",
-        "nwc_to_sales", "log_assets", "sales_growth", "ccc_change", "ccc_volatility",
-        "ccc_lag", "dso_lag", "dio_lag", "dpo_lag", "gross_margin_lag", "roa_lag",
-        "assets_lag", "revenue_lag",
+        "ar", "inventory", "ap", "ap_clean", "ap_reconstructed", "ap_quality",
+        "accrued_liabilities", "assets", "assets_current", "liabilities_current",
+        "cash", "equity", "net_income", "op_income", "ppe_net",
+        "inventory_write_down",
+        "dso", "dio", "dpo", "dpo_clean", "ccc", "ccc_clean",
+        "dso_avg", "dio_avg", "dpo_avg", "ccc_avg",
+        "negative_ccc", "negative_ccc_clean", "gross_margin", "roa",
+        "cash_ratio", "current_ratio", "nwc_to_sales", "log_assets",
+        "capital_intensity", "noncurrent_asset_share", "asset_turnover",
+        "capital_intensity_used",
+        "write_down_to_cogs", "write_down_to_inventory",
+        "sales_growth", "ccc_change", "ccc_volatility", "ccc_clean_volatility",
+        "ccc_lag", "ccc_clean_lag", "dso_lag", "dio_lag", "dpo_lag",
+        "dpo_clean_lag", "gross_margin_lag", "roa_lag", "assets_lag",
+        "revenue_lag", "ppe_net_lag", "capital_intensity_lag",
+        "noncurrent_asset_share_lag", "asset_turnover_lag",
+        "capital_intensity_used_lag",
+        "write_down_to_cogs_lag",
         "days_since_prev", "tag_revenue", "tag_cogs", "tag_ar", "tag_inventory", "tag_ap",
     ]
     main = p[keep_cols].copy()
@@ -399,12 +475,21 @@ def build_panel() -> dict:
            .reset_index())
     cov.to_csv(TABLES / "coverage_by_year.csv", index=False)
 
+    ap_counts = main["ap_quality"].value_counts()
     stats = {
         "panel_rows": int(len(main)),
         "panel_firms": int(main["cik"].nunique()),
         "year_min": int(main["fiscal_year"].min()),
         "year_max": int(main["fiscal_year"].max()),
         "n_industries_sic2": int(main["sic2"].nunique()),
+        "ap_quality_counts": {str(k): int(v) for k, v in ap_counts.items()},
+        "ap_quality_share": {str(k): float(v / len(main)) for k, v in ap_counts.items()},
+        "clean_ap_rows": int(main["ap_clean"].notna().sum()),
+        "clean_ap_firms": int(main.loc[main["ap_clean"].notna(), "cik"].nunique()),
+        "clean_ap_ccc_median": float(main["ccc_clean"].median()),
+        "clean_ap_negative_ccc_share": float(main["negative_ccc_clean"].mean()),
+        "write_down_rows": int(main["inventory_write_down"].notna().sum()),
+        "ppe_rows": int(main["ppe_net"].notna().sum()),
         "attrition": att.to_dict(orient="records"),
         "attrition_missing_items": missing_records,
         "tag_usage_top": usage_out.head(40).to_dict(orient="records"),

@@ -63,8 +63,8 @@ def fig_industry(ind: pd.DataFrame, res: dict) -> Path:
     ax.axvline(res["panel"]["median_ccc"], color=C_GREY, ls="--", lw=1)
     ax.set_xlabel("Cash conversion cycle, days (bar = median, whiskers = IQR)")
     ax.set_title(f"CCC by 2-digit SIC, {res['panel']['year_min']}-{res['panel']['year_max']}\n"
-                 f"dashed line = sample median ({res['panel']['median_ccc']:.1f} days); "
-                 f"industries with >=150 firm-years", fontsize=9.5, loc="left")
+                 f"dashed = sample median ({res['panel']['median_ccc']:.1f} days); "
+                 f"industries with >=150 firm-years", fontsize=9.0, loc="left")
     fig.tight_layout()
     p = FIGS / "fig1_ccc_by_industry.png"
     fig.savefig(p)
@@ -75,13 +75,16 @@ def fig_industry(ind: pd.DataFrame, res: dict) -> Path:
 def fig_persistence(p: pd.DataFrame, res: dict) -> Path:
     # same variables as the regression: screened sample, 1/99 winsorized CCC,
     # lag only when the previous fiscal year end is 350-380 days earlier
-    d = p.dropna(subset=["ccc_w", "ccc_w_lag"]).copy()
-    dd = d[d["ccc_w"].between(-200, 400) & d["ccc_w_lag"].between(-200, 400)]
+    d = p.dropna(subset=["ccc_clean_w", "ccc_clean_w_lag"]).copy()
+    dd = d[d["ccc_clean_w"].between(-200, 400)
+           & d["ccc_clean_w_lag"].between(-200, 400)]
 
     fig, ax = plt.subplots(figsize=(6.4, 5.0))
-    ax.scatter(dd["ccc_w_lag"], dd["ccc_w"], s=4, alpha=0.10, color=C_MAIN, linewidths=0)
-    bins = pd.qcut(dd["ccc_w_lag"], 30, duplicates="drop")
-    bm = dd.groupby(bins).agg(x=("ccc_w_lag", "median"), y=("ccc_w", "median"))
+    ax.scatter(dd["ccc_clean_w_lag"], dd["ccc_clean_w"], s=4, alpha=0.10,
+               color=C_MAIN, linewidths=0)
+    bins = pd.qcut(dd["ccc_clean_w_lag"], 30, duplicates="drop")
+    bm = dd.groupby(bins).agg(x=("ccc_clean_w_lag", "median"),
+                              y=("ccc_clean_w", "median"))
     ax.plot(bm["x"], bm["y"], "o-", color=C_ACC, ms=3.5, lw=1.4, label="binned medians")
     xs = np.linspace(-100, 300, 50)
     rho = res["persistence"]["beta"]
@@ -104,9 +107,10 @@ def fig_persistence(p: pd.DataFrame, res: dict) -> Path:
 
 
 def fig_ccc_roa(p: pd.DataFrame, res: dict) -> Path:
-    d = p.dropna(subset=["ccc_w", "roa_w", "log_assets", "gross_margin"]).copy()
-    dem = twoway_demean(d, ["ccc_w", "roa_w"])
-    d["ccc_dm"], d["roa_dm"] = dem["ccc_w"], dem["roa_w"]
+    d = p.dropna(subset=["ccc_clean_w", "roa_w", "log_assets", "gross_margin",
+                         "capital_intensity_used_w", "asset_turnover_w"]).copy()
+    dem = twoway_demean(d, ["ccc_clean_w", "roa_w"])
+    d["ccc_dm"], d["roa_dm"] = dem["ccc_clean_w"], dem["roa_w"]
     d = d[d["roa_dm"].between(-0.5, 0.5)]
     xlo, xhi = d["ccc_dm"].quantile([0.01, 0.99])
 
@@ -137,7 +141,7 @@ def fig_ccc_roa(p: pd.DataFrame, res: dict) -> Path:
 
 def fig_shock_2020(p: pd.DataFrame, res: dict) -> Path:
     d = p[p["fiscal_year"] == 2020].dropna(
-        subset=["sales_growth", "ccc_w_lag", "industry", "sic2", "sic"]).copy()
+        subset=["sales_growth", "ccc_clean_w_lag", "industry", "sic2", "sic"]).copy()
     # same left-hand side as the headline cross-section
     d["_y"] = winsorize(d["sales_growth"], [d["sic2"]], min_group=10**9)
     d["division"] = d["sic"].map(sic_division)
@@ -146,18 +150,18 @@ def fig_shock_2020(p: pd.DataFrame, res: dict) -> Path:
     palette = ["#1f4e79", "#c0504d", "#4f81bd", "#9bbb59", "#8064a2", "#f79646"]
     for i, div in enumerate(top):
         sub = d[d["division"] == div]
-        ax.scatter(sub["ccc_w_lag"], sub["_y"], s=7, alpha=0.30,
+        ax.scatter(sub["ccc_clean_w_lag"], sub["_y"], s=7, alpha=0.30,
                    color=palette[i], linewidths=0,
                    label=f"{div} ({len(sub)})")
     rest = d[~d["division"].isin(top)]
-    ax.scatter(rest["ccc_w_lag"], rest["_y"], s=5, alpha=0.12,
+    ax.scatter(rest["ccc_clean_w_lag"], rest["_y"], s=5, alpha=0.12,
                color=C_GREY, linewidths=0, label=f"other ({len(rest)})")
-    q = pd.qcut(d["ccc_w_lag"], 10, duplicates="drop")
-    bm = d.groupby(q).agg(x=("ccc_w_lag", "median"), y=("_y", "median"))
+    q = pd.qcut(d["ccc_clean_w_lag"], 10, duplicates="drop")
+    bm = d.groupby(q).agg(x=("ccc_clean_w_lag", "median"), y=("_y", "median"))
     ax.plot(bm["x"], bm["y"], "o-", color=C_MAIN, ms=4.5, lw=1.5, label="decile medians")
     b = res["shock_2020"]["revenue_growth"]["beta"]
     xs = np.linspace(bm["x"].min(), bm["x"].max(), 30)
-    ax.plot(xs, b * xs + d["_y"].median() - b * d["ccc_w_lag"].median(),
+    ax.plot(xs, b * xs + d["_y"].median() - b * d["ccc_clean_w_lag"].median(),
             color=C_ACC, lw=1.3, ls="--", label=f"slope = {b:.5f} per day")
     ax.axhline(0, color="black", lw=0.6); ax.axvline(0, color="black", lw=0.6)
     ax.set_xlim(-100, 400)
@@ -227,11 +231,55 @@ def fig_shock_2022(res: dict) -> Path:
     return pth
 
 
+def fig_quarterly_shock(res: dict) -> Path:
+    """Coefficient on pre-shock CCC, one point per (shock year, fiscal quarter)."""
+    q = res.get("shock_quarterly", {})
+    rows = q.get("by_quarter", []) if q.get("available") else []
+    fig, ax = plt.subplots(figsize=(7.2, 4.2))
+    if rows:
+        d = pd.DataFrame(rows)
+        d = d[d["beta"].notna() & d["se"].notna()].copy()
+        keys = sorted(d[["shock_year", "quarter"]].drop_duplicates()
+                      .itertuples(index=False, name=None))
+        if not keys:
+            raise ValueError("quarterly results contain no estimable coefficient")
+        pos = {k: i for i, k in enumerate(keys)}
+        series = [
+            ("sales_growth", C_MAIN, "o", "revenue growth, YoY", -0.12),
+            ("gross_margin_change", C_ACC, "s", "gross-margin change, YoY", 0.12),
+        ]
+        for outcome, color, marker, label, shift in series:
+            sub = d[d["outcome"] == outcome]
+            if sub.empty:
+                continue
+            x = [pos[(row.shock_year, row.quarter)] + shift for row in sub.itertuples()]
+            ax.errorbar(x, sub["beta"], yerr=1.96 * sub["se"], fmt=marker,
+                        color=color, capsize=2, ms=4.5, lw=1.2, label=label)
+        ax.set_xticks(range(len(keys)))
+        ax.set_xticklabels([qtr for _, qtr in keys], rotation=30, fontsize=8, ha="right")
+        ax.axhline(0, color="black", lw=0.8)
+        ax.set_ylabel("Coefficient per pre-shock CCC day")
+        ax.set_title("Quarterly 10-Q shock panel (95% CI; industry + quarter FE,\n"
+                     "SE clustered by firm; exposure = clean annual CCC of the prior FY)",
+                     fontsize=9.5, loc="left")
+        ax.legend(frameon=False, fontsize=8)
+    else:
+        ax.text(0.5, 0.5, "Quarterly cache not available",
+                ha="center", va="center", transform=ax.transAxes)
+        ax.set_axis_off()
+    fig.tight_layout()
+    pth = FIGS / "fig7_quarterly_shock.png"
+    fig.savefig(pth)
+    plt.close(fig)
+    return pth
+
+
 def main() -> None:
     FIGS.mkdir(parents=True, exist_ok=True)
     res = json.loads((OUT / "results.json").read_text())
     p_raw = pd.read_parquet(PROC / "panel.parquet")
-    p_est, _ = plausibility_screen(p_raw)
+    p_clean = p_raw[p_raw["ccc_clean"].notna()].copy()
+    p_est, _ = plausibility_screen(p_clean, "ccc_clean")
     p_est = add_winsorized(p_est)
     ind = pd.read_csv(TABLES / "industry_summary.csv")
     yr = pd.read_csv(TABLES / "year_summary.csv")
@@ -243,6 +291,7 @@ def main() -> None:
         fig_shock_2020(p_est, res),
         fig_time_series(yr, res),
         fig_shock_2022(res),
+        fig_quarterly_shock(res),
     ]
     for m in made:
         print(f"wrote {m.relative_to(ROOT)}")

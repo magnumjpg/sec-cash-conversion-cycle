@@ -1,11 +1,12 @@
 """
 One command rebuilds the project from cached raw data:
 
-    python src/run_all.py                # download (cached) -> panel -> analysis -> figures
+    python src/run_all.py                # download (cached) -> panels -> analysis -> figures
     python src/run_all.py --skip-download
     python src/run_all.py --test         # ... and run the test suite
 
-The download step is idempotent: a quarter already cached in data/raw/fsds is
+The download step is idempotent: a quarter already cached in data/raw/fsds (annual
+10-K/20-F facts) or data/raw/fsds_q (10-Q facts for the 2019-2022 shock panel) is
 not fetched again, so the pipeline runs fully offline.
 """
 
@@ -23,7 +24,9 @@ SRC = Path(__file__).resolve().parent
 sys.path.insert(0, str(SRC))
 
 import analysis  # noqa: E402
+import analysis_quarterly  # noqa: E402
 import build_panel  # noqa: E402
+import build_quarterly  # noqa: E402
 import download_sec  # noqa: E402
 import figures  # noqa: E402
 from json_utils import write_json  # noqa: E402
@@ -60,7 +63,10 @@ def main(argv: list[str] | None = None) -> int:
 
     if not args.skip_download:
         step("download_sec", lambda: download_sec.main([]), log)
+        step("download_sec_quarterly", lambda: download_sec.main(["--quarterly"]), log)
     step("build_panel", build_panel.build_panel, log)
+    step("build_quarterly", build_quarterly.build, log)
+    step("analysis_quarterly", analysis_quarterly.main, log)
     if not args.skip_validation:
         try:
             step("verify_known_firms", __import__("verify_known_firms").main, log)

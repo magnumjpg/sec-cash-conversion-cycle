@@ -1,28 +1,29 @@
 sic2,industry,rho,se,half_life_years,n,firms,model,rho_firm_fe,se_firm_fe,half_life_firm_fe,n_firm_fe
-30,Rubber & plastics,0.961646,0.057592,17.723428,275,33,"pooled AR(1), year FE only (between + within firm)",0.564933,0.116999,1.213816,275
-27,Printing & publishing,0.952011,0.027545,14.094585,166,20,"pooled AR(1), year FE only (between + within firm)",0.580878,0.085166,1.276011,166
-51,Wholesale non-durables,0.947108,0.055854,12.755269,432,61,"pooled AR(1), year FE only (between + within firm)",0.615355,0.254744,1.427535,432
-20,Food & tobacco,0.930025,0.04588,9.554814,903,128,"pooled AR(1), year FE only (between + within firm)",0.397464,0.042881,0.751256,903
-25,Furniture,0.92723,0.041172,9.174233,229,23,"pooled AR(1), year FE only (between + within firm)",0.624426,0.027449,1.471891,229
-56,Apparel retail,0.926958,0.036823,9.138697,232,29,"pooled AR(1), year FE only (between + within firm)",0.400929,0.136545,0.75839,232
-33,Primary metals,0.907287,0.053066,7.124048,397,47,"pooled AR(1), year FE only (between + within firm)",0.220304,0.198502,0.458204,397
-34,Fabricated metal,0.879543,0.092339,5.400311,488,57,"pooled AR(1), year FE only (between + within firm)",0.499445,0.153304,0.998402,488
-32,"Stone, clay & glass",0.874374,0.059733,5.163227,159,23,"pooled AR(1), year FE only (between + within firm)",0.592562,0.087692,1.324572,159
-35,Machinery & computers,0.866057,0.024058,4.820075,1804,221,"pooled AR(1), year FE only (between + within firm)",0.337505,0.058602,0.638155,1804
-13,Mining & energy,0.865775,0.057569,4.80919,179,35,"pooled AR(1), year FE only (between + within firm)",0.471352,0.302543,0.921553,179
-55,Auto & fuel retail,0.85988,0.082248,4.591525,226,26,"pooled AR(1), year FE only (between + within firm)",0.529057,0.030614,1.088726,226
-39,Misc. manufacturing,0.840491,0.056253,3.988909,306,48,"pooled AR(1), year FE only (between + within firm)",0.637068,0.139026,1.537327,306
-59,Specialty retail,0.837979,0.057041,3.921347,581,97,"pooled AR(1), year FE only (between + within firm)",0.293527,0.220653,0.565472,581
-87,Engineering services,0.835591,0.052363,3.859053,139,25,"pooled AR(1), year FE only (between + within firm)",0.152079,0.116626,0.368038,139
-50,Wholesale durables,0.832195,0.087634,3.773492,600,81,"pooled AR(1), year FE only (between + within firm)",0.491889,0.136377,0.976947,600
-26,Paper,0.813751,0.073955,3.363148,203,30,"pooled AR(1), year FE only (between + within firm)",0.2108,0.105827,0.445226,203
-48,Communications,0.792833,0.110644,2.985865,243,50,"pooled AR(1), year FE only (between + within firm)",0.077405,0.1296,0.270897,243
-36,Electronics,0.76559,0.029116,2.594999,2944,394,"pooled AR(1), year FE only (between + within firm)",0.417865,0.046763,0.794349,2944
-73,Business services,0.750522,0.056452,2.415264,1028,196,"pooled AR(1), year FE only (between + within firm)",0.383205,0.088346,0.722641,1028
-38,Instruments,0.749845,0.039899,2.407693,2688,366,"pooled AR(1), year FE only (between + within firm)",0.302253,0.081248,0.579317,2688
-80,Health services,0.680885,0.098995,1.803369,230,44,"pooled AR(1), year FE only (between + within firm)",0.363966,0.102252,0.685812,230
-37,Transport equipment,0.6758,0.052922,1.768872,1009,130,"pooled AR(1), year FE only (between + within firm)",0.127196,0.106249,0.336149,1009
-01,Agriculture,0.660126,0.059325,1.668928,145,27,"pooled AR(1), year FE only (between + within firm)",0.376928,0.156214,0.710409,145
-23,Apparel,0.598951,0.196257,1.352283,220,27,"pooled AR(1), year FE only (between + within firm)",0.131082,0.093725,0.341127,220
-28,Chemicals & pharma,0.591251,0.038062,1.318986,2878,438,"pooled AR(1), year FE only (between + within firm)",0.241891,0.067471,0.488384,2878
-58,Restaurants,0.298548,0.136623,0.573405,164,33,"pooled AR(1), year FE only (between + within firm)",-0.046252,0.133671,,164
+30,Rubber & plastics,0.961039,0.052112,17.441761,295,35,"pooled AR(1), year FE only (between + within firm)",0.568161,0.114118,1.22605,295
+27,Printing & publishing,0.952002,0.027464,14.091852,168,21,"pooled AR(1), year FE only (between + within firm)",0.575132,0.083995,1.253077,168
+51,Wholesale non-durables,0.939077,0.049713,11.027199,458,66,"pooled AR(1), year FE only (between + within firm)",0.627965,0.149638,1.489771,458
+20,Food & tobacco,0.932164,0.044883,9.867348,964,135,"pooled AR(1), year FE only (between + within firm)",0.404179,0.043321,0.76515,964
+25,Furniture,0.924617,0.040544,8.843859,242,24,"pooled AR(1), year FE only (between + within firm)",0.61899,0.029962,1.445059,242
+56,Apparel retail,0.924001,0.03418,8.769288,241,30,"pooled AR(1), year FE only (between + within firm)",0.397507,0.129105,0.751343,241
+33,Primary metals,0.906896,0.051839,7.092668,454,52,"pooled AR(1), year FE only (between + within firm)",0.236312,0.189721,0.480484,454
+34,Fabricated metal,0.89743,0.078211,6.404968,535,61,"pooled AR(1), year FE only (between + within firm)",0.476259,0.152569,0.934421,535
+32,"Stone, clay & glass",0.874358,0.059717,5.16252,159,23,"pooled AR(1), year FE only (between + within firm)",0.592328,0.087847,1.32357,159
+87,Engineering services,0.867092,0.055681,4.860435,142,26,"pooled AR(1), year FE only (between + within firm)",0.268747,0.135977,0.527515,142
+55,Auto & fuel retail,0.860751,0.082947,4.622515,240,27,"pooled AR(1), year FE only (between + within firm)",0.526835,0.030449,1.081575,240
+13,Mining & energy,0.859992,0.055207,4.595488,188,36,"pooled AR(1), year FE only (between + within firm)",0.492689,0.268386,0.979191,188
+50,Wholesale durables,0.846221,0.082957,4.151197,686,90,"pooled AR(1), year FE only (between + within firm)",0.512685,0.136452,1.037501,686
+39,Misc. manufacturing,0.843085,0.054705,4.060914,323,50,"pooled AR(1), year FE only (between + within firm)",0.636661,0.137473,1.535148,323
+35,Machinery & computers,0.838655,0.033109,3.939312,1905,233,"pooled AR(1), year FE only (between + within firm)",0.279056,0.064322,0.543072,1905
+59,Specialty retail,0.838531,0.053738,3.936029,673,107,"pooled AR(1), year FE only (between + within firm)",0.344468,0.203107,0.650383,673
+26,Paper,0.807806,0.076565,3.247603,208,31,"pooled AR(1), year FE only (between + within firm)",0.27373,0.149172,0.534995,208
+48,Communications,0.785311,0.110087,2.868094,270,54,"pooled AR(1), year FE only (between + within firm)",0.087173,0.125855,0.284092,270
+36,Electronics,0.765547,0.027405,2.594457,3186,418,"pooled AR(1), year FE only (between + within firm)",0.426745,0.043854,0.813965,3186
+38,Instruments,0.755952,0.036515,2.477499,2860,385,"pooled AR(1), year FE only (between + within firm)",0.316756,0.075351,0.602934,2860
+73,Business services,0.742225,0.055104,2.325197,1070,203,"pooled AR(1), year FE only (between + within firm)",0.360074,0.08821,0.678594,1070
+80,Health services,0.685298,0.099562,1.834198,252,47,"pooled AR(1), year FE only (between + within firm)",0.383969,0.092058,0.724146,252
+37,Transport equipment,0.670618,0.05374,1.734795,1040,135,"pooled AR(1), year FE only (between + within firm)",0.117567,0.108182,0.323787,1040
+01,Agriculture,0.66521,0.058855,1.700338,148,28,"pooled AR(1), year FE only (between + within firm)",0.381117,0.155359,0.718549,148
+23,Apparel,0.602034,0.195163,1.365966,220,27,"pooled AR(1), year FE only (between + within firm)",0.133504,0.094275,0.344228,220
+28,Chemicals & pharma,0.598176,0.037244,1.348878,3086,459,"pooled AR(1), year FE only (between + within firm)",0.248231,0.065332,0.497451,3086
+24,Lumber & wood,0.584873,0.094511,1.292316,189,21,"pooled AR(1), year FE only (between + within firm)",0.355165,0.039093,0.669596,189
+58,Restaurants,0.298704,0.137614,0.573653,167,33,"pooled AR(1), year FE only (between + within firm)",-0.048903,0.13673,,167

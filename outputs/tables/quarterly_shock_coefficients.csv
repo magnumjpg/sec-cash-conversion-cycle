@@ -1,0 +1,25 @@
+beta,se,t,p,stars,n,n_firms,model,shock_year,quarter,outcome
+-7e-06,1.5e-05,-0.422059,0.672982,,1211,1210,"cash_ratio_q (winsorized 1/99) on ccc_pre + 2-digit SIC FE; one quarter, HC1 SE",2020,2020Q1,cash_ratio
+-1.5e-05,2.7e-05,-0.56606,0.571353,,1135,1134,"gross_margin_change_yoy (winsorized 1/99) on ccc_pre + 2-digit SIC FE; one quarter, HC1 SE",2020,2020Q1,gross_margin_change
+0.000368,0.000279,1.3195,0.187002,,1186,1185,"sales_growth_yoy (winsorized 1/99) on ccc_pre + 2-digit SIC FE; one quarter, HC1 SE",2020,2020Q1,sales_growth
+0.000172,0.000222,0.774524,0.438621,,118,118,"write_down_to_cogs_q (winsorized 1/99) on ccc_pre + 2-digit SIC FE; one quarter, HC1 SE",2020,2020Q1,write_down
+-1.9e-05,2.6e-05,-0.721144,0.470821,,1237,1235,"cash_ratio_q (winsorized 1/99) on ccc_pre + 2-digit SIC FE; one quarter, HC1 SE",2020,2020Q2,cash_ratio
+-3.1e-05,2.9e-05,-1.061527,0.28845,,1169,1167,"gross_margin_change_yoy (winsorized 1/99) on ccc_pre + 2-digit SIC FE; one quarter, HC1 SE",2020,2020Q2,gross_margin_change
+0.00022,0.000188,1.16996,0.242017,,1220,1218,"sales_growth_yoy (winsorized 1/99) on ccc_pre + 2-digit SIC FE; one quarter, HC1 SE",2020,2020Q2,sales_growth
+0.000233,0.000147,1.588121,0.112259,,33,33,"write_down_to_cogs_q (winsorized 1/99) on ccc_pre + 2-digit SIC FE; one quarter, HC1 SE",2020,2020Q2,write_down
+-1.6e-05,1.9e-05,-0.826442,0.408554,,1234,1234,"cash_ratio_q (winsorized 1/99) on ccc_pre + 2-digit SIC FE; one quarter, HC1 SE",2020,2020Q3,cash_ratio
+-2.6e-05,1.9e-05,-1.383525,0.166504,,1158,1158,"gross_margin_change_yoy (winsorized 1/99) on ccc_pre + 2-digit SIC FE; one quarter, HC1 SE",2020,2020Q3,gross_margin_change
+7.5e-05,9.5e-05,0.787279,0.431118,,1210,1210,"sales_growth_yoy (winsorized 1/99) on ccc_pre + 2-digit SIC FE; one quarter, HC1 SE",2020,2020Q3,sales_growth
+0.000761,0.000626,1.216121,0.223939,,36,36,"write_down_to_cogs_q (winsorized 1/99) on ccc_pre + 2-digit SIC FE; one quarter, HC1 SE",2020,2020Q3,write_down
+-6e-06,1.7e-05,-0.342203,0.732198,,1270,1269,"cash_ratio_q (winsorized 1/99) on ccc_pre + 2-digit SIC FE; one quarter, HC1 SE",2022,2022Q1,cash_ratio
+4e-05,1.6e-05,2.535667,0.011223,**,1159,1158,"gross_margin_change_yoy (winsorized 1/99) on ccc_pre + 2-digit SIC FE; one quarter, HC1 SE",2022,2022Q1,gross_margin_change
+-0.000386,0.000263,-1.46762,0.142208,,1192,1191,"sales_growth_yoy (winsorized 1/99) on ccc_pre + 2-digit SIC FE; one quarter, HC1 SE",2022,2022Q1,sales_growth
+-6.2e-05,5.9e-05,-1.058141,0.289991,,127,127,"write_down_to_cogs_q (winsorized 1/99) on ccc_pre + 2-digit SIC FE; one quarter, HC1 SE",2022,2022Q1,write_down
+1e-06,1.5e-05,0.050363,0.959833,,1273,1273,"cash_ratio_q (winsorized 1/99) on ccc_pre + 2-digit SIC FE; one quarter, HC1 SE",2022,2022Q2,cash_ratio
+2.7e-05,1.5e-05,1.747927,0.080477,*,1189,1189,"gross_margin_change_yoy (winsorized 1/99) on ccc_pre + 2-digit SIC FE; one quarter, HC1 SE",2022,2022Q2,gross_margin_change
+6.7e-05,0.000113,0.594963,0.551868,,1223,1223,"sales_growth_yoy (winsorized 1/99) on ccc_pre + 2-digit SIC FE; one quarter, HC1 SE",2022,2022Q2,sales_growth
+-0.000379,0.000268,-1.415387,0.156955,,31,31,"write_down_to_cogs_q (winsorized 1/99) on ccc_pre + 2-digit SIC FE; one quarter, HC1 SE",2022,2022Q2,write_down
+-1.5e-05,1.7e-05,-0.86587,0.386562,,1264,1263,"cash_ratio_q (winsorized 1/99) on ccc_pre + 2-digit SIC FE; one quarter, HC1 SE",2022,2022Q3,cash_ratio
+-0.0,2.7e-05,-0.014112,0.98874,,1213,1212,"gross_margin_change_yoy (winsorized 1/99) on ccc_pre + 2-digit SIC FE; one quarter, HC1 SE",2022,2022Q3,gross_margin_change
+4.4e-05,0.000144,0.307369,0.758562,,1250,1249,"sales_growth_yoy (winsorized 1/99) on ccc_pre + 2-digit SIC FE; one quarter, HC1 SE",2022,2022Q3,sales_growth
+-0.000215,0.000275,-0.784167,0.432942,,36,36,"write_down_to_cogs_q (winsorized 1/99) on ccc_pre + 2-digit SIC FE; one quarter, HC1 SE",2022,2022Q3,write_down

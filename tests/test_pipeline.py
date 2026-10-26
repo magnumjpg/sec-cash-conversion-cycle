@@ -15,10 +15,19 @@ sys.path.insert(0, str(ROOT / "src"))
 PANEL = ROOT / "data" / "processed" / "panel.csv"
 RESULTS = ROOT / "outputs" / "results.json"
 FSDS = ROOT / "data" / "raw" / "fsds"
+FSDS_Q = ROOT / "data" / "raw" / "fsds_q"
+QPANEL = ROOT / "data" / "processed" / "quarterly_panel.parquet"
+QPANEL_CSV = ROOT / "data" / "processed" / "quarterly_panel.csv"
+QRESULTS = ROOT / "outputs" / "quarterly_results.json"
+QSTATS = ROOT / "outputs" / "quarterly_stats.json"
 
 requires_raw_cache = pytest.mark.skipif(
     not FSDS.exists() or not any(FSDS.glob("*_sub.parquet")),
     reason="raw SEC cache absent; rebuild with src/download_sec.py",
+)
+requires_quarterly = pytest.mark.skipif(
+    not (QPANEL.exists() or QPANEL_CSV.exists()),
+    reason="quarterly panel absent; run src/build_quarterly.py",
 )
 
 
@@ -34,10 +43,26 @@ def results() -> dict:
     return json.loads(RESULTS.read_text())
 
 
+@pytest.fixture(scope="session")
+def qpanel() -> pd.DataFrame:
+    if QPANEL.exists():
+        return pd.read_parquet(QPANEL)
+    assert QPANEL_CSV.exists(), "run `python src/build_quarterly.py` first"
+    return pd.read_csv(QPANEL_CSV, low_memory=False)
+
+
+@pytest.fixture(scope="session")
+def qresults() -> dict:
+    assert QRESULTS.exists(), "run `python src/analysis_quarterly.py` first"
+    return json.loads(QRESULTS.read_text())
+
+
 def test_files_exist():
     for rel in ["data/manifest.json", "outputs/results.json", "README.md",
                 "DATA.md", "METHOD.md", "LIMITATIONS.md", "DECISIONS.md",
                 "outputs/tables/attrition_missing_items.csv",
+                "outputs/quarterly_results.json", "outputs/quarterly_stats.json",
+                "outputs/figures/fig7_quarterly_shock.png",
                 "requirements.txt", "LICENSE"]:
         assert (ROOT / rel).exists(), f"missing {rel}"
 
@@ -49,6 +74,57 @@ def test_ccc_identity(panel):
     assert np.allclose(panel["dso"], 365 * panel["ar"] / panel["revenue"], atol=1e-6)
     assert np.allclose(panel["dio"], 365 * panel["inventory"] / panel["cogs"], atol=1e-6)
     assert np.allclose(panel["dpo"], 365 * panel["ap"] / panel["cogs"], atol=1e-6)
+
+
+def test_clean_ccc_identity(panel):
+    """The headline measure uses trade AP, not AP+accruals."""
+    clean = panel["ccc_clean"].notna()
+    contaminated = panel["ap_quality"] == "fallback_contaminated"
+    assert int(clean.sum()) == int((~contaminated).sum())
+    assert np.allclose(panel.loc[clean, "dpo_clean"],
+                       365 * panel.loc[clean, "ap_clean"] / panel.loc[clean, "cogs"],
+                       atol=1e-6)
+    assert np.allclose(panel.loc[clean, "ccc_clean"],
+                       panel.loc[clean, "dso"] + panel.loc[clean, "dio"]
+                       - panel.loc[clean, "dpo_clean"], atol=1e-6)
+    assert np.allclose(panel.loc[clean, "negative_ccc_clean"],
+                       (panel.loc[clean, "ccc_clean"] < 0).astype(float), atol=1e-12)
+
+
+def test_ap_quality_partition(panel):
+    """Direct trade AP, reconstructed residual, or explicitly contaminated."""
+    direct = panel["ap_quality"] == "direct"
+    recon = panel["ap_quality"] == "reconstructed"
+    cont = panel["ap_quality"] == "fallback_contaminated"
+    assert set(panel["ap_quality"].unique()) <= {"direct", "reconstructed",
+                                                 "fallback_contaminated"}
+    assert (direct | recon | cont).all()
+    assert panel.loc[direct, "tag_ap"].isin(
+        ["AccountsPayableCurrent", "AccountsPayableTradeCurrent"]).all()
+    assert np.allclose(panel.loc[direct, "ap_clean"], panel.loc[direct, "ap"],
+                       atol=1e-6)
+    assert panel.loc[cont, "tag_ap"].eq(
+        "AccountsPayableAndAccruedLiabilitiesCurrent").all()
+    assert np.allclose(panel.loc[recon, "ap_clean"],
+                       panel.loc[recon, "ap"]
+                       - panel.loc[recon, "accrued_liabilities"], atol=1e-6)
+    assert (panel.loc[recon, "ap_clean"] > 0).all()
+    assert panel.loc[cont, "ap_clean"].isna().all()
+
+
+def test_trade_ap_helper():
+    """The scalar rule and the vectorised panel logic must agree."""
+    from tags import trade_ap
+    assert trade_ap(100.0, "AccountsPayableCurrent", None) == (100.0, "direct")
+    assert trade_ap(100.0, "AccountsPayableTradeCurrent", 40.0) == (100.0, "direct")
+    assert trade_ap(100.0, "AccountsPayableAndAccruedLiabilitiesCurrent", 40.0) \
+        == (60.0, "reconstructed")
+    # an accrual split at or above the combined line is not a trade payable
+    assert trade_ap(100.0, "AccountsPayableAndAccruedLiabilitiesCurrent", 120.0) \
+        == (None, "fallback_contaminated")
+    assert trade_ap(100.0, "AccountsPayableAndAccruedLiabilitiesCurrent", None) \
+        == (None, "fallback_contaminated")
+    assert trade_ap(None, "AccountsPayableCurrent", 40.0) == (None, "missing")
 
 
 def test_no_negative_revenue_or_cogs(panel):
@@ -90,7 +166,10 @@ def test_panel_size_stable(results):
 
 def test_results_keys(results):
     for key in ["meta", "panel", "descriptives", "industries", "by_year", "persistence",
-                "ccc_roa", "shock_2020", "shock_2022", "shock_window", "rank_check",
+                "ccc_roa", "ccc_roa_baseline", "ccc_roa_between",
+                "ccc_roa_industry_year", "ccc_roa_components",
+                "shock_2020", "shock_2022", "shock_window", "shock_quarterly",
+                "write_down_coverage", "ap_quality", "rank_check",
                 "funnel", "robustness_ccc_roa", "robustness_persistence", "attrition",
                 "attrition_missing_items", "tag_usage", "tag_sensitivity",
                 "robustness_summary"]:
@@ -105,8 +184,25 @@ def test_persistence_bounds(results):
 
 
 def test_headline_numbers_match_panel(panel, results):
-    assert abs(results["panel"]["median_ccc"] - panel["ccc"].median()) < 0.05
-    assert abs(results["panel"]["share_negative_ccc"] - panel["negative_ccc"].mean()) < 1e-6
+    clean = panel["ccc_clean"].notna()
+    assert abs(results["panel"]["median_ccc"] - panel["ccc_clean"].median()) < 0.05
+    assert abs(results["panel"]["share_negative_ccc"]
+               - panel["negative_ccc_clean"].mean()) < 1e-6
+    assert results["panel"]["rows_clean_ap"] == int(clean.sum())
+    # the mixed-AP sensitivity is reported separately and must stay larger
+    assert abs(results["panel"]["median_ccc_all_rows"] - panel["ccc"].median()) < 0.05
+    assert results["panel"]["median_ccc_all_rows"] < results["panel"]["median_ccc"]
+
+
+def test_ap_quality_stats_match_panel(panel, results):
+    aq = results["ap_quality"]
+    counts = panel["ap_quality"].value_counts().to_dict()
+    assert aq["counts"] == {k: int(v) for k, v in counts.items()}
+    assert aq["clean_rows"] == int(counts.get("direct", 0) + counts.get("reconstructed", 0))
+    # reconstruction is rare precisely because the combined tag is used when the
+    # accrual split is absent; the panel must not pretend otherwise
+    assert 0 < aq["counts"].get("reconstructed", 0) < 0.05 * len(panel)
+    assert aq["counts"]["fallback_contaminated"] > 1000
 
 
 def test_lags_respect_fiscal_spacing(panel):
@@ -136,6 +232,92 @@ def test_raw_cache_integrity():
 
 
 @requires_raw_cache
+def test_quarterly_cache_integrity():
+    subs = sorted(FSDS_Q.glob("*_sub.parquet"))
+    assert len(subs) == 16, f"expected 16 quarterly shock files, found {len(subs)}"
+    adsh = []
+    for f in subs:
+        assert f.with_name(f.name.replace("_sub", "_num")).exists()
+        df = pd.read_parquet(f, columns=["adsh", "form"])
+        assert len(df) > 0
+        forms = set(df["form"].astype(str))
+        # the cache is a filing-quarter, not a form-quarter; build_quarterly.py
+        # filters to 10-Q/10-Q/A.  What matters here is that the cache is sane
+        # and every file actually contains 10-Qs.
+        assert forms <= {"10-Q", "10-Q/A", "10-K", "10-K/A", "20-F", "20-F/A",
+                         "40-F", "40-F/A"}, f"unexpected forms in {f.name}: {forms}"
+        assert any(form.startswith("10-Q") for form in forms)
+        adsh.append(set(df["adsh"]))
+    assert sum(len(a) for a in adsh) == len(set().union(*adsh))
+
+
+@requires_quarterly
+def test_quarterly_panel_integrity(qpanel):
+    """One row per firm-quarter, calendar labels, and the clean-AP identities."""
+    assert not qpanel.duplicated(["cik", "ddate"]).any()
+    assert qpanel["calendar_year"].between(2018, 2022).all()
+    period_end = pd.to_datetime(qpanel["ddate"].astype(str), format="%Y%m%d")
+    expected = (period_end.dt.year.astype(str) + "Q"
+                + period_end.dt.quarter.astype(str))
+    assert (qpanel["quarter"] == expected).all()
+
+    ok = qpanel["ccc_q"].notna()
+    assert np.allclose(
+        qpanel.loc[ok, "ccc_q"],
+        qpanel.loc[ok, "dso_q"] + qpanel.loc[ok, "dio_q"] - qpanel.loc[ok, "dpo_q"],
+        atol=1e-6,
+    )
+    clean = qpanel["ap_quality"] != "fallback_contaminated"
+    ok = clean & qpanel["dpo_q"].notna() & (qpanel["cogs_q"] > 0)
+    assert np.allclose(
+        qpanel.loc[ok, "dpo_q"],
+        365 * qpanel.loc[ok, "ap_clean"]
+        / (qpanel.loc[ok, "cogs_q"] * 4),
+        atol=1e-6,
+    )
+    assert qpanel.loc[~clean, "ap_clean"].isna().all()
+    assert set(qpanel["ap_quality"].unique()) <= {"direct", "reconstructed",
+                                                  "fallback_contaminated"}
+
+
+@requires_quarterly
+def test_quarterly_stats_match_panel(qpanel):
+    stats = json.loads(QSTATS.read_text())
+    assert stats["rows_out"] == len(qpanel)
+    assert stats["firms_out"] == qpanel["cik"].nunique()
+    assert stats["firm_quarters"] == stats["rows_out"]
+    assert 0 <= stats["firm_quarters_outside_window"] < 1000
+    counts = qpanel["ap_quality"].value_counts().to_dict()
+    assert stats["ap_quality_counts"] == {k: int(v) for k, v in counts.items()}
+    assert stats["quarters"] == sorted(qpanel["quarter"].dropna().unique().tolist())
+
+
+def test_quarterly_results_use_pre_shock_exposure(qresults):
+    """The 10-Q window is calendar, and the exposure is the prior fiscal year."""
+    assert qresults["available"] is True
+    assert qresults["quarters_used"] == [
+        "2020Q1", "2020Q2", "2020Q3", "2022Q1", "2022Q2", "2022Q3"]
+    assert qresults["n_firm_quarters"] > 5000
+    assert qresults["n_firms"] > 1000
+    # With the exposure measured before the shock and the window aligned to
+    # calendar Q1-Q3, no pooled coefficient clears 5%.  The closest is the
+    # 2022 gross-margin change; the earlier cash-ratio result came from a
+    # same-year exposure and does not survive.
+    pooled = qresults["pooled"]
+    for year in ["2020", "2022"]:
+        for name, spec in pooled[year].items():
+            assert spec["n"] > 100, f"{year}.{name} lost almost all rows"
+            assert spec["p"] > 0.05, f"{year}.{name} is unexpectedly significant"
+    gm22 = pooled["2022"]["gross_margin_change"]
+    assert gm22["beta"] > 0
+    assert 0.05 < gm22["p"] < 0.10
+    # 6 calendar quarters x 4 outcomes
+    assert len(qresults["by_quarter"]) == 24
+    assert {row["quarter"] for row in qresults["by_quarter"]} == {
+        "2020Q1", "2020Q2", "2020Q3", "2022Q1", "2022Q2", "2022Q3"}
+
+
+@requires_raw_cache
 def test_manifest_hashes(results):
     man = json.loads((ROOT / "data" / "manifest.json").read_text())
     entries = {e["path"]: e for e in man["files"]}
@@ -143,7 +325,7 @@ def test_manifest_hashes(results):
     for p, e in entries.items():
         assert len(e["sha256"]) == 64
     # every cached derived file is described in the manifest
-    for f in FSDS.glob("*.parquet"):
+    for f in list(FSDS.glob("*.parquet")) + list(FSDS_Q.glob("*.parquet")):
         rel = str(f.relative_to(ROOT)).replace("\\", "/")
         assert rel in entries, f"{rel} missing from manifest"
 
@@ -245,29 +427,56 @@ def test_robustness_count_is_computed_from_pvalues(results):
     assert summary["n_specs_main_sample"] == len(main)
     assert summary["n_significant_p05"] == sum(1 for r in main if r["p"] < 0.05)
     assert summary["n_positive"] == sum(1 for r in main if r["beta"] > 0)
-    # spec 9 now filters inventory as well and is the preferred-tag estimate
-    spec9 = next(r for r in rows if r["spec"].startswith("9."))
-    assert spec9["n"] == results["tag_sensitivity"]["preferred_only_ccc_roa"]["n"]
-    assert spec9["p"] > 0.05
-    assert spec9["n"] < 5000
+    # spec 11 keeps only firm-years on the charter's preferred tag for every
+    # input; it is the strictest tag test and does not clear 5%
+    spec11 = next(r for r in rows if r["spec"].startswith("11."))
+    assert spec11["n"] == results["tag_sensitivity"]["preferred_only_ccc_roa"]["n"]
+    assert spec11["p"] > 0.05
+    assert spec11["n"] < 5000
 
 
 def test_tag_sensitivity_matches_panel(panel, results):
     ts = results["tag_sensitivity"]
-    pref = panel["tag_ap"] == "AccountsPayableCurrent"
+    pref = panel["tag_ap"].isin(["AccountsPayableCurrent",
+                                 "AccountsPayableTradeCurrent"])
     fb = panel["tag_ap"] == "AccountsPayableAndAccruedLiabilitiesCurrent"
+    recon = panel["ap_quality"] == "reconstructed"
+    cont = panel["ap_quality"] == "fallback_contaminated"
+    clean = panel["ccc_clean"].notna()
     assert ts["preferred_ap"]["n"] == int(pref.sum())
     assert ts["fallback_ap"]["n"] == int(fb.sum())
-    assert abs(ts["preferred_ap"]["ccc_median"] - panel.loc[pref, "ccc"].median()) < 1e-6
-    assert abs(ts["fallback_ap"]["ccc_median"] - panel.loc[fb, "ccc"].median()) < 1e-6
-    assert abs(ts["preferred_ap"]["dpo_median"] - panel.loc[pref, "dpo"].median()) < 1e-6
-    assert abs(ts["fallback_ap"]["dpo_median"] - panel.loc[fb, "dpo"].median()) < 1e-6
+    assert ts["reconstructed_ap"]["n"] == int(recon.sum())
+    assert ts["contaminated_ap"]["n"] == int(cont.sum())
+    assert ts["clean_ap"]["n"] == int(clean.sum())
+    blocks = [
+        ("preferred_ap", pref, "ccc", "dpo", "negative_ccc"),
+        ("fallback_ap", fb, "ccc", "dpo", "negative_ccc"),
+        # reconstructed rows are only meaningful on the clean measurement
+        ("reconstructed_ap", recon, "ccc_clean", "dpo_clean",
+         "negative_ccc_clean"),
+        ("contaminated_ap", cont, "ccc", "dpo", "negative_ccc"),
+    ]
+    for key, mask, ccc, dpo, neg in blocks:
+        assert abs(ts[key]["ccc_median"] - panel.loc[mask, ccc].median()) < 1e-6
+        assert abs(ts[key]["dpo_median"] - panel.loc[mask, dpo].median()) < 1e-6
+        assert abs(ts[key]["negative_ccc_share"]
+                   - panel.loc[mask, neg].mean()) < 1e-6
+    assert abs(ts["clean_ap"]["ccc_median"]
+               - panel.loc[clean, "ccc_clean"].median()) < 1e-6
+    assert abs(ts["clean_ap"]["dpo_median"]
+               - panel.loc[clean, "dpo_clean"].median()) < 1e-6
     assert abs(ts["fallback_share_panel"] - fb.mean()) < 1e-6
-    firm_med = panel.groupby("cik")["ccc"].median().median()
-    assert abs(ts["median_of_firm_median_ccc"] - firm_med) < 1e-6
+    assert abs(ts["reconstructed_share_of_fallback"] - recon.sum() / fb.sum()) < 1e-6
+    firm_med = panel.groupby("cik")["ccc_clean"].median()
+    assert abs(ts["median_of_firm_median_ccc"] - firm_med.median()) < 1e-6
+    assert ts["n_firms"] == int(firm_med.notna().sum())
     # the fallback is a different concept and must lower the pooled level
     assert ts["fallback_ap"]["ccc_median"] < ts["preferred_ap"]["ccc_median"]
     assert ts["fallback_ap"]["dpo_median"] > ts["preferred_ap"]["dpo_median"]
+    # nearly all fallback rows cannot be reconstructed: the combined tag is
+    # used precisely when the accrual split is absent
+    assert ts["reconstructed_share_of_fallback"] < 0.05
+    assert ts["contaminated_ap"]["n"] > 1000
 
 
 def test_persistence_reports_a_range(results):
@@ -289,7 +498,7 @@ def test_attrition_missing_decomposition(results):
     rows = results["attrition_missing_items"]
     by_item = {r["item"]: r["n_firm_years"] for r in rows}
     total = by_item["any item missing (rows dropped)"]
-    assert total == 77938
+    assert total == 76218
     for item in ["revenue", "cogs", "ar", "inventory", "ap"]:
         assert 0 < by_item[item] <= total
     assert (by_item["exactly one item missing"]
@@ -327,6 +536,8 @@ def test_json_outputs_are_strict():
     paths = [RESULTS, ROOT / "outputs" / "panel_stats.json",
              ROOT / "outputs" / "validation.json",
              ROOT / "outputs" / "run_log.json",
+             ROOT / "outputs" / "quarterly_results.json",
+             ROOT / "outputs" / "quarterly_stats.json",
              ROOT / "data" / "manifest.json"]
     parsed = {}
     for path in paths:

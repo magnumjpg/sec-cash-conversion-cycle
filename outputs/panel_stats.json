@@ -1,45 +1,61 @@
 {
-  "panel_rows": 25341,
-  "panel_firms": 3158,
+  "panel_rows": 26974,
+  "panel_firms": 3320,
   "year_min": 2010,
   "year_max": 2024,
-  "n_industries_sic2": 58,
+  "n_industries_sic2": 59,
+  "ap_quality_counts": {
+    "direct": 24201,
+    "fallback_contaminated": 2702,
+    "reconstructed": 71
+  },
+  "ap_quality_share": {
+    "direct": 0.8971973011047676,
+    "fallback_contaminated": 0.10017053458886335,
+    "reconstructed": 0.002632164306369096
+  },
+  "clean_ap_rows": 24272,
+  "clean_ap_firms": 3010,
+  "clean_ap_ccc_median": 80.38295526294662,
+  "clean_ap_negative_ccc_share": 0.1163892551087673,
+  "write_down_rows": 4657,
+  "ppe_rows": 25637,
   "attrition": [
     {
       "level": "fact",
       "step": "F0. us-gaap facts, project tags, annual filings, consolidated, qtrs 0/4",
-      "n": 2536529,
+      "n": 2795447,
       "firms": null
     },
     {
       "level": "fact",
       "step": "F1. dropped: reporting currency not USD",
-      "n": 60858,
-      "firms": 416.0
+      "n": 66359,
+      "firms": 419.0
     },
     {
       "level": "fact",
       "step": "F2. dropped: IFRS taxonomy (ifrs-full)",
-      "n": 23790,
+      "n": 23795,
       "firms": null
     },
     {
       "level": "fact",
       "step": "F3. dropped: duplicate tag/period, older filing",
-      "n": 1257640,
+      "n": 1368693,
       "firms": null
     },
     {
       "level": "fact",
       "step": "F4. dropped: flow fact without annual duration (qtrs != 4)",
-      "n": 1603,
+      "n": 1624,
       "firms": null
     },
     {
       "level": "firm-year",
       "step": "0. flow+balance matched on exact fiscal-year end",
-      "n": 116988,
-      "firms": 14268.0
+      "n": 117001,
+      "firms": 14270.0
     },
     {
       "level": "firm-year",
@@ -56,8 +72,8 @@
     {
       "level": "firm-year",
       "step": "0c. firm-years in 2010-2024 window",
-      "n": 105865,
-      "firms": 14232.0
+      "n": 105878,
+      "firms": 14234.0
     },
     {
       "level": "firm-year",
@@ -68,14 +84,14 @@
     {
       "level": "firm-year",
       "step": "2. dropped: missing revenue/COGS/AR/inventory/AP",
-      "n": 77938,
-      "firms": 12525.0
+      "n": 76218,
+      "firms": 12408.0
     },
     {
       "level": "firm-year",
       "step": "3. dropped: revenue<=0 or COGS<=0",
-      "n": 267,
-      "firms": 216.0
+      "n": 279,
+      "firms": 226.0
     },
     {
       "level": "firm-year",
@@ -92,91 +108,115 @@
     {
       "level": "firm-year",
       "step": "6. dropped: financials & real estate (SIC 6000-6999)",
-      "n": 364,
-      "firms": 85.0
+      "n": 390,
+      "firms": 90.0
     },
     {
       "level": "firm-year",
       "step": "7. dropped: utilities (SIC 4900-4999)",
-      "n": 449,
-      "firms": 79.0
+      "n": 474,
+      "firms": 81.0
     },
     {
       "level": "firm-year",
       "step": "8. dropped: fewer than 3 usable years",
-      "n": 1505,
-      "firms": 905.0
+      "n": 1542,
+      "firms": 927.0
     },
     {
       "level": "firm-year",
       "step": "9. MAIN SAMPLE",
-      "n": 25341,
-      "firms": 3158.0
+      "n": 26974,
+      "firms": 3320.0
     }
   ],
   "attrition_missing_items": [
     {
       "item": "revenue",
-      "n_firm_years": 26071,
-      "share_of_dropped": 0.334509
+      "n_firm_years": 26073,
+      "share_of_dropped": 0.342085
     },
     {
       "item": "cogs",
-      "n_firm_years": 55272,
-      "share_of_dropped": 0.709179
+      "n_firm_years": 55285,
+      "share_of_dropped": 0.725354
     },
     {
       "item": "ar",
-      "n_firm_years": 47782,
-      "share_of_dropped": 0.613077
+      "n_firm_years": 47795,
+      "share_of_dropped": 0.627083
     },
     {
       "item": "inventory",
-      "n_firm_years": 63363,
-      "share_of_dropped": 0.812992
+      "n_firm_years": 63376,
+      "share_of_dropped": 0.83151
     },
     {
       "item": "ap",
-      "n_firm_years": 31957,
-      "share_of_dropped": 0.410031
+      "n_firm_years": 28551,
+      "share_of_dropped": 0.374597
     },
     {
       "item": "any item missing (rows dropped)",
-      "n_firm_years": 77938,
+      "n_firm_years": 76218,
       "share_of_dropped": 1.0
     },
     {
       "item": "exactly one item missing",
-      "n_firm_years": 20375,
-      "share_of_dropped": 0.261426
+      "n_firm_years": 19419,
+      "share_of_dropped": 0.254782
     },
     {
       "item": "more than one item missing",
-      "n_firm_years": 57563,
-      "share_of_dropped": 0.738574
+      "n_firm_years": 56799,
+      "share_of_dropped": 0.745218
     },
     {
       "item": "missing item-cells (sum of the five rows above)",
-      "n_firm_years": 224445,
+      "n_firm_years": 221080,
       "share_of_dropped": null
     }
   ],
   "tag_usage_top": [
+    {
+      "concept": "accrued_liabilities",
+      "tag": "AccruedLiabilitiesCurrent",
+      "firm_years": 40931,
+      "tier": "charter",
+      "preferred": true,
+      "share_of_concept": 0.8633774890313871
+    },
+    {
+      "concept": "accrued_liabilities",
+      "tag": "OtherAccruedLiabilitiesCurrent",
+      "firm_years": 6477,
+      "tier": "extra",
+      "preferred": false,
+      "share_of_concept": 0.1366225109686129
+    },
     {
       "concept": "ap",
       "tag": "AccountsPayableCurrent",
       "firm_years": 62195,
       "tier": "charter",
       "preferred": true,
-      "share_of_concept": 0.7841419133592213
+      "share_of_concept": 0.7498432677469136
     },
     {
       "concept": "ap",
       "tag": "AccountsPayableAndAccruedLiabilitiesCurrent",
-      "firm_years": 17121,
+      "firm_years": 17004,
       "tier": "charter",
       "preferred": false,
-      "share_of_concept": 0.21585808664077866
+      "share_of_concept": 0.20500578703703703
+    },
+    {
+      "concept": "ap",
+      "tag": "AccountsPayableTradeCurrent",
+      "firm_years": 3745,
+      "tier": "extra",
+      "preferred": false,
+      "share_of_concept": 0.045150945216049385
     },
     {
       "concept": "ar",
@@ -299,6 +339,14 @@
       "share_of_concept": 0.0039060785604564407
     },
     {
+      "concept": "inventory_write_down",
+      "tag": "InventoryWriteDown",
+      "firm_years": 7833,
+      "tier": "charter",
+      "preferred": true,
+      "share_of_concept": 1.0
+    },
+    {
       "concept": "liabilities_current",
       "tag": "LiabilitiesCurrent",
       "firm_years": 87918,
@@ -329,6 +377,22 @@
       "tier": "charter",
       "preferred": true,
       "share_of_concept": 1.0
+    },
+    {
+      "concept": "ppe_net",
+      "tag": "PropertyPlantAndEquipmentNet",
+      "firm_years": 82338,
+      "tier": "charter",
+      "preferred": true,
+      "share_of_concept": 0.9996964656459818
+    },
+    {
+      "concept": "ppe_net",
+      "tag": "PropertyPlantAndEquipmentNetExcludingCapitalLeasedAssets",
+      "firm_years": 25,
+      "tier": "extra",
+      "preferred": false,
+      "share_of_concept": 0.00030353435401818776
     },
     {
       "concept": "revenue",
@@ -374,36 +438,36 @@
   "raw": {
     "n_annual_filings_cached": 105027,
     "n_ciks_with_annual_filing": 15401,
-    "n_num_rows_matched_to_annual_filings": 2560319,
-    "n_rows_ifrs_taxonomy_excluded": 23790,
-    "rows_tagged_us_gaap": 2536529,
-    "rows_non_usd": 60858,
-    "ciks_non_usd": 416,
-    "duplicate_tag_values_collapsed": 1257640,
-    "flow_facts_dropped_not_annual_duration": 1603,
-    "firm_years_flow_balance_matched_on_exact_end": 116988,
-    "n_ciks_with_a_project_tag": 14268,
-    "firms_flow_balance_matched_on_exact_end": 14268,
+    "n_num_rows_matched_to_annual_filings": 2819242,
+    "n_rows_ifrs_taxonomy_excluded": 23795,
+    "rows_tagged_us_gaap": 2795447,
+    "rows_non_usd": 66359,
+    "ciks_non_usd": 419,
+    "duplicate_tag_values_collapsed": 1368693,
+    "flow_facts_dropped_not_annual_duration": 1624,
+    "firm_years_flow_balance_matched_on_exact_end": 117001,
+    "n_ciks_with_a_project_tag": 14270,
+    "firms_flow_balance_matched_on_exact_end": 14270,
     "firm_years_dropped_duplicate_fiscal_year": 1567,
     "firm_years_outside_2010_2024_window": 9556,
-    "firm_years_in_2010_2024_window": 105865,
-    "firms_in_2010_2024_window": 14232
+    "firm_years_in_2010_2024_window": 105878,
+    "firms_in_2010_2024_window": 14234
   },
   "rows_per_year": {
-    "2010": 1408,
-    "2011": 1840,
-    "2012": 1940,
-    "2013": 1948,
-    "2014": 1886,
-    "2015": 1800,
-    "2016": 1763,
-    "2017": 1769,
-    "2018": 1661,
-    "2019": 1605,
-    "2020": 1634,
-    "2021": 1653,
-    "2022": 1645,
-    "2023": 1476,
-    "2024": 1313
+    "2010": 1502,
+    "2011": 1956,
+    "2012": 2062,
+    "2013": 2061,
+    "2014": 2005,
+    "2015": 1918,
+    "2016": 1880,
+    "2017": 1878,
+    "2018": 1762,
+    "2019": 1711,
+    "2020": 1740,
+    "2021": 1762,
+    "2022": 1751,
+    "2023": 1575,
+    "2024": 1411
   }
 }

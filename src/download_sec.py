@@ -41,6 +41,7 @@ from json_utils import json_safe  # noqa: E402
 ROOT = Path(__file__).resolve().parents[1]
 RAW = ROOT / "data" / "raw"
 FSDS_DIR = RAW / "fsds"
+FSDS_Q_DIR = RAW / "fsds_q"
 ZIP_DIR = RAW / "zips"
 MANIFEST = ROOT / "data" / "manifest.json"
 
@@ -59,10 +60,19 @@ MAX_RETRIES = 6
 # fiscal years 2009-2024 (FY2009 is needed as the lag for 2010).
 QUARTERS = [f"{y}q{q}" for y in range(2010, 2026) for q in range(1, 5)]
 
+# Quarterly shock cache: 2019q1-2022q4 is enough for a pre-shock 2019 balance,
+# the 2020 COVID quarters, a pre-shock 2021 balance and the 2022 inflation
+# quarters.  Kept in a separate directory so the annual panel build cannot
+# accidentally mix 10-Q and 10-K facts.
+QUARTERS_Q = [f"{y}q{q}" for y in range(2019, 2023) for q in range(1, 5)]
+
 # Only tags used downstream are cached; keeps each quarter's cache to a few MB.
 from tags import TAG_UNIVERSE  # noqa: E402  (same directory when run as a script)
 
 FORM_KEEP = ["10-K", "10-K/A", "20-F", "20-F/A", "40-F", "40-F/A"]
+FORM_KEEP_Q = ["10-Q", "10-Q/A", "10-K", "10-K/A", "20-F", "20-F/A", "40-F", "40-F/A"]
+QTRS_KEEP = ["0", "4"]
+QTRS_KEEP_Q = ["0", "1", "2", "3", "4"]
 
 SUB_COLS = ["adsh", "cik", "name", "sic", "form", "period", "fy", "fp", "filed", "fye"]
 NUM_COLS = ["adsh", "tag", "version", "ddate", "qtrs", "uom", "segments", "coreg", "value"]
@@ -175,7 +185,10 @@ def download_tickers(man: dict, force: bool = False) -> None:
         print(f"  ! ticker normalisation skipped: {exc}", flush=True)
 
 
-def _parse_quarter(zip_path: Path, quarter: str) -> tuple[pd.DataFrame, pd.DataFrame, pd.DataFrame]:
+def _parse_quarter(zip_path: Path, quarter: str,
+                   form_keep: list[str] | set[str] = FORM_KEEP,
+                   qtrs_keep: list[str] | set[str] = QTRS_KEEP
+                   ) -> tuple[pd.DataFrame, pd.DataFrame, pd.DataFrame]:
     """Read sub.txt / num.txt from an FSDS zip and keep only what we need."""
     with zipfile.ZipFile(zip_path) as zf:
         names = set(zf.namelist())
@@ -186,7 +199,7 @@ def _parse_quarter(zip_path: Path, quarter: str) -> tuple[pd.DataFrame, pd.DataF
         form_counts["quarter"] = quarter
         sub = sub[[c for c in SUB_COLS if c in sub.columns]].copy()
 
-        sub = sub[sub["form"].isin(FORM_KEEP)].copy()
+        sub = sub[sub["form"].isin(form_keep)].copy()
         sub["cik"] = pd.to_numeric(sub["cik"], errors="coerce").astype("Int64")
 
         keep_adsh = set(sub["adsh"])
@@ -204,7 +217,7 @@ def _parse_quarter(zip_path: Path, quarter: str) -> tuple[pd.DataFrame, pd.DataF
                 continue
             # Consolidated totals only: drop segment/co-registrant breakdowns.
             chunk = chunk[chunk["segments"].isna() & chunk["coreg"].isna()]
-            chunk = chunk[chunk["qtrs"].isin(["0", "4"])]
+            chunk = chunk[chunk["qtrs"].isin(qtrs_keep)]
             if chunk.empty:
                 continue
             chunks.append(chunk)
@@ -216,10 +229,14 @@ def _parse_quarter(zip_path: Path, quarter: str) -> tuple[pd.DataFrame, pd.DataF
     return sub, num, form_counts
 
 
-def download_quarter(quarter: str, man: dict, force: bool = False) -> dict:
-    out_sub = FSDS_DIR / f"{quarter}_sub.parquet"
-    out_num = FSDS_DIR / f"{quarter}_num.parquet"
-    out_forms = FSDS_DIR / f"{quarter}_forms.parquet"
+def download_quarter(quarter: str, man: dict, force: bool = False,
+                     out_dir: Path = FSDS_DIR,
+                     form_keep: list[str] | set[str] = FORM_KEEP,
+                     qtrs_keep: list[str] | set[str] = QTRS_KEEP,
+                     note_label: str = "annual forms") -> dict:
+    out_sub = out_dir / f"{quarter}_sub.parquet"
+    out_num = out_dir / f"{quarter}_num.parquet"
+    out_forms = out_dir / f"{quarter}_forms.parquet"
     if out_sub.exists() and out_num.exists() and out_forms.exists() and not force:
         return {"quarter": quarter, "status": "cached"}
 
@@ -227,9 +244,9 @@ def download_quarter(quarter: str, man: dict, force: bool = False) -> dict:
     zip_path = ZIP_DIR / f"{quarter}.zip"
     fetch(url, zip_path, man, force=force, note=f"SEC FSDS {quarter}")
     src_bytes = zip_path.stat().st_size
-    sub, num, form_counts = _parse_quarter(zip_path, quarter)
+    sub, num, form_counts = _parse_quarter(zip_path, quarter, form_keep, qtrs_keep)
 
-    FSDS_DIR.mkdir(parents=True, exist_ok=True)
+    out_dir.mkdir(parents=True, exist_ok=True)
     sub.to_parquet(out_sub, index=False)
     num.to_parquet(out_num, index=False)
     form_counts.to_parquet(out_forms, index=False)
@@ -239,7 +256,8 @@ def download_quarter(quarter: str, man: dict, force: bool = False) -> dict:
     if not os.environ.get("KEEP_SEC_ZIPS"):
         zip_path.unlink(missing_ok=True)
 
-    note = f"derived from {url} ({src_bytes} bytes); sub/num filtered to annual forms + project tags"
+    note = (f"derived from {url} ({src_bytes} bytes); sub/num filtered to "
+            f"{note_label} + project tags, qtrs {','.join(sorted(qtrs_keep))}")
     for p in (out_sub, out_num, out_forms):
         _record(man, url, p, note=note, source_bytes=src_bytes)
     _save_manifest(man)
@@ -250,18 +268,19 @@ def download_quarter(quarter: str, man: dict, force: bool = False) -> dict:
 def build_manifest_from_cache() -> dict:
     """Rebuild data/manifest.json from whatever is cached (offline safety net)."""
     man = _load_manifest()
-    for p in sorted(FSDS_DIR.glob("*.parquet")):
-        entry = {
-            "url": FSDS_URL.format(q=p.name.split("_")[0]),
-            "path": str(p.relative_to(ROOT)).replace("\\", "/"),
-            "bytes": p.stat().st_size,
-            "sha256": _sha256(p),
-            "fetched_at_utc": datetime.fromtimestamp(p.stat().st_mtime, timezone.utc)
-            .isoformat(timespec="seconds"),
-            "note": "reconstructed from local cache",
-        }
-        man["files"] = [f for f in man["files"] if f["path"] != entry["path"]]
-        man["files"].append(entry)
+    for folder in (FSDS_DIR, FSDS_Q_DIR):
+        for p in sorted(folder.glob("*.parquet")):
+            entry = {
+                "url": FSDS_URL.format(q=p.name.split("_")[0]),
+                "path": str(p.relative_to(ROOT)).replace("\\", "/"),
+                "bytes": p.stat().st_size,
+                "sha256": _sha256(p),
+                "fetched_at_utc": datetime.fromtimestamp(p.stat().st_mtime, timezone.utc)
+                .isoformat(timespec="seconds"),
+                "note": "reconstructed from local cache",
+            }
+            man["files"] = [f for f in man["files"] if f["path"] != entry["path"]]
+            man["files"].append(entry)
     man["files"].sort(key=lambda f: f["path"])
     man = finalize_manifest(man)
     _save_manifest(man)
@@ -283,6 +302,8 @@ def main(argv: list[str] | None = None) -> int:
     ap = argparse.ArgumentParser(description="Download & cache SEC XBRL data")
     ap.add_argument("--quarters", nargs="*", default=None)
     ap.add_argument("--force", action="store_true")
+    ap.add_argument("--quarterly", action="store_true",
+                    help="cache 10-Q/10-K facts for the 2019-2022 shock panel")
     ap.add_argument("--offline", action="store_true", help="rebuild manifest from cache only")
     args = ap.parse_args(argv)
 
@@ -297,12 +318,21 @@ def main(argv: list[str] | None = None) -> int:
 
     download_tickers(man, force=args.force)
 
-    quarters = args.quarters or QUARTERS
+    if args.quarterly:
+        out_dir, forms, qtrs = FSDS_Q_DIR, FORM_KEEP_Q, QTRS_KEEP_Q
+        quarters = args.quarters or QUARTERS_Q
+        label = "quarterly forms"
+    else:
+        out_dir, forms, qtrs = FSDS_DIR, FORM_KEEP, QTRS_KEEP
+        quarters = args.quarters or QUARTERS
+        label = "annual forms"
+
     t0 = time.time()
     done = failed = 0
     for i, q in enumerate(quarters, 1):
         try:
-            res = download_quarter(q, man, force=args.force)
+            res = download_quarter(q, man, force=args.force, out_dir=out_dir,
+                                   form_keep=forms, qtrs_keep=qtrs, note_label=label)
             done += 1
             extra = ""
             if res["status"] == "downloaded":
