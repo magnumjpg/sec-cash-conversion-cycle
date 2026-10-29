@@ -15,9 +15,9 @@ vendor-adjusted data enter the panel. Every number in `README.md` is produced by
 | SEC company tickers + exchange | `https://www.sec.gov/files/company_tickers_exchange.json` | `data/raw/tickers.parquet` |
 | SEC `companyfacts` API | `https://data.sec.gov/api/xbrl/companyfacts/CIK##########.json` | internal spot check, 3 issuers only |
 
-The charter preferred `companyfacts` and suggested the Frames API. Frames were
+The initial design considered `companyfacts` and evaluated the Frames API. Frames were
 tested and rejected because the payload has no `form`, `filed`, `fp` or `sic`,
-which makes three charter rules unenforceable (10-K-only, latest-filing-wins,
+which makes three standard panel criteria unenforceable (10-K-only, latest-filing-wins,
 SIC exclusions). FSDS is the SEC's own bulk extract of the same XBRL facts,
 exposes all of those fields, and includes delisted filers. Full reasoning and the
 trade-off table: `DECISIONS.md → D-01`.
@@ -33,7 +33,7 @@ User-Agent sent to the SEC: `portfolio-research/1.0 (${SEC_CONTACT})`, where
 e.g. `export SEC_CONTACT=you@example.com` (bash) or
 `$env:SEC_CONTACT="you@example.com"` (PowerShell). The fallback contact is
 `portfolio-research@example.com`; no personal address is stored in the repo.
-Requests are throttled to **4 per second** (charter ceiling: 5), with 6 retries
+Requests are throttled to **4 per second** (specification ceiling: 5), with 6 retries
 and exponential backoff.
 
 ## 2. What is cached, and where
@@ -155,7 +155,7 @@ item counts overlap and are **not** disjoint:
 | Revenue | 26,073 | 34.2% |
 | **More than one item missing** | **56,799** | **74.5%** |
 | Exactly one item missing | 19,419 | 25.5% |
-| Missing item-cells (sum of the five item rows) | 221,080 | — |
+| Missing item-cells (sum of the five item rows) | 221,080 | - |
 
 Inventory and COGS dominate the drop: 83.2% of the excluded rows have no
 inventory fact and 72.5% no COGS, which is the expected consequence of requiring
@@ -177,23 +177,23 @@ labelled denominator rather than assume they are the same.
 
 | Concept | Tag | Rows | Share | Tier |
 |---|---|---:|---:|---|
-| revenue | `RevenueFromContractWithCustomerExcludingAssessedTax` | 8,342 | 30.9% | charter (preferred) |
-| revenue | `SalesRevenueNet` | 7,630 | 28.3% | charter |
-| revenue | `Revenues` | 7,309 | 27.1% | charter |
-| revenue | `RevenueFromContractWithCustomerIncludingAssessedTax` | 1,823 | 6.8% | charter |
+| revenue | `RevenueFromContractWithCustomerExcludingAssessedTax` | 8,342 | 30.9% | primary taxonomy (preferred) |
+| revenue | `SalesRevenueNet` | 7,630 | 28.3% | standard taxonomy |
+| revenue | `Revenues` | 7,309 | 27.1% | standard taxonomy |
+| revenue | `RevenueFromContractWithCustomerIncludingAssessedTax` | 1,823 | 6.8% | standard taxonomy |
 | revenue | `SalesRevenueGoodsNet` | 1,870 | 6.9% | **extra** (last resort) |
-| cogs | `CostOfGoodsAndServicesSold` | 13,408 | 49.7% | charter (preferred) |
-| cogs | `CostOfRevenue` | 8,107 | 30.1% | charter |
-| cogs | `CostOfGoodsSold` | 5,459 | 20.2% | charter |
-| ar | `AccountsReceivableNetCurrent` | 23,967 | 88.9% | charter (preferred) |
-| ar | `ReceivablesNetCurrent` | 2,890 | 10.7% | charter |
-| ar | `AccountsReceivableGrossCurrent` | 117 | 0.4% | charter |
-| inventory | `InventoryNet` | 26,776 | 99.3% | charter (preferred) |
-| inventory | `InventoryGross` | 127 | 0.5% | charter |
-| inventory | `InventoryFinishedGoodsNetOfReserves` | 71 | 0.3% | charter |
-| ap | `AccountsPayableCurrent` | 22,564 | 83.7% | charter (preferred) |
+| cogs | `CostOfGoodsAndServicesSold` | 13,408 | 49.7% | primary taxonomy (preferred) |
+| cogs | `CostOfRevenue` | 8,107 | 30.1% | standard taxonomy |
+| cogs | `CostOfGoodsSold` | 5,459 | 20.2% | standard taxonomy |
+| ar | `AccountsReceivableNetCurrent` | 23,967 | 88.9% | primary taxonomy (preferred) |
+| ar | `ReceivablesNetCurrent` | 2,890 | 10.7% | standard taxonomy |
+| ar | `AccountsReceivableGrossCurrent` | 117 | 0.4% | standard taxonomy |
+| inventory | `InventoryNet` | 26,776 | 99.3% | primary taxonomy (preferred) |
+| inventory | `InventoryGross` | 127 | 0.5% | standard taxonomy |
+| inventory | `InventoryFinishedGoodsNetOfReserves` | 71 | 0.3% | standard taxonomy |
+| ap | `AccountsPayableCurrent` | 22,564 | 83.7% | primary taxonomy (preferred) |
 | ap | `AccountsPayableTradeCurrent` | 1,637 | 6.1% | **extra** (direct trade AP) |
-| ap | `AccountsPayableAndAccruedLiabilitiesCurrent` | 2,773 | 10.3% | charter |
+| ap | `AccountsPayableAndAccruedLiabilitiesCurrent` | 2,773 | 10.3% | standard taxonomy |
 
 New concepts added in tag mapping **2.0.0**:
 
@@ -204,7 +204,7 @@ New concepts added in tag mapping **2.0.0**:
 | `inventory_write_down` | `InventoryWriteDown` / `InventoryImpairmentLoss` | 4,657 | quarterly and annual shock outcome |
 
 No `extra` tag is used for COGS, receivables or inventory in the final panel.
-Robustness spec 11 restricts to firm-years where the *preferred* charter tag
+Robustness spec 11 restricts to firm-years where the *preferred* primary tag
 supplied every input (including `InventoryNet` and a direct trade-AP tag); it is
 the cleaner measurement, and it is weaker than the clean-AP headline
 (β = +0.000122, t = 1.72, p = 0.086, n = 4,543).

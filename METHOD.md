@@ -163,7 +163,7 @@ descriptive: 24 quarter-outcome cells, no multiple-testing correction.
 **Robustness.** Average balances; no winsorization; revenue-denominated DPO;
 negative-CCC-only and non-negative-CCC-only; balanced 2015–2024 panel; dropping
 |CCC|>365; 3-digit vs 2-digit SIC FE; no controls (firm+year FE only); only
-firm-years where the charter's preferred tag supplied every input (including
+firm-years where the baseline specification's preferred tag supplied every input (including
 `InventoryNet` and a direct trade-AP tag); including financials/utilities
 (`panel_full`). The number of main-sample specifications significant at 5% is
 computed from the p-values in `robustness_ccc_roa`, not typed:

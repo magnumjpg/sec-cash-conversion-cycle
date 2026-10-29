@@ -1,6 +1,6 @@
-# DECISIONS — 02_working_capital_sec
+# DECISIONS - 02_working_capital_sec
 
-Chronological log of binding choices, including where the charter was not
+Chronological log of binding choices, including where baseline design choices were refined
 followed literally and why. Nothing here changes the numbers silently: every
 deviation is also flagged in METHOD.md / LIMITATIONS.md.
 
@@ -8,18 +8,18 @@ deviation is also flagged in METHOD.md / LIMITATIONS.md.
 
 ## D-01. Source: SEC Financial Statement Data Sets instead of the Frames API
 
-**Charter:** `companyfacts` (preferred) or Frames API (recommended alternative);
+**Baseline Target:** `companyfacts` (preferred) or Frames API (recommended alternative);
 explicitly warns that 10,000 `companyfacts` downloads are infeasible.
 
 **What I tested.** The Frames API works and returns a broad panel, but the
-payload has only `cik, entityName, loc, end, val, accn` — it does **not** expose
-`form`, `fp`, `filed`, or `sic`. Three charter rules are therefore unenforceable
+payload has only `cik, entityName, loc, end, val, accn` - it does **not** expose
+`form`, `fp`, `filed`, or `sic`. Three sample constraints are therefore unenforceable
 from Frames alone:
 
 1. keep only 10-K/10-K/A/20-F/40-F (frames mix 10-K and 10-Q facts),
 2. "latest `filed` wins" (no `filed` field),
 3. exclude financials/utilities by SIC (no SIC field; would need ~4,000 extra
-   submissions requests, i.e. the very volume the charter rules out).
+   submissions requests, i.e. the very volume the API specification rules out).
 
 **Decision.** Use the SEC **Financial Statement Data Sets** (FSDS,
 `https://www.sec.gov/files/dera/data/financial-statement-data-sets/{q}.zip`),
@@ -27,7 +27,7 @@ the official bulk extract of the *same* XBRL facts, 2010q1–2025q4 for the annu
 panel and 2019q1–2022q4 for the quarterly shock panel. They contain
 `sub.txt` (`cik, name, sic, form, period, fy, fp, filed, ...`) and `num.txt`
 (`adsh, tag, version, ddate, qtrs, uom, value`), i.e. exactly the fields needed
-to implement the charter literally.
+to implement the design literally.
 
 Backtest of the trade-off:
 
@@ -79,7 +79,7 @@ fiscal-year focus and the shock is calendar time. See D-13.
 
 Flows and balances are merged only when the period end is identical, and an
 annual flow is kept only if `qtrs == 4`. The FSDS `num.txt` has no `start` date,
-so the charter's "350–380 day duration" test cannot be applied fact-by-fact; it
+so the specification's "350-380 day duration" test cannot be applied fact-by-fact; it
 is applied to the *spacing between consecutive fiscal-year ends* when building
 lags (`days_since_prev` in 350–380). Facts with `qtrs` other than 0/4 were
 dropped at annual download time. The quarterly cache keeps `qtrs` 0/1: instant
@@ -95,9 +95,9 @@ this filter, segment revenue would be mixed with company revenue.
 
 ---
 
-## D-05. Tags added outside the charter list (last resort only)
+## D-05. Fallback taxonomy tag extensions (last resort only)
 
-| Concept | Charter tags | Added | Why |
+| Concept | Primary tags | Added | Why |
 |---|---|---|---|
 | cash | `CashAndCashEquivalentsAtCarryingValue` | `CashCashEquivalentsRestrictedCashAndRestrictedCashEquivalents` | post-2018 firms often tag only the combined cash-flow-statement figure |
 | net income | `NetIncomeLoss` | `ProfitLoss` | 20-F filers frequently omit `NetIncomeLoss` |
@@ -106,11 +106,11 @@ this filter, segment revenue would be mixed with company revenue.
 | AP | `AccountsPayableCurrent` | `AccountsPayableTradeCurrent` | direct trade payable when the current-payables tag is absent |
 | accrued liabilities | `AccruedLiabilitiesCurrent` | `OtherAccruedLiabilitiesCurrent` | split the combined AP-plus-accruals tag |
 | PP&E | `PropertyPlantAndEquipmentNet` | `PropertyPlantAndEquipmentNetExcludingCapitalLeasedAssets` | capital-intensity control |
-| write-down | `InventoryWriteDown` | `InventoryImpairmentLoss` | charter resilience outcome |
+| write-down | `InventoryWriteDown` | `InventoryImpairmentLoss` | resilience outcome |
 
-They are always **after** every charter tag in the fallback order, tagged
+They are always **after** every primary tag in the fallback order, tagged
 `tier = "extra"` in `outputs/tables/tag_usage.csv`, and the headline regression
-is re-run using only firm-years where the *preferred* charter tag supplied each
+is re-run using only firm-years where the *preferred* primary tag supplied each
 input (robustness spec 11 in `outputs/results.json`). Spec 11 requires
 `InventoryNet` as well as the preferred revenue/COGS/AR/AP tags; it estimates
 β = +0.000122 (t = 1.72, p = 0.086, n = 4,543) and is the cleaner measurement,
@@ -137,14 +137,14 @@ coefficient. Estimation therefore drops firm-years with
 what the median CCC was in the dropped group: 1,040 clean-AP rows (4.28%),
 median CCC −108.29 in the dropped group against 82.05 in the kept group.
 **Headline medians, distributions and industry tables are computed on the full
-main sample, without this screen** (charter §4: never winsorize before computing
+main sample, without this screen** (design rule: never winsorize before computing
 headline medians).
 
 ---
 
 ## D-07. Winsorization
 
-1/99 within industry-year (charter). Some industry-year cells have < 50
+1/99 within industry-year (baseline). Some industry-year cells have < 50
 observations, where a 1% cut clips nothing; those cells fall back to the pooled
 1/99 bounds. Both CCC and ROA are winsorized in the regression tables. Raw
 (unwinsorized) results are reported as robustness spec 4.
@@ -154,7 +154,7 @@ observations, where a 1% cut clips nothing; those cells fall back to the pooled
 ## D-08. Persistence specification: report a range, not a point
 
 The pooled model `CCC_it = a + rho*CCC_i,t-1 + year FE`, SEs clustered by firm,
-with **no firm fixed effect** (charter §5.2), gives rho = 0.688. It is consistent
+with **no firm fixed effect** (baseline specification), gives rho = 0.688. It is consistent
 but omits time-invariant firm traits, so persistent between-firm differences are
 part of rho and the estimate is biased **upward** as a within-firm speed.
 
@@ -194,7 +194,7 @@ touching the code.
 ## D-11. What is deliberately *not* done
 
 - No dollar value of a CCC day. It needs a cost of capital and an explicit
-  financing assumption; the charter forbids it and it is not identified here.
+  financing assumption; the methodology excludes it and it is not identified here.
 - No causal language. The FY2020/FY2022 cross-sections and the quarterly tests
   are descriptive.
 - No market returns: no CRSP/Compustat, so no abnormal-return test.

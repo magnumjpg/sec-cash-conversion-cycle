@@ -1,4 +1,4 @@
-# ANALYSIS_LOG — how the working-capital panel was built
+# ANALYSIS_LOG - how the working-capital panel was built
 
 A record of what was tried, what broke, and what changed. Not a polished
 narrative: the point is that the false starts are visible.
@@ -13,19 +13,19 @@ narrative: the point is that the false starts are visible.
 
 ## 1. Choosing a source, and rejecting the obvious one
 
-The charter preferred `companyfacts` and suggested the Frames API as a fallback.
-`companyfacts` for 3,000+ issuers is thousands of requests; the charter itself
+The baseline specification preferred `companyfacts` and suggested the Frames API as a fallback.
+`companyfacts` for 3,000+ issuers is thousands of requests; the baseline specification itself
 rules that out.
 
 The Frames API was tested and works, but its payload has only
 `cik, entityName, loc, end, val, accn`. It does **not** expose `form`, `filed` or
-`sic`. That makes three charter rules unenforceable:
+`sic`. That makes three specification rules unenforceable:
 
 - keep only annual reports (Frames mixes 10-K and 10-Q facts);
 - "latest filing wins" (no filing date to sort on);
 - exclude financials and utilities by SIC (no SIC).
 
-**Decision:** use the SEC Financial Statement Data Sets — the same XBRL facts,
+**Decision:** use the SEC Financial Statement Data Sets - the same XBRL facts,
 delivered as quarterly bulk files with `sub.txt` and `num.txt`. 2010q1–2025q4,
 64 quarters, cached and hashed. See `DECISIONS.md → D-01`.
 
@@ -56,11 +56,11 @@ First descriptive run: mean CCC **−249.7 days**, standard deviation **103,401*
 
 That is not a heavy tail, it is a data problem. Inspection found two causes:
 
-1. XBRL scale errors — total assets tagged in millions, COGS off by 1,000×;
+1. XBRL scale errors - total assets tagged in millions, COGS off by 1,000×;
 2. micro-caps with revenues under $1m, where one day of receivables moves the
    ratio by thousands of days.
 
-**Decision:** keep the full sample for headline medians (the charter asks for
+**Decision:** keep the full sample for headline medians (the baseline specification asks for
 medians), but screen for estimation: |CCC| ≤ 3,650 days, assets ≥ $1m, revenue
 ≥ $1m. That removes **1,495 rows (5.90%)**.
 
@@ -73,7 +73,7 @@ estimation sample gets 77.9.
 
 ## 4. Internal spot check against the API we did not use
 
-Three issuers — Fastenal, Walmart, Apple — three fiscal years, seven concepts
+Three issuers - Fastenal, Walmart, Apple - three fiscal years, seven concepts
 each: revenue, COGS, receivables, inventory, payables, assets, net income.
 
 **63/63 exact matches** against `companyfacts`, maximum relative difference 0.0.
@@ -117,7 +117,7 @@ closes each year.
 
 ## 6. The sign that would not cooperate
 
-The charter's prior: higher CCC → lower profitability. The estimate came out
+The baseline specification's prior: higher CCC → lower profitability. The estimate came out
 **positive**: +0.000139 (t = 3.81).
 
 Before writing anything, three checks:
@@ -146,7 +146,7 @@ result weaker, not stronger, and is included for that reason.
 Two cross-sections, one observation per firm:
 
 - **FY2020 demand shock** (pre-shock FY2019 CCC): revenue-growth coefficient
-  +0.000071, t = 0.38 — not detectable, not "no effect". ROA is significant but
+  +0.000071, t = 0.38 - not detectable, not "no effect". ROA is significant but
   non-monotone across quintiles. Cash ratio is not detectable either.
 - **FY2022 cost shock**: gross-margin change coefficient −0.00006, t = −2.37. The
   quintile medians are **not monotone** (−0.81, −0.35, −0.75, −0.41, −0.93 pp),
@@ -165,7 +165,7 @@ Both are labelled descriptive. No placebo, no pre-trend, no matched controls.
 
 ## 8. What is missing, and why it stays missing
 
-Inventory write-downs were a charter outcome. The cached tag slice never
+Inventory write-downs were a specification outcome. The cached tag slice never
 contained the write-down tags, and the source zips were deleted after the panel
 was built.
 
@@ -238,7 +238,7 @@ A later review found issues that changed numbers rather than presentation:
 2. **The headline CCC level mixes two AP concepts.** Preferred-AP rows have a
    median CCC of 80.54 days and fallback rows 3.76; the fallback adds accruals
    and raises DPO, so the pooled 74.97 understates the preferred level. The
-   pooled sample remains the headline because the charter mandates ordered
+   pooled sample remains the headline because the baseline specification mandates ordered
    fallbacks, but the mix and its direction are now in
    `results.json → tag_sensitivity`.
 3. **Persistence was overstated.** 0.685 is a pooled AR(1); with firm FE it is
@@ -332,8 +332,8 @@ used:
    `(cik, ddate)`.
 2. **The "pre-shock" exposure was measured after the shock.** The first version
    merged the 10-Q to the annual panel on the 10-Q's own `fy`. For a December
-   filer, a 2020Q1 10-Q carries `fy = 2020`, so the merge used **FY2020** — the
-   shock year — as the "pre-shock" balance. This produced a spurious 2022
+   filer, a 2020Q1 10-Q carries `fy = 2020`, so the merge used **FY2020** - the
+   shock year - as the "pre-shock" balance. This produced a spurious 2022
    cash/assets coefficient (t = −2.52). The fix maps each quarterly row to
    `shock_year − 1` (FY2019 for 2020, FY2021 for 2022) before merging.
 

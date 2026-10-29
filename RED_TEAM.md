@@ -1,6 +1,6 @@
-# RED_TEAM — attacking the working-capital project
+# Robustness Analysis and Boundary Conditions
 
-Written from the position of a referee who does not want to accept the result.
+Technical assessment of identification strategies, taxonomy classification choices, and econometric robustness checks.
 Each objection is followed by what the project does about it and what remains
 unresolved.
 
@@ -30,7 +30,7 @@ changes would be needed.
 
 ---
 
-## "Then your result is just industry fixed effects."
+## 2. Within-Firm vs Between-Firm Identification (Industry Controls)
 
 No. The headline specification has firm fixed effects, so industry is absorbed
 by construction. The variance decomposition is the relevant number, and it is
@@ -44,7 +44,7 @@ explains very little of working-capital levels.
 
 ---
 
-## "Your mean CCC is 114 days with an SD of 103,000. That is not data, that is garbage."
+## 3. Distributional Skewness and Winsorization Robustness
 
 Correct, and the README says so. The mean is uninterpretable because a small
 share of XBRL facts are tagged at the wrong scale (assets in millions, COGS off
@@ -65,7 +65,7 @@ repairing them would require reading 1,040 filings.
 
 ---
 
-## "Persistence of 0.688 is a mechanical artefact of not having firm fixed effects."
+## 4. Persistence Estimators (Pooled AR(1), Firm-FE & Anderson-Hsiao)
 
 Partly fair, and the project now says so. The 0.688 is a pooled AR(1) with year
 FE and no firm FE. It is consistent, but it keeps persistent between-firm
@@ -85,7 +85,7 @@ quotes the range together with the definitions.
 
 ---
 
-## "Your shock tests have no power. A t-statistic of 0.65 is not evidence of no effect."
+## 5. Statistical Power of Shock Response Tests
 
 Agreed, and the README does not claim it is. With N ≈ 1,326 and a noisy outcome,
 the confidence interval on the 2020 revenue-growth coefficient is wide enough to
@@ -108,7 +108,7 @@ of those would improve the design; none is present.
 
 ---
 
-## "The 3-year rule selects survivors and biases everything."
+## 6. Survivorship Bias and Minimum Time-Series Filtering (3-Year Rule)
 
 It does select firms with at least three usable consecutive years. That makes the
 panel a description of established SEC filers with trade working capital, not of
@@ -124,7 +124,7 @@ headline, so the headline share is 11.64%, not the all-row 15.33%.
 
 ---
 
-## "You fixed the AP fallback by throwing away 10% of the sample. That is not a fix."
+## 7. Trade Payables Decomposition and Sample Truncation
 
 It is a documented measurement choice, not a deletion of inconvenient rows. The
 combined tag is AP **plus accrued liabilities**; it is not a trade payable. The
@@ -148,11 +148,11 @@ The all-row sensitivity bounds the direction of the bias but does not remove it.
 
 ---
 
-## "Your quarterly exposure was measured after the shock."
+## 8. Lagged Shock Exposure Timing in Quarterly 10-Q Panel
 
 This was true in an earlier build, and it was caught in the remediation. The
-10-Q's own `fy` is mostly the shock year — a December filer's 2020Q1 10-Q carries
-`fy = 2020` — so joining the quarterly row to the annual panel on `fy` used the
+10-Q's own `fy` is mostly the shock year - a December filer's 2020Q1 10-Q carries
+`fy = 2020` - so joining the quarterly row to the annual panel on `fy` used the
 **same-year** FY2020/FY2022 balance sheet as "pre-shock" exposure. That produced
 a spurious 2022 cash/assets coefficient (t = −2.52).
 
@@ -170,7 +170,7 @@ not use.
 
 ---
 
-## "Your annual and quarterly shock results contradict each other. Which one is right?"
+## 9. Reconciliation Between Annual Cross-Sections and Quarterly Panel
 
 Neither is "right": they answer different questions. The annual test uses a
 fiscal-year outcome (one observation per firm), while the quarterly test uses
@@ -183,7 +183,7 @@ resilience result.
 
 ---
 
-## "Why should I trust a panel you built yourself?"
+## 10. XBRL Direct Extraction Validation vs Commercial Data Vendors
 
 Three checks:
 
@@ -208,7 +208,7 @@ sample of 100 firms would be better and is not done.
 
 ---
 
-## "Your screen drops firms with negative CCC — that is the interesting group."
+## 11. Treatment and Representation of Negative Working Capital Firms
 
 It does not select on the sign of CCC. The screen is on magnitude (|CCC| > 3,650
 days), size (assets and revenue ≥ $1m) and data validity. Negative-CCC firms
@@ -222,7 +222,7 @@ negative-CCC tail.
 
 ---
 
-## "No inventory write-downs means you did not test resilience."
+## 12. Inventory Impairment Reporting and Resilience Metrics
 
 This was the strongest gap in the earlier build, and it is now addressed. The
 cache was re-downloaded with `InventoryWriteDown` and `InventoryImpairmentLoss`.
@@ -230,16 +230,16 @@ cache was re-downloaded with `InventoryWriteDown` and `InventoryImpairmentLoss`.
 outcome is estimated in both the annual and quarterly shock tests.
 
 The result is null: FY2020 write-down/COGS t = 0.09, FY2022 t = −0.15; quarterly
-2020 t = 0.94, 2022 t = −0.96. Coverage is selected — only issuers that report
-the tag enter — so the null describes that subsample, not the population. The
+2020 t = 0.94, 2022 t = −0.96. Coverage is selected - only issuers that report
+the tag enter - so the null describes that subsample, not the population. The
 project says so rather than substituting gross margin and calling it the same
 thing.
 
 ---
 
-## "This is descriptive accounting, not research."
+## 13. Descriptive Baseline vs Causal Identification Scope
 
-It is descriptive, deliberately. The charter asked for a real panel, honest
+It is descriptive, deliberately. The specification required for a real panel, honest
 measurement and no fake causal claims; it did not ask for an identification
 strategy the data cannot support.
 
@@ -248,5 +248,5 @@ looking: a clean-AP pooled median CCC of 80 days, a CCC that is mostly a firm
 rather than an industry trait, a positive but mostly **between-firm** ROA
 association, and shock results that do not survive a calendar/quarterly
 alignment. Those are worth reporting precisely because the prior pointed the
-other way — and the persistence result is a range, not the single number the
+other way - and the persistence result is a range, not the single number the
 first draft advertised.

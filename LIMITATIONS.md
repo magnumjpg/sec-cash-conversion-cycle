@@ -8,7 +8,7 @@
   not mean that lengthening the CCC raises ROA, any more than a negative
   coefficient would license the opposite.
 - **No dollar value of a CCC day.** That requires a cost of capital, a financing
-  mix and an assumption about what happens to the freed cash. The charter
+  mix and an assumption about what happens to the freed cash. The baseline specification
   forbids it and nothing in this pipeline identifies it.
 - **No market test.** Without CRSP/Compustat there are no returns, no abnormal
   performance, no event windows. "Resilience" is measured with accounting

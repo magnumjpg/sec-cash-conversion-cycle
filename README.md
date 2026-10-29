@@ -1,4 +1,4 @@
-# Cash Conversion and Resilience — 15 Years of SEC Filings
+# Cash Conversion and Resilience - 15 Years of SEC Filings
 
 [![CI](https://github.com/magnumjpg/sec-cash-conversion-cycle/actions/workflows/ci.yml/badge.svg)](https://github.com/magnumjpg/sec-cash-conversion-cycle/actions/workflows/ci.yml) [![tests](https://img.shields.io/badge/tests-38%20passed-brightgreen)](#) [![Python](https://img.shields.io/badge/python-3.11-blue)](https://www.python.org/) [![License](https://img.shields.io/badge/license-MIT-green)](LICENSE) [![Data](https://img.shields.io/badge/data-SEC%20XBRL%20filings-informational)](DATA.md)
 
@@ -105,7 +105,7 @@ instruments**; communications (9.55) and agriculture (129.81) are the other
 extremes. Restaurants are the clearest "negative CCC as a business model"
 group: they collect from diners before they pay suppliers.
 
-![Figure 1 — CCC by industry](outputs/figures/fig1_ccc_by_industry.png)
+![Figure 1 - CCC by industry](outputs/figures/fig1_ccc_by_industry.png)
 
 *Figure 1. Median cash conversion cycle by two-digit SIC industry, 2010–2024. Bars are industry medians, whiskers the interquartile range, and the dashed line the 80-day sample median; only industries with at least 150 firm-years are shown. Source: `outputs/figures/fig1_ccc_by_industry.png`.*
 
@@ -116,11 +116,11 @@ liabilities**, not a like-for-like trade payable. Using it as a fallback raises
 DPO and lowers CCC. The current mapping therefore does three things:
 
 1. **Direct trade AP** is `AccountsPayableCurrent` or
-   `AccountsPayableTradeCurrent` — **24,201 firm-years**.
+   `AccountsPayableTradeCurrent` - **24,201 firm-years**.
 2. **Reconstructed AP** is `AccountsPayableAndAccruedLiabilitiesCurrent −
-   AccruedLiabilitiesCurrent`, kept only when the residual is positive —
+   AccruedLiabilitiesCurrent`, kept only when the residual is positive  - 
    **71 firm-years**.
-3. **Contaminated AP** is the combined tag with no usable accrual split —
+3. **Contaminated AP** is the combined tag with no usable accrual split  - 
    **2,702 firm-years**. It is excluded from the clean headline and kept only in
    the all-row sensitivity.
 
@@ -159,14 +159,14 @@ sample (n = 23,232):
 
 The two shares cannot be added: "between industries" is nested inside "between
 firms", so 6.24 + 64.54 + 35.46 = 106.24, not 100. Industry labels explain very
-little; unobserved firm-level factors — business model, bargaining power,
-product mix — account for most of the level differences. This is why the rest
+little; unobserved firm-level factors - business model, bargaining power,
+product mix - account for most of the level differences. This is why the rest
 of the project estimates firm effects rather than treating "industry practice"
 as the unit of analysis.
 
-Headline medians are computed on the **unscreened** sample, as the charter
-requires. Raw means are unusable — mean CCC is 114.1 days with an SD of 103,060
-— because roughly 4% of clean-AP rows are not interpretable at face value
+Headline medians are computed on the **unscreened** sample, as the primary empirical specification
+requires. Raw means are unusable - mean CCC is 114.1 days with an SD of 103,060
+ -  because roughly 4% of clean-AP rows are not interpretable at face value
 (mostly XBRL scale errors: assets tagged in millions, COGS off by 1,000×, plus
 micro-caps). For estimation only, rows with |CCC| > 3,650 days, assets < $1m or
 revenue < $1m are dropped: **1,040 rows (4.28%)**. The screen is not neutral:
@@ -206,7 +206,7 @@ identify the latter.
 | DIO only (winsorized), pooled | 0.655 | 1.64 | 20,110 |
 | DPO only (winsorized), pooled | 0.584 | 1.29 | 20,099 |
 
-![Figure 2 — Persistence of the cash conversion cycle](outputs/figures/fig2_persistence.png)
+![Figure 2 - Persistence of the cash conversion cycle](outputs/figures/fig2_persistence.png)
 
 *Figure 2. Pooled AR(1) of the cash conversion cycle: CCC in year t against year t−1, with 20-bin medians and the fitted slope ρ = 0.688 (half-life 1.86 years, N = 20,110). Source: `outputs/figures/fig2_persistence.png`.*
 
@@ -241,13 +241,13 @@ in mapping 2.0.0, so the positive coefficient is not just a capital-intensity pr
 | **Between-firm regression (firm means)** | **+0.000525** (t = 4.80) |
 
 The sign is **positive**: 100 extra CCC days are associated with **+1.30
-percentage points of ROA**, or 0.055 SD per SD. This contradicts the charter's
+percentage points of ROA**, or 0.055 SD per SD. This contradicts the theoretical
 prior ("expect negative β") and should be stated plainly. But the number is a
 composition fact more than a within-firm lever:
 
 - The **between-firm** coefficient (+0.000525) is about four times the headline.
-  Firms that systematically run longer cycles — instruments, machinery,
-  made-to-order manufacturing — also earn higher margins. That is a
+  Firms that systematically run longer cycles - instruments, machinery,
+  made-to-order manufacturing - also earn higher margins. That is a
   cross-sectional association, not evidence that lengthening a firm's cycle
   raises its ROA.
 - The **within-firm** coefficient is identified by changes in a firm's own CCC.
@@ -264,12 +264,12 @@ composition fact more than a within-firm lever:
 The sign holds in **all 13 main-sample specifications** (12 ROA variants and a
 2020 growth placebo), but only **9 of 13** are significant at 5%
 (`robustness_summary.n_significant_p05`), ranging from +0.000004 with average
-balances (p = 0.895) to +0.000300 when |CCC| > 365 is dropped. The cleanest tag measurement —
-spec 11, which requires the preferred charter tag for every input — is weaker
+balances (p = 0.895) to +0.000300 when |CCC| > 365 is dropped. The cleanest tag measurement  - 
+spec 11, which requires the preferred standard taxonomy tag for every input - is weaker
 still (β = +0.000122, p = 0.086, n = 4,543), so the tag mixture is not generating
 the positive sign, but it does flatter its precision.
 
-![Figure 3 — CCC and ROA within firm-year](outputs/figures/fig3_ccc_vs_roa.png)
+![Figure 3 - CCC and ROA within firm-year](outputs/figures/fig3_ccc_vs_roa.png)
 
 *Figure 3. Cash conversion cycle and ROA with firm and year fixed effects removed, with 20-bin medians and the fitted slope β = +0.000130 (t = 3.23, N = 22,811). Source: `outputs/figures/fig3_ccc_vs_roa.png`.*
 
@@ -354,7 +354,7 @@ pooled estimate is not. The annual FY2022 negative margin slope is therefore
 imprecise. Read together, the shock evidence is a set of null, imprecise
 estimates, not a resilience result in either direction.
 
-![Figure 7 — Quarterly shock coefficients](outputs/figures/fig7_quarterly_shock.png)
+![Figure 7 - Quarterly shock coefficients](outputs/figures/fig7_quarterly_shock.png)
 
 *Figure 7. Coefficient on pre-shock clean CCC, one point per (shock year, calendar quarter), 95% CI from firm-clustered SEs. Source: `outputs/figures/fig7_quarterly_shock.png`.*
 
@@ -460,15 +460,15 @@ volumes, cache layout and the full attrition funnel are in `DATA.md`.
 
 | Command | Status |
 |---|---|
-| `python src/download_sec.py` | ok — 64/64 annual quarters cached |
-| `python src/download_sec.py --quarterly` | ok — 16/16 quarterly quarters cached |
-| `python src/build_panel.py` | ok — 26,974 / 3,320 |
-| `python src/build_quarterly.py` | ok — 72,811 firm-quarters / 8,097 firms |
+| `python src/download_sec.py` | ok - 64/64 annual quarters cached |
+| `python src/download_sec.py --quarterly` | ok - 16/16 quarterly quarters cached |
+| `python src/build_panel.py` | ok - 26,974 / 3,320 |
+| `python src/build_quarterly.py` | ok - 72,811 firm-quarters / 8,097 firms |
 | `python src/analysis.py` | ok |
-| `python src/analysis_quarterly.py` | ok — 8,588 shock firm-quarters |
-| `python src/figures.py` | ok — 7 figures |
-| `python src/verify_known_firms.py` | ok — internal spot check 63/63 |
-| `python src/run_all.py --skip-download --test` | ok — 38 tests passed |
+| `python src/analysis_quarterly.py` | ok - 8,588 shock firm-quarters |
+| `python src/figures.py` | ok - 7 figures |
+| `python src/verify_known_firms.py` | ok - internal spot check 63/63 |
+| `python src/run_all.py --skip-download --test` | ok - 38 tests passed |
 
 ## 9. Files
 
@@ -514,7 +514,7 @@ Figures: [CCC by industry](outputs/figures/fig1_ccc_by_industry.png) (fig1),
 [2022 margin change by pre-shock CCC quintile](outputs/figures/fig6_shock_2022.png) (fig6)
 and [quarterly shock coefficients](outputs/figures/fig7_quarterly_shock.png) (fig7).
 
-## Appendix — Headline numbers, all from `outputs/results.json`
+## Appendix - Headline numbers, all from `outputs/results.json`
 
 | Key | Value |
 |---|---:|
