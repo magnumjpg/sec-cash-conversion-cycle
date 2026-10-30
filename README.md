@@ -1,22 +1,24 @@
-# Cash Conversion and Resilience - 15 Years of SEC Filings
+# Cash Conversion and Resilience: 15 Years of SEC Filings
 
-[![CI](https://github.com/magnumjpg/sec-cash-conversion-cycle/actions/workflows/ci.yml/badge.svg)](https://github.com/magnumjpg/sec-cash-conversion-cycle/actions/workflows/ci.yml) [![tests](https://img.shields.io/badge/tests-38%20passed-brightgreen)](#) [![Python](https://img.shields.io/badge/python-3.11-blue)](https://www.python.org/) [![License](https://img.shields.io/badge/license-MIT-green)](LICENSE) [![Data](https://img.shields.io/badge/data-SEC%20XBRL%20filings-informational)](DATA.md)
+*A reproducible XBRL panel of US listed firms, 2010-2024.*
 
-[Resumen en español](#resumen-en-español) · [Method](METHOD.md) · [Limitations](LIMITATIONS.md) · [Decisions](DECISIONS.md)
+[![CI](https://github.com/magnumjpg/sec-cash-conversion-cycle/actions/workflows/ci.yml/badge.svg)](https://github.com/magnumjpg/sec-cash-conversion-cycle/actions/workflows/ci.yml) [![tests](https://img.shields.io/badge/tests-38%20passed-brightgreen)](https://github.com/magnumjpg/sec-cash-conversion-cycle/actions/workflows/ci.yml) [![Python](https://img.shields.io/badge/python-3.11-blue)](https://www.python.org/) [![License](https://img.shields.io/badge/license-MIT-green)](LICENSE) [![Data](https://img.shields.io/badge/data-SEC%20XBRL%20filings-informational)](DATA.md)
+
+**English** · [Español](#resumen-en-español) · [Data](DATA.md) · [Method](METHOD.md) · [Limitations](LIMITATIONS.md) · [Decisions](DECISIONS.md)
 
 **US listed firms hold about 80 days of working capital in their cash conversion cycle, and the level is mostly a firm trait rather than an industry one.**
 
-*SEC XBRL · 2010–2024 · 26,974 firm-years · 3,320 firms · clean-AP headline on 24,272 firm-years · 38 tests*
+*SEC XBRL · 2010-2024 · 26,974 firm-years · 3,320 firms · clean-AP headline on 24,272 firm-years · 38 tests*
 
 ---
 
 ## At a glance
 
 - **Question:** how long is the cash conversion cycle (CCC) of US listed firms, and is it associated with profitability and with the 2020/2022 shocks?
-- **Data:** SEC XBRL Financial Statement Data Sets, fiscal years 2010–2024, **26,974 firm-years / 3,320 firms**. The clean trade-AP headline uses **24,272 firm-years / 3,010 firms**.
+- **Data:** SEC XBRL Financial Statement Data Sets, fiscal years 2010-2024, **26,974 firm-years / 3,320 firms**. The clean trade-AP headline uses **24,272 firm-years / 3,010 firms**.
 - **Method:** CCC from fiscal-year-end balances; firm+year FE with capital-intensity and asset-turnover controls for the ROA association; pooled and firm-FE AR(1) for persistence; a separate 10-Q panel for the shocks.
-- **Headline:** clean-AP pooled firm-year median CCC **80.38 days** (median of firm-level medians **74.19**); all-row mixed-AP sensitivity **75.42**. CCC–ROA **β = +0.000130** (t = 3.23), but **+0.000525** between firms and not a within-firm lever.
-- **Caveat:** the AP fallback is reconstructed only where the accrual split exists (**2.56%** of fallback rows); the remaining **2,702** contaminated firm-years are excluded from the headline. Persistence is a **range (ρ ≈ 0.24–0.69)**, and everything here is descriptive.
+- **Headline:** clean-AP pooled firm-year median CCC **80.38 days** (median of firm-level medians **74.19**); all-row mixed-AP sensitivity **75.42**. CCC-ROA **β = +0.000130** (t = 3.23), but **+0.000525** between firms and not a within-firm lever.
+- **Caveat:** the AP fallback is reconstructed only where the accrual split exists (**2.56%** of fallback rows); the remaining **2,702** contaminated firm-years are excluded from the headline. Persistence is a **range (ρ ≈ 0.24-0.69)**, and everything here is descriptive.
 
 **The answer in one paragraph.** The clean-AP pooled firm-year median CCC is **80.4 days** on 24,272
 firm-years (the median of firm-level medians is 74.2), and CCC is mostly a
@@ -32,11 +34,27 @@ receivables and negatively on payables. The 2020/2022 shock exposure is not
 detectable once the outcome is measured in calendar quarters with a pre-shock
 balance sheet.
 
+## Contents
+
+- [1. Building the panel](#1-building-the-panel)
+- [2. Level and structure](#2-level-and-structure)
+- [3. Persistence: a range, bounded by two biased estimators](#3-persistence-a-range-bounded-by-two-biased-estimators)
+- [4. CCC and ROA: positive, small, and mostly between firms](#4-ccc-and-roa-positive-small-and-mostly-between-firms)
+- [5. Shock exposure: annual and quarterly](#5-shock-exposure-annual-and-quarterly)
+- [6. What this does not prove](#6-what-this-does-not-prove)
+- [7. Literature and positioning](#7-literature-and-positioning)
+- [8. Reproduce](#8-reproduce)
+- [9. Files](#9-files)
+- [Appendix: headline numbers](#appendix-headline-numbers-all-from-outputsresultsjson)
+- [License](#license)
+- [Author](#author)
+- [Resumen en español](#resumen-en-español)
+
 ## 1. Building the panel
 
 The panel is built from SEC XBRL filings, not from a vendor. The source is the
 SEC Financial Statement Data Sets (bulk extracts of the same facts as
-`companyfacts`), 2010q1–2025q4 quarterly extracts. Reasons for preferring the
+`companyfacts`), 2010q1-2025q4 quarterly extracts. Reasons for preferring the
 bulk files, and the checks that were run before switching, are in
 `DECISIONS.md → D-01`.
 
@@ -44,13 +62,13 @@ bulk files, and the checks that were run before switching, are in
 |---|---:|
 | Flow and balance facts matched on the same fiscal-year end | 117,001 |
 | − duplicate fiscal-year label | −1,567 |
-| − fiscal year outside 2010–2024 | −9,556 |
-| **In the 2010–2024 window** | **105,878** |
+| − fiscal year outside 2010-2024 | −9,556 |
+| **In the 2010-2024 window** | **105,878** |
 | − missing revenue / COGS / AR / inventory / AP | −76,218 |
 | − revenue ≤ 0 or COGS ≤ 0 | −279 |
 | − negative balance-sheet item | −1 |
-| − financials & real estate (SIC 6000–6999) | −390 |
-| − utilities (SIC 4900–4999) | −474 |
+| − financials & real estate (SIC 6000-6999) | −390 |
+| − utilities (SIC 4900-4999) | −474 |
 | − fewer than 3 usable years | −1,542 |
 | **Main sample** | **26,974** |
 | of which clean trade AP (direct or reconstructed) | 24,272 |
@@ -62,7 +80,7 @@ missing in 63,376 of those rows (83.2%), COGS in 55,285 (72.5%), AR in 47,795
 counts overlap and sum to 221,080 item-cells, so they must not be read as
 disjoint groups. The full table is `outputs/tables/attrition_missing_items.csv`.
 
-The main sample covers **3,320 firms**, fiscal years **2010–2024**, and **59
+The main sample covers **3,320 firms**, fiscal years **2010-2024**, and **59
 two-digit SIC industries** (28 with at least 150 firm-years). Coverage is
 **1,411 to 2,062 firm-years per year** (lowest in 2024, highest in 2012); the
 decline is not decomposed here. Tag choices are explicit and counted
@@ -78,7 +96,7 @@ alignment for three issuers; it does **not** validate the tag choice, the
 ordered fallback logic or coverage of the wider panel.
 
 All ratios use fiscal-year-end balances. Lags are used only when consecutive
-fiscal-year ends are 350–380 days apart, so a year-end change does not create a
+fiscal-year ends are 350-380 days apart, so a year-end change does not create a
 fake 15-month year.
 
 ## 2. Level and structure
@@ -105,9 +123,9 @@ instruments**; communications (9.55) and agriculture (129.81) are the other
 extremes. Restaurants are the clearest "negative CCC as a business model"
 group: they collect from diners before they pay suppliers.
 
-![Figure 1 - CCC by industry](outputs/figures/fig1_ccc_by_industry.png)
+![Figure 1. CCC by industry](outputs/figures/fig1_ccc_by_industry.png)
 
-*Figure 1. Median cash conversion cycle by two-digit SIC industry, 2010–2024. Bars are industry medians, whiskers the interquartile range, and the dashed line the 80-day sample median; only industries with at least 150 firm-years are shown. Source: `outputs/figures/fig1_ccc_by_industry.png`.*
+*Figure 1. Median cash conversion cycle by two-digit SIC industry, 2010-2024. Bars are industry medians, whiskers the interquartile range, and the dashed line the 80-day sample median; only industries with at least 150 firm-years are shown. Source: `outputs/figures/fig1_ccc_by_industry.png`.*
 
 ### 2a. The AP fix: reconstruct trade payables, exclude what cannot be split
 
@@ -116,11 +134,11 @@ liabilities**, not a like-for-like trade payable. Using it as a fallback raises
 DPO and lowers CCC. The current mapping therefore does three things:
 
 1. **Direct trade AP** is `AccountsPayableCurrent` or
-   `AccountsPayableTradeCurrent` - **24,201 firm-years**.
+   `AccountsPayableTradeCurrent`, **24,201 firm-years**.
 2. **Reconstructed AP** is `AccountsPayableAndAccruedLiabilitiesCurrent −
-   AccruedLiabilitiesCurrent`, kept only when the residual is positive  - 
+   AccruedLiabilitiesCurrent`, kept only when the residual is positive,
    **71 firm-years**.
-3. **Contaminated AP** is the combined tag with no usable accrual split  - 
+3. **Contaminated AP** is the combined tag with no usable accrual split,
    **2,702 firm-years**. It is excluded from the clean headline and kept only in
    the all-row sensitivity.
 
@@ -141,7 +159,7 @@ sensitivity of 26,974 rows.
 The contaminated rows are not a random fringe: they are **10.0% of the panel**,
 and their median CCC is 3.7 days against 80.4 on clean AP. Including them would
 make the headline look like a business-model fact when it is partly an
-accounting-convention artefact. The clean headline is therefore the primary
+accounting-convention artifact. The clean headline is therefore the primary
 number; the mixed-AP median (75.42) is reported as a sensitivity and is not used
 in the regressions. In the pre-filter tagged universe the combined tag is used
 by 20.5% of firm-years that report any AP tag (`tag_usage.csv`); after the
@@ -159,14 +177,14 @@ sample (n = 23,232):
 
 The two shares cannot be added: "between industries" is nested inside "between
 firms", so 6.24 + 64.54 + 35.46 = 106.24, not 100. Industry labels explain very
-little; unobserved firm-level factors - business model, bargaining power,
-product mix - account for most of the level differences. This is why the rest
+little; unobserved firm-level factors (business model, bargaining power,
+product mix) account for most of the level differences. This is why the rest
 of the project estimates firm effects rather than treating "industry practice"
 as the unit of analysis.
 
 Headline medians are computed on the **unscreened** sample, as the primary empirical specification
-requires. Raw means are unusable - mean CCC is 114.1 days with an SD of 103,060
- -  because roughly 4% of clean-AP rows are not interpretable at face value
+requires. Raw means are unusable: mean CCC is 114.1 days with an SD of 103,060,
+because roughly 4% of clean-AP rows are not interpretable at face value
 (mostly XBRL scale errors: assets tagged in millions, COGS off by 1,000×, plus
 micro-caps). For estimation only, rows with |CCC| > 3,650 days, assets < $1m or
 revenue < $1m are dropped: **1,040 rows (4.28%)**. The screen is not neutral:
@@ -188,8 +206,8 @@ Two estimators bracket the AR(1) coefficient; neither is the truth on its own.
   lagged difference with the twice-lagged level. ρ = **0.413** (SE 0.145,
   N = 14,225), between the two.
 
-The defensible statement is a range of roughly **0.24–0.69**, with a half-life
-of roughly **0.5–1.9 years**, not a point estimate. The pooled
+The defensible statement is a range of roughly **0.24-0.69**, with a half-life
+of roughly **0.5-1.9 years**, not a point estimate. The pooled
 `1 − ρ = 0.312` is an implication of that pooled AR(1), not the within-firm
 speed at which a firm's gap to its long-run CCC closes; this design does not
 identify the latter.
@@ -206,12 +224,12 @@ identify the latter.
 | DIO only (winsorized), pooled | 0.655 | 1.64 | 20,110 |
 | DPO only (winsorized), pooled | 0.584 | 1.29 | 20,099 |
 
-![Figure 2 - Persistence of the cash conversion cycle](outputs/figures/fig2_persistence.png)
+![Figure 2. Persistence of the cash conversion cycle](outputs/figures/fig2_persistence.png)
 
 *Figure 2. Pooled AR(1) of the cash conversion cycle: CCC in year t against year t−1, with 20-bin medians and the fitted slope ρ = 0.688 (half-life 1.86 years, N = 20,110). Source: `outputs/figures/fig2_persistence.png`.*
 
 The by-industry table uses the same **pooled** estimator (year FE only, so it
-mixes between- and within-firm variation) and is labelled that way in
+mixes between- and within-firm variation) and is labeled that way in
 `outputs/tables/persistence_by_industry_ccc_clean.csv`; a firm-FE ρ is reported
 alongside it for every industry where the within transformation is estimable.
 Those industry firm-FE estimates are noisy, and one is slightly negative, so
@@ -221,7 +239,7 @@ CCC is persistent enough to be a meaningful firm characteristic, but the data
 do not support a single "X% of the gap closes each year" claim: the pooled and
 within estimators disagree by a factor of about 2.8.
 
-## 4. CCC and ROA: positive, small, and mostly *between* firms
+## 4. CCC and ROA: positive, small, and mostly between firms
 
 `ROA_it = α_i + δ_t + β·CCC_it + γ·log(assets)_it + θ·gross_margin_it + κ·capital_intensity_it + λ·asset_turnover_it + ε_it`,
 firm and year fixed effects, SEs clustered by firm, CCC and ROA winsorized 1/99
@@ -246,8 +264,8 @@ prior ("expect negative β") and should be stated plainly. But the number is a
 composition fact more than a within-firm lever:
 
 - The **between-firm** coefficient (+0.000525) is about four times the headline.
-  Firms that systematically run longer cycles - instruments, machinery,
-  made-to-order manufacturing - also earn higher margins. That is a
+  Firms that systematically run longer cycles (instruments, machinery,
+  made-to-order manufacturing) also earn higher margins. That is a
   cross-sectional association, not evidence that lengthening a firm's cycle
   raises its ROA.
 - The **within-firm** coefficient is identified by changes in a firm's own CCC.
@@ -264,12 +282,12 @@ composition fact more than a within-firm lever:
 The sign holds in **all 13 main-sample specifications** (12 ROA variants and a
 2020 growth placebo), but only **9 of 13** are significant at 5%
 (`robustness_summary.n_significant_p05`), ranging from +0.000004 with average
-balances (p = 0.895) to +0.000300 when |CCC| > 365 is dropped. The cleanest tag measurement  - 
-spec 11, which requires the preferred standard taxonomy tag for every input - is weaker
-still (β = +0.000122, p = 0.086, n = 4,543), so the tag mixture is not generating
-the positive sign, but it does flatter its precision.
+balances (p = 0.895) to +0.000300 when |CCC| > 365 is dropped. The cleanest tag
+measurement (spec 11, which requires the preferred standard taxonomy tag for every
+input) is weaker still (β = +0.000122, p = 0.086, n = 4,543), so the tag mixture
+is not generating the positive sign, but it does flatter its precision.
 
-![Figure 3 - CCC and ROA within firm-year](outputs/figures/fig3_ccc_vs_roa.png)
+![Figure 3. CCC and ROA within firm-year](outputs/figures/fig3_ccc_vs_roa.png)
 
 *Figure 3. Cash conversion cycle and ROA with firm and year fixed effects removed, with 20-bin medians and the fitted slope β = +0.000130 (t = 3.23, N = 22,811). Source: `outputs/figures/fig3_ccc_vs_roa.png`.*
 
@@ -281,7 +299,7 @@ Cross-sections with 2-digit SIC fixed effects and HC1 standard errors;
 pre-shock CCC is the winsorized lagged clean-AP value. Descriptive only. The
 labels are issuer **fiscal years**, not calendar windows: 29.0% of FY2020 rows
 and 28.3% of FY2022 rows have a non-December year-end, so a June-ending firm's
-"FY2020" covers July 2019–June 2020. A December-only re-estimation is reported
+"FY2020" covers July 2019-June 2020. A December-only re-estimation is reported
 below.
 
 | Outcome | β per CCC day | t | N |
@@ -319,10 +337,10 @@ below.
 ### 5b. Quarterly 10-Q panel
 
 The annual 10-K panel cannot resolve a shock that lasted weeks. A separate
-quarterly panel is built from the 2019q1–2022q4 FSDS cache, keeping 10-Q/10-Q/A
+quarterly panel is built from the 2019q1-2022q4 FSDS cache, keeping 10-Q/10-Q/A
 forms and one-quarter flows (`qtrs == 1`) with instant balances (`qtrs == 0`).
 It yields **72,811 firm-quarters / 8,097 firms / 20 quarters**; the shock
-sample (period ends in calendar Q1–Q3 of 2020 or 2022, with an annual pre-shock
+sample (period ends in calendar Q1-Q3 of 2020 or 2022, with an annual pre-shock
 balance sheet) is **8,588 firm-quarters / 1,852 firms**.
 
 Two design choices matter:
@@ -354,7 +372,7 @@ pooled estimate is not. The annual FY2022 negative margin slope is therefore
 imprecise. Read together, the shock evidence is a set of null, imprecise
 estimates, not a resilience result in either direction.
 
-![Figure 7 - Quarterly shock coefficients](outputs/figures/fig7_quarterly_shock.png)
+![Figure 7. Quarterly shock coefficients](outputs/figures/fig7_quarterly_shock.png)
 
 *Figure 7. Coefficient on pre-shock clean CCC, one point per (shock year, calendar quarter), 95% CI from firm-clustered SEs. Source: `outputs/figures/fig7_quarterly_shock.png`.*
 
@@ -366,7 +384,7 @@ not report the tag.
 ## 6. What this does not prove
 
 - **No causality.** CCC is chosen jointly with industry, growth, bargaining
-  power, supplier terms and product mix. A positive CCC–ROA coefficient does not
+  power, supplier terms and product mix. A positive CCC-ROA coefficient does not
   mean that lengthening CCC raises ROA.
 - **No dollar value of a CCC day.** That needs a cost of capital, a financing
   mix and an assumption about what happens to the freed cash. It is not
@@ -389,12 +407,12 @@ not report the tag.
   direction.
 - **No identified within-firm adjustment speed.** The pooled AR(1) (0.688) is
   biased up by persistent firm differences and the firm-FE AR(1) (0.243) is
-  Nickell-biased down; the data bound the parameter, they do not pin it down.
+  Nickell-biased down; the data bound the parameter but do not pin it down.
 - **Definition sensitivity.** Winsorization, trimming and the persistence
   estimator move the persistence estimate between 0.24 and 0.69 and the ROA
   coefficient between 0.000004 and 0.000300. Full list: `LIMITATIONS.md`.
 - **A null quarterly result is not "no effect".** The 10-Q estimates are
-  imprecise; they fail to detect an association, they do not rule one out.
+  imprecise; they fail to detect an association but do not rule one out.
 
 ## 7. Literature and positioning
 
@@ -405,7 +423,7 @@ policy lever.
 
 - **Deloof (2003), "Does Working Capital Management Affect Profitability of
   Belgian Firms?", *Journal of Business Finance & Accounting*.** Establishes the
-  negative CCC–profitability prior on firm-level panel data; informs the
+  negative CCC-profitability prior on firm-level panel data; informs the
   benchmark this project contradicts.
 - **García-Teruel & Martínez-Solano (2007), "Effects of Working Capital
   Management on SME Profitability", *International Journal of Managerial
@@ -417,7 +435,7 @@ policy lever.
   decomposition here.
 - **Baños-Caballero, García-Teruel & Martínez-Solano (2014), "Working Capital
   Management, Corporate Performance, and Financial Constraints", *Journal of
-  Business Research*.** Shows the CCC–performance relation can be non-linear and
+  Business Research*.** Shows the CCC-performance relation can be non-linear and
   financing-constrained; informs why a single linear slope is only descriptive.
 - **Aktas, Croci & Petmezas (2015), "Is Working Capital Management
   Value-Enhancing? Evidence from Firm Performance and Investments", *Journal of
@@ -434,7 +452,7 @@ policy lever.
   cash policy from working-capital policy.
 
 The gap this project fills is measurement, not identification: the contribution
-is a reproducible 2010–2024 XBRL panel with **tag-level provenance for every
+is a reproducible 2010-2024 XBRL panel with **tag-level provenance for every
 input**, an explicit trade-AP reconstruction, and a disclosure of what the tag
 mix does to the headline level. It is not a causal estimate of the return to
 shortening the CCC, and it does not use the CRSP/Compustat data that most of the
@@ -460,15 +478,15 @@ volumes, cache layout and the full attrition funnel are in `DATA.md`.
 
 | Command | Status |
 |---|---|
-| `python src/download_sec.py` | ok - 64/64 annual quarters cached |
-| `python src/download_sec.py --quarterly` | ok - 16/16 quarterly quarters cached |
-| `python src/build_panel.py` | ok - 26,974 / 3,320 |
-| `python src/build_quarterly.py` | ok - 72,811 firm-quarters / 8,097 firms |
+| `python src/download_sec.py` | ok, 64/64 annual quarters cached |
+| `python src/download_sec.py --quarterly` | ok, 16/16 quarterly quarters cached |
+| `python src/build_panel.py` | ok, 26,974 / 3,320 |
+| `python src/build_quarterly.py` | ok, 72,811 firm-quarters / 8,097 firms |
 | `python src/analysis.py` | ok |
-| `python src/analysis_quarterly.py` | ok - 8,588 shock firm-quarters |
-| `python src/figures.py` | ok - 7 figures |
-| `python src/verify_known_firms.py` | ok - internal spot check 63/63 |
-| `python src/run_all.py --skip-download --test` | ok - 38 tests passed |
+| `python src/analysis_quarterly.py` | ok, 8,588 shock firm-quarters |
+| `python src/figures.py` | ok, 7 figures |
+| `python src/verify_known_firms.py` | ok, internal spot check 63/63 |
+| `python src/run_all.py --skip-download --test` | ok, 38 tests passed |
 
 ## 9. Files
 
@@ -514,7 +532,7 @@ Figures: [CCC by industry](outputs/figures/fig1_ccc_by_industry.png) (fig1),
 [2022 margin change by pre-shock CCC quintile](outputs/figures/fig6_shock_2022.png) (fig6)
 and [quarterly shock coefficients](outputs/figures/fig7_quarterly_shock.png) (fig7).
 
-## Appendix - Headline numbers, all from `outputs/results.json`
+## Appendix: headline numbers, all from `outputs/results.json`
 
 | Key | Value |
 |---|---:|
@@ -551,16 +569,24 @@ and [quarterly shock coefficients](outputs/figures/fig7_quarterly_shock.png) (fi
 Note: the quarterly appendix numbers are from `outputs/quarterly_results.json`,
 which is embedded in `results.json → shock_quarterly`.
 
+## License
+
+MIT. See [LICENSE](LICENSE).
+
+## Author
+
+Jaime Pérez. [GitHub](https://github.com/magnumjpg) · [LinkedIn](https://www.linkedin.com/in/jaime-p%C3%A9rez-656919237/) · [jaimeperezgms@gmail.com](mailto:jaimeperezgms@gmail.com)
+
 ---
 
 ## Resumen en español
 
-El proyecto construye un panel de **26.974 empresas-año (3.320 empresas, 2010–2024)** a partir de los ficheros XBRL de la SEC, no de un proveedor de datos. La medida principal usa **acreedores comerciales limpios**: 24.272 empresas-año (3.010 empresas) con la etiqueta directa de acreedores o con el residuo `acreedores + devengos − devengos corrientes`; las 2.702 filas en las que ese residuo no puede reconstruirse se excluyen del titular. El ciclo de conversión de caja (CCC) mediano agrupado es de **80,38 días** (mediana de las medianas por empresa: 74,19; DSO 49,69; DIO 83,98; DPO 47,91; los componentes son medianas separadas y no suman 80,38), y un **11,64%** de las observaciones limpias tiene CCC negativo (15,33% si se incluyen las filas contaminadas, que no son comparables).
+El proyecto construye un panel de **26.974 empresas-año (3.320 empresas, 2010-2024)** a partir de los ficheros XBRL de la SEC, no de un proveedor de datos. La medida principal usa **acreedores comerciales limpios**: 24.272 empresas-año (3.010 empresas) con la etiqueta directa de acreedores o con el residuo `acreedores + devengos − devengos corrientes`; las 2.702 filas en las que ese residuo no puede reconstruirse se excluyen del titular. El ciclo de conversión de caja (CCC) mediano agrupado es de **80,38 días** (mediana de las medianas por empresa: 74,19; DSO 49,69; DIO 83,98; DPO 47,91; los componentes son medianas separadas y no suman 80,38), y un **11,64%** de las observaciones limpias tiene CCC negativo (15,33% si se incluyen las filas contaminadas, que no son comparables).
 
 La reconstrucción recupera solo el **2,56%** de las filas con la etiqueta combinada, porque esa etiqueta se usa precisamente cuando no existe el desglose de devengos. Las filas contaminadas tienen un CCC mediano de 3,69 días y un DPO de 112,39, frente a 80,38 y 47,91 en la muestra limpia; incluirlas haría parecer un hecho de modelo de negocio lo que en parte es una convención contable.
 
 El resultado estructural más interesante es que **solo el 6,24% de la varianza del CCC es entre industrias** (93,76% dentro de ellas) y que el **64,54% es entre empresas** (35,46% dentro de la misma empresa a lo largo del tiempo). Son dos particiones solapadas: no suman 100. La etiqueta sectorial explica muy poco; los factores no observados de la empresa explican la mayor parte.
 
-La persistencia es un **rango, no un punto**: el AR(1) agrupado da ρ = 0,688 (semivida 1,86 años, sesgado al alza por diferencias persistentes entre empresas), el AR(1) con efectos fijos de empresa da 0,243 (semivida 0,49 años, sesgado a la baja por Nickell) y el IV de Anderson–Hsiao da 0,413; la verdad está entre ambos, aproximadamente 0,24–0,69. La asociación con la rentabilidad es **positiva y pequeña** (+1,30 puntos de ROA por cada 100 días de CCC, 0,055 desviaciones típicas), en contra de la hipótesis de partida, y 9 de las 13 especificaciones principales son significativas al 5%; con la etiqueta preferida en todas las entradas (especificación 11) el coeficiente es más débil (p = 0,086). Pero el coeficiente **entre empresas** (+0,000525) cuadruplica al titular, y por componentes el signo positivo carga en las cuentas por cobrar (DSO +0,000473) mientras que más acreedores se asocian con **menor** ROA (DPO −0,000108): no es una historia de "alargar el CCC mejora la rentabilidad". La correlación de rangos dentro de la empresa típica es prácticamente cero (mediana −0,014; positiva solo en el 47,2% de las empresas).
+La persistencia es un **rango, no un punto**: el AR(1) agrupado da ρ = 0,688 (semivida 1,86 años, sesgado al alza por diferencias persistentes entre empresas), el AR(1) con efectos fijos de empresa da 0,243 (semivida 0,49 años, sesgado a la baja por Nickell) y el IV de Anderson–Hsiao da 0,413; la verdad está entre ambos, aproximadamente 0,24-0,69. La asociación con la rentabilidad es **positiva y pequeña** (+1,30 puntos de ROA por cada 100 días de CCC, 0,055 desviaciones típicas), en contra de la hipótesis de partida, y 9 de las 13 especificaciones principales son significativas al 5%; con la etiqueta preferida en todas las entradas (especificación 11) el coeficiente es más débil (p = 0,086). Pero el coeficiente **entre empresas** (+0,000525) cuadruplica al titular, y por componentes el signo positivo carga en las cuentas por cobrar (DSO +0,000473) mientras que más acreedores se asocian con **menor** ROA (DPO −0,000108): no es una historia de "alargar el CCC mejora la rentabilidad". La correlación de rangos dentro de la empresa típica es prácticamente cero (mediana −0,014; positiva solo en el 47,2% de las empresas).
 
-En los shocks de 2020 y 2022 no hay un patrón robusto. En el panel trimestral de 10-Q (8.588 empresas-trimestre, 1.852 empresas), con la exposición medida en el ejercicio anterior y una ventana de calendario Q1–Q3, **ningún coeficiente agrupado es significativo al 5%**: el crecimiento de ingresos de 2020 da t = 1,48, el cambio de margen bruto de 2022 da +0,000023 (t = 1,89, p = 0,059) y el resto es más débil. El resultado anual negativo del margen de 2022 (t = −2,06; t = −1,50 con cierres de diciembre) **no se confirma** trimestralmente: el signo cambia y la estimación es imprecisa. La conclusión honesta es descriptiva: el CCC es un rasgo de empresa más que de sector, su relación con la rentabilidad es débil y sobre todo entre empresas, y los shocks no permiten detectar un efecto de resiliencia.
+En los shocks de 2020 y 2022 no hay un patrón robusto. En el panel trimestral de 10-Q (8.588 empresas-trimestre, 1.852 empresas), con la exposición medida en el ejercicio anterior y una ventana de calendario Q1-Q3, **ningún coeficiente agrupado es significativo al 5%**: el crecimiento de ingresos de 2020 da t = 1,48, el cambio de margen bruto de 2022 da +0,000023 (t = 1,89, p = 0,059) y el resto es más débil. El resultado anual negativo del margen de 2022 (t = −2,06; t = −1,50 con cierres de diciembre) **no se confirma** trimestralmente: el signo cambia y la estimación es imprecisa. La conclusión honesta es descriptiva: el CCC es un rasgo de empresa más que de sector, su relación con la rentabilidad es débil y sobre todo entre empresas, y los shocks no permiten detectar un efecto de resiliencia.
