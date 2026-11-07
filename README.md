@@ -2,13 +2,13 @@
 
 *A reproducible XBRL panel of US listed firms, 2010-2024.*
 
-[![CI](https://github.com/magnumjpg/sec-cash-conversion-cycle/actions/workflows/ci.yml/badge.svg)](https://github.com/magnumjpg/sec-cash-conversion-cycle/actions/workflows/ci.yml) [![tests](https://img.shields.io/badge/tests-38%20passed-brightgreen)](https://github.com/magnumjpg/sec-cash-conversion-cycle/actions/workflows/ci.yml) [![Python](https://img.shields.io/badge/python-3.11-blue)](https://www.python.org/) [![License](https://img.shields.io/badge/license-MIT-green)](LICENSE) [![Data](https://img.shields.io/badge/data-SEC%20XBRL%20filings-informational)](DATA.md)
+[![CI](https://github.com/magnumjpg/sec-cash-conversion-cycle/actions/workflows/ci.yml/badge.svg)](https://github.com/magnumjpg/sec-cash-conversion-cycle/actions/workflows/ci.yml) [![tests](https://img.shields.io/badge/tests-35%20passed%2C%203%20skipped-yellowgreen)](https://github.com/magnumjpg/sec-cash-conversion-cycle/actions/workflows/ci.yml) [![Python](https://img.shields.io/badge/python-3.11-blue)](https://www.python.org/) [![License](https://img.shields.io/badge/license-MIT-green)](LICENSE) [![Data](https://img.shields.io/badge/data-SEC%20XBRL%20filings-informational)](DATA.md)
 
 **English** · [Español](#resumen-en-español) · [Data](DATA.md) · [Method](METHOD.md) · [Limitations](LIMITATIONS.md) · [Decisions](DECISIONS.md)
 
 **US listed firms hold about 80 days of working capital in their cash conversion cycle, and the level is mostly a firm trait rather than an industry one.**
 
-*SEC XBRL · 2010-2024 · 26,974 firm-years · 3,320 firms · clean-AP headline on 24,272 firm-years · 38 tests*
+*SEC XBRL · 2010-2024 · 26,974 firm-years · 3,320 firms · clean-AP headline on 24,272 firm-years · 38 tests (35 in CI)*
 
 ---
 
@@ -486,7 +486,7 @@ volumes, cache layout and the full attrition funnel are in `DATA.md`.
 | `python src/analysis_quarterly.py` | ok, 8,588 shock firm-quarters |
 | `python src/figures.py` | ok, 7 figures |
 | `python src/verify_known_firms.py` | ok, internal spot check 63/63 |
-| `python src/run_all.py --skip-download --test` | ok, 38 tests passed |
+| `python src/run_all.py --skip-download --test` | ok, 38 tests passed (35 without the raw cache) |
 
 ## 9. Files
 
